@@ -1,4 +1,4 @@
-import { Phone, MessageSquare, FileText, Mail, Target, BarChart3 } from "lucide-react";
+import { Phone, MessageSquare, FileText, Mail, Target, BarChart3, Globe } from "lucide-react";
 
 const solutions = [
   {
@@ -36,6 +36,12 @@ const solutions = [
     title: "Mini-CRM + Analytics",
     description: "Faze (NEW/WON/LOST), dashboard, ROI i izvještaji.",
     color: "text-neon-cyan"
+  },
+  {
+    icon: Globe,
+    title: "Web scraping",
+    description: "Automatsko prikupljanje podataka - cijene konkurencije, tržišni trendovi.",
+    color: "text-neon-purple"
   }
 ];
 

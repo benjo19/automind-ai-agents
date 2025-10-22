@@ -40,6 +40,7 @@ const plans = [
     features: [
       "Sve iz Pro plana",
       "Voice outbound pozivi",
+      "Web scraping & analiza konkurencije",
       "Prilagođene integracije",
       "CRM dashboard & izvještaji",
       "Neograničeno poruka",
