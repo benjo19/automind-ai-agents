@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet";
 import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
+import Services from "@/components/Services";
 import SolutionCards from "@/components/SolutionCards";
 import HowItWorks from "@/components/HowItWorks";
 import BeforeAfter from "@/components/BeforeAfter";
@@ -121,6 +123,8 @@ const Index = () => {
 
       <main className="min-h-screen">
         <Hero />
+        <Stats />
+        <Services />
         <SolutionCards />
         <HowItWorks />
         <BeforeAfter />
