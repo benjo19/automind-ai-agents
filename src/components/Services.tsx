@@ -1,4 +1,4 @@
-import { Bot, Zap, Globe } from "lucide-react";
+import { Bot, Zap, Globe, Code } from "lucide-react";
 
 const services = [
   {
@@ -22,7 +22,7 @@ const services = [
       "Auto-ponude i invoice",
       "Email marketing sekvence",
       "Mini-CRM dashboard",
-      "Make.com integracije"
+      "Automatizirane integracije"
     ],
     color: "text-neon-cyan",
     gradient: "from-neon-cyan/20 to-transparent"
@@ -39,6 +39,19 @@ const services = [
     ],
     color: "text-neon-purple",
     gradient: "from-neon-purple/20 to-transparent"
+  },
+  {
+    icon: Code,
+    title: "Web stranice",
+    description: "Moderni, brzi i responzivni web. Od landing stranica do kompleksnih web aplikacija.",
+    features: [
+      "Landing stranice",
+      "Web shopovi",
+      "SEO optimizacija",
+      "Hosting i održavanje"
+    ],
+    color: "text-neon-cyan",
+    gradient: "from-neon-cyan/20 to-transparent"
   }
 ];
 
@@ -55,7 +68,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <div
               key={index}

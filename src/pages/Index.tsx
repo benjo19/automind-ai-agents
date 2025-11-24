@@ -18,13 +18,13 @@ const Index = () => {
         <title>Automind – AI agenti (chat + voice) + auto-ponude i CRM</title>
         <meta 
           name="description" 
-          content="AI agenti koji odgovaraju, zovu i automatski šalju ponude. Make.com, Google Sheets CRM, e-mail sekvence, analytics. Aktivacija u 24h." 
+          content="AI agenti koji odgovaraju, zovu i automatski šalju ponude. Pametne integracije, CRM sustav, e-mail sekvence, analytics. Aktivacija u 24h." 
         />
         <meta name="keywords" content="AI agenti, chat bot, voice bot, automatizacija, CRM, ponude, email sekvence" />
         <meta property="og:title" content="Automind – AI agenti (chat + voice) + auto-ponude i CRM" />
         <meta 
           property="og:description" 
-          content="AI agenti koji odgovaraju, zovu i automatski šalju ponude. Make.com, Google Sheets CRM, e-mail sekvence, analytics." 
+          content="AI agenti koji odgovaraju, zovu i automatski šalju ponude. Pametne integracije, CRM sustav, e-mail sekvence, analytics." 
         />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://automind.hr" />
@@ -57,7 +57,7 @@ const Index = () => {
             "@context": "https://schema.org",
             "@type": "Product",
             "name": "Automind AI Platform",
-            "description": "Chat + Voice agenti s Make.com integracijama za automatizaciju prodaje",
+            "description": "Chat + Voice agenti s pametnim integracijama za automatizaciju prodaje",
             "brand": {
               "@type": "Brand",
               "name": "Automind"

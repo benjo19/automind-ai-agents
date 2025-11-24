@@ -14,6 +14,10 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground">
               © 2025 Automind. Sva prava pridržana.
             </p>
+            <p className="text-xs text-muted-foreground/70 mt-2">
+              FA. BE. MA TRGOVINA DOO<br />
+              OIB: 60898333063
+            </p>
           </div>
 
           {/* Contact Info */}

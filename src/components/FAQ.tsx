@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     question: "Kako funkcionira model naplate?",
-    answer: "Mjesečno + trošak trećih servisa. Fiksna mjesečna pretplata plus varijabilni troškovi prema korištenju AI servisa (OpenAI, Make.com, Vapi)."
+    answer: "Mjesečno + trošak trećih servisa. Fiksna mjesečna pretplata plus varijabilni troškovi prema korištenju AI servisa i integracija."
   },
   {
     question: "Mogu li integrirati s postojećim sustavima?",
