@@ -10,7 +10,7 @@ const steps = [
   {
     icon: Link2,
     title: "Poveži",
-    description: "Lovable forma → Make webhook → OpenAI/Vapi → Gmail/Telegram.",
+    description: "Automatski povezujemo sve vaše sustave - forme, AI, email, poruke.",
     step: "02"
   },
   {

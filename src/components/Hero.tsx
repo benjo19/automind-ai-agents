@@ -51,7 +51,7 @@ const Hero = () => {
 
           {/* Description */}
           <p className="mb-10 text-lg text-muted-foreground md:text-xl max-w-3xl mx-auto">
-            Chat + Voice agenti. Make.com integracije, Google Sheets CRM, auto-PDF ponude i e-mail sekvence.
+            Chat + Voice agenti. Pametne integracije, jednostavni CRM, auto-PDF ponude i e-mail sekvence.
           </p>
 
           {/* CTA Buttons */}
