@@ -1,4 +1,5 @@
 import { X, Check } from "lucide-react";
+import callAgentImg from "@/assets/call-agent.jpg";
 
 const BeforeAfter = () => {
   const before = [
@@ -24,7 +25,7 @@ const BeforeAfter = () => {
           </h2>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
           {/* Before */}
           <div className="glass-card p-8 rounded-xl border border-destructive/20 animate-fade-in">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
@@ -39,6 +40,18 @@ const BeforeAfter = () => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Center Image */}
+          <div className="hidden lg:flex justify-center animate-fade-in">
+            <div className="rounded-2xl overflow-hidden border border-border shadow-card">
+              <img 
+                src={callAgentImg} 
+                alt="AI agent u akciji" 
+                className="w-full h-80 object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
 
           {/* After */}

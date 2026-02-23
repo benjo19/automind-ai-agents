@@ -1,4 +1,5 @@
 import { Bot, Zap, Globe, Code } from "lucide-react";
+import laptopImg from "@/assets/professional-laptop.jpg";
 
 const services = [
   {
@@ -51,13 +52,23 @@ const Services = () => {
   return (
     <section className="py-24 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            Naše usluge
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Kompletan AI ekosustav za automatizaciju i optimizaciju vašeg poslovanja
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <div className="animate-fade-in">
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 gradient-text">
+              Naše usluge
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-xl">
+              Kompletan AI ekosustav za automatizaciju i optimizaciju vašeg poslovanja
+            </p>
+          </div>
+          <div className="animate-fade-in rounded-2xl overflow-hidden border border-border shadow-card">
+            <img 
+              src={laptopImg} 
+              alt="Profesionalno rješenje za vaš posao" 
+              className="w-full h-64 lg:h-80 object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
