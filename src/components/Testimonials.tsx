@@ -29,7 +29,6 @@ const Testimonials = () => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -37,7 +36,7 @@ const Testimonials = () => {
     <section className="py-20 md:py-32 relative overflow-hidden">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
             Što kažu <span className="gradient-text">naši klijenti</span>
           </h2>
         </div>
@@ -54,14 +53,14 @@ const Testimonials = () => {
                 }`}
               >
                 <div className="glass-card p-8 md:p-12 rounded-2xl text-center">
-                  <Quote className="h-12 w-12 text-neon-purple mx-auto mb-6 opacity-50" />
+                  <Quote className="h-12 w-12 text-accent mx-auto mb-6 opacity-50" />
                   
                   <p className="text-xl md:text-2xl mb-8 leading-relaxed">
                     "{testimonial.quote}"
                   </p>
 
                   <div className="flex items-center justify-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-hero flex items-center justify-center font-bold">
+                    <div className="w-12 h-12 rounded-full bg-accent text-background flex items-center justify-center font-bold">
                       {testimonial.avatar}
                     </div>
                     <div className="text-left">
@@ -82,7 +81,7 @@ const Testimonials = () => {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'bg-neon-purple w-8'
+                    ? 'bg-accent w-8'
                     : 'bg-muted-foreground/30'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}

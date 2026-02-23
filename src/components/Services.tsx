@@ -11,8 +11,6 @@ const services = [
       "Podrška za hrvatski jezik",
       "Integracija s CRM sustavom"
     ],
-    color: "text-neon-purple",
-    gradient: "from-neon-purple/20 to-transparent"
   },
   {
     icon: Zap,
@@ -24,8 +22,6 @@ const services = [
       "Mini-CRM dashboard",
       "Automatizirane integracije"
     ],
-    color: "text-neon-cyan",
-    gradient: "from-neon-cyan/20 to-transparent"
   },
   {
     icon: Globe,
@@ -37,8 +33,6 @@ const services = [
       "Analytics dashboard",
       "Izvještaji o performansama"
     ],
-    color: "text-neon-purple",
-    gradient: "from-neon-purple/20 to-transparent"
   },
   {
     icon: Code,
@@ -50,8 +44,6 @@ const services = [
       "SEO optimizacija",
       "Hosting i održavanje"
     ],
-    color: "text-neon-cyan",
-    gradient: "from-neon-cyan/20 to-transparent"
   }
 ];
 
@@ -60,10 +52,10 @@ const Services = () => {
     <section className="py-24 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+          <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 gradient-text">
             Naše usluge
           </h2>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Kompletan AI ekosustav za automatizaciju i optimizaciju vašeg poslovanja
           </p>
         </div>
@@ -72,25 +64,25 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="glass-card p-8 hover:scale-105 transition-all duration-300 animate-fade-in group"
+              className="glass-card p-8 hover:scale-105 transition-all duration-300 animate-fade-in group hover:border-foreground/15"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                <service.icon className={`w-8 h-8 ${service.color}`} />
+              <div className="w-16 h-16 rounded-2xl bg-secondary border border-border flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <service.icon className="w-8 h-8 text-accent" />
               </div>
               
-              <h3 className={`text-2xl font-bold mb-3 ${service.color}`}>
+              <h3 className="text-2xl font-bold mb-3 text-foreground">
                 {service.title}
               </h3>
               
-              <p className="text-white/70 mb-6">
+              <p className="text-muted-foreground mb-6">
                 {service.description}
               </p>
 
               <ul className="space-y-3">
                 {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-white/60 text-sm">
-                    <span className={`${service.color} mt-1`}>✓</span>
+                  <li key={idx} className="flex items-start gap-2 text-muted-foreground text-sm">
+                    <span className="text-accent mt-1">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}

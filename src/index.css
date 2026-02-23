@@ -2,58 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Automind Dark Premium Theme */
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    /* Automind Elegant Dark Theme */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
 
-    --card: 217 33% 17%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 262 83% 58%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 218 11% 65%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 189 97% 43%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 40 30% 55%;
+    --accent-foreground: 0 0% 95%;
 
     --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 262 83% 58%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 0 0% 95%;
 
     --radius: 0.75rem;
 
-    /* Automind Custom Tokens */
-    --neon-purple: 262 83% 58%;
-    --neon-cyan: 189 97% 43%;
-    --glass-bg: 217 33% 17% / 0.7;
-    --glass-border: 210 40% 98% / 0.1;
-    --glow-purple: 262 83% 58% / 0.4;
-    --glow-cyan: 189 97% 43% / 0.3;
+    /* Elegant Tokens */
+    --glass-bg: 0 0% 8% / 0.7;
+    --glass-border: 0 0% 95% / 0.08;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(189 97% 43%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(217 33% 17% / 0.8) 0%, hsl(217 33% 17% / 0.4) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 95%) 0%, hsl(40 30% 55%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 8% / 0.8) 0%, hsl(0 0% 8% / 0.4) 100%);
     
     /* Shadows */
-    --shadow-glow: 0 0 40px hsl(var(--neon-purple) / 0.3);
-    --shadow-card: 0 8px 32px hsl(222 47% 11% / 0.4);
+    --shadow-glow: 0 0 30px hsl(40 30% 55% / 0.15);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -78,18 +70,9 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-card);
   }
 
-  /* Glow effects */
-  .glow-purple {
-    box-shadow: 0 0 20px hsl(var(--glow-purple));
-  }
-
-  .glow-cyan {
-    box-shadow: 0 0 20px hsl(var(--glow-cyan));
-  }
-
-  /* Gradient text */
+  /* Gradient text - elegant white to silver */
   .gradient-text {
-    background: var(--gradient-hero);
+    background: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(40 30% 65%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -122,15 +105,5 @@ All colors MUST be HSL.
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
   }
 }

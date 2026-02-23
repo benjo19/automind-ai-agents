@@ -60,14 +60,14 @@ const Pricing = () => {
     <section className="py-20 md:py-32 relative bg-gradient-to-b from-secondary/20 to-background">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
             Jednostavni <span className="gradient-text">planovi</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
             Odaberite plan koji najbolje odgovara vašim potrebama
           </p>
           <p className="text-sm text-muted-foreground">
-            + trošak trećih servisa (OpenAI/Make/Vapi)
+            + trošak trećih servisa
           </p>
         </div>
 
@@ -76,13 +76,13 @@ const Pricing = () => {
             <div
               key={index}
               className={`glass-card p-8 rounded-xl relative transition-all duration-300 hover:scale-105 animate-fade-in ${
-                plan.highlighted ? 'border-2 border-neon-purple glow-purple' : ''
+                plan.highlighted ? 'border border-accent/50 shadow-glow' : ''
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {plan.highlighted && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 bg-gradient-hero px-4 py-1 rounded-full text-sm font-semibold">
+                  <span className="inline-flex items-center gap-1 bg-accent text-background px-4 py-1 rounded-full text-sm font-semibold">
                     <Star className="h-4 w-4" />
                     Najpopularniji
                   </span>
@@ -103,7 +103,7 @@ const Pricing = () => {
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, fIndex) => (
                   <li key={fIndex} className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-neon-cyan shrink-0 mt-0.5" />
+                    <Check className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                     <span className="text-sm">{feature}</span>
                   </li>
                 ))}

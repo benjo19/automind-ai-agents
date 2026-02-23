@@ -122,7 +122,7 @@ const DemoForm = () => {
     <section id="demo" className="py-20 md:py-32 relative bg-gradient-to-b from-background to-secondary/20">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
             Zatraži <span className="gradient-text">demo</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
