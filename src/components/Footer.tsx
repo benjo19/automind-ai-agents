@@ -1,4 +1,5 @@
 import { Mail, Phone, Linkedin, Twitter, Facebook } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const CTA_EMAIL = "info@automind.hr";
 const CTA_PHONE = "+385 91 000 0000";
@@ -10,7 +11,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
-            <h3 className="text-2xl font-bold gradient-text mb-2">Automind</h3>
+            <img src={logo} alt="Automind logo" className="h-10 w-auto invert mb-3 mx-auto md:mx-0" />
             <p className="text-sm text-muted-foreground">
               © 2025 Automind. Sva prava pridržana.
             </p>
@@ -24,14 +25,14 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row gap-6 text-center md:text-left">
             <a
               href={`mailto:${CTA_EMAIL}`}
-              className="flex items-center gap-2 text-muted-foreground hover:text-neon-cyan transition-colors"
+              className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors"
             >
               <Mail className="h-5 w-5" />
               <span className="text-sm">{CTA_EMAIL}</span>
             </a>
             <a
               href={`tel:${CTA_PHONE}`}
-              className="flex items-center gap-2 text-muted-foreground hover:text-neon-purple transition-colors"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <Phone className="h-5 w-5" />
               <span className="text-sm">{CTA_PHONE}</span>
@@ -42,21 +43,21 @@ const Footer = () => {
           <div className="flex gap-4">
             <a
               href="#"
-              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-purple transition-all"
+              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-5 w-5" />
             </a>
             <a
               href="#"
-              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-cyan transition-all"
+              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all"
               aria-label="Twitter"
             >
               <Twitter className="h-5 w-5" />
             </a>
             <a
               href="#"
-              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:glow-purple transition-all"
+              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all"
               aria-label="Facebook"
             >
               <Facebook className="h-5 w-5" />

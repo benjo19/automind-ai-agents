@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import logo from "@/assets/logo.png";
 
 const Hero = () => {
   const scrollToDemo = () => {
@@ -28,25 +29,35 @@ const Hero = () => {
       {/* Content */}
       <div className="container relative z-10 px-4 py-20 md:py-32">
         <div className="mx-auto max-w-4xl text-center animate-fade-in">
+          {/* Logo */}
+          <div className="mb-8 flex justify-center">
+            <img src={logo} alt="Automind logo" className="h-24 md:h-32 w-auto invert" />
+          </div>
+
+          {/* Tagline */}
+          <p className="mb-6 text-sm md:text-base tracking-[0.3em] text-muted-foreground font-light uppercase">
+            Automatiziraj. Optimiziraj. Napreduj.
+          </p>
+
           {/* Badges */}
           <div className="mb-8 flex flex-wrap justify-center gap-3">
             <span className="glass-card inline-flex items-center gap-2 px-4 py-2 text-sm">
-              <CheckCircle2 className="h-4 w-4 text-neon-cyan" />
+              <CheckCircle2 className="h-4 w-4 text-accent" />
               GDPR-ready
             </span>
             <span className="glass-card inline-flex items-center gap-2 px-4 py-2 text-sm">
-              <CheckCircle2 className="h-4 w-4 text-neon-cyan" />
+              <CheckCircle2 className="h-4 w-4 text-accent" />
               HR voice
             </span>
             <span className="glass-card inline-flex items-center gap-2 px-4 py-2 text-sm">
-              <CheckCircle2 className="h-4 w-4 text-neon-cyan" />
+              <CheckCircle2 className="h-4 w-4 text-accent" />
               Aktivacija 24h
             </span>
           </div>
 
           {/* Heading */}
-          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            <span className="gradient-text">Automind</span> — AI koji odgovara, prodaje, zove i šalje ponude za vas.
+          <h1 className="mb-6 font-playfair text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            AI koji odgovara, prodaje, zove i šalje ponude za vas.
           </h1>
 
           {/* Description */}

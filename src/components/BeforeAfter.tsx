@@ -19,14 +19,14 @@ const BeforeAfter = () => {
     <section className="py-20 md:py-32 relative">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
             Prije i <span className="gradient-text">poslije</span>
           </h2>
         </div>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Before */}
-          <div className="glass-card p-8 rounded-xl border-2 border-destructive/20 animate-fade-in">
+          <div className="glass-card p-8 rounded-xl border border-destructive/20 animate-fade-in">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
               <X className="h-8 w-8 text-destructive" />
               Prije
@@ -42,15 +42,15 @@ const BeforeAfter = () => {
           </div>
 
           {/* After */}
-          <div className="glass-card p-8 rounded-xl border-2 border-neon-cyan/30 glow-cyan animate-fade-in">
+          <div className="glass-card p-8 rounded-xl border border-accent/30 animate-fade-in">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <Check className="h-8 w-8 text-neon-cyan" />
+              <Check className="h-8 w-8 text-accent" />
               Poslije
             </h3>
             <ul className="space-y-4">
               {after.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-neon-cyan shrink-0 mt-0.5" />
+                  <Check className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}

@@ -37,7 +37,7 @@ const FAQ = () => {
     <section className="py-20 md:py-32 relative">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
             Često postavljana <span className="gradient-text">pitanja</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -50,7 +50,7 @@ const FAQ = () => {
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-neon-cyan transition-colors">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-accent transition-colors">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground leading-relaxed">

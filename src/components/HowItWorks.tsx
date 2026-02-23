@@ -26,7 +26,7 @@ const HowItWorks = () => {
     <section id="how-it-works" className="py-20 md:py-32 relative bg-gradient-to-b from-background to-secondary/20">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
             Kako <span className="gradient-text">radi</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -45,14 +45,14 @@ const HowItWorks = () => {
                   style={{ animationDelay: `${index * 0.15}s` }}
                 >
                   {/* Step Number */}
-                  <div className="text-8xl font-bold text-neon-purple/10 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4">
+                  <div className="text-8xl font-bold text-foreground/5 absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4">
                     {step.step}
                   </div>
 
                   {/* Icon */}
                   <div className="relative z-10 mb-6 flex justify-center">
-                    <div className="glass-card p-6 rounded-2xl inline-block glow-purple">
-                      <Icon className="h-12 w-12 text-neon-purple" />
+                    <div className="glass-card p-6 rounded-2xl inline-block">
+                      <Icon className="h-12 w-12 text-accent" />
                     </div>
                   </div>
 
@@ -64,7 +64,7 @@ const HowItWorks = () => {
 
                   {/* Connector Line */}
                   {index < steps.length - 1 && (
-                    <div className="hidden md:block absolute top-20 left-full w-full h-0.5 bg-gradient-to-r from-neon-purple to-transparent -z-10" />
+                    <div className="hidden md:block absolute top-20 left-full w-full h-px bg-gradient-to-r from-foreground/20 to-transparent -z-10" />
                   )}
                 </div>
               );
