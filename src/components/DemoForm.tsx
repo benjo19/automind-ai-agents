@@ -15,7 +15,8 @@ import { toast } from "sonner";
 import { Loader2, Send } from "lucide-react";
 
 const WEBHOOK_URL = "https://hook.make.com/TVOJ_WEBHOOK";
-const CTA_EMAIL = "info@automind.hr";
+const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
+const CTA_PHONE = "0995085933";
 
 const DemoForm = () => {
   const [isLoading, setIsLoading] = useState(false);

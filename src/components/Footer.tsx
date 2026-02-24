@@ -1,8 +1,8 @@
 import { Mail, Phone, Linkedin, Twitter, Facebook } from "lucide-react";
 import logo from "@/assets/logo.png";
 
-const CTA_EMAIL = "info@automind.hr";
-const CTA_PHONE = "+385 91 000 0000";
+const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
+const CTA_PHONE = "0995085933";
 
 const Footer = () => {
   return (
