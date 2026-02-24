@@ -2,35 +2,22 @@ import { X, Check } from "lucide-react";
 import callAgentImg from "@/assets/call-agent.jpg";
 
 const BeforeAfter = () => {
-  const before = [
-    "Ručni odgovori na upite",
-    "Izgubljeni leadovi",
-    "Kašnjenje s ponudama",
-    "Zaboravljeni follow-upovi"
-  ];
-
-  const after = [
-    "AI odgovara 24/7",
-    "Svaki lead bilježen",
-    "Auto-ponuda u minuti",
-    "Follow-up bez zaborava"
-  ];
+  const before = ["Ručni odgovori na upite", "Izgubljeni leadovi", "Kašnjenje s ponudama", "Zaboravljeni follow-upovi"];
+  const after = ["AI odgovara 24/7", "Svaki lead bilježen", "Auto-ponuda u minuti", "Follow-up bez zaborava"];
 
   return (
-    <section className="py-20 md:py-32 relative">
-      <div className="container px-4">
+    <section className="py-20 md:py-32 relative glow-bg">
+      <div className="container px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
             Prije i <span className="gradient-text">poslije</span>
           </h2>
         </div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-          {/* Before */}
-          <div className="glass-card p-8 rounded-xl border border-destructive/20 animate-fade-in">
+          <div className="glass-card hover-lift p-8 border-destructive/20 animate-fade-in-up">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <X className="h-8 w-8 text-destructive" />
-              Prije
+              <X className="h-8 w-8 text-destructive" /> Prije
             </h3>
             <ul className="space-y-4">
               {before.map((item, index) => (
@@ -42,23 +29,15 @@ const BeforeAfter = () => {
             </ul>
           </div>
 
-          {/* Center Image */}
           <div className="hidden lg:flex justify-center animate-fade-in">
             <div className="rounded-2xl overflow-hidden border border-border shadow-card">
-              <img 
-                src={callAgentImg} 
-                alt="AI agent u akciji" 
-                className="w-full h-80 object-cover"
-                loading="lazy"
-              />
+              <img src={callAgentImg} alt="AI agent u akciji" className="w-full h-80 object-cover" loading="lazy" />
             </div>
           </div>
 
-          {/* After */}
-          <div className="glass-card p-8 rounded-xl border border-accent/30 animate-fade-in">
+          <div className="glass-card hover-lift p-8 border-accent/30 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <Check className="h-8 w-8 text-accent" />
-              Poslije
+              <Check className="h-8 w-8 text-accent icon-glow" /> Poslije
             </h3>
             <ul className="space-y-4">
               {after.map((item, index) => (

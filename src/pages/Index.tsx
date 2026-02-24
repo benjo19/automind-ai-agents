@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet";
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import SolutionCards from "@/components/SolutionCards";
 import HowItWorks from "@/components/HowItWorks";
 import BeforeAfter from "@/components/BeforeAfter";
-
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import DemoForm from "@/components/DemoForm";
@@ -88,12 +88,12 @@ const Index = () => {
 
       <main className="min-h-screen">
         <Hero />
+        <Marquee />
         <Stats />
         <Services />
         <SolutionCards />
         <HowItWorks />
         <BeforeAfter />
-        
         <Testimonials />
         <FAQ />
         <DemoForm />
