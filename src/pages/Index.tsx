@@ -5,7 +5,7 @@ import Services from "@/components/Services";
 import SolutionCards from "@/components/SolutionCards";
 import HowItWorks from "@/components/HowItWorks";
 import BeforeAfter from "@/components/BeforeAfter";
-import Pricing from "@/components/Pricing";
+
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import DemoForm from "@/components/DemoForm";
@@ -55,41 +55,6 @@ const Index = () => {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "Automind AI Platform",
-            "description": "Chat + Voice agenti s pametnim integracijama za automatizaciju prodaje",
-            "brand": {
-              "@type": "Brand",
-              "name": "Automind"
-            },
-            "offers": [
-              {
-                "@type": "Offer",
-                "name": "Basic Plan",
-                "price": "49",
-                "priceCurrency": "EUR",
-                "priceValidUntil": "2025-12-31"
-              },
-              {
-                "@type": "Offer",
-                "name": "Pro Plan",
-                "price": "149",
-                "priceCurrency": "EUR",
-                "priceValidUntil": "2025-12-31"
-              },
-              {
-                "@type": "Offer",
-                "name": "Premium Plan",
-                "price": "299",
-                "priceCurrency": "EUR",
-                "priceValidUntil": "2025-12-31"
-              }
-            ]
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
               {
@@ -128,7 +93,7 @@ const Index = () => {
         <SolutionCards />
         <HowItWorks />
         <BeforeAfter />
-        <Pricing />
+        
         <Testimonials />
         <FAQ />
         <DemoForm />
