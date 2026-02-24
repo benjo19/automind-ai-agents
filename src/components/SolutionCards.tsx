@@ -4,46 +4,53 @@ const solutions = [
   {
     icon: Phone,
     title: "Voice bot koji zove",
-    description: "HR glas, live transkript, zakazivanje follow-upa.",
+    description: "Automatski pozivi s HR glasom, live transkript i zakazivanje follow-upa.",
+    span: "md:col-span-2",
   },
   {
     icon: MessageSquare,
     title: "Chat koji zatvara",
-    description: "Web/WhatsApp/Telegram, daje cijene, prebacuje na čovjeka.",
+    description: "Web, WhatsApp i Telegram — daje cijene, odgovara i prebacuje na čovjeka.",
+    span: "",
   },
   {
     icon: FileText,
     title: "Auto-ponude (PDF)",
-    description: "Google Docs → PDF s logom, uvjetima i cijenama.",
+    description: "Google Docs → PDF s logom, uvjetima i cijenama. U minuti.",
+    span: "",
   },
   {
     icon: Mail,
     title: "E-mail sekvence",
-    description: "Zahvalnica, ponuda, podsjetnik + mogućnost odjave.",
+    description: "Zahvalnica, ponuda, podsjetnik — automatski, s mogućnošću odjave.",
+    span: "",
   },
   {
     icon: Target,
-    title: "Lead collecting + scoring",
-    description: "UTM tracking, hot lead pravila, Telegram alert.",
+    title: "Lead scoring",
+    description: "UTM tracking, hot lead pravila i Telegram alert kad netko čeka.",
+    span: "",
   },
   {
     icon: BarChart3,
     title: "Mini-CRM + Analytics",
-    description: "Faze (NEW/WON/LOST), dashboard, ROI i izvještaji.",
+    description: "Faze (NEW/WON/LOST), dashboard s ROI-em i izvještaji.",
+    span: "",
   },
   {
     icon: Globe,
     title: "Web scraping",
-    description: "Automatsko prikupljanje podataka - cijene konkurencije, tržišni trendovi.",
-  }
+    description: "Cijene konkurencije, tržišni trendovi — automatski, svaki dan.",
+    span: "md:col-span-2",
+  },
 ];
 
 const SolutionCards = () => {
   return (
-    <section className="py-20 md:py-32 relative">
-      <div className="container px-4">
+    <section className="py-20 md:py-32 relative glow-bg">
+      <div className="container px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
             Kompletno <span className="gradient-text">AI rješenje</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -51,20 +58,20 @@ const SolutionCards = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
             return (
               <div
                 key={index}
-                className="glass-card p-8 rounded-xl hover:scale-105 transition-all duration-300 group animate-fade-in hover:border-foreground/15"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`glass-card hover-lift p-8 group animate-fade-in ${solution.span}`}
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
-                <div className="text-accent mb-4 group-hover:scale-110 transition-transform">
-                  <Icon className="h-10 w-10" />
+                <div className="mb-4">
+                  <Icon className="h-8 w-8 text-accent icon-glow" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{solution.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-lg font-semibold mb-2 text-foreground">{solution.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {solution.description}
                 </p>
               </div>
