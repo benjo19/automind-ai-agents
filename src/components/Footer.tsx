@@ -1,4 +1,5 @@
 import { Mail, Phone, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
@@ -39,27 +40,28 @@ const Footer = () => {
             </a>
           </div>
 
+          {/* Legal Links */}
+          <div className="flex flex-col md:flex-row gap-4 text-center">
+            <Link to="/politika-privatnosti" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Politika privatnosti
+            </Link>
+            <Link to="/uvjeti-koristenja" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Uvjeti korištenja
+            </Link>
+            <Link to="/kolacici" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Kolačići
+            </Link>
+          </div>
+
           {/* Social Links */}
           <div className="flex gap-4">
-            <a
-              href="#"
-              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all"
-              aria-label="LinkedIn"
-            >
+            <a href="#" className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all" aria-label="LinkedIn">
               <Linkedin className="h-5 w-5" />
             </a>
-            <a
-              href="#"
-              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all"
-              aria-label="Twitter"
-            >
+            <a href="#" className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all" aria-label="Twitter">
               <Twitter className="h-5 w-5" />
             </a>
-            <a
-              href="#"
-              className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all"
-              aria-label="Facebook"
-            >
+            <a href="#" className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-foreground/30 transition-all" aria-label="Facebook">
               <Facebook className="h-5 w-5" />
             </a>
           </div>
