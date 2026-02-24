@@ -1,5 +1,6 @@
 import { Bot, Zap, Globe, Code } from "lucide-react";
 import laptopImg from "@/assets/professional-laptop.jpg";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const services = [
   {
@@ -32,41 +33,41 @@ const Services = () => {
   return (
     <section className="py-24 px-4 relative glow-bg">
       <div className="container mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-          <div className="animate-fade-in">
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 tracking-tight gradient-text">
-              Naše usluge
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-xl">
-              Kompletan AI ekosustav za automatizaciju i optimizaciju vašeg poslovanja
-            </p>
+        <ScrollReveal>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 tracking-tight gradient-text">
+                Naše usluge
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-xl">
+                Kompletan AI ekosustav za automatizaciju i optimizaciju vašeg poslovanja
+              </p>
+            </div>
+            <div className="rounded-2xl overflow-hidden border border-border shadow-card">
+              <img src={laptopImg} alt="Profesionalno rješenje za vaš posao" className="w-full h-64 lg:h-80 object-cover" loading="lazy" />
+            </div>
           </div>
-          <div className="animate-fade-in rounded-2xl overflow-hidden border border-border shadow-card">
-            <img src={laptopImg} alt="Profesionalno rješenje za vaš posao" className="w-full h-64 lg:h-80 object-cover" loading="lazy" />
-          </div>
-        </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className="glass-card hover-lift p-8 animate-fade-in group"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="w-14 h-14 rounded-xl bg-secondary border border-border flex items-center justify-center mb-6">
-                <service.icon className="w-7 h-7 text-accent icon-glow" />
+            <ScrollReveal key={index} delay={index * 100}>
+              <div className="glass-card hover-lift p-8 group h-full">
+                <div className="w-14 h-14 rounded-xl bg-secondary border border-border flex items-center justify-center mb-6">
+                  <service.icon className="w-7 h-7 text-accent icon-glow" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-foreground">{service.title}</h3>
+                <p className="text-muted-foreground mb-6 text-sm">{service.description}</p>
+                <ul className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-muted-foreground text-sm">
+                      <span className="text-accent mt-0.5">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-foreground">{service.title}</h3>
-              <p className="text-muted-foreground mb-6 text-sm">{service.description}</p>
-              <ul className="space-y-2">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-muted-foreground text-sm">
-                    <span className="text-accent mt-0.5">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
