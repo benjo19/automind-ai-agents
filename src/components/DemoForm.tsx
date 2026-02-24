@@ -14,7 +14,7 @@ import {
 import { toast } from "sonner";
 import { Loader2, Send } from "lucide-react";
 
-const WEBHOOK_URL = "https://hook.make.com/TVOJ_WEBHOOK";
+const WEBHOOK_URL = "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1";
 const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
 const CTA_PHONE = "0995085933";
 
