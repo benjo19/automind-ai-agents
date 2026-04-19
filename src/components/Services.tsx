@@ -31,10 +31,10 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 px-4 relative glow-bg scroll-mt-20">
+    <section id="services" className="py-14 md:py-20 px-4 relative glow-bg scroll-mt-20">
       <div className="container mx-auto relative z-10">
         <ScrollReveal>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12 md:mb-16">
             <div>
               <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 tracking-tight gradient-text">
                 Naše usluge
@@ -52,7 +52,7 @@ const Services = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <ScrollReveal key={index} delay={index * 100}>
-              <div className="glass-card hover-lift p-8 group h-full">
+              <div className="glass-card hover-lift p-6 group h-full">
                 <div className="w-14 h-14 rounded-xl bg-secondary border border-border flex items-center justify-center mb-6">
                   <service.icon className="w-7 h-7 text-accent icon-glow" />
                 </div>

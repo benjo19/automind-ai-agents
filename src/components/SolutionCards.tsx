@@ -13,10 +13,10 @@ const solutions = [
 
 const SolutionCards = () => {
   return (
-    <section id="solutions" className="py-20 md:py-32 relative glow-bg scroll-mt-20">
+    <section id="solutions" className="py-14 md:py-20 relative glow-bg scroll-mt-20">
       <div className="container px-4 relative z-10">
         <ScrollReveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-12">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
               Kompletno <span className="gradient-text">AI rješenje</span>
             </h2>
@@ -31,7 +31,7 @@ const SolutionCards = () => {
             const Icon = solution.icon;
             return (
               <ScrollReveal key={index} delay={index * 80} className={solution.span}>
-                <div className="glass-card hover-lift p-8 group h-full">
+                <div className="glass-card hover-lift p-6 group h-full">
                   <div className="mb-4">
                     <Icon className="h-8 w-8 text-accent icon-glow" />
                   </div>
