@@ -31,7 +31,7 @@ const SolutionCards = () => {
             const Icon = solution.icon;
             return (
               <ScrollReveal key={index} delay={index * 80} className={solution.span}>
-                <div className="glass-card hover-lift p-8 group h-full">
+                <div className="glass-card hover-lift p-6 group h-full">
                   <div className="mb-4">
                     <Icon className="h-8 w-8 text-accent icon-glow" />
                   </div>
