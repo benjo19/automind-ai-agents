@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import logo from "@/assets/logo.png";
 
 const Hero = () => {
   const scrollToDemo = () => {
@@ -12,7 +11,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative flex items-center justify-center overflow-hidden">
       {/* Radial glow background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-background" />
@@ -21,13 +20,8 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 px-4 py-20 md:py-32">
+      <div className="container relative z-10 px-4 pt-24 pb-12 md:pt-28 md:pb-20">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Logo */}
-          <div className="mb-8 flex justify-center animate-fade-in">
-            <img src={logo} alt="Automind logo" className="h-20 md:h-28 w-auto invert" />
-          </div>
-
           {/* Tagline */}
           <p className="mb-6 text-sm md:text-base tracking-[0.3em] text-muted-foreground font-light uppercase animate-fade-in" style={{ animationDelay: '0.1s' }}>
             Automatiziraj. Optimiziraj. Napreduj.
