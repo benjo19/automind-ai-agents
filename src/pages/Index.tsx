@@ -102,6 +102,7 @@ const Index = () => {
         <DemoForm />
         <Footer />
       </main>
+      <ChatWidget />
     </>
   );
 };
