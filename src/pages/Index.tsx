@@ -11,6 +11,7 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import DemoForm from "@/components/DemoForm";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
 
 const Index = () => {
   return (
@@ -101,6 +102,7 @@ const Index = () => {
         <DemoForm />
         <Footer />
       </main>
+      <ChatWidget />
     </>
   );
 };
