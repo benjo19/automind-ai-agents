@@ -19,7 +19,7 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden glow-bg">
+    <section id="testimonials" className="py-20 md:py-32 relative overflow-hidden glow-bg scroll-mt-20">
       <div className="container px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16">

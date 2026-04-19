@@ -17,7 +17,7 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section className="py-20 md:py-32 relative glow-bg">
+    <section id="faq" className="py-20 md:py-32 relative glow-bg scroll-mt-20">
       <div className="container px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16">
