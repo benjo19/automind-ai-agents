@@ -3,12 +3,12 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const solutions = [
   { icon: Phone, title: "Voice bot koji zove", description: "Automatski pozivi s HR glasom, live transkript i zakazivanje follow-upa.", span: "md:col-span-2" },
-  { icon: MessageSquare, title: "Chat koji zatvara", description: "Web, WhatsApp i Telegram — daje cijene, odgovara i prebacuje na čovjeka.", span: "" },
-  { icon: FileText, title: "Auto-ponude (PDF)", description: "Google Docs → PDF s logom, uvjetima i cijenama. U minuti.", span: "" },
+  { icon: MessageSquare, title: "Chat koji zatvara", description: "Web, WhatsApp i Telegram — odgovara na upite, kvalificira leadove i prebacuje na čovjeka.", span: "" },
+  { icon: FileText, title: "Auto-ponude (PDF)", description: "Google Docs → PDF s logom i uvjetima. Profesionalna ponuda u minuti.", span: "" },
   { icon: Mail, title: "E-mail sekvence", description: "Zahvalnica, ponuda, podsjetnik — automatski, s mogućnošću odjave.", span: "" },
   { icon: Target, title: "Lead scoring", description: "UTM tracking, hot lead pravila i Telegram alert kad netko čeka.", span: "" },
   { icon: BarChart3, title: "Mini-CRM + Analytics", description: "Faze (NEW/WON/LOST), dashboard s ROI-em i izvještaji.", span: "" },
-  { icon: Globe, title: "Web scraping", description: "Cijene konkurencije, tržišni trendovi — automatski, svaki dan.", span: "md:col-span-2" },
+  { icon: Globe, title: "Web scraping", description: "Praćenje konkurencije i tržišnih trendova — automatski, svaki dan.", span: "md:col-span-2" },
 ];
 
 const SolutionCards = () => {
