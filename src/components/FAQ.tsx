@@ -20,7 +20,7 @@ const FAQ = () => {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Često postavljana <span className="gradient-text">pitanja</span>
+              Često postavljana <span className="gradient-text-rainbow">pitanja</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Odgovori na najčešća pitanja o Automind platformi
@@ -34,7 +34,7 @@ const FAQ = () => {
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left text-lg font-semibold hover:text-accent transition-colors">
+                    <AccordionTrigger className="text-left text-lg font-semibold hover:text-accent-pink transition-colors">
                       {faq.question}
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground leading-relaxed">

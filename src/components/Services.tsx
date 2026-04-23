@@ -8,18 +8,27 @@ const services = [
     title: "AI Agenti",
     description: "Chat i voice agenti koji razgovaraju s klijentima na hrvatskom — kad ih trebate.",
     features: ["Chat na webu i porukama", "Voice agent za pozive", "Prebacivanje na čovjeka"],
+    color: "text-accent",
+    glow: "icon-glow",
+    check: "text-accent",
   },
   {
     icon: Zap,
     title: "Automatizacija prodaje",
     description: "Ponude, follow-up i evidencija klijenata — automatski, bez gubljenja u administraciji.",
     features: ["Auto-ponude u vašem stilu", "Pravovremeni follow-up", "Pregled klijenata na jednom mjestu"],
+    color: "text-accent-pink",
+    glow: "icon-glow-pink",
+    check: "text-accent-pink",
   },
   {
     icon: Code,
     title: "Web stranice",
     description: "Moderni, brzi i responzivni web — od landing stranica do kompleksnijih projekata.",
     features: ["Landing stranice", "Web shopovi", "SEO i održavanje"],
+    color: "text-accent-cyan",
+    glow: "icon-glow-cyan",
+    check: "text-accent-cyan",
   },
 ];
 
@@ -30,7 +39,7 @@ const Services = () => {
         <ScrollReveal>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12 md:mb-16">
             <div>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 tracking-tight gradient-text">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 tracking-tight gradient-text-rainbow">
                 Naše usluge
               </h2>
               <p className="text-xl text-muted-foreground max-w-xl">
@@ -48,14 +57,14 @@ const Services = () => {
             <ScrollReveal key={index} delay={index * 100}>
               <div className="glass-card hover-lift p-6 group h-full">
                 <div className="w-14 h-14 rounded-xl bg-secondary border border-border flex items-center justify-center mb-6">
-                  <service.icon className="w-7 h-7 text-accent icon-glow" />
+                  <service.icon className={`w-7 h-7 ${service.color} ${service.glow}`} />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-foreground">{service.title}</h3>
                 <p className="text-muted-foreground mb-6 text-sm">{service.description}</p>
                 <ul className="space-y-2">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-muted-foreground text-sm">
-                      <span className="text-accent mt-0.5">✓</span>
+                      <span className={`${service.check} mt-0.5`}>✓</span>
                       <span>{feature}</span>
                     </li>
                   ))}

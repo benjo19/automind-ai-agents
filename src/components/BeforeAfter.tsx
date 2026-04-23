@@ -12,7 +12,7 @@ const BeforeAfter = () => {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Prije i <span className="gradient-text">poslije</span>
+              Prije i <span className="gradient-text-rainbow">poslije</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -43,14 +43,14 @@ const BeforeAfter = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={300}>
-            <div className="glass-card hover-lift p-8 border-accent/30">
+            <div className="glass-card hover-lift p-8 border-accent-emerald/30">
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <Check className="h-8 w-8 text-accent icon-glow" /> Poslije
+                <Check className="h-8 w-8 text-accent-emerald icon-glow-emerald" /> Poslije
               </h3>
               <ul className="space-y-4">
                 {after.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <Check className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                    <Check className="h-5 w-5 text-accent-emerald shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
                 ))}
