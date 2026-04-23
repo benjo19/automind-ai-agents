@@ -1,4 +1,4 @@
-import { TrendingUp, Users, Clock, CheckCircle } from "lucide-react";
+import { TrendingUp, Users, Clock } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
