@@ -2,56 +2,49 @@
 
 ## Cilj
 
-Smanjiti količinu nabrajanja AI/automatizacijskih opcija i preusmjeriti naglasak na **personalizirani pristup** ("razgovor → prilagođeno rješenje"). Stranica će biti kraća, čišća i manje "feature-heavy".
+Korisnik može odmah u Hero sekciji ostaviti kontakt (lead) — bez da skrolanjem traži formu — ali bez da se sad pojavljuje cijela velika DemoForm na vrhu. Rješenje: **mini lead bar u Hero-u** (samo e-mail + gumb "Informiraj me"), koji jednim klikom prebacuje korisnika na punu formu dolje s već popunjenim e-mailom.
 
 ## Što se mijenja
 
-### 1. `SolutionCards.tsx` — skratiti bento s 7 na 4 kartice
-Zadržati samo srž, ukloniti tehnički zvučne stavke:
-- Ostaju: **Voice agent**, **Chat agent**, **Auto-ponude (PDF)**, **E-mail follow-up**
-- Brišu se: Lead scoring, Mini-CRM + Analytics, Web scraping
-- Naslov mijenjamo iz "Kompletno AI rješenje" → **"Što gradimo za vas"**
-- Podnaslov: **"Svako rješenje je prilagođeno vašem poslu — bez gotovih paketa."**
-- Opise pojednostaviti (manje "UTM/CRM/ROI" žargona, više benefita)
+### 1. Novi mini lead element u `Hero.tsx`
+Ispod CTA gumba (`Zatraži demo` / `Kako radi`) dodaje se kompaktna inline forma:
 
-### 2. `Services.tsx` — s 4 kartice na 3
-- Brišemo karticu **"Web scraping & Analitika"** (preklapa se i previše je tehnička)
-- Ostaju: AI Agenti, Automatizacija prodaje, Web stranice
-- Skraćuju se feature-liste sa 4 na 3 stavke po kartici (manje natrpano)
-- Podnaslov: **"Razgovaramo, slušamo, predlažemo rješenje koje ima smisla baš za vaš posao."**
+```text
+┌─────────────────────────────────────────────┐
+│  [ vas@email.com         ]  [ Informiraj me ]│
+│  Bez obveze · Odgovor u 24h                 │
+└─────────────────────────────────────────────┘
+```
 
-### 3. `HowItWorks.tsx` — preformulirati u personalizirani tijek
-Trenutno zvuči tehnički ("Sheets, Docs predložak, cjenici"). Mijenjamo u tri koraka koja naglašavaju ljudski pristup:
-- **01 Razgovor** — Upoznamo vaš posao, izazove i ciljeve
-- **02 Prijedlog** — Dobivate prilagođeno rješenje s jasnim opsegom
-- **03 Pokretanje** — Postavljamo, povezujemo i ostajemo uz vas
+- Jedno polje: **e-mail** (Input)
+- Jedan gumb: **"Informiraj me →"** (variant `hero`)
+- Mikro-tekst ispod: *"Bez obveze · Odgovor u 24h"*
+- Glassmorphism stil (`glass-card`), max širina ~480px, centrirano
+- Vizualno diskretno — ne nadjačava postojeći H1/CTA, samo dodaje "brzi ulaz"
 
-### 4. `Hero.tsx` — kraći, personalniji podnaslov
-- Podnaslov mijenjamo iz tehničkog nabrajanja u: **"Prilagođena AI rješenja za vaš posao — od prvog razgovora do pokretanja."**
-- Uklanjamo **mock dashboard** (chart bars + "Active Agents/Conversations/Conversion") — to je upravo ona vrsta "AI feature flexa" koju želimo smanjiti, i dodatno skraćuje stranicu
+### 2. Ponašanje na submit
+- Validacija da e-mail nije prazan (jednostavna `type="email" required`)
+- Spremanje e-maila u `sessionStorage` pod ključem `prefill_email`
+- Smooth scroll na `#demo` sekciju
+- Bez direktnog slanja na webhook — puna forma (s GDPR pristankom, imenom, itd.) ostaje izvor istine za slanje, čime se izbjegava duplo slanje i nepotpuni leadovi bez GDPR suglasnosti
 
-### 5. `Marquee.tsx` — ukloniti iz `Index.tsx`
-Marquee trenutno prikazuje "OpenAI, Make.com, Supabase…" što direktno krši memory pravilo *"NEVER use tool names in copy"*. Najčišći potez: **maknuti sekciju** iz layouta (komponentu ostavljamo u repu projekta neaktivnu).
+### 3. Prefill u `DemoForm.tsx`
+- Na mountu (`useEffect`) pročitati `sessionStorage.getItem("prefill_email")`
+- Ako postoji, postaviti u `formData.email` i obrisati ključ iz storage-a
+- Polje e-mail tako dočekuje korisnika već popunjeno → smanjuje friction
 
-### 6. `Stats.tsx` — sa 4 metrike na 3
-- Brišemo **"99.8% Uptime garancija"** (tehnički metrik koji ne pripada personaliziranom narativu)
-- Ostaju: 46 Aktivnih korisnika, 87% Povećanje konverzija, 24h Aktivacija sustava
+## Što ostaje isto
+- DemoForm sekcija na dnu (sa svim poljima, GDPR, webhook integracijom) — netaknuta
+- Navbar CTA "Zatraži demo" — netaknut
+- Dizajn sustav, boje, fontovi
+- ChatWidget i ostale sekcije
 
-### 7. `FAQ.tsx` — manje "feature" pitanja
-- Brišemo: *"Podržavate li hrvatski voice?"* i *"Mogu li integrirati s postojećim sustavima?"* (preusko-tehnička)
-- Ostaju 4 pitanja koja naglašavaju suradnju i podršku
-- Sinkroniziramo i FAQPage JSON-LD u `Index.tsx` da odražava nove FAQ stavke
+## Datoteke
 
-### 8. `Index.tsx` — meta i layout
-- Maknuti `<Marquee />` iz strukture
-- Ažurirati `<title>` i `meta description` da budu manje "feature lista", više "personaliziran pristup"
-- Ažurirati FAQPage JSON-LD u skladu s točkom 7
-
-## Što ostaje netaknuto
-- Dizajn sustav (boje, fontovi, glass-card, gradient-text)
-- ChatWidget, DemoForm, Footer, BeforeAfter, Testimonials
-- Webhook integracije, edge funkcija, Cloud postavke
+- `src/components/Hero.tsx` — dodaje mini lead bar (Input + gumb + helper tekst) ispod postojećih CTA gumba
+- `src/components/DemoForm.tsx` — `useEffect` koji čita `sessionStorage.prefill_email` i puni `formData.email`
 
 ## Rezultat
-Stranica gubi cca 1 sekciju (Marquee) + 3 bento kartice + 1 service karticu + mock dashboard + 2 FAQ pitanja → znatno kraća i fokusiranija na poruku **"prilagođeno baš za vas"**.
+
+Hero ostaje vizualno čist, ali korisnik **odmah na prvom ekranu** ima brzi način ostaviti e-mail. Klik ga vodi na punu formu s već unesenim e-mailom — manje koraka, veća konverzija, bez velike forme na vrhu.
 
