@@ -1,14 +1,11 @@
-import { Phone, MessageSquare, FileText, Mail, Target, BarChart3, Globe } from "lucide-react";
+import { Phone, MessageSquare, FileText, Mail } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const solutions = [
-  { icon: Phone, title: "Voice bot koji zove", description: "Automatski pozivi s HR glasom, live transkript i zakazivanje follow-upa.", span: "md:col-span-2" },
-  { icon: MessageSquare, title: "Chat koji zatvara", description: "Web, WhatsApp i Telegram — odgovara na upite, kvalificira leadove i prebacuje na čovjeka.", span: "" },
-  { icon: FileText, title: "Auto-ponude (PDF)", description: "Google Docs → PDF s logom i uvjetima. Profesionalna ponuda u minuti.", span: "" },
-  { icon: Mail, title: "E-mail sekvence", description: "Zahvalnica, ponuda, podsjetnik — automatski, s mogućnošću odjave.", span: "" },
-  { icon: Target, title: "Lead scoring", description: "UTM tracking, hot lead pravila i Telegram alert kad netko čeka.", span: "" },
-  { icon: BarChart3, title: "Mini-CRM + Analytics", description: "Faze (NEW/WON/LOST), dashboard s ROI-em i izvještaji.", span: "" },
-  { icon: Globe, title: "Web scraping", description: "Praćenje konkurencije i tržišnih trendova — automatski, svaki dan.", span: "md:col-span-2" },
+  { icon: Phone, title: "Voice agent", description: "Preuzima pozive umjesto vas i zakazuje sljedeći korak — prirodno, na hrvatskom.", span: "md:col-span-2" },
+  { icon: MessageSquare, title: "Chat agent", description: "Odgovara klijentima na webu i porukama, 24/7, i prebaci razgovor kad treba čovjek.", span: "" },
+  { icon: FileText, title: "Auto-ponude (PDF)", description: "Profesionalna ponuda u vašem stilu — pripremljena i poslana automatski.", span: "" },
+  { icon: Mail, title: "E-mail follow-up", description: "Pravovremene poruke koje održavaju razgovor živim i vode klijenta do odluke.", span: "md:col-span-2" },
 ];
 
 const SolutionCards = () => {
@@ -18,10 +15,10 @@ const SolutionCards = () => {
         <ScrollReveal>
           <div className="text-center mb-10 md:mb-12">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Kompletno <span className="gradient-text">AI rješenje</span>
+              Što <span className="gradient-text">gradimo za vas</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Sve što vam treba za automatizaciju prodaje i podrške
+              Svako rješenje je prilagođeno vašem poslu — bez gotovih paketa.
             </p>
           </div>
         </ScrollReveal>

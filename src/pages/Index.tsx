@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
-import Marquee from "@/components/Marquee";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import SolutionCards from "@/components/SolutionCards";
@@ -17,16 +16,16 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Automind – AI agenti (chat + voice) + auto-ponude i CRM</title>
+        <title>Automind – Prilagođena AI rješenja za vaš posao</title>
         <meta 
           name="description" 
-          content="AI agenti koji odgovaraju, zovu i automatski šalju ponude. Pametne integracije, CRM sustav, e-mail sekvence, analytics. Aktivacija u 24h." 
+          content="Prilagođena AI rješenja za vaš posao — od prvog razgovora do pokretanja. Bez gotovih paketa, s jasnim opsegom i osobnim pristupom." 
         />
-        <meta name="keywords" content="AI agenti, chat bot, voice bot, automatizacija, CRM, ponude, email sekvence" />
-        <meta property="og:title" content="Automind – AI agenti (chat + voice) + auto-ponude i CRM" />
+        <meta name="keywords" content="AI rješenja, personalizirani pristup, automatizacija, voice agent, chat agent, Hrvatska" />
+        <meta property="og:title" content="Automind – Prilagođena AI rješenja za vaš posao" />
         <meta 
           property="og:description" 
-          content="AI agenti koji odgovaraju, zovu i automatski šalju ponude. Pametne integracije, CRM sustav, e-mail sekvence, analytics." 
+          content="Prilagođena AI rješenja za vaš posao — od prvog razgovora do pokretanja. Bez gotovih paketa." 
         />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://automind.hr" />
@@ -61,26 +60,26 @@ const Index = () => {
             "mainEntity": [
               {
                 "@type": "Question",
+                "name": "Kako izgleda suradnja?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nakon kratkog razgovora pripremamo prijedlog rješenja prilagođen vašim potrebama, s jasnim opsegom i rokovima — bez fiksnih paketa."
+                }
+              },
+              {
+                "@type": "Question",
                 "name": "Koliko brzo možemo krenuti?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "U 24h s gotovim predlošcima. Naš tim priprema sve potrebne postavke i integracije prema vašim specifikacijama."
+                  "text": "Najčešće u 24h. Naš tim priprema sve potrebne postavke prema vašim specifikacijama."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Je li moguć white-label?",
+                "name": "Je li rješenje prilagođeno baš nama?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Da, vaši logotipi i API ključevi. Možete potpuno prilagoditi brand i izgled prema vašim potrebama."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Podržavate li hrvatski voice?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Da, HR glasovi + ASR (automatsko prepoznavanje govora). Koristimo najnovije AI modele za prirodan hrvatski govor."
+                  "text": "Da. Svaki projekt kreće od razgovora — ne nudimo gotove pakete, već rješenje koje ima smisla za vaše poslovanje."
                 }
               }
             ]
@@ -91,7 +90,6 @@ const Index = () => {
       <Navbar />
       <main className="min-h-screen">
         <Hero />
-        <Marquee />
         <Stats />
         <Services />
         <SolutionCards />

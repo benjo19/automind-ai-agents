@@ -2,9 +2,9 @@ import { Settings, Link2, Rocket } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const steps = [
-  { icon: Settings, title: "Postavke", description: "Sheets (Postavke/Leads/Razgovori), Docs predložak, cjenici.", step: "01" },
-  { icon: Link2, title: "Poveži", description: "Automatski povezujemo sve vaše sustave - forme, AI, email, poruke.", step: "02" },
-  { icon: Rocket, title: "Kreni", description: "Bot odgovara, šalje PDF, pokreće e-mail sekvencu, bilježi u CRM.", step: "03" },
+  { icon: Settings, title: "Razgovor", description: "Upoznamo vaš posao, izazove i ciljeve — bez obveza.", step: "01" },
+  { icon: Link2, title: "Prijedlog", description: "Dobivate prilagođeno rješenje s jasnim opsegom i rokovima.", step: "02" },
+  { icon: Rocket, title: "Pokretanje", description: "Postavljamo, povezujemo i ostajemo uz vas nakon lansiranja.", step: "03" },
 ];
 
 const HowItWorks = () => {
@@ -17,7 +17,7 @@ const HowItWorks = () => {
               Kako <span className="gradient-text">radi</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Tri jednostavna koraka do potpune automatizacije
+              Tri jednostavna koraka — od prvog razgovora do gotovog rješenja
             </p>
           </div>
         </ScrollReveal>

@@ -44,7 +44,7 @@ const Hero = () => {
 
           {/* Description */}
           <p className="mb-10 text-lg text-muted-foreground md:text-xl max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            Chat + Voice agenti. Pametne integracije, jednostavni CRM, auto-PDF ponude i e-mail sekvence.
+            Prilagođena AI rješenja za vaš posao — od prvog razgovora do pokretanja.
           </p>
 
           {/* CTA Buttons */}
@@ -67,50 +67,6 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Product Preview - 3D floating dashboard */}
-          <div className="mt-16 animate-fade-in-up" style={{ animationDelay: '0.7s', perspective: '1200px' }}>
-            <div
-              className="mx-auto max-w-3xl rounded-xl border border-foreground/10 bg-card/80 backdrop-blur-sm p-6 md:p-8 shadow-glow"
-              style={{
-                transform: 'rotateX(8deg)',
-                transformStyle: 'preserve-3d',
-                boxShadow: '0 0 60px hsl(245 58% 60% / 0.1), 0 20px 60px hsl(0 0% 0% / 0.4)',
-              }}
-            >
-              {/* Mock dashboard header */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-destructive" />
-                <div className="w-3 h-3 rounded-full bg-accent/40" />
-                <div className="w-3 h-3 rounded-full bg-accent/40" />
-                <span className="ml-3 text-xs text-muted-foreground font-mono">automind-dashboard</span>
-              </div>
-              {/* Mock dashboard content */}
-              <div className="grid grid-cols-3 gap-3 mb-4">
-                <div className="glass-card p-3 rounded-lg">
-                  <div className="text-xs text-muted-foreground mb-1">Active Agents</div>
-                  <div className="text-xl font-bold gradient-text">12</div>
-                </div>
-                <div className="glass-card p-3 rounded-lg">
-                  <div className="text-xs text-muted-foreground mb-1">Conversations</div>
-                  <div className="text-xl font-bold gradient-text">847</div>
-                </div>
-                <div className="glass-card p-3 rounded-lg">
-                  <div className="text-xs text-muted-foreground mb-1">Conversion</div>
-                  <div className="text-xl font-bold gradient-text">87%</div>
-                </div>
-              </div>
-              {/* Mock chart bars */}
-              <div className="flex items-end gap-1.5 h-16">
-                {[40, 65, 50, 80, 60, 90, 75, 85, 95, 70, 88, 92].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-sm bg-accent/30"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
