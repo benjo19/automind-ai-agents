@@ -83,6 +83,31 @@ const Hero = () => {
             </Button>
           </div>
 
+          {/* Quick lead capture */}
+          <div className="mt-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <form
+              onSubmit={handleQuickLead}
+              className="glass-card mx-auto flex max-w-[480px] flex-col gap-2 rounded-xl p-2 sm:flex-row sm:items-center sm:gap-2"
+            >
+              <Input
+                type="email"
+                required
+                value={quickEmail}
+                onChange={(e) => setQuickEmail(e.target.value)}
+                placeholder="vas@email.com"
+                aria-label="E-mail adresa"
+                className="h-11 flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+              />
+              <Button type="submit" variant="hero" className="h-11 shrink-0 group">
+                Informiraj me
+                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </form>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Bez obveze · Odgovor u 24h
+            </p>
+          </div>
+
         </div>
       </div>
     </section>
