@@ -1,13 +1,29 @@
+import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const Hero = () => {
+  const [quickEmail, setQuickEmail] = useState("");
+
   const scrollToDemo = () => {
     document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToHowItWorks = () => {
     document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleQuickLead = (e: FormEvent) => {
+    e.preventDefault();
+    const trimmed = quickEmail.trim();
+    if (!trimmed) return;
+    try {
+      sessionStorage.setItem("prefill_email", trimmed);
+    } catch {
+      // ignore storage errors (private mode, etc.)
+    }
+    scrollToDemo();
   };
 
   return (
