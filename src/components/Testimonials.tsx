@@ -24,7 +24,7 @@ const Testimonials = () => {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Što kažu <span className="gradient-text">naši klijenti</span>
+              Što kažu <span className="gradient-text-rainbow">naši klijenti</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -40,10 +40,10 @@ const Testimonials = () => {
                   }`}
                 >
                   <div className={`glass-card p-8 md:p-12 rounded-2xl text-center ${index === currentIndex ? "shadow-glow" : ""}`}>
-                    <Quote className="h-12 w-12 text-accent icon-glow mx-auto mb-6 opacity-50" />
+                    <Quote className="h-12 w-12 text-accent-pink icon-glow-pink mx-auto mb-6 opacity-60" />
                     <p className="text-xl md:text-2xl mb-8 leading-relaxed">"{testimonial.quote}"</p>
                     <div className="flex items-center justify-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold text-sm">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-accent-pink text-accent-foreground flex items-center justify-center font-bold text-sm">
                         {testimonial.avatar}
                       </div>
                       <div className="text-left">
@@ -61,8 +61,8 @@ const Testimonials = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentIndex ? "bg-accent w-8" : "bg-muted-foreground/30"
+                  className={`h-2 rounded-full transition-all ${
+                    index === currentIndex ? "bg-gradient-to-r from-accent to-accent-pink w-8" : "bg-muted-foreground/30 w-2"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />

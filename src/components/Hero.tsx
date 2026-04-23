@@ -12,10 +12,11 @@ const Hero = () => {
 
   return (
     <section className="relative flex items-center justify-center overflow-hidden">
-      {/* Radial glow background */}
+      {/* Multi-color radial glow background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-background" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,hsl(245_58%_60%/0.12)_0%,transparent_70%)]" />
+        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[radial-gradient(ellipse,hsl(245_70%_65%/0.18)_0%,transparent_70%)]" />
+        <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[500px] h-[450px] bg-[radial-gradient(ellipse,hsl(320_85%_65%/0.14)_0%,transparent_70%)]" />
+        <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[400px] bg-[radial-gradient(ellipse,hsl(180_75%_55%/0.12)_0%,transparent_70%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
 
@@ -29,16 +30,20 @@ const Hero = () => {
 
           {/* Badges */}
           <div className="mb-8 flex flex-wrap justify-center gap-3 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            {["GDPR-ready", "HR voice", "Aktivacija 24h"].map((badge) => (
-              <span key={badge} className="glass-card inline-flex items-center gap-2 px-4 py-2 text-sm">
-                <CheckCircle2 className="h-4 w-4 text-accent icon-glow" />
-                {badge}
+            {[
+              { label: "GDPR-ready", color: "text-accent-emerald icon-glow-emerald" },
+              { label: "HR voice", color: "text-accent-cyan icon-glow-cyan" },
+              { label: "Aktivacija 24h", color: "text-accent-amber icon-glow-amber" },
+            ].map((badge) => (
+              <span key={badge.label} className="glass-card inline-flex items-center gap-2 px-4 py-2 text-sm">
+                <CheckCircle2 className={`h-4 w-4 ${badge.color}`} />
+                {badge.label}
               </span>
             ))}
           </div>
 
           {/* Heading */}
-          <h1 className="mb-6 font-playfair text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up gradient-text" style={{ animationDelay: '0.3s' }}>
+          <h1 className="mb-6 font-playfair text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up gradient-text-rainbow" style={{ animationDelay: '0.3s' }}>
             AI koji odgovara, prodaje, zove i šalje ponude za vas.
           </h1>
 
