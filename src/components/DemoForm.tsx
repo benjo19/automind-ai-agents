@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,6 +25,18 @@ const DemoForm = () => {
     interests: [] as string[], deadline: "", message: "",
     consentGdpr: false, consentNewsletter: false,
   });
+
+  useEffect(() => {
+    try {
+      const prefill = sessionStorage.getItem("prefill_email");
+      if (prefill) {
+        setFormData((prev) => ({ ...prev, email: prefill }));
+        sessionStorage.removeItem("prefill_email");
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, []);
 
   const handleInterestChange = (interest: string, checked: boolean) => {
     setFormData((prev) => ({
