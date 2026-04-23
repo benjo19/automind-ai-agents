@@ -1,126 +1,57 @@
 
 
-# Premium Visual Overhaul -- AutoMind AI
+## Cilj
 
-Transformacija postojeceg dizajna u "Dark Mode Cinematic" stil inspiriran Linear.app i Framer.com. Zadrzavamo sav postojeci sadrzaj i funkcionalnost, ali podizemo vizualnu kvalitetu na premium razinu.
+Smanjiti količinu nabrajanja AI/automatizacijskih opcija i preusmjeriti naglasak na **personalizirani pristup** ("razgovor → prilagođeno rješenje"). Stranica će biti kraća, čišća i manje "feature-heavy".
 
----
+## Što se mijenja
 
-## 1. Globalni stilovi i tipografija
+### 1. `SolutionCards.tsx` — skratiti bento s 7 na 4 kartice
+Zadržati samo srž, ukloniti tehnički zvučne stavke:
+- Ostaju: **Voice agent**, **Chat agent**, **Auto-ponude (PDF)**, **E-mail follow-up**
+- Brišu se: Lead scoring, Mini-CRM + Analytics, Web scraping
+- Naslov mijenjamo iz "Kompletno AI rješenje" → **"Što gradimo za vas"**
+- Podnaslov: **"Svako rješenje je prilagođeno vašem poslu — bez gotovih paketa."**
+- Opise pojednostaviti (manje "UTM/CRM/ROI" žargona, više benefita)
 
-**Datoteka: `index.html`**
-- Zamijeniti Playfair Display font s **Inter** (za body) i zadrzati Playfair za naslove kao accent font
-- Dodati preconnect za Inter font
+### 2. `Services.tsx` — s 4 kartice na 3
+- Brišemo karticu **"Web scraping & Analitika"** (preklapa se i previše je tehnička)
+- Ostaju: AI Agenti, Automatizacija prodaje, Web stranice
+- Skraćuju se feature-liste sa 4 na 3 stavke po kartici (manje natrpano)
+- Podnaslov: **"Razgovaramo, slušamo, predlažemo rješenje koje ima smisla baš za vaš posao."**
 
-**Datoteka: `src/index.css`**
-- Dodati nove CSS varijable za glow efekte (indigo/purple radial gradients)
-- Azurirati glass-card klasu: 1px border s 10% white opacity, backdrop-blur(16px), subtilni shadow
-- Dodati `.glow-bg` utility klasu za radial gradient pozadine iza sekcija
-- Dodati `.text-gradient` klasu (white to slate-400)
-- Dodati keyframe animacije: `slide-up`, `fade-in-up`, `marquee-scroll`
-- Dodati `.hover-lift` klasu za bento kartice (scale 1.02x na hover)
+### 3. `HowItWorks.tsx` — preformulirati u personalizirani tijek
+Trenutno zvuči tehnički ("Sheets, Docs predložak, cjenici"). Mijenjamo u tri koraka koja naglašavaju ljudski pristup:
+- **01 Razgovor** — Upoznamo vaš posao, izazove i ciljeve
+- **02 Prijedlog** — Dobivate prilagođeno rješenje s jasnim opsegom
+- **03 Pokretanje** — Postavljamo, povezujemo i ostajemo uz vas
 
-**Datoteka: `tailwind.config.ts`**
-- Dodati Inter u fontFamily
-- Dodati nove animacije (`slide-up`, `fade-in-up`, `marquee`)
-- Dodati `tracking-tight` za headline stilove
+### 4. `Hero.tsx` — kraći, personalniji podnaslov
+- Podnaslov mijenjamo iz tehničkog nabrajanja u: **"Prilagođena AI rješenja za vaš posao — od prvog razgovora do pokretanja."**
+- Uklanjamo **mock dashboard** (chart bars + "Active Agents/Conversations/Conversion") — to je upravo ona vrsta "AI feature flexa" koju želimo smanjiti, i dodatno skraćuje stranicu
 
----
+### 5. `Marquee.tsx` — ukloniti iz `Index.tsx`
+Marquee trenutno prikazuje "OpenAI, Make.com, Supabase…" što direktno krši memory pravilo *"NEVER use tool names in copy"*. Najčišći potez: **maknuti sekciju** iz layouta (komponentu ostavljamo u repu projekta neaktivnu).
 
-## 2. Hero 2.0
+### 6. `Stats.tsx` — sa 4 metrike na 3
+- Brišemo **"99.8% Uptime garancija"** (tehnički metrik koji ne pripada personaliziranom narativu)
+- Ostaju: 46 Aktivnih korisnika, 87% Povećanje konverzija, 24h Aktivacija sustava
 
-**Datoteka: `src/components/Hero.tsx`**
-- Centriran layout s vecim, boldijim naslovom i `tracking-tight`
-- Naslov dobiva text-gradient (white to slate-400)
-- Ispod CTA gumbova dodati "Product Preview" -- stilizirana slika/mockup dashboarda koji izgleda kao da lebdi u 3D prostoru:
-  - `perspective` + `rotateX` transform
-  - Svijetleci border (glow efekt)
-  - Meki box-shadow
-- Dodati subtilni radial gradient glow iza hero sekcije (indigo/purple, niska opacity)
-- Ukloniti pozadinsku sliku, koristiti cistiji dark gradient
+### 7. `FAQ.tsx` — manje "feature" pitanja
+- Brišemo: *"Podržavate li hrvatski voice?"* i *"Mogu li integrirati s postojećim sustavima?"* (preusko-tehnička)
+- Ostaju 4 pitanja koja naglašavaju suradnju i podršku
+- Sinkroniziramo i FAQPage JSON-LD u `Index.tsx` da odražava nove FAQ stavke
 
----
+### 8. `Index.tsx` — meta i layout
+- Maknuti `<Marquee />` iz strukture
+- Ažurirati `<title>` i `meta description` da budu manje "feature lista", više "personaliziran pristup"
+- Ažurirati FAQPage JSON-LD u skladu s točkom 7
 
-## 3. Marquee -- integrirani alati
+## Što ostaje netaknuto
+- Dizajn sustav (boje, fontovi, glass-card, gradient-text)
+- ChatWidget, DemoForm, Footer, BeforeAfter, Testimonials
+- Webhook integracije, edge funkcija, Cloud postavke
 
-**Nova datoteka: `src/components/Marquee.tsx`**
-- Horizontalni beskonacni scroll s logotipovima/imenima alata: OpenAI, Stripe, Make.com, Supabase, Slack, WhatsApp, Telegram, Google Docs
-- Koristiti CSS animaciju (`@keyframes marquee`) umjesto eksterne biblioteke
-- Sivi/muted tekst, subtilan i elegantan
-- Pozicionirati ispod Hero sekcije ili ispod Stats
-
----
-
-## 4. Bento Feature Grid
-
-**Datoteka: `src/components/SolutionCards.tsx`** (potpuni redizajn)
-- Zamijeniti uniformni grid s **Bento-style layoutom** -- razlicite velicine kartica (neke zauzimaju 2 kolone, neke 1)
-- Svaka kartica:
-  - Glass efekt s 1px white/10% borderom
-  - Hover: scale(1.02), border postaje svjetliji
-  - Lucide ikona s subtilnim purple/indigo glow efektom (box-shadow na ikoni)
-  - Tekst fokusiran na **outcome** (rezultat), ne na feature
-- Grid layout: `grid-cols-3` na desktopu, prva i zadnja kartica span 2 kolone
-
----
-
-## 5. Services sekcija
-
-**Datoteka: `src/components/Services.tsx`**
-- Azurirati kartice da koriste novi glass stil
-- Dodati glow efekt iza sekcije (radial gradient)
-- Ikone dobivaju subtilni purple glow
-- Hover animacija: lift efekt umjesto scale
-
----
-
-## 6. Stats sekcija
-
-**Datoteka: `src/components/Stats.tsx`**
-- Dodati subtilni glow pozadinu
-- Brojevi dobivaju gradient text efekt
-- Animacija entrance: slide-up s delayem
-
----
-
-## 7. Before/After, HowItWorks, Testimonials, FAQ
-
-**Datoteke: `BeforeAfter.tsx`, `HowItWorks.tsx`, `Testimonials.tsx`, `FAQ.tsx`**
-- Primijeniti konzistentan glass-card stil na sve kartice
-- Dodati fade-in-up entrance animacije
-- Azurirati boje ikona na indigo/purple glow stil
-- Testimonials: dodati subtilni glow iza aktivnog testimoniala
-
----
-
-## 8. Footer
-
-**Datoteka: `src/components/Footer.tsx`**
-- Duboki dark footer (`bg-background` ili tamniji)
-- Organizirani linkovi u stupce
-- Social ikone: micro-interakcija na hover (scale + glow)
-- Subtilan separator na vrhu (gradient linija)
-
----
-
-## 9. Mobilna verzija
-
-- Svi komponenti responsivni
-- Bento grid prelazi u jednu kolonu na mobilnom
-- Hero preview se skalira i gubi 3D perspektivu na manjem ekranu
-- Marquee radi jednako na svim velicinama
-- Dodati hamburger mobilni meni ako se doda navigacija
-
----
-
-## Redoslijed implementacije
-
-1. Globalni stilovi (`index.html`, `index.css`, `tailwind.config.ts`)
-2. Hero 2.0
-3. Marquee komponenta (nova)
-4. Bento Feature Grid (SolutionCards redizajn)
-5. Services, Stats azuriranje
-6. BeforeAfter, HowItWorks, Testimonials, FAQ azuriranje
-7. Footer redizajn
-8. Mobilna optimizacija i testiranje
+## Rezultat
+Stranica gubi cca 1 sekciju (Marquee) + 3 bento kartice + 1 service karticu + mock dashboard + 2 FAQ pitanja → znatno kraća i fokusiranija na poruku **"prilagođeno baš za vas"**.
 
