@@ -2,7 +2,7 @@ import { TrendingUp, Users, Clock, CheckCircle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
-  { icon: Users, value: "500+", label: "Aktivnih klijenata" },
+  { icon: Users, value: "46", label: "Aktivnih korisnika" },
   { icon: TrendingUp, value: "87%", label: "Povećanje konverzija" },
   { icon: Clock, value: "24h", label: "Aktivacija sustava" },
   { icon: CheckCircle, value: "99.8%", label: "Uptime garancija" },

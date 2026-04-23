@@ -3,9 +3,9 @@ import { Quote } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const testimonials = [
-  { quote: "Automind nam je povećao prodaju za 40% u prvom mjesecu. AI agent radi 24/7 bez odmora!", author: "Marko Horvat", company: "TechSolutions d.o.o.", avatar: "MH" },
-  { quote: "Automatske PDF ponude štede nam sate vremena svaki dan. Klijenti dobivaju ponudu u minuti.", author: "Ana Kovačić", company: "BuildPro grupa", avatar: "AK" },
-  { quote: "Voice bot zvuči prirodno na hrvatskom. Naši klijenti često ne znaju da razgovaraju s AI-jem.", author: "Ivan Novak", company: "CallCenter+", avatar: "IN" },
+  { quote: "Chat na webu hvata upite i navečer i vikendom — više nam ne bježe potencijalni klijenti dok ne stignemo odgovoriti.", author: "Marko H.", company: "Mali obrt, Zagreb", avatar: "MH" },
+  { quote: "Automatske ponude su nam stvarno olakšale dan. Umjesto pola sata, ponuda ode u par minuta i izgleda profesionalno.", author: "Ana K.", company: "Uslužna djelatnost", avatar: "AK" },
+  { quote: "Postavili smo sve brzo i bez komplikacija. Tim je bio dostupan za pitanja i prilagodbe nakon pokretanja.", author: "Ivan N.", company: "Lokalni poduzetnik", avatar: "IN" },
 ];
 
 const Testimonials = () => {
