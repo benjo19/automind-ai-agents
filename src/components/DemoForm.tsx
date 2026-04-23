@@ -107,14 +107,14 @@ const DemoForm = () => {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="budget">Budžet *</Label>
+                  <Label htmlFor="budget">Opseg projekta</Label>
                   <Select value={formData.budget} onValueChange={(value) => setFormData({ ...formData, budget: value })}>
-                    <SelectTrigger><SelectValue placeholder="Odaberite budžet" /></SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder="Odaberite opseg" /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="basic">Basic (49€/mj)</SelectItem>
-                      <SelectItem value="pro">Pro (149€/mj)</SelectItem>
-                      <SelectItem value="premium">Premium (299€/mj)</SelectItem>
-                      <SelectItem value="custom">Prilagođeno</SelectItem>
+                      <SelectItem value="small">Manji projekt</SelectItem>
+                      <SelectItem value="medium">Srednji projekt</SelectItem>
+                      <SelectItem value="large">Veći projekt</SelectItem>
+                      <SelectItem value="custom">Prilagođeno / dogovor</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
