@@ -90,6 +90,7 @@ const Index = () => {
       <Navbar />
       <main className="min-h-screen">
         <Hero />
+        <DemoForm />
         <Stats />
         <Services />
         <SolutionCards />
@@ -97,7 +98,6 @@ const Index = () => {
         <BeforeAfter />
         <Testimonials />
         <FAQ />
-        <DemoForm />
         <Footer />
       </main>
       <ChatWidget />

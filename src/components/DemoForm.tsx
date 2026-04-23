@@ -110,6 +110,8 @@ const DemoForm = () => {
                     <SelectContent>
                       <SelectItem value="retail">Maloprodaja</SelectItem>
                       <SelectItem value="services">Usluge</SelectItem>
+                      <SelectItem value="hospitality">Ugostiteljstvo</SelectItem>
+                      <SelectItem value="construction">Građevina</SelectItem>
                       <SelectItem value="it">IT/Tehnologija</SelectItem>
                       <SelectItem value="manufacturing">Proizvodnja</SelectItem>
                       <SelectItem value="healthcare">Zdravstvo</SelectItem>
