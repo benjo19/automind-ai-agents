@@ -7,11 +7,9 @@ import {
 import ScrollReveal from "@/components/ScrollReveal";
 
 const faqs = [
-  { question: "Koliko brzo možemo krenuti?", answer: "U 24h s gotovim predlošcima. Naš tim priprema sve potrebne postavke i integracije prema vašim specifikacijama." },
-  { question: "Je li moguć white-label?", answer: "Da, vaši logotipi i API ključevi. Možete potpuno prilagoditi brand i izgled prema vašim potrebama." },
-  { question: "Podržavate li hrvatski voice?", answer: "Da, HR glasovi + ASR (automatsko prepoznavanje govora). Koristimo najnovije AI modele za prirodan hrvatski govor." },
   { question: "Kako izgleda suradnja?", answer: "Nakon kratkog razgovora pripremamo prijedlog rješenja prilagođen vašim potrebama, s jasnim opsegom i rokovima — bez fiksnih paketa." },
-  { question: "Mogu li integrirati s postojećim sustavima?", answer: "Da, radimo prilagođene integracije s vašim CRM-om, ERP-om ili drugim poslovnim alatima putem API-ja i webhookova." },
+  { question: "Koliko brzo možemo krenuti?", answer: "Najčešće u 24h. Naš tim priprema sve potrebne postavke prema vašim specifikacijama." },
+  { question: "Je li rješenje prilagođeno baš nama?", answer: "Da. Svaki projekt kreće od razgovora — ne nudimo gotove pakete, već rješenje koje ima smisla za vaše poslovanje." },
   { question: "Što ako trebam podršku?", answer: "Pružamo kontinuiranu podršku putem emaila, a po potrebi i prioritetnu podršku s bržim vremenom odgovora — sve dogovaramo individualno." },
 ];
 

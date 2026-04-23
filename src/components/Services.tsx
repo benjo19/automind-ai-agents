@@ -1,4 +1,4 @@
-import { Bot, Zap, Globe, Code } from "lucide-react";
+import { Bot, Zap, Code } from "lucide-react";
 import laptopImg from "@/assets/professional-laptop.jpg";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -6,26 +6,20 @@ const services = [
   {
     icon: Bot,
     title: "AI Agenti",
-    description: "Inteligentni chat i voice agenti koji razgovaraju s klijentima 24/7, odgovaraju na pitanja i vode kroz proces kupnje.",
-    features: ["Chat bot na web stranici", "Voice bot za telefonske pozive", "Podrška za hrvatski jezik", "Integracija s CRM sustavom"],
+    description: "Chat i voice agenti koji razgovaraju s klijentima na hrvatskom — kad ih trebate.",
+    features: ["Chat na webu i porukama", "Voice agent za pozive", "Prebacivanje na čovjeka"],
   },
   {
     icon: Zap,
     title: "Automatizacija prodaje",
-    description: "Automatski generirani PDF dokumenti, email sekvence i praćenje klijenata kroz prodajni proces.",
-    features: ["Auto-ponude i invoice", "Email marketing sekvence", "Mini-CRM dashboard", "Automatizirane integracije"],
-  },
-  {
-    icon: Globe,
-    title: "Web scraping & Analitika",
-    description: "Prikupljanje podataka o konkurenciji, tržišnim trendovima i ROI izvještaji za donošenje boljih poslovnih odluka.",
-    features: ["Praćenje cijena konkurencije", "Prikupljanje lead podataka", "Analytics dashboard", "Izvještaji o performansama"],
+    description: "Ponude, follow-up i evidencija klijenata — automatski, bez gubljenja u administraciji.",
+    features: ["Auto-ponude u vašem stilu", "Pravovremeni follow-up", "Pregled klijenata na jednom mjestu"],
   },
   {
     icon: Code,
     title: "Web stranice",
-    description: "Moderni, brzi i responzivni web. Od landing stranica do kompleksnih web aplikacija.",
-    features: ["Landing stranice", "Web shopovi", "SEO optimizacija", "Hosting i održavanje"],
+    description: "Moderni, brzi i responzivni web — od landing stranica do kompleksnijih projekata.",
+    features: ["Landing stranice", "Web shopovi", "SEO i održavanje"],
   },
 ];
 
@@ -40,7 +34,7 @@ const Services = () => {
                 Naše usluge
               </h2>
               <p className="text-xl text-muted-foreground max-w-xl">
-                Kompletan AI ekosustav za automatizaciju i optimizaciju vašeg poslovanja
+                Razgovaramo, slušamo, predlažemo rješenje koje ima smisla baš za vaš posao.
               </p>
             </div>
             <div className="rounded-2xl overflow-hidden border border-border shadow-card">
@@ -49,7 +43,7 @@ const Services = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <ScrollReveal key={index} delay={index * 100}>
               <div className="glass-card hover-lift p-6 group h-full">

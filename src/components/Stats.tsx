@@ -5,14 +5,13 @@ const stats = [
   { icon: Users, value: "46", label: "Aktivnih korisnika" },
   { icon: TrendingUp, value: "87%", label: "Povećanje konverzija" },
   { icon: Clock, value: "24h", label: "Aktivacija sustava" },
-  { icon: CheckCircle, value: "99.8%", label: "Uptime garancija" },
 ];
 
 const Stats = () => {
   return (
     <section className="py-12 md:py-16 px-4 relative glow-bg">
       <div className="container mx-auto relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {stats.map((stat, index) => (
             <ScrollReveal key={index} delay={index * 100}>
               <div className="text-center">
