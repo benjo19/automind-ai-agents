@@ -1,29 +1,13 @@
-import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const Hero = () => {
-  const [quickEmail, setQuickEmail] = useState("");
-
   const scrollToDemo = () => {
     document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToHowItWorks = () => {
     document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleQuickLead = (e: FormEvent) => {
-    e.preventDefault();
-    const trimmed = quickEmail.trim();
-    if (!trimmed) return;
-    try {
-      sessionStorage.setItem("prefill_email", trimmed);
-    } catch {
-      // ignore storage errors (private mode, etc.)
-    }
-    scrollToDemo();
   };
 
   return (
@@ -65,8 +49,8 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style={{ animationDelay: '0.5s' }}>
-            <Button 
-              variant="hero" 
+            <Button
+              variant="hero"
               size="lg"
               onClick={scrollToDemo}
               className="group"
@@ -74,40 +58,14 @@ const Hero = () => {
               Zatraži demo
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button 
-              variant="hero-outline" 
+            <Button
+              variant="hero-outline"
               size="lg"
               onClick={scrollToHowItWorks}
             >
               Kako radi
             </Button>
           </div>
-
-          {/* Quick lead capture */}
-          <div className="mt-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <form
-              onSubmit={handleQuickLead}
-              className="glass-card mx-auto flex max-w-[480px] flex-col gap-2 rounded-xl p-2 sm:flex-row sm:items-center sm:gap-2"
-            >
-              <Input
-                type="email"
-                required
-                value={quickEmail}
-                onChange={(e) => setQuickEmail(e.target.value)}
-                placeholder="vas@email.com"
-                aria-label="E-mail adresa"
-                className="h-11 flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-              />
-              <Button type="submit" variant="hero" className="h-11 shrink-0 group">
-                Informiraj me
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </form>
-            <p className="mt-3 text-xs text-muted-foreground">
-              Bez obveze · Odgovor u 24h
-            </p>
-          </div>
-
         </div>
       </div>
     </section>
