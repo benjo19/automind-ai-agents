@@ -26,6 +26,18 @@ const DemoForm = () => {
     consentGdpr: false, consentNewsletter: false,
   });
 
+  useEffect(() => {
+    try {
+      const prefill = sessionStorage.getItem("prefill_email");
+      if (prefill) {
+        setFormData((prev) => ({ ...prev, email: prefill }));
+        sessionStorage.removeItem("prefill_email");
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, []);
+
   const handleInterestChange = (interest: string, checked: boolean) => {
     setFormData((prev) => ({
       ...prev,
