@@ -23,7 +23,27 @@ const HowItWorks = () => {
         </ScrollReveal>
 
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Animated connector line (desktop only) */}
+            <div className="hidden md:block absolute top-16 left-[18%] right-[18%] h-px pointer-events-none">
+              <div
+                className="absolute inset-0 opacity-40"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, hsl(var(--accent-cyan)), hsl(var(--accent-pink)), hsl(var(--accent-emerald)))",
+                  maskImage:
+                    "repeating-linear-gradient(to right, black 0 8px, transparent 8px 16px)",
+                  WebkitMaskImage:
+                    "repeating-linear-gradient(to right, black 0 8px, transparent 8px 16px)",
+                }}
+              />
+              <div className="absolute top-1/2 left-0 w-4 h-4 -translate-y-1/2 animate-arrow-slide text-accent-pink">
+                <svg viewBox="0 0 16 16" fill="currentColor" className="w-full h-full drop-shadow-[0_0_6px_hsl(var(--accent-pink)/0.7)]">
+                  <path d="M3 2l10 6-10 6V2z" />
+                </svg>
+              </div>
+            </div>
+
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (

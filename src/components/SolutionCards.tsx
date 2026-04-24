@@ -1,14 +1,31 @@
-import { Phone, MessageSquare, FileText, Mail } from "lucide-react";
+import { Phone, MessageSquare, FileText, Mail, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const solutions = [
-  { icon: Phone, title: "Voice agent", description: "Preuzima pozive umjesto vas i zakazuje sljedeći korak — prirodno, na hrvatskom.", span: "md:col-span-2", color: "text-accent", glow: "icon-glow", hover: "hover:border-accent/40" },
-  { icon: MessageSquare, title: "Chat agent", description: "Odgovara klijentima na webu i porukama, 24/7, i prebaci razgovor kad treba čovjek.", span: "", color: "text-accent-pink", glow: "icon-glow-pink", hover: "hover:border-accent-pink/40" },
-  { icon: FileText, title: "Auto-ponude (PDF)", description: "Profesionalna ponuda u vašem stilu — pripremljena i poslana automatski.", span: "", color: "text-accent-amber", glow: "icon-glow-amber", hover: "hover:border-accent-amber/40" },
-  { icon: Mail, title: "E-mail follow-up", description: "Pravovremene poruke koje održavaju razgovor živim i vode klijenta do odluke.", span: "md:col-span-2", color: "text-accent-cyan", glow: "icon-glow-cyan", hover: "hover:border-accent-cyan/40" },
+  { icon: Phone, title: "Voice agent", description: "Preuzima pozive umjesto vas i zakazuje sljedeći korak — prirodno, na hrvatskom.", span: "md:col-span-2", color: "text-accent", glow: "icon-glow", hover: "hover:border-accent/40", bg: "bg-accent/15", waveColor: "bg-accent", showWave: true },
+  { icon: MessageSquare, title: "Chat agent", description: "Odgovara klijentima na webu i porukama, 24/7, i prebaci razgovor kad treba čovjek.", span: "", color: "text-accent-pink", glow: "icon-glow-pink", hover: "hover:border-accent-pink/40", bg: "bg-accent-pink/15", waveColor: "", showWave: false },
+  { icon: FileText, title: "Auto-ponude (PDF)", description: "Profesionalna ponuda u vašem stilu — pripremljena i poslana automatski.", span: "", color: "text-accent-amber", glow: "icon-glow-amber", hover: "hover:border-accent-amber/40", bg: "bg-accent-amber/15", waveColor: "", showWave: false },
+  { icon: Mail, title: "E-mail follow-up", description: "Pravovremene poruke koje održavaju razgovor živim i vode klijenta do odluke.", span: "md:col-span-2", color: "text-accent-cyan", glow: "icon-glow-cyan", hover: "hover:border-accent-cyan/40", bg: "bg-accent-cyan/15", waveColor: "", showWave: false },
 ];
 
+const Waveform = () => (
+  <div className="absolute bottom-4 right-4 flex items-end gap-1 h-10 opacity-30 pointer-events-none">
+    {[0, 0.15, 0.3, 0.45, 0.6, 0.45, 0.3].map((delay, i) => (
+      <div
+        key={i}
+        className="w-1 h-full bg-accent rounded-full animate-wave"
+        style={{ animationDelay: `${delay}s` }}
+      />
+    ))}
+  </div>
+);
+
 const SolutionCards = () => {
+  const scrollToDemo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section id="solutions" className="py-14 md:py-20 relative glow-bg scroll-mt-20">
       <div className="container px-4 relative z-10">
@@ -28,12 +45,22 @@ const SolutionCards = () => {
             const Icon = solution.icon;
             return (
               <ScrollReveal key={index} delay={index * 80} className={solution.span}>
-                <div className={`glass-card hover-lift p-6 group h-full transition-colors ${solution.hover}`}>
+                <div className={`relative overflow-hidden glass-card hover-lift p-6 group h-full transition-colors ${solution.hover}`}>
                   <div className="mb-4">
-                    <Icon className={`h-8 w-8 ${solution.color} ${solution.glow}`} />
+                    <div className={`w-16 h-16 rounded-full ${solution.bg} flex items-center justify-center`}>
+                      <Icon className={`h-8 w-8 ${solution.color} ${solution.glow}`} />
+                    </div>
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">{solution.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{solution.description}</p>
+                  <a
+                    href="#demo"
+                    onClick={scrollToDemo}
+                    className={`mt-4 inline-flex items-center gap-1 text-sm font-medium ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                  >
+                    Saznaj više <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                  {solution.showWave && <Waveform />}
                 </div>
               </ScrollReveal>
             );
