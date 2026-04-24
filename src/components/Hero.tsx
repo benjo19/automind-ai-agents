@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-const ROTATING_WORDS = ["odgovara", "prodaje", "zove", "šalje ponude"];
+const ROTATING_WORDS = ["odgovara", "prodaje", "zove", "organizira podatke"];
 
 const AVATARS = [
   { initials: "MK", from: "from-accent", to: "to-accent-pink" },
@@ -64,18 +64,18 @@ const Hero = () => {
           </div>
 
           {/* Heading with rotating word */}
-          <h1 className="mb-6 font-playfair text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up gradient-text-rainbow" style={{ animationDelay: '0.3s' }}>
+          <h1 className="mb-6 font-playfair text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up text-foreground" style={{ animationDelay: '0.3s' }}>
             AI koji{" "}
-            <span className="relative inline-block align-baseline" style={{ minWidth: "6ch" }}>
+            <span className="relative inline-flex align-baseline justify-center" style={{ minWidth: "10ch" }}>
               <span
                 key={wordIndex}
-                className="inline-block animate-word-fade"
+                className="inline-block animate-word-cycle gradient-text-rainbow"
               >
-                {ROTATING_WORDS[wordIndex]}
+                {ROTATING_WORDS[wordIndex]},
               </span>
             </span>
             <br className="hidden sm:block" />
-            za vas.
+            {" "}za vas.
           </h1>
 
           {/* Description */}

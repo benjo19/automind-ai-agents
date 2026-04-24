@@ -184,19 +184,19 @@
   }
 
   /* Rotating word fade for hero */
-  @keyframes word-fade {
-    0% { opacity: 0; transform: translateY(8px); }
-    15%, 85% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-8px); }
+  @keyframes word-cycle {
+    0% { opacity: 0; transform: translateY(10px); }
+    20%, 80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
   }
-  .animate-word-fade {
-    animation: word-fade 2s ease-in-out;
+  .animate-word-cycle {
+    animation: word-cycle 2s ease-in-out forwards;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .animate-wave,
     .animate-arrow-slide,
-    .animate-word-fade,
+    .animate-word-cycle,
     .animate-float {
       animation: none !important;
     }
