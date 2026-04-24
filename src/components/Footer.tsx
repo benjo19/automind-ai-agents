@@ -100,33 +100,6 @@ const Footer = () => {
               </Button>
             </form>
           </div>
-
-          {/* Social */}
-          <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">Društvene mreže</h4>
-            <TooltipProvider delayDuration={150}>
-              <div className="flex gap-3">
-                {[
-                  { icon: Linkedin, label: "LinkedIn" },
-                  { icon: Twitter, label: "Twitter" },
-                  { icon: Facebook, label: "Facebook" },
-                ].map(({ icon: Icon, label }) => (
-                  <Tooltip key={label}>
-                    <TooltipTrigger asChild>
-                      <button
-                        type="button"
-                        aria-label={`${label} — uskoro`}
-                        className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-muted-foreground hover:text-accent hover:shadow-glow hover:scale-110 transition-all duration-300 cursor-default"
-                      >
-                        <Icon className="h-4 w-4" />
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent>Uskoro</TooltipContent>
-                  </Tooltip>
-                ))}
-              </div>
-            </TooltipProvider>
-          </div>
         </div>
 
         {/* Bottom */}
