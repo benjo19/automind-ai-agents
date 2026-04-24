@@ -1,7 +1,28 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
+const ROTATING_WORDS = ["odgovara", "prodaje", "zove", "šalje ponude"];
+
+const AVATARS = [
+  { initials: "MK", from: "from-accent", to: "to-accent-pink" },
+  { initials: "AN", from: "from-accent-pink", to: "to-accent-amber" },
+  { initials: "IN", from: "from-accent-cyan", to: "to-accent-emerald" },
+  { initials: "JT", from: "from-accent-amber", to: "to-accent-pink" },
+];
+
 const Hero = () => {
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollToDemo = () => {
     document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -42,9 +63,19 @@ const Hero = () => {
             ))}
           </div>
 
-          {/* Heading */}
+          {/* Heading with rotating word */}
           <h1 className="mb-6 font-playfair text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up gradient-text-rainbow" style={{ animationDelay: '0.3s' }}>
-            AI koji odgovara, prodaje, zove i šalje ponude za vas.
+            AI koji{" "}
+            <span className="relative inline-block align-baseline" style={{ minWidth: "6ch" }}>
+              <span
+                key={wordIndex}
+                className="inline-block animate-word-fade"
+              >
+                {ROTATING_WORDS[wordIndex]}
+              </span>
+            </span>
+            <br className="hidden sm:block" />
+            za vas.
           </h1>
 
           {/* Description */}
@@ -70,6 +101,23 @@ const Hero = () => {
             >
               Kako radi
             </Button>
+          </div>
+
+          {/* Social proof */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="flex -space-x-3">
+              {AVATARS.map((a) => (
+                <div
+                  key={a.initials}
+                  className={`w-9 h-9 rounded-full bg-gradient-to-br ${a.from} ${a.to} ring-2 ring-background flex items-center justify-center text-xs font-semibold text-white shadow-md`}
+                >
+                  {a.initials}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Već koristi <span className="text-foreground font-semibold">46+ tvrtki</span> u Hrvatskoj
+            </p>
           </div>
         </div>
       </div>
