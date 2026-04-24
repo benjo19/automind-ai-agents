@@ -11,6 +11,7 @@ import FAQ from "@/components/FAQ";
 import DemoForm from "@/components/DemoForm";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import CookieConsent from "@/components/CookieConsent";
 
 const Index = () => {
   return (
@@ -101,6 +102,7 @@ const Index = () => {
         <Footer />
       </main>
       <ChatWidget />
+      <CookieConsent />
     </>
   );
 };
