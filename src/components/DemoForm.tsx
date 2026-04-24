@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,14 +13,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Loader2, Send } from "lucide-react";
+import { Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1";
 const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
 
 const DemoForm = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", company: "", industry: "", budget: "",
     interests: [] as string[], deadline: "", message: "",
@@ -45,6 +48,16 @@ const DemoForm = () => {
     }));
   };
 
+  const goToStep2 = () => {
+    if (!formData.name || !formData.email || !formData.company) {
+      toast.error("Molimo ispunite sva obavezna polja");
+      return;
+    }
+    setStep(2);
+    // smooth scroll back to top of form for context
+    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!formData.consentGdpr) { toast.error("Morate prihvatiti uvjete zaštite podataka"); return; }
@@ -58,8 +71,9 @@ const DemoForm = () => {
       };
       const response = await fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       if (response.ok) {
-        toast.success("Hvala! Upit je poslan ✅", { description: "Kontaktirat ćemo vas u najkraćem mogućem roku." });
         setFormData({ name: "", email: "", phone: "", company: "", industry: "", budget: "", interests: [], deadline: "", message: "", consentGdpr: false, consentNewsletter: false });
+        setStep(1);
+        navigate("/hvala");
       } else { throw new Error("Network response was not ok"); }
     } catch { toast.error(`Greška! Pošaljite e-mail na ${CTA_EMAIL}`, { description: "Ispričavamo se zbog neugodnosti." }); }
     finally { setIsLoading(false); }
@@ -82,89 +96,118 @@ const DemoForm = () => {
         <ScrollReveal delay={100}>
           <div className="max-w-3xl mx-auto">
             <form onSubmit={handleSubmit} className="glass-card p-8 md:p-12 rounded-2xl space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Ime i prezime *</Label>
-                  <Input id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Vaše ime" />
+              {/* Progress indicator */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span className={step === 1 ? "text-foreground font-semibold" : ""}>1. Vaši podaci</span>
+                  <span className={step === 2 ? "text-foreground font-semibold" : ""}>2. Detalji projekta</span>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">E-mail *</Label>
-                  <Input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="vas@email.com" />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Telefon</Label>
-                  <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+385 91 000 0000" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="company">Tvrtka *</Label>
-                  <Input id="company" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Naziv tvrtke" />
+                <div className="flex gap-2">
+                  <div className="h-1.5 flex-1 rounded-full bg-accent" />
+                  <div className={`h-1.5 flex-1 rounded-full transition-colors ${step === 2 ? "bg-accent" : "bg-secondary"}`} />
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="industry">Djelatnost *</Label>
-                  <Select value={formData.industry} onValueChange={(value) => setFormData({ ...formData, industry: value })}>
-                    <SelectTrigger><SelectValue placeholder="Odaberite djelatnost" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="retail">Maloprodaja</SelectItem>
-                      <SelectItem value="services">Usluge</SelectItem>
-                      <SelectItem value="hospitality">Ugostiteljstvo</SelectItem>
-                      <SelectItem value="construction">Građevina</SelectItem>
-                      <SelectItem value="it">IT/Tehnologija</SelectItem>
-                      <SelectItem value="manufacturing">Proizvodnja</SelectItem>
-                      <SelectItem value="healthcare">Zdravstvo</SelectItem>
-                      <SelectItem value="education">Obrazovanje</SelectItem>
-                      <SelectItem value="other">Ostalo</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="budget">Opseg projekta</Label>
-                  <Select value={formData.budget} onValueChange={(value) => setFormData({ ...formData, budget: value })}>
-                    <SelectTrigger><SelectValue placeholder="Odaberite opseg" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="small">Manji projekt</SelectItem>
-                      <SelectItem value="medium">Srednji projekt</SelectItem>
-                      <SelectItem value="large">Veći projekt</SelectItem>
-                      <SelectItem value="custom">Prilagođeno / dogovor</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <Label>Što vas zanima? *</Label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[{ value: "chat", label: "Chat bot" }, { value: "voice", label: "Voice bot" }, { value: "ponude", label: "Auto-ponude" }, { value: "crm", label: "CRM" }, { value: "email", label: "E-mail sekvence" }].map((interest) => (
-                    <div key={interest.value} className="flex items-center space-x-2">
-                      <Checkbox id={interest.value} checked={formData.interests.includes(interest.value)} onCheckedChange={(checked) => handleInterestChange(interest.value, checked as boolean)} />
-                      <label htmlFor={interest.value} className="text-sm cursor-pointer">{interest.label}</label>
+
+              {step === 1 && (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Ime i prezime *</Label>
+                      <Input id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Vaše ime" />
                     </div>
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="deadline">Željeni rok implementacije</Label>
-                <Input id="deadline" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} placeholder="npr. odmah, za 2 tjedna, sljedeći mjesec..." />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Dodatna poruka</Label>
-                <Textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Opišite vaše potrebe ili postavite pitanje..." rows={4} />
-              </div>
-              <div className="space-y-3 pt-4 border-t border-border">
-                <div className="flex items-start space-x-2">
-                  <Checkbox id="gdpr" checked={formData.consentGdpr} onCheckedChange={(checked) => setFormData({ ...formData, consentGdpr: checked as boolean })} required />
-                  <label htmlFor="gdpr" className="text-sm leading-relaxed cursor-pointer">Prihvaćam uvjete zaštite podataka i suglasan sam da me Automind kontaktira vezano uz moj upit. *</label>
-                </div>
-                <div className="flex items-start space-x-2">
-                  <Checkbox id="newsletter" checked={formData.consentNewsletter} onCheckedChange={(checked) => setFormData({ ...formData, consentNewsletter: checked as boolean })} />
-                  <label htmlFor="newsletter" className="text-sm leading-relaxed cursor-pointer">Želim primati newsletter s novostima i ponudama.</label>
-                </div>
-              </div>
-              <Button type="submit" variant="hero" size="lg" className="w-full" disabled={isLoading}>
-                {isLoading ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" />Šaljem...</>) : (<><Send className="mr-2 h-5 w-5" />Pošalji upit</>)}
-              </Button>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">E-mail *</Label>
+                      <Input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="vas@email.com" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Telefon</Label>
+                      <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+385 91 000 0000" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="company">Tvrtka *</Label>
+                      <Input id="company" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Naziv tvrtke" />
+                    </div>
+                  </div>
+                  <Button type="button" variant="hero" size="lg" className="w-full" onClick={goToStep2}>
+                    Dalje <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </>
+              )}
+
+              {step === 2 && (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="industry">Djelatnost *</Label>
+                      <Select value={formData.industry} onValueChange={(value) => setFormData({ ...formData, industry: value })}>
+                        <SelectTrigger><SelectValue placeholder="Odaberite djelatnost" /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="retail">Maloprodaja</SelectItem>
+                          <SelectItem value="services">Usluge</SelectItem>
+                          <SelectItem value="hospitality">Ugostiteljstvo</SelectItem>
+                          <SelectItem value="construction">Građevina</SelectItem>
+                          <SelectItem value="it">IT/Tehnologija</SelectItem>
+                          <SelectItem value="manufacturing">Proizvodnja</SelectItem>
+                          <SelectItem value="healthcare">Zdravstvo</SelectItem>
+                          <SelectItem value="education">Obrazovanje</SelectItem>
+                          <SelectItem value="other">Ostalo</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="budget">Opseg projekta</Label>
+                      <Select value={formData.budget} onValueChange={(value) => setFormData({ ...formData, budget: value })}>
+                        <SelectTrigger><SelectValue placeholder="Odaberite opseg" /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="small">Manji projekt</SelectItem>
+                          <SelectItem value="medium">Srednji projekt</SelectItem>
+                          <SelectItem value="large">Veći projekt</SelectItem>
+                          <SelectItem value="custom">Prilagođeno / dogovor</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <Label>Što vas zanima? *</Label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {[{ value: "chat", label: "Chat bot" }, { value: "voice", label: "Voice bot" }, { value: "ponude", label: "Auto-ponude" }, { value: "crm", label: "CRM" }, { value: "email", label: "E-mail sekvence" }].map((interest) => (
+                        <div key={interest.value} className="flex items-center space-x-2">
+                          <Checkbox id={interest.value} checked={formData.interests.includes(interest.value)} onCheckedChange={(checked) => handleInterestChange(interest.value, checked as boolean)} />
+                          <label htmlFor={interest.value} className="text-sm cursor-pointer">{interest.label}</label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="deadline">Željeni rok implementacije</Label>
+                    <Input id="deadline" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} placeholder="npr. odmah, za 2 tjedna, sljedeći mjesec..." />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Dodatna poruka</Label>
+                    <Textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Opišite vaše potrebe ili postavite pitanje..." rows={4} />
+                  </div>
+                  <div className="space-y-3 pt-4 border-t border-border">
+                    <div className="flex items-start space-x-2">
+                      <Checkbox id="gdpr" checked={formData.consentGdpr} onCheckedChange={(checked) => setFormData({ ...formData, consentGdpr: checked as boolean })} required />
+                      <label htmlFor="gdpr" className="text-sm leading-relaxed cursor-pointer">Prihvaćam uvjete zaštite podataka i suglasan sam da me Automind kontaktira vezano uz moj upit. *</label>
+                    </div>
+                    <div className="flex items-start space-x-2">
+                      <Checkbox id="newsletter" checked={formData.consentNewsletter} onCheckedChange={(checked) => setFormData({ ...formData, consentNewsletter: checked as boolean })} />
+                      <label htmlFor="newsletter" className="text-sm leading-relaxed cursor-pointer">Želim primati newsletter s novostima i ponudama.</label>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button type="button" variant="hero-outline" size="lg" className="sm:w-auto" onClick={() => setStep(1)} disabled={isLoading}>
+                      <ArrowLeft className="mr-2 h-5 w-5" /> Natrag
+                    </Button>
+                    <Button type="submit" variant="hero" size="lg" className="flex-1" disabled={isLoading}>
+                      {isLoading ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" />Šaljem...</>) : (<><Send className="mr-2 h-5 w-5" />Pošalji upit</>)}
+                    </Button>
+                  </div>
+                </>
+              )}
             </form>
           </div>
         </ScrollReveal>

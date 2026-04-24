@@ -2,9 +2,9 @@ import { Quote, Star } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const testimonials = [
-  { quote: "Chat na webu hvata upite i navečer i vikendom — više nam ne bježe potencijalni klijenti dok ne stignemo odgovoriti.", author: "Marko H.", company: "Mali obrt, Zagreb" },
-  { quote: "Automatske ponude su nam stvarno olakšale dan. Umjesto pola sata, ponuda ode u par minuta i izgleda profesionalno.", author: "Ana K.", company: "Uslužna djelatnost" },
-  { quote: "Postavili smo sve brzo i bez komplikacija. Tim je bio dostupan za pitanja i prilagodbe nakon pokretanja.", author: "Ivan N.", company: "Lokalni poduzetnik" },
+  { quote: "Chat na webu hvata upite i navečer i vikendom — više nam ne bježe potencijalni klijenti dok ne stignemo odgovoriti.", author: "Marko H.", company: "Frizerski salon · Zagreb" },
+  { quote: "Automatske ponude su nam stvarno olakšale dan. Umjesto pola sata, ponuda ode u par minuta i izgleda profesionalno.", author: "Ana K.", company: "Građevinska tvrtka · Split" },
+  { quote: "Postavili smo sve brzo i bez komplikacija. Tim je bio dostupan za pitanja i prilagodbe nakon pokretanja.", author: "Ivan N.", company: "Auto servis · Osijek" },
 ];
 
 const Testimonials = () => {
@@ -26,7 +26,7 @@ const Testimonials = () => {
               <ScrollReveal key={index} delay={index * 100}>
                 <div
                   className={`glass-card p-6 md:p-8 rounded-2xl text-center h-full flex flex-col ${
-                    isMiddle ? "md:scale-105 shadow-glow border-accent/30" : ""
+                    isMiddle ? "md:scale-110 shadow-glow border-accent/40" : ""
                   }`}
                 >
                   {/* Stars */}
@@ -47,7 +47,7 @@ const Testimonials = () => {
                       src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(t.author)}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`}
                       alt={t.author}
                       loading="lazy"
-                      className="w-12 h-12 rounded-full bg-secondary"
+                      className="w-12 h-12 rounded-full bg-secondary ring-2 ring-border"
                     />
                     <div className="text-left">
                       <div className="font-semibold text-sm">{t.author}</div>

@@ -44,7 +44,7 @@ const Hero = () => {
 
       {/* Decorative robot SVG (desktop only) */}
       <div
-        className="hidden md:block absolute right-4 lg:right-12 top-1/2 -translate-y-1/2 w-64 h-80 opacity-25 pointer-events-none animate-robot-float"
+        className="hidden lg:block absolute right-4 lg:right-12 top-1/2 -translate-y-1/2 w-64 h-80 opacity-25 pointer-events-none animate-robot-float"
         style={{ zIndex: 1 }}
         aria-hidden="true"
       >
@@ -105,7 +105,7 @@ const Hero = () => {
               { label: "HR voice", color: "text-accent-cyan icon-glow-cyan" },
               { label: "Aktivacija 24h", color: "text-accent-amber icon-glow-amber" },
             ].map((badge) => (
-              <span key={badge.label} className="glass-card inline-flex items-center gap-2 px-4 py-2 text-sm">
+              <span key={badge.label} className="glass-card inline-flex items-center gap-2 px-5 py-2.5 text-sm">
                 <CheckCircle2 className={`h-4 w-4 ${badge.color}`} />
                 {badge.label}
               </span>
@@ -113,7 +113,7 @@ const Hero = () => {
           </div>
 
           {/* Heading with rotating word */}
-          <h1 className="mb-6 font-playfair text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up text-foreground" style={{ animationDelay: '0.3s' }}>
+          <h1 className="mb-6 font-playfair text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up text-foreground" style={{ animationDelay: '0.3s' }}>
             AI koji{" "}
             <span className="relative inline-flex align-baseline justify-center" style={{ minWidth: "10ch" }}>
               <span
