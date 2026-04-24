@@ -1,0 +1,16 @@
+{
+  "name": "Automind – AI agenti za vaš biznis",
+  "short_name": "Automind",
+  "description": "AI agenti koji odgovaraju, zovu i automatski šalju ponude.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
