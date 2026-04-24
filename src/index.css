@@ -193,11 +193,21 @@
     animation: word-cycle 2s ease-in-out forwards;
   }
 
+  /* Robot float */
+  @keyframes robot-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .animate-robot-float {
+    animation: robot-float 3s ease-in-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-wave,
     .animate-arrow-slide,
     .animate-word-cycle,
-    .animate-float {
+    .animate-float,
+    .animate-robot-float {
       animation: none !important;
     }
   }
