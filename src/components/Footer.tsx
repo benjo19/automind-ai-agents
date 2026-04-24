@@ -1,16 +1,10 @@
 import { useState, FormEvent } from "react";
-import { Mail, Phone, Linkedin, Twitter, Facebook, Loader2 } from "lucide-react";
+import { Mail, Phone, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import logo from "@/assets/logo.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
 const CTA_PHONE = "0995085933";
@@ -51,7 +45,7 @@ const Footer = () => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
       <div className="container px-4">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
             <img src={logo} alt="Automind logo" className="h-10 w-auto invert mb-4" />
