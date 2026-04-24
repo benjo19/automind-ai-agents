@@ -35,9 +35,10 @@ const Hero = () => {
     <section className="relative flex items-center justify-center overflow-hidden">
       {/* Multi-color radial glow background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[radial-gradient(ellipse,hsl(245_70%_65%/0.18)_0%,transparent_70%)]" />
-        <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[500px] h-[450px] bg-[radial-gradient(ellipse,hsl(320_85%_65%/0.14)_0%,transparent_70%)]" />
-        <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[400px] bg-[radial-gradient(ellipse,hsl(180_75%_55%/0.12)_0%,transparent_70%)]" />
+        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[radial-gradient(ellipse,hsl(245_70%_65%/0.18)_0%,transparent_70%)] animate-float" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[500px] h-[450px] bg-[radial-gradient(ellipse,hsl(320_85%_65%/0.14)_0%,transparent_70%)] animate-float" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[400px] bg-[radial-gradient(ellipse,hsl(180_75%_55%/0.12)_0%,transparent_70%)] animate-float" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 w-[480px] h-[420px] bg-[radial-gradient(ellipse,hsl(35_95%_60%/0.08)_0%,transparent_70%)] animate-float" style={{ animationDelay: '4.5s' }} />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
 
