@@ -82,6 +82,46 @@ const Index = () => {
                   "@type": "Answer",
                   "text": "Da. Svaki projekt kreće od razgovora — ne nudimo gotove pakete, već rješenje koje ima smisla za vaše poslovanje."
                 }
+              },
+              {
+                "@type": "Question",
+                "name": "Što ako trebam podršku?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Pružamo kontinuiranu podršku putem emaila, a po potrebi i prioritetnu podršku s bržim vremenom odgovora — sve dogovaramo individualno."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Koliko košta?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Cijena ovisi o kompleksnosti rješenja. Razgovaramo, slušamo i dajemo ponudu prilagođenu vašem budgetu. Nema skrivenih troškova ni iznenađenja."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Postoji li ugovor ili obveza?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bez dugoročnih obveza. Sve dogovaramo individualno s jasnim uvjetima prije početka suradnje."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Gdje se pohranjuju moji podaci?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Infrastruktura je unutar EU, u skladu s GDPR propisima. Vaši podaci nisu dijeljeni s trećim stranama."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Što ako nisam zadovoljan rezultatom?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Ostajemo uz vas dok rješenje ne radi kako treba. Prilagodbe i podrška su dio svake suradnje."
+                }
               }
             ]
           })}
@@ -91,7 +131,6 @@ const Index = () => {
       <Navbar />
       <main className="min-h-screen">
         <Hero />
-        <DemoForm />
         <Stats />
         <Services />
         <SolutionCards />
@@ -99,6 +138,7 @@ const Index = () => {
         <BeforeAfter />
         <Testimonials />
         <FAQ />
+        <DemoForm />
         <Footer />
       </main>
       <ChatWidget />

@@ -33,6 +33,22 @@ const BeforeAfter = () => {
     };
   }, [dragging, updatePos]);
 
+  // Hint animation: nudge slider once on mount so users see it's draggable
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const t1 = setTimeout(() => {
+      setPos(30);
+      const t2 = setTimeout(() => setPos(50), 600);
+      (t1 as unknown as { _t2?: ReturnType<typeof setTimeout> })._t2 = t2;
+    }, 800);
+    return () => {
+      const inner = (t1 as unknown as { _t2?: ReturnType<typeof setTimeout> })._t2;
+      if (inner) clearTimeout(inner);
+      clearTimeout(t1);
+    };
+  }, []);
+
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") setPos((p) => Math.max(0, p - 5));
     if (e.key === "ArrowRight") setPos((p) => Math.min(100, p + 5));

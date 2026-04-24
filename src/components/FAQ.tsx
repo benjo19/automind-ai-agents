@@ -11,6 +11,10 @@ const faqs = [
   { question: "Koliko brzo možemo krenuti?", answer: "Najčešće u 24h. Naš tim priprema sve potrebne postavke prema vašim specifikacijama." },
   { question: "Je li rješenje prilagođeno baš nama?", answer: "Da. Svaki projekt kreće od razgovora — ne nudimo gotove pakete, već rješenje koje ima smisla za vaše poslovanje." },
   { question: "Što ako trebam podršku?", answer: "Pružamo kontinuiranu podršku putem emaila, a po potrebi i prioritetnu podršku s bržim vremenom odgovora — sve dogovaramo individualno." },
+  { question: "Koliko košta?", answer: "Cijena ovisi o kompleksnosti rješenja. Razgovaramo, slušamo i dajemo ponudu prilagođenu vašem budgetu. Nema skrivenih troškova ni iznenađenja." },
+  { question: "Postoji li ugovor ili obveza?", answer: "Bez dugoročnih obveza. Sve dogovaramo individualno s jasnim uvjetima prije početka suradnje." },
+  { question: "Gdje se pohranjuju moji podaci?", answer: "Infrastruktura je unutar EU, u skladu s GDPR propisima. Vaši podaci nisu dijeljeni s trećim stranama." },
+  { question: "Što ako nisam zadovoljan rezultatom?", answer: "Ostajemo uz vas dok rješenje ne radi kako treba. Prilagodbe i podrška su dio svake suradnje." },
 ];
 
 const FAQ = () => {
@@ -35,7 +39,12 @@ const FAQ = () => {
                 {faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
                     <AccordionTrigger className="text-left text-lg font-semibold hover:text-accent-pink transition-colors">
-                      {faq.question}
+                      <span className="flex items-start">
+                        <span className="text-accent-pink text-xs font-mono mr-3 shrink-0 mt-1.5">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span>{faq.question}</span>
+                      </span>
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground leading-relaxed">
                       {faq.answer}
