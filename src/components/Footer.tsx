@@ -105,7 +105,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-border/50 pt-6 text-center">
           <p className="text-xs text-muted-foreground/60">
-            © 2025 Automind. Sva prava pridržana.
+            © 2026 Automind. Sva prava pridržana.
           </p>
         </div>
       </div>

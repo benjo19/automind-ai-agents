@@ -2,9 +2,9 @@ import { Settings, Link2, Rocket } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const steps = [
-  { icon: Settings, title: "Razgovor", description: "Upoznamo vaš posao, izazove i ciljeve — bez obveza.", step: "01", color: "text-accent-cyan", glow: "icon-glow-cyan", numColor: "text-accent-cyan/10" },
-  { icon: Link2, title: "Prijedlog", description: "Dobivate prilagođeno rješenje s jasnim opsegom i rokovima.", step: "02", color: "text-accent-pink", glow: "icon-glow-pink", numColor: "text-accent-pink/10" },
-  { icon: Rocket, title: "Pokretanje", description: "Postavljamo, povezujemo i ostajemo uz vas nakon lansiranja.", step: "03", color: "text-accent-emerald", glow: "icon-glow-emerald", numColor: "text-accent-emerald/10" },
+  { icon: Settings, title: "Razgovor", description: "Upoznamo vaš posao, izazove i ciljeve — bez obveza.", step: "01", color: "text-accent-cyan", glow: "icon-glow-cyan", numColor: "text-accent-cyan/20" },
+  { icon: Link2, title: "Prijedlog", description: "Dobivate prilagođeno rješenje s jasnim opsegom i rokovima.", step: "02", color: "text-accent-pink", glow: "icon-glow-pink", numColor: "text-accent-pink/20" },
+  { icon: Rocket, title: "Pokretanje", description: "Postavljamo, povezujemo i ostajemo uz vas nakon lansiranja.", step: "03", color: "text-accent-emerald", glow: "icon-glow-emerald", numColor: "text-accent-emerald/20" },
 ];
 
 const HowItWorks = () => {
@@ -25,7 +25,7 @@ const HowItWorks = () => {
         <div className="max-w-5xl mx-auto">
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Animated connector line (desktop only) */}
-            <div className="hidden md:block absolute top-16 left-[18%] right-[18%] h-px pointer-events-none">
+            <div className="hidden md:block absolute top-[4.5rem] left-[18%] right-[18%] h-px pointer-events-none">
               <div
                 className="absolute inset-0 opacity-40"
                 style={{

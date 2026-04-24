@@ -2,7 +2,7 @@ import { Phone, MessageSquare, FileText, Mail, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const solutions = [
-  { icon: Phone, title: "Voice agent", description: "Preuzima pozive umjesto vas i zakazuje sljedeći korak — prirodno, na hrvatskom.", span: "md:col-span-2", color: "text-accent", glow: "icon-glow", hover: "hover:border-accent/40", bg: "bg-accent/15", waveColor: "bg-accent", showWave: true },
+  { icon: Phone, title: "Voice agent", description: "Preuzima pozive umjesto vas i zakazuje sljedeći korak — prirodno, na hrvatskom.", span: "md:col-span-2", color: "text-accent", glow: "icon-glow", hover: "hover:border-accent/40", bg: "bg-accent/15", waveColor: "bg-accent", showWave: true, extraBorder: "border-accent/20" },
   { icon: MessageSquare, title: "Chat agent", description: "Odgovara klijentima na webu i porukama, 24/7, i prebaci razgovor kad treba čovjek.", span: "", color: "text-accent-pink", glow: "icon-glow-pink", hover: "hover:border-accent-pink/40", bg: "bg-accent-pink/15", waveColor: "", showWave: false },
   { icon: FileText, title: "Auto-ponude (PDF)", description: "Profesionalna ponuda u vašem stilu — pripremljena i poslana automatski.", span: "", color: "text-accent-amber", glow: "icon-glow-amber", hover: "hover:border-accent-amber/40", bg: "bg-accent-amber/15", waveColor: "", showWave: false },
   { icon: Mail, title: "E-mail follow-up", description: "Pravovremene poruke koje održavaju razgovor živim i vode klijenta do odluke.", span: "md:col-span-2", color: "text-accent-cyan", glow: "icon-glow-cyan", hover: "hover:border-accent-cyan/40", bg: "bg-accent-cyan/15", waveColor: "", showWave: false },
@@ -45,10 +45,10 @@ const SolutionCards = () => {
             const Icon = solution.icon;
             return (
               <ScrollReveal key={index} delay={index * 80} className={solution.span}>
-                <div className={`relative overflow-hidden glass-card hover-lift p-6 group h-full transition-colors ${solution.hover}`}>
+                <div className={`relative overflow-hidden glass-card hover-lift p-6 group h-full transition-colors ${solution.hover} ${(solution as { extraBorder?: string }).extraBorder ?? ""}`}>
                   <div className="mb-4">
-                    <div className={`w-16 h-16 rounded-full ${solution.bg} flex items-center justify-center`}>
-                      <Icon className={`h-8 w-8 ${solution.color} ${solution.glow}`} />
+                    <div className={`w-12 h-12 rounded-full ${solution.bg} flex items-center justify-center`}>
+                      <Icon className={`h-6 w-6 ${solution.color} ${solution.glow}`} />
                     </div>
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">{solution.title}</h3>

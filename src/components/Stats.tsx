@@ -23,7 +23,7 @@ const StatCard = ({ icon: Icon, target, suffix, decimals = 0, label, color, glow
   const { value, ref } = useCountUp(target, 1500);
   const display = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString();
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="text-center relative z-10">
+    <div ref={ref as React.RefObject<HTMLDivElement>} className="text-center relative z-10 glass-card p-6 rounded-2xl">
       <div className="flex justify-center mb-4">
         <div className="p-4 rounded-xl bg-secondary border border-border">
           <Icon className={`w-8 h-8 ${color} ${glow}`} />
@@ -44,7 +44,7 @@ const Stats = () => {
       <div className="container mx-auto relative z-10">
         <div className="relative">
           {/* Dashed connector (desktop only) */}
-          <div className="hidden md:block absolute top-12 left-[12%] right-[12%] border-t border-dashed border-foreground/15 pointer-events-none" />
+          <div className="hidden md:block absolute top-[4.5rem] left-[12%] right-[12%] border-t border-dashed border-foreground/15 pointer-events-none" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
             {stats.map((stat, index) => (

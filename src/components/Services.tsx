@@ -46,7 +46,7 @@ const Services = () => {
                 Razgovaramo, slušamo, predlažemo rješenje koje ima smisla baš za vaš posao.
               </p>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-border shadow-card">
+            <div className="rounded-2xl overflow-hidden border border-border shadow-card mb-8 md:mb-0">
               <img src={laptopImg} alt="Profesionalno rješenje za vaš posao" className="w-full h-64 lg:h-80 object-cover" loading="lazy" />
             </div>
           </div>
