@@ -37,15 +37,14 @@ const BeforeAfter = () => {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
+    let t2: ReturnType<typeof setTimeout> | undefined;
     const t1 = setTimeout(() => {
       setPos(30);
-      const t2 = setTimeout(() => setPos(50), 600);
-      (t1 as unknown as { _t2?: ReturnType<typeof setTimeout> })._t2 = t2;
+      t2 = setTimeout(() => setPos(50), 600);
     }, 800);
     return () => {
-      const inner = (t1 as unknown as { _t2?: ReturnType<typeof setTimeout> })._t2;
-      if (inner) clearTimeout(inner);
       clearTimeout(t1);
+      if (t2) clearTimeout(t2);
     };
   }, []);
 
