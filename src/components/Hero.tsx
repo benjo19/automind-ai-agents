@@ -1,28 +1,14 @@
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-const ROTATING_WORDS = ["odgovara", "prodaje", "zove", "organizira podatke"];
-
-const AVATARS = [
-  { initials: "MK", from: "from-accent", to: "to-accent-pink" },
-  { initials: "AN", from: "from-accent-pink", to: "to-accent-amber" },
-  { initials: "IN", from: "from-accent-cyan", to: "to-accent-emerald" },
-  { initials: "JT", from: "from-accent-amber", to: "to-accent-pink" },
+const BADGES = [
+  { label: "Aktivacija u 24h", color: "text-accent-amber icon-glow-amber" },
+  { label: "Hrvatski jezik i glas", color: "text-accent-cyan icon-glow-cyan" },
+  { label: "GDPR-ready", color: "text-accent-emerald icon-glow-emerald" },
+  { label: "Bez tehničkog znanja", color: "text-accent-pink icon-glow-pink" },
 ];
 
 const Hero = () => {
-  const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
   const scrollToDemo = () => {
     document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -100,11 +86,7 @@ const Hero = () => {
 
           {/* Badges */}
           <div className="mb-8 flex flex-wrap justify-center gap-3 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            {[
-              { label: "GDPR-ready", color: "text-accent-emerald icon-glow-emerald" },
-              { label: "HR voice", color: "text-accent-cyan icon-glow-cyan" },
-              { label: "Aktivacija 24h", color: "text-accent-amber icon-glow-amber" },
-            ].map((badge) => (
+            {BADGES.map((badge) => (
               <span key={badge.label} className="glass-card inline-flex items-center gap-2 px-5 py-2.5 text-sm">
                 <CheckCircle2 className={`h-4 w-4 ${badge.color}`} />
                 {badge.label}
@@ -114,22 +96,12 @@ const Hero = () => {
 
           {/* Heading with rotating word */}
           <h1 className="mb-6 font-playfair text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up text-foreground" style={{ animationDelay: '0.3s' }}>
-            AI koji{" "}
-            <span className="relative inline-flex align-baseline justify-center" style={{ minWidth: "10ch" }}>
-              <span
-                key={wordIndex}
-                className="inline-block animate-word-cycle gradient-text-rainbow"
-              >
-                {ROTATING_WORDS[wordIndex]},
-              </span>
-            </span>
-            <br className="hidden sm:block" />
-            {" "}za vas.
+            AI koji odgovara, zove i šalje ponude za vas.
           </h1>
 
           {/* Description */}
           <p className="mb-10 text-lg text-muted-foreground md:text-xl max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            Prilagođena AI rješenja za vaš posao — od prvog razgovora do pokretanja.
+            AutoMind hvata upite s weba, maila, WhatsAppa i poziva, odgovara klijentima, dogovara termine i šalje ponude — 24/7.
           </p>
 
           {/* CTA Buttons */}
@@ -140,7 +112,7 @@ const Hero = () => {
               onClick={scrollToDemo}
               className="group"
             >
-              Zatraži demo
+              Zatraži besplatnu AI analizu
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
@@ -148,24 +120,14 @@ const Hero = () => {
               size="lg"
               onClick={scrollToHowItWorks}
             >
-              Kako radi
+              Pogledaj kako radi
             </Button>
           </div>
 
           {/* Social proof */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="flex -space-x-3">
-              {AVATARS.map((a) => (
-                <div
-                  key={a.initials}
-                  className={`w-9 h-9 rounded-full bg-gradient-to-br ${a.from} ${a.to} ring-2 ring-background flex items-center justify-center text-xs font-semibold text-white shadow-md`}
-                >
-                  {a.initials}
-                </div>
-              ))}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Već koristi <span className="text-foreground font-semibold">46+ tvrtki</span> u Hrvatskoj
+          <div className="mt-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
+              Napravljeno za obrte, servise, salone, turizam i lokalne tvrtke u Hrvatskoj.
             </p>
           </div>
         </div>
