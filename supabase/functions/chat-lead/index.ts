@@ -150,6 +150,37 @@ async function getRelevantContext(clientKey: string, queryEmbedding: number[] | 
   }
 }
 
+async function getRecentContext(clientKey: string) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return "";
+
+  try {
+    const url = new URL(`${SUPABASE_URL}/rest/v1/conversations`);
+    url.searchParams.set("select", "role,content,created_at");
+    url.searchParams.set("client_key", `eq.${clientKey}`);
+    url.searchParams.set("order", "created_at.desc");
+    url.searchParams.set("limit", "6");
+
+    const res = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+      },
+    });
+
+    if (!res.ok) return "";
+    const rows = await res.json();
+    if (!Array.isArray(rows) || rows.length === 0) return "";
+
+    return rows
+      .reverse()
+      .map((m) => `${m.role === "user" ? "Klijent" : "Ana"}: ${m.content}`)
+      .join("\n");
+  } catch (e) {
+    console.error("Recent conversation context failed:", e);
+    return "";
+  }
+}
+
 const tools = [
   {
     type: "function",
