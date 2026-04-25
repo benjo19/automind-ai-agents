@@ -268,7 +268,13 @@ Deno.serve(async (req) => {
 
     const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
     const queryEmbedding = createEmbedding(lastUserMessage);
-    const memoryContext = await getRelevantContext(clientKey, queryEmbedding);
+    const [semanticContext, recentContext] = await Promise.all([
+      getRelevantContext(clientKey, queryEmbedding),
+      getRecentContext(clientKey),
+    ]);
+    const memoryContext = [semanticContext, recentContext]
+      .filter(Boolean)
+      .join("\n\nZADNJE PORUKE ISTOG KLIJENTA:\n");
     await saveConversation(clientKey, "user", lastUserMessage, queryEmbedding, {
       source: "chat-widget",
     });
