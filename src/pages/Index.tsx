@@ -1,12 +1,15 @@
 import { Helmet } from "react-helmet";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import ConcreteActions from "@/components/ConcreteActions";
+import TargetIndustries from "@/components/TargetIndustries";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import SolutionCards from "@/components/SolutionCards";
 import HowItWorks from "@/components/HowItWorks";
 import BeforeAfter from "@/components/BeforeAfter";
 import Testimonials from "@/components/Testimonials";
+import MissedLeadCost from "@/components/MissedLeadCost";
 import FAQ from "@/components/FAQ";
 import DemoForm from "@/components/DemoForm";
 import Footer from "@/components/Footer";
@@ -131,6 +134,8 @@ const Index = () => {
       <Navbar />
       <main className="min-h-screen">
         <Hero />
+        <ConcreteActions />
+        <TargetIndustries />
         <DemoForm />
         <Stats />
         <Services />
@@ -138,6 +143,7 @@ const Index = () => {
         <HowItWorks />
         <BeforeAfter />
         <Testimonials />
+        <MissedLeadCost />
         <FAQ />
         <Footer />
       </main>
