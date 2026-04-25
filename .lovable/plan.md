@@ -1,91 +1,111 @@
-
-
 ## Cilj
-Veliki refactor postojeće stranice: 13 ciljanih izmjena kroz Hero, Stats, Marquee, Services, SolutionCards, HowItWorks, BeforeAfter, Testimonials, FAQ, DemoForm, Footer + nova `/hvala` stranica i CSS ispravak.
+Preurediti homepage da jasnije prodaje AutoMind malim i srednjim poduzetnicima u Hrvatskoj: konkretan hero copy, jasne koristi, industrije za koje je rješenje namijenjeno i dodatni CTA oko propuštenih klijenata.
 
-## Promjene po sekcijama
+## Promjene
 
-### 1. `src/components/Hero.tsx`
-- Badges (linija 108): `px-4 py-2` → `px-5 py-2.5`
-- H1 (linija 116): `text-4xl` → `text-3xl` (ostali breakpointi nepromijenjeni)
-- Robot wrapper (linija 47): `hidden md:block` → `hidden lg:block`
+### 1. Hero sekcija
+U `src/components/Hero.tsx`:
+- Zamijeniti rotirajući/generički naslov fiksnim naslovom:
+  - `AI koji odgovara, zove i šalje ponude za vas.`
+- Zamijeniti podnaslov tekstom:
+  - `AutoMind hvata upite s weba, maila, WhatsAppa i poziva, odgovara klijentima, dogovara termine i šalje ponude — 24/7.`
+- Badgeve postaviti ovim redoslijedom:
+  - `Aktivacija u 24h`
+  - `Hrvatski jezik i glas`
+  - `GDPR-ready`
+  - `Bez tehničkog znanja`
+- Primarni CTA promijeniti u:
+  - `Zatraži besplatnu AI analizu`
+- Sekundarni CTA promijeniti u:
+  - `Pogledaj kako radi`
+- Ukloniti social proof tekst `Već koristi 46+ tvrtki u Hrvatskoj`.
+- Umjesto toga prikazati:
+  - `Napravljeno za obrte, servise, salone, turizam i lokalne tvrtke u Hrvatskoj.`
+- Zadržati postojeći premium dark/gradient izgled, animirane glow elemente, robot SVG i CTA stilove.
 
-### 2. `src/components/Stats.tsx`
-- `StatCard` root `<div>`: dodati `glass-card p-6 rounded-2xl` uz postojeći `text-center relative z-10`
-- Dashed connector: `top-12` → `top-[4.5rem]`
+### 2. Nova sekcija: “Što AutoMind konkretno radi?”
+Dodati novu komponentu, npr. `src/components/ConcreteActions.tsx`, odmah ispod Hero dijela, prije kontakt forme.
 
-### 3. `src/components/Marquee.tsx` (kompletni rewrite)
-- Iznad marquee diva: dodati uvodni `<p>` "Integriramo se s alatima koje već koristite"
-- `tools` → array objekata `{ name, slug }` (8 alata, dupliciran 2× za beskonačni scroll)
-- Svaki item: logo (`https://cdn.simpleicons.org/${slug}/6b7280` h-5 w-5) + naziv
-- Wrapper div s `style={{ maskImage / WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)" }}`
+Kartice:
+1. `Odgovara na web i WhatsApp upite`
+   - `Klijent pošalje upit, AI odmah odgovara i sprema podatke.`
+2. `Prima pozive i zapisuje zahtjeve`
+   - `AI voice agent razgovara na hrvatskom i šalje vam sažetak poziva.`
+3. `Šalje ponude automatski`
+   - `Iz upita generira osnovnu ponudu i šalje je vama na pregled ili direktno klijentu.`
+4. `Podsjeća na follow-up`
+   - `Nijedan lead ne ostaje zaboravljen. Sustav vas podsjeća kada treba nazvati ili poslati poruku.`
+5. `Sprema leadove u CRM`
+   - `Svi kontakti, upiti i statusi nalaze se na jednom mjestu.`
 
-### 4. `src/components/Services.tsx`
-- Image wrapper: dodati `mb-8 md:mb-0` u postojeći className
+Dizajn:
+- Glass kartice u postojećem gradient/glow stilu.
+- Ikone iz `lucide-react`.
+- Responsive grid: 1 stupac mobitel, 2 stupca tablet, 3 stupca desktop, s petom karticom skladno uklopljenom.
 
-### 5. `src/components/SolutionCards.tsx`
-- Ikone wrapper: `w-16 h-16` → `w-12 h-12`
-- Voice agent kartica (prva, `col-span-2`): dodati `border-accent/20`
+### 3. Nova sekcija: “Za koga je AutoMind?”
+Dodati novu komponentu, npr. `src/components/TargetIndustries.tsx`, nakon sekcije “Što AutoMind konkretno radi?” ili nakon kontakt forme, ovisno o postojećem flowu. Preporuka: ispod nove konkretne sekcije, prije forme, kako bi korisnik prvo razumio koristi i prepoznao se u primjerima.
 
-### 6. `src/components/HowItWorks.tsx`
-- `numColor` u `steps` arrayu: `/10` → `/20` (cyan, pink, emerald)
-- Connector linija: `top-16` → `top-[4.5rem]`
+Kartice/čipovi:
+- `Automehaničari i servisi`
+- `Frizerski i beauty saloni`
+- `Apartmani i turizam`
+- `Nekretnine`
+- `Građevina i majstori`
+- `Praonice i lokalne usluge`
 
-### 7. `src/components/BeforeAfter.tsx`
-- Dodati `useEffect(() => { ... }, [])` koji 800 ms nakon mounta pokreće hint:
-  - `setTimeout(() => { setPos(30); setTimeout(() => setPos(50), 600); }, 800)`
-- Cleanup oba timeouta na unmount
-- Respect `prefers-reduced-motion` (preskoči animaciju ako reduce)
+Dizajn:
+- Kratke glass kartice ili pill elementi.
+- Jasno, čitljivo i poslovno, bez tehničkog žargona.
 
-### 8. `src/components/Testimonials.tsx`
-- Avatar `<img>`: dodati `ring-2 ring-border` uz postojeći `bg-secondary`
-- Srednja kartica (`isMiddle`): `md:scale-105` → `md:scale-110`, `border-accent/30` → `border-accent/40`
-- Tvrtke u `testimonials` arrayu:
-  - Marko H. → "Frizerski salon · Zagreb"
-  - Ana K. → "Građevinska tvrtka · Split"
-  - Ivan N. → "Auto servis · Osijek"
+### 4. Nova sekcija: “Koliko vas košta propušten klijent?”
+Dodati komponentu, npr. `src/components/MissedLeadCost.tsx`, prije postojeće forme ili prije FAQ-a kao dodatni prodajni CTA blok.
 
-### 9. `src/components/FAQ.tsx`
-- AccordionTrigger sadržaj: prefiks `<span className="text-accent-pink text-xs font-mono mr-3 shrink-0">{String(index+1).padStart(2,'0')}</span>`
-- Dodati 4 nova FAQ-a: "Koliko košta?", "Postoji li ugovor ili obveza?", "Gdje se pohranjuju moji podaci?", "Što ako nisam zadovoljan rezultatom?" (s odgovorima iz brief-a)
-- **Bonus:** ažurirati FAQ JSON-LD u `src/pages/Index.tsx` da uključuje nova pitanja (SEO konzistentnost)
+Sadržaj:
+- Naslov: `Koliko vas košta propušten klijent?`
+- Tekst: `Ako vam samo 3 klijenta mjesečno ne dobiju odgovor na vrijeme, već gubite više nego što košta automatizacija.`
+- CTA: `Želim provjeriti koliko upita gubim`
+- CTA scrolla na postojeću kontakt formu `#demo`.
 
-### 10. DemoForma — premjestiti + 2-step
-- **`src/pages/Index.tsx`**: maknuti `<DemoForm />` ispod Hero, dodati ga prije `<Footer />`
-  Novi redoslijed: Hero → Stats → Services → SolutionCards → HowItWorks → BeforeAfter → Testimonials → FAQ → DemoForm → Footer
-- **`src/components/DemoForm.tsx`**: pretvoriti u 2-step:
-  - Novi state: `step` (1 ili 2)
-  - Progress bar (koristiti postojeći `@/components/ui/progress` ili custom 2-bar) iznad forme, accent boja (`bg-accent`)
-  - **Korak 1:** ime, email, telefon, tvrtka + gumb "Dalje →" (validira required polja koraka 1, ne submita)
-  - **Korak 2:** djelatnost, opseg, interesi, rok, poruka, GDPR, newsletter + gumbi "← Natrag" i "Pošalji upit" (submit)
-  - Submit handler ostaje isti, ali nakon uspjeha: `useNavigate` → `navigate("/hvala")` umjesto toast-a (toast ostaje samo za error)
+Napomena:
+- Ovo nije pricing sekcija i neće prikazivati cijene, pakete ni pretplate.
 
-### 11. `src/components/Footer.tsx`
-- Email konstanta `CTA_EMAIL` već je `auto.mind.ai2025@gmail.com` ✓ (nepromijenjeno)
-- Copyright: `© 2025` → `© 2026`
-- Provjereno: social div je već uklonjen u prijašnjem koraku ✓
+### 5. Homepage redoslijed
+U `src/pages/Index.tsx` ažurirati strukturu na prodajniji flow:
 
-### 12. Nova stranica `/hvala`
-- **Kreirati `src/pages/ThankYou.tsx`:**
-  - `min-h-screen flex items-center justify-center` s tamnom pozadinom
-  - `CheckCircle2` ikona (h-20 w-20, `text-accent-emerald icon-glow-emerald`, jednokratni `animate-bounce`)
-  - H1 "Hvala! Upit je zaprimljen." (`font-playfair gradient-text-rainbow`)
-  - Paragraf "Naš tim javit će vam se u roku 24h s personaliziranom ponudom."
-  - Gumb "Povratak na početak" → `useNavigate()` → `navigate("/")`
-  - `<Helmet>` s `<meta name="robots" content="noindex" />` (thank-you stranice ne treba indeksirati)
-- **`src/App.tsx`:** dodati `<Route path="/hvala" element={<ThankYou />} />` iznad catch-all rute
+```text
+Navbar
+Hero
+ConcreteActions
+TargetIndustries
+DemoForm
+Stats / Services / ostale postojeće sekcije
+MissedLeadCost
+FAQ
+Footer
+ChatWidget
+CookieConsent
+```
 
-### 13. CSS fix — `src/index.css`
-- `body::before`: `z-index: 0` → `z-index: -1` (noise overlay ide iza svega umjesto preko, sprječava potencijalne klik probleme i osigurava da gradient/blob layeri ostanu vidljivi pravilno)
+Ako bude bolje vizualno, `MissedLeadCost` može ići neposredno prije `DemoForm` kao dodatni okidač za formu, ali forma ostaje visoko na stranici kako je ranije traženo.
 
-## Datoteke
-- Edit: `src/components/Hero.tsx`, `Stats.tsx`, `Marquee.tsx`, `Services.tsx`, `SolutionCards.tsx`, `HowItWorks.tsx`, `BeforeAfter.tsx`, `Testimonials.tsx`, `FAQ.tsx`, `DemoForm.tsx`, `Footer.tsx`
-- Edit: `src/pages/Index.tsx` (preraspored + FAQ JSON-LD), `src/App.tsx` (nova ruta), `src/index.css` (z-index fix)
-- Create: `src/pages/ThankYou.tsx`
+### 6. Ton i copy cleanup
+Proći kroz nove tekstove i povezane postojeće naslove kako bi ton bio:
+- jasan
+- direktan
+- poslovan
+- razumljiv netehničkim korisnicima
 
-## Što ostaje netaknuto
-Sav ostali copy, brand boje, fontovi, glassmorphism tokens, animacije (word-cycle, robot-float, marquee, float, wave), CookieConsent, ChatWidget, legal stranice, webhook URL, supabase integracije.
+Izbjegavati izraze:
+- `digitalna transformacija`
+- `revolucionarna tehnologija`
+- `budućnost poslovanja`
+
+## Tehnički detalji
+- Promjene su primarno frontend: React komponente i `Index.tsx` import/redoslijed.
+- Nema potrebe za backend ili baznim promjenama.
+- Koristit će se postojeći dizajn tokeni: `glass-card`, `gradient-text-rainbow`, `glow-bg`, `hover-lift`, accent boje i `ScrollReveal`.
+- Ne dirati automatski generirane Cloud/Supabase datoteke.
 
 ## Rezultat
-Stranica dobiva polished detalje (badge spacing, glass StatCards, brand logoi u marquee, jači numerički akcenti u HowItWorks), bolji UX (BeforeAfter hint, 2-step DemoForm, dedicated thank-you stranica) i čišću tehničku osnovu (z-index fix, ažurirani FAQ schema).
-
+Homepage će odmah objasniti što AutoMind radi, za koga je namijenjen i zašto je problem propuštenih upita poslovno važan — uz zadržavanje premium dark AI vizualnog identiteta i jasnih CTA gumba prema kontakt formi.
