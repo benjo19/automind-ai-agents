@@ -206,9 +206,11 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    const messages = sanitizeMessages(body.messages);
+    const clientKey = sanitizeClientKey(body.clientKey);
 
-    if (!Array.isArray(messages)) {
+    if (!messages) {
       return new Response(
         JSON.stringify({ error: "messages must be an array" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
@@ -219,6 +221,17 @@ Deno.serve(async (req) => {
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
+
+    const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
+    const queryEmbedding = await createEmbedding(lastUserMessage, LOVABLE_API_KEY);
+    const memoryContext = await getRelevantContext(clientKey, queryEmbedding);
+    await saveConversation(clientKey, "user", lastUserMessage, queryEmbedding, {
+      source: "chat-widget",
+    });
+
+    const systemPrompt = memoryContext
+      ? `${SYSTEM_PROMPT}\n\nRELEVANTAN KONTEKST IZ RANIJIH RAZGOVORA OVOG KLIJENTA:\n${memoryContext}\n\nKoristi ovaj kontekst prirodno samo ako je relevantan. Ne govori da imaš bazu podataka ili memoriju.`
+      : SYSTEM_PROMPT;
 
     const aiResp = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
@@ -231,7 +244,7 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           model: "google/gemini-3-flash-preview",
           messages: [
-            { role: "system", content: SYSTEM_PROMPT },
+            { role: "system", content: systemPrompt },
             ...messages,
           ],
           tools,
@@ -273,6 +286,7 @@ Deno.serve(async (req) => {
         let toolName: string | null = null;
         let toolArgsStr = "";
         let leadSubmitted = false;
+        let assistantContent = "";
 
         try {
           while (true) {
@@ -296,6 +310,8 @@ Deno.serve(async (req) => {
               try {
                 const parsed = JSON.parse(data);
                 const delta = parsed.choices?.[0]?.delta;
+                const content = delta?.content;
+                if (typeof content === "string") assistantContent += content;
                 const toolCall = delta?.tool_calls?.[0];
                 if (toolCall) {
                   if (toolCall.function?.name) {
@@ -331,6 +347,14 @@ Deno.serve(async (req) => {
                 ),
               );
             }
+          }
+
+          if (assistantContent.trim()) {
+            const assistantEmbedding = await createEmbedding(assistantContent, LOVABLE_API_KEY);
+            await saveConversation(clientKey, "assistant", assistantContent, assistantEmbedding, {
+              source: "chat-widget",
+              lead_submitted: leadSubmitted,
+            });
           }
         } catch (err) {
           console.error("Stream error:", err);
