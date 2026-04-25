@@ -89,6 +89,10 @@ function createEmbedding(input: string) {
   return magnitude ? vector.map((value) => Number((value / magnitude).toFixed(6))) : null;
 }
 
+function formatVector(embedding: number[] | null) {
+  return embedding ? `[${embedding.join(",")}]` : null;
+}
+
 async function saveConversation(
   clientKey: string,
   role: "user" | "assistant",
@@ -98,7 +102,7 @@ async function saveConversation(
 ) {
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !content.trim()) return;
 
-  await fetch(`${SUPABASE_URL}/rest/v1/conversations`, {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/conversations`, {
     method: "POST",
     headers: {
       apikey: SUPABASE_SERVICE_ROLE_KEY,
@@ -110,10 +114,14 @@ async function saveConversation(
       client_key: clientKey,
       role,
       content: content.slice(0, 4000),
-      embedding,
+      embedding: formatVector(embedding),
       metadata,
     }),
   }).catch((e) => console.error("Conversation save failed:", e));
+
+  if (res && !res.ok) {
+    console.error("Conversation save failed:", res.status, await res.text());
+  }
 }
 
 async function getRelevantContext(clientKey: string, queryEmbedding: number[] | null) {
@@ -128,7 +136,7 @@ async function getRelevantContext(clientKey: string, queryEmbedding: number[] | 
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        query_embedding: queryEmbedding,
+        query_embedding: formatVector(queryEmbedding),
         match_client_key: clientKey,
         match_count: 5,
       }),
