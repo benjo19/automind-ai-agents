@@ -5,6 +5,9 @@
 const MAKE_WEBHOOK_URL =
   "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1";
 
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -29,6 +32,110 @@ KAD POZVATI ALAT submit_lead:
 - Email je obavezan za slanje ponude.
 - Nakon poziva alata, zahvali korisniku i potvrdi da će se tim javiti uskoro (obično u 24h).
 - Ne pozivaj alat dvaput za isti lead u istom razgovoru.`;
+
+function sanitizeClientKey(value: unknown) {
+  return typeof value === "string" && /^[a-zA-Z0-9_-]{16,80}$/.test(value)
+    ? value
+    : crypto.randomUUID();
+}
+
+function sanitizeMessages(value: unknown) {
+  if (!Array.isArray(value)) return null;
+  return value
+    .filter((m) =>
+      m &&
+      (m.role === "user" || m.role === "assistant") &&
+      typeof m.content === "string" &&
+      m.content.trim().length > 0
+    )
+    .slice(-12)
+    .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }));
+}
+
+async function createEmbedding(input: string, apiKey: string) {
+  const res = await fetch("https://ai.gateway.lovable.dev/v1/embeddings", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "google/text-embedding-004",
+      input,
+    }),
+  });
+
+  if (!res.ok) {
+    console.error("Embedding error:", res.status, await res.text());
+    return null;
+  }
+
+  const data = await res.json();
+  return data.data?.[0]?.embedding as number[] | null;
+}
+
+async function saveConversation(
+  clientKey: string,
+  role: "user" | "assistant",
+  content: string,
+  embedding: number[] | null,
+  metadata: Record<string, unknown> = {},
+) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !content.trim()) return;
+
+  await fetch(`${SUPABASE_URL}/rest/v1/conversations`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify({
+      client_key: clientKey,
+      role,
+      content: content.slice(0, 4000),
+      embedding,
+      metadata,
+    }),
+  }).catch((e) => console.error("Conversation save failed:", e));
+}
+
+async function getRelevantContext(clientKey: string, queryEmbedding: number[] | null) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !queryEmbedding) return "";
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/match_conversations`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query_embedding: queryEmbedding,
+        match_client_key: clientKey,
+        match_count: 5,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("Conversation search failed:", res.status, await res.text());
+      return "";
+    }
+
+    const matches = await res.json();
+    if (!Array.isArray(matches) || matches.length === 0) return "";
+
+    return matches
+      .filter((m) => Number(m.similarity) > 0.62)
+      .map((m) => `${m.role === "user" ? "Klijent" : "Ana"}: ${m.content}`)
+      .join("\n");
+  } catch (e) {
+    console.error("Conversation context failed:", e);
+    return "";
+  }
+}
 
 const tools = [
   {
