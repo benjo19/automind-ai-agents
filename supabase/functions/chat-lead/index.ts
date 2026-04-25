@@ -52,26 +52,39 @@ function sanitizeMessages(value: unknown) {
     .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }));
 }
 
-async function createEmbedding(input: string, apiKey: string) {
-  const res = await fetch("https://ai.gateway.lovable.dev/v1/embeddings", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "google/text-embedding-004",
-      input,
-    }),
-  });
+function createEmbedding(input: string) {
+  const synonyms: Record<string, string[]> = {
+    rezervacije: ["termin", "termini", "narucivanje", "booking", "appointment"],
+    chat: ["chatbot", "poruke", "whatsapp", "webchat", "messenger"],
+    voice: ["poziv", "pozivi", "telefon", "glas", "call"],
+    ponude: ["pdf", "predracun", "automatizacija", "email"],
+    crm: ["klijenti", "lead", "prodaja", "pipeline"],
+    salon: ["frizer", "frizerski", "beauty", "kozmeticki"],
+    servis: ["auto", "autoservis", "radiona", "popravak"],
+  };
 
-  if (!res.ok) {
-    console.error("Embedding error:", res.status, await res.text());
-    return null;
+  const expanded = input.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const tokens = expanded.match(/[a-z0-9]{3,}/g) ?? [];
+  const vector = new Array(768).fill(0);
+
+  const addToken = (token: string, weight = 1) => {
+    let hash = 2166136261;
+    for (let i = 0; i < token.length; i++) {
+      hash ^= token.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    vector[Math.abs(hash) % vector.length] += weight;
+  };
+
+  for (const token of tokens) {
+    addToken(token, 1);
+    for (const [concept, words] of Object.entries(synonyms)) {
+      if (token === concept || words.includes(token)) addToken(concept, 1.5);
+    }
   }
 
-  const data = await res.json();
-  return data.data?.[0]?.embedding as number[] | null;
+  const magnitude = Math.sqrt(vector.reduce((sum, value) => sum + value * value, 0));
+  return magnitude ? vector.map((value) => Number((value / magnitude).toFixed(6))) : null;
 }
 
 async function saveConversation(
@@ -223,7 +236,7 @@ Deno.serve(async (req) => {
     }
 
     const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
-    const queryEmbedding = await createEmbedding(lastUserMessage, LOVABLE_API_KEY);
+    const queryEmbedding = createEmbedding(lastUserMessage);
     const memoryContext = await getRelevantContext(clientKey, queryEmbedding);
     await saveConversation(clientKey, "user", lastUserMessage, queryEmbedding, {
       source: "chat-widget",
@@ -350,7 +363,7 @@ Deno.serve(async (req) => {
           }
 
           if (assistantContent.trim()) {
-            const assistantEmbedding = await createEmbedding(assistantContent, LOVABLE_API_KEY);
+            const assistantEmbedding = createEmbedding(assistantContent);
             await saveConversation(clientKey, "assistant", assistantContent, assistantEmbedding, {
               source: "chat-widget",
               lead_submitted: leadSubmitted,
