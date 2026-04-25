@@ -5,6 +5,9 @@
 const MAKE_WEBHOOK_URL =
   "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1";
 
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -22,6 +25,8 @@ PRAVILA RAZGOVORA:
 - Tek nakon 2-3 izmjene, kad imaš kontekst, zatraži kontakt podatke (ime, email, telefon).
 - Ne izmišljaj cijene. Ako pitaju za cijenu, reci da tim šalje personaliziranu ponudu nakon kratkog razgovora.
 - Ako korisnik nije zainteresiran, budi pristojan i ponudi pomoć kasnije.
+- Ako dobiješ relevantan kontekst iz ranijih poruka, tretiraj ga kao dio aktualnog razgovora.
+- Ako klijent pita sjećaš li se nečega, odgovori iz dostupnog konteksta; ne tvrdi da nemaš pristup prijašnjim razgovorima.
 
 KAD POZVATI ALAT submit_lead:
 - ČIM imaš ime, email i (opcionalno) telefon te osnovni kontekst (industrija ili interes).
@@ -29,6 +34,154 @@ KAD POZVATI ALAT submit_lead:
 - Email je obavezan za slanje ponude.
 - Nakon poziva alata, zahvali korisniku i potvrdi da će se tim javiti uskoro (obično u 24h).
 - Ne pozivaj alat dvaput za isti lead u istom razgovoru.`;
+
+function sanitizeClientKey(value: unknown) {
+  return typeof value === "string" && /^[a-zA-Z0-9_-]{16,80}$/.test(value)
+    ? value
+    : crypto.randomUUID();
+}
+
+function sanitizeMessages(value: unknown) {
+  if (!Array.isArray(value)) return null;
+  return value
+    .filter((m) =>
+      m &&
+      (m.role === "user" || m.role === "assistant") &&
+      typeof m.content === "string" &&
+      m.content.trim().length > 0
+    )
+    .slice(-12)
+    .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }));
+}
+
+function createEmbedding(input: string) {
+  const synonyms: Record<string, string[]> = {
+    rezervacije: ["termin", "termini", "narucivanje", "booking", "appointment"],
+    chat: ["chatbot", "poruke", "whatsapp", "webchat", "messenger"],
+    voice: ["poziv", "pozivi", "telefon", "glas", "call"],
+    ponude: ["pdf", "predracun", "automatizacija", "email"],
+    crm: ["klijenti", "lead", "prodaja", "pipeline"],
+    salon: ["frizer", "frizerski", "beauty", "kozmeticki"],
+    servis: ["auto", "autoservis", "radiona", "popravak"],
+  };
+
+  const expanded = input.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const tokens = expanded.match(/[a-z0-9]{3,}/g) ?? [];
+  const vector = new Array(768).fill(0);
+
+  const addToken = (token: string, weight = 1) => {
+    let hash = 2166136261;
+    for (let i = 0; i < token.length; i++) {
+      hash ^= token.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    vector[Math.abs(hash) % vector.length] += weight;
+  };
+
+  for (const token of tokens) {
+    addToken(token, 1);
+    for (const [concept, words] of Object.entries(synonyms)) {
+      if (token === concept || words.includes(token)) addToken(concept, 1.5);
+    }
+  }
+
+  const magnitude = Math.sqrt(vector.reduce((sum, value) => sum + value * value, 0));
+  return magnitude ? vector.map((value) => Number((value / magnitude).toFixed(6))) : null;
+}
+
+async function saveConversation(
+  clientKey: string,
+  role: "user" | "assistant",
+  content: string,
+  embedding: number[] | null,
+  metadata: Record<string, unknown> = {},
+) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !content.trim()) return;
+
+  await fetch(`${SUPABASE_URL}/rest/v1/conversations`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify({
+      client_key: clientKey,
+      role,
+      content: content.slice(0, 4000),
+      embedding,
+      metadata,
+    }),
+  }).catch((e) => console.error("Conversation save failed:", e));
+}
+
+async function getRelevantContext(clientKey: string, queryEmbedding: number[] | null) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !queryEmbedding) return "";
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/match_conversations`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query_embedding: queryEmbedding,
+        match_client_key: clientKey,
+        match_count: 5,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("Conversation search failed:", res.status, await res.text());
+      return "";
+    }
+
+    const matches = await res.json();
+    if (!Array.isArray(matches) || matches.length === 0) return "";
+
+    return matches
+      .filter((m) => Number(m.similarity) > 0.62)
+      .map((m) => `${m.role === "user" ? "Klijent" : "Ana"}: ${m.content}`)
+      .join("\n");
+  } catch (e) {
+    console.error("Conversation context failed:", e);
+    return "";
+  }
+}
+
+async function getRecentContext(clientKey: string) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return "";
+
+  try {
+    const url = new URL(`${SUPABASE_URL}/rest/v1/conversations`);
+    url.searchParams.set("select", "role,content,created_at");
+    url.searchParams.set("client_key", `eq.${clientKey}`);
+    url.searchParams.set("order", "created_at.desc");
+    url.searchParams.set("limit", "6");
+
+    const res = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+      },
+    });
+
+    if (!res.ok) return "";
+    const rows = await res.json();
+    if (!Array.isArray(rows) || rows.length === 0) return "";
+
+    return rows
+      .reverse()
+      .map((m) => `${m.role === "user" ? "Klijent" : "Ana"}: ${m.content}`)
+      .join("\n");
+  } catch (e) {
+    console.error("Recent conversation context failed:", e);
+    return "";
+  }
+}
 
 const tools = [
   {
@@ -99,9 +252,11 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    const messages = sanitizeMessages(body.messages);
+    const clientKey = sanitizeClientKey(body.clientKey);
 
-    if (!Array.isArray(messages)) {
+    if (!messages) {
       return new Response(
         JSON.stringify({ error: "messages must be an array" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
@@ -112,6 +267,23 @@ Deno.serve(async (req) => {
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
+
+    const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
+    const queryEmbedding = createEmbedding(lastUserMessage);
+    const [semanticContext, recentContext] = await Promise.all([
+      getRelevantContext(clientKey, queryEmbedding),
+      getRecentContext(clientKey),
+    ]);
+    const memoryContext = [semanticContext, recentContext]
+      .filter(Boolean)
+      .join("\n\nZADNJE PORUKE ISTOG KLIJENTA:\n");
+    await saveConversation(clientKey, "user", lastUserMessage, queryEmbedding, {
+      source: "chat-widget",
+    });
+
+    const systemPrompt = memoryContext
+      ? `${SYSTEM_PROMPT}\n\nRELEVANTAN KONTEKST IZ RANIJIH RAZGOVORA OVOG KLIJENTA:\n${memoryContext}\n\nKoristi ovaj kontekst prirodno ako je relevantan. Ako korisnik pita sjećaš li se, odgovori konkretno iz konteksta. Ne govori da nemaš pristup prijašnjim razgovorima i ne spominji tehničke detalje memorije.`
+      : SYSTEM_PROMPT;
 
     const aiResp = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
@@ -124,7 +296,7 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           model: "google/gemini-3-flash-preview",
           messages: [
-            { role: "system", content: SYSTEM_PROMPT },
+            { role: "system", content: systemPrompt },
             ...messages,
           ],
           tools,
@@ -166,6 +338,7 @@ Deno.serve(async (req) => {
         let toolName: string | null = null;
         let toolArgsStr = "";
         let leadSubmitted = false;
+        let assistantContent = "";
 
         try {
           while (true) {
@@ -189,6 +362,8 @@ Deno.serve(async (req) => {
               try {
                 const parsed = JSON.parse(data);
                 const delta = parsed.choices?.[0]?.delta;
+                const content = delta?.content;
+                if (typeof content === "string") assistantContent += content;
                 const toolCall = delta?.tool_calls?.[0];
                 if (toolCall) {
                   if (toolCall.function?.name) {
@@ -224,6 +399,14 @@ Deno.serve(async (req) => {
                 ),
               );
             }
+          }
+
+          if (assistantContent.trim()) {
+            const assistantEmbedding = createEmbedding(assistantContent);
+            await saveConversation(clientKey, "assistant", assistantContent, assistantEmbedding, {
+              source: "chat-widget",
+              lead_submitted: leadSubmitted,
+            });
           }
         } catch (err) {
           console.error("Stream error:", err);

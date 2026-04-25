@@ -14,13 +14,56 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      conversations: {
+        Row: {
+          client_key: string
+          content: string
+          created_at: string
+          embedding: string | null
+          id: string
+          metadata: Json
+          role: string
+        }
+        Insert: {
+          client_key: string
+          content: string
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          metadata?: Json
+          role: string
+        }
+        Update: {
+          client_key?: string
+          content?: string
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          metadata?: Json
+          role?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      match_conversations: {
+        Args: {
+          match_client_key: string
+          match_count?: number
+          query_embedding: string
+        }
+        Returns: {
+          content: string
+          created_at: string
+          id: string
+          metadata: Json
+          role: string
+          similarity: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

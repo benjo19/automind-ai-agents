@@ -6,6 +6,19 @@ import { cn } from "@/lib/utils";
 type Msg = { role: "user" | "assistant"; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-lead`;
+const CHAT_CLIENT_KEY = "automind_chat_client_key";
+
+const getClientKey = () => {
+  try {
+    const existing = localStorage.getItem(CHAT_CLIENT_KEY);
+    if (existing) return existing;
+    const next = crypto.randomUUID();
+    localStorage.setItem(CHAT_CLIENT_KEY, next);
+    return next;
+  } catch {
+    return crypto.randomUUID();
+  }
+};
 
 const INITIAL_GREETING: Msg = {
   role: "assistant",
@@ -16,6 +29,7 @@ const INITIAL_GREETING: Msg = {
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([INITIAL_GREETING]);
+  const [clientKey] = useState(getClientKey);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [leadSent, setLeadSent] = useState(false);
@@ -66,6 +80,7 @@ const ChatWidget = () => {
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
         body: JSON.stringify({
+          clientKey,
           messages: nextMessages.map((m) => ({ role: m.role, content: m.content })),
         }),
       });
