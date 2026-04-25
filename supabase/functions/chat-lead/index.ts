@@ -25,6 +25,8 @@ PRAVILA RAZGOVORA:
 - Tek nakon 2-3 izmjene, kad imaš kontekst, zatraži kontakt podatke (ime, email, telefon).
 - Ne izmišljaj cijene. Ako pitaju za cijenu, reci da tim šalje personaliziranu ponudu nakon kratkog razgovora.
 - Ako korisnik nije zainteresiran, budi pristojan i ponudi pomoć kasnije.
+- Ako dobiješ relevantan kontekst iz ranijih poruka, tretiraj ga kao dio aktualnog razgovora.
+- Ako klijent pita sjećaš li se nečega, odgovori iz dostupnog konteksta; ne tvrdi da nemaš pristup prijašnjim razgovorima.
 
 KAD POZVATI ALAT submit_lead:
 - ČIM imaš ime, email i (opcionalno) telefon te osnovni kontekst (industrija ili interes).
@@ -280,7 +282,7 @@ Deno.serve(async (req) => {
     });
 
     const systemPrompt = memoryContext
-      ? `${SYSTEM_PROMPT}\n\nRELEVANTAN KONTEKST IZ RANIJIH RAZGOVORA OVOG KLIJENTA:\n${memoryContext}\n\nKoristi ovaj kontekst prirodno samo ako je relevantan. Ne govori da imaš bazu podataka ili memoriju.`
+      ? `${SYSTEM_PROMPT}\n\nRELEVANTAN KONTEKST IZ RANIJIH RAZGOVORA OVOG KLIJENTA:\n${memoryContext}\n\nKoristi ovaj kontekst prirodno ako je relevantan. Ako korisnik pita sjećaš li se, odgovori konkretno iz konteksta. Ne govori da nemaš pristup prijašnjim razgovorima i ne spominji tehničke detalje memorije.`
       : SYSTEM_PROMPT;
 
     const aiResp = await fetch(
