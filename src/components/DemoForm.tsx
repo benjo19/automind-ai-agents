@@ -176,29 +176,29 @@ const DemoForm = () => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="deadline">Željeni rok implementacije</Label>
-                    <Input id="deadline" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} placeholder="npr. odmah, za 2 tjedna, sljedeći mjesec..." />
+                    <Label htmlFor="deadline">{t.demoForm.deadline}</Label>
+                    <Input id="deadline" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} placeholder={t.demoForm.deadlinePlaceholder} />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="message">Dodatna poruka</Label>
-                    <Textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Opišite vaše potrebe ili postavite pitanje..." rows={4} />
+                    <Label htmlFor="message">{t.demoForm.message}</Label>
+                    <Textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={t.demoForm.messagePlaceholder} rows={4} />
                   </div>
                   <div className="space-y-3 pt-4 border-t border-border">
                     <div className="flex items-start space-x-2">
                       <Checkbox id="gdpr" checked={formData.consentGdpr} onCheckedChange={(checked) => setFormData({ ...formData, consentGdpr: checked as boolean })} required />
-                      <label htmlFor="gdpr" className="text-sm leading-relaxed cursor-pointer">Prihvaćam uvjete zaštite podataka i suglasan sam da me Automind kontaktira vezano uz moj upit. *</label>
+                      <label htmlFor="gdpr" className="text-sm leading-relaxed cursor-pointer">{t.demoForm.gdpr}</label>
                     </div>
                     <div className="flex items-start space-x-2">
                       <Checkbox id="newsletter" checked={formData.consentNewsletter} onCheckedChange={(checked) => setFormData({ ...formData, consentNewsletter: checked as boolean })} />
-                      <label htmlFor="newsletter" className="text-sm leading-relaxed cursor-pointer">Želim primati newsletter s novostima i ponudama.</label>
+                      <label htmlFor="newsletter" className="text-sm leading-relaxed cursor-pointer">{t.demoForm.newsletter}</label>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button type="button" variant="hero-outline" size="lg" className="sm:w-auto" onClick={() => setStep(1)} disabled={isLoading}>
-                      <ArrowLeft className="mr-2 h-5 w-5" /> Natrag
+                      <ArrowLeft className="mr-2 h-5 w-5" /> {t.demoForm.back}
                     </Button>
                     <Button type="submit" variant="hero" size="lg" className="flex-1" disabled={isLoading}>
-                      {isLoading ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" />Šaljem...</>) : (<><Send className="mr-2 h-5 w-5" />Pošalji upit</>)}
+                      {isLoading ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" />{t.demoForm.sending}</>) : (<><Send className="mr-2 h-5 w-5" />{t.demoForm.submit}</>)}
                     </Button>
                   </div>
                 </>
