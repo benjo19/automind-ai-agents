@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 const BADGES = [
   { label: "Aktivacija u 24h", color: "text-accent-amber icon-glow-amber" },
@@ -9,6 +10,7 @@ const BADGES = [
 ];
 
 const Hero = () => {
+  const { t } = useLanguage();
   const scrollToDemo = () => {
     document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -81,27 +83,27 @@ const Hero = () => {
         <div className="mx-auto max-w-4xl text-center">
           {/* Tagline */}
           <p className="mb-6 text-sm md:text-base tracking-[0.3em] text-muted-foreground font-light uppercase animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            Automatiziraj. Optimiziraj. Napreduj.
+            {t.hero.tagline}
           </p>
 
           {/* Badges */}
           <div className="mb-8 flex flex-wrap justify-center gap-3 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            {BADGES.map((badge) => (
+            {BADGES.map((badge, index) => (
               <span key={badge.label} className="glass-card inline-flex items-center gap-2 px-5 py-2.5 text-sm">
                 <CheckCircle2 className={`h-4 w-4 ${badge.color}`} />
-                {badge.label}
+                {t.hero.badges[index]}
               </span>
             ))}
           </div>
 
           {/* Heading with rotating word */}
           <h1 className="mb-6 font-playfair text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up text-foreground" style={{ animationDelay: '0.3s' }}>
-            AI koji odgovara, zove i šalje ponude za vas.
+            {t.hero.title}
           </h1>
 
           {/* Description */}
           <p className="mb-10 text-lg text-muted-foreground md:text-xl max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            AutoMind hvata upite s weba, maila, WhatsAppa i poziva, odgovara klijentima, dogovara termine i šalje ponude — 24/7.
+            {t.hero.description}
           </p>
 
           {/* CTA Buttons */}
@@ -112,7 +114,7 @@ const Hero = () => {
               onClick={scrollToDemo}
               className="group"
             >
-              Zatraži besplatnu AI analizu
+              {t.hero.primaryCta}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
@@ -120,14 +122,14 @@ const Hero = () => {
               size="lg"
               onClick={scrollToHowItWorks}
             >
-              Pogledaj kako radi
+              {t.hero.secondaryCta}
             </Button>
           </div>
 
           {/* Social proof */}
           <div className="mt-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
-              Napravljeno za obrte, servise, salone, turizam i lokalne tvrtke u Hrvatskoj.
+              {t.hero.proof}
             </p>
           </div>
         </div>
