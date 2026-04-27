@@ -168,7 +168,7 @@ const DemoForm = () => {
                     <Label>{t.demoForm.interestsLabel}</Label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {["chat", "voice", "ponude", "crm", "email"].map((value, index) => (
-                        <div key={interest.value} className="flex items-center space-x-2">
+                        <div key={value} className="flex items-center space-x-2">
                           <Checkbox id={value} checked={formData.interests.includes(value)} onCheckedChange={(checked) => handleInterestChange(value, checked as boolean)} />
                           <label htmlFor={value} className="text-sm cursor-pointer">{t.demoForm.interests[index]}</label>
                         </div>
