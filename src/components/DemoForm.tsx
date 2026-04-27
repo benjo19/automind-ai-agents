@@ -142,42 +142,35 @@ const DemoForm = () => {
                 <>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="industry">Djelatnost *</Label>
+                      <Label htmlFor="industry">{t.demoForm.industry}</Label>
                       <Select value={formData.industry} onValueChange={(value) => setFormData({ ...formData, industry: value })}>
-                        <SelectTrigger><SelectValue placeholder="Odaberite djelatnost" /></SelectTrigger>
+                        <SelectTrigger><SelectValue placeholder={t.demoForm.industryPlaceholder} /></SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="retail">Maloprodaja</SelectItem>
-                          <SelectItem value="services">Usluge</SelectItem>
-                          <SelectItem value="hospitality">Ugostiteljstvo</SelectItem>
-                          <SelectItem value="construction">Građevina</SelectItem>
-                          <SelectItem value="it">IT/Tehnologija</SelectItem>
-                          <SelectItem value="manufacturing">Proizvodnja</SelectItem>
-                          <SelectItem value="healthcare">Zdravstvo</SelectItem>
-                          <SelectItem value="education">Obrazovanje</SelectItem>
-                          <SelectItem value="other">Ostalo</SelectItem>
+                          {["retail", "services", "hospitality", "construction", "it", "manufacturing", "healthcare", "education", "other"].map((value, index) => (
+                            <SelectItem key={value} value={value}>{t.demoForm.industries[index]}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="budget">Opseg projekta</Label>
+                      <Label htmlFor="budget">{t.demoForm.budget}</Label>
                       <Select value={formData.budget} onValueChange={(value) => setFormData({ ...formData, budget: value })}>
-                        <SelectTrigger><SelectValue placeholder="Odaberite opseg" /></SelectTrigger>
+                        <SelectTrigger><SelectValue placeholder={t.demoForm.budgetPlaceholder} /></SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="small">Manji projekt</SelectItem>
-                          <SelectItem value="medium">Srednji projekt</SelectItem>
-                          <SelectItem value="large">Veći projekt</SelectItem>
-                          <SelectItem value="custom">Prilagođeno / dogovor</SelectItem>
+                          {["small", "medium", "large", "custom"].map((value, index) => (
+                            <SelectItem key={value} value={value}>{t.demoForm.budgets[index]}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <Label>Što vas zanima? *</Label>
+                    <Label>{t.demoForm.interestsLabel}</Label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {[{ value: "chat", label: "Chat bot" }, { value: "voice", label: "Voice bot" }, { value: "ponude", label: "Auto-ponude" }, { value: "crm", label: "CRM" }, { value: "email", label: "E-mail sekvence" }].map((interest) => (
+                      {["chat", "voice", "ponude", "crm", "email"].map((value, index) => (
                         <div key={interest.value} className="flex items-center space-x-2">
-                          <Checkbox id={interest.value} checked={formData.interests.includes(interest.value)} onCheckedChange={(checked) => handleInterestChange(interest.value, checked as boolean)} />
-                          <label htmlFor={interest.value} className="text-sm cursor-pointer">{interest.label}</label>
+                          <Checkbox id={value} checked={formData.interests.includes(value)} onCheckedChange={(checked) => handleInterestChange(value, checked as boolean)} />
+                          <label htmlFor={value} className="text-sm cursor-pointer">{t.demoForm.interests[index]}</label>
                         </div>
                       ))}
                     </div>
