@@ -1,5 +1,6 @@
 import { FileText, MessageSquareText, PhoneCall, RefreshCw, UsersRound } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const actions = [
   {
@@ -35,13 +36,14 @@ const actions = [
 ];
 
 const ConcreteActions = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-14 md:py-20 relative glow-bg">
       <div className="container px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-10 md:mb-12">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Što AutoMind <span className="gradient-text-rainbow">konkretno radi?</span>
+              {t.concreteActions.titleStart} <span className="gradient-text-rainbow">{t.concreteActions.titleHighlight}</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -49,14 +51,15 @@ const ConcreteActions = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
           {actions.map((action, index) => {
             const Icon = action.icon;
+            const [title, description] = t.concreteActions.actions[index];
             return (
               <ScrollReveal key={action.title} delay={index * 80} className={index === 4 ? "md:col-span-2 lg:col-span-1" : ""}>
                 <div className="glass-card hover-lift p-6 h-full">
                   <div className="w-12 h-12 rounded-xl bg-secondary border border-border flex items-center justify-center mb-5">
                     <Icon className={`h-6 w-6 ${action.color}`} />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-foreground">{action.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{action.description}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">{title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
                 </div>
               </ScrollReveal>
             );
