@@ -1,56 +1,49 @@
-## Cilj
-Dodati englesku verziju cijele stranice tako da korisnik može prebacivati jezik između hrvatskog i engleskog bez dupliciranja dizajna.
+## Plan: Installable Web App za Automind
+
+Napravit ću najjednostavniju i najsigurniju verziju: aplikacija će se moći dodati na Home Screen / instalirati iz browsera, bez service workera i bez offline cachea. To izbjegava probleme sa zastarjelim sadržajem u Lovable previewu.
 
 ## Što ću napraviti
 
-### 1. Jezični sustav
-- Dodati jednostavan translation setup za `hr` i `en`.
-- Hrvatski ostaje postojeći/default jezik.
-- Engleski dobiva prijevode za sav vidljivi sadržaj na stranici.
-- Spremiti odabir jezika u browser, da korisnik ostane na odabranom jeziku pri povratku.
+1. **Dovršiti web app manifest**
+   - Ažurirati `public/site.webmanifest` s boljim podacima za instalaciju:
+     - naziv aplikacije
+     - kratki naziv
+     - opis
+     - `start_url`
+     - `scope`
+     - `display: standalone`
+     - brand boje
+     - ikone potrebne za iOS/Android instalaciju
 
-### 2. Language switcher u navigaciji
-- U `Navbar` dodati prebacivanje jezika, npr. `HR / EN`.
-- Switcher će biti dostupan i na desktopu i u mobilnom meniju.
-- Navigacijski linkovi i CTA gumbi mijenjat će tekst prema jeziku.
+2. **Dodati mobilne install meta tagove**
+   - U `index.html` dodati/pojačati tagove za:
+     - iPhone “Add to Home Screen” prikaz
+     - Android instalaciju
+     - status bar boju
+     - app title
+     - maskable icon podršku gdje je moguće
 
-### 3. Prevesti glavnu landing stranicu
-Prevesti tekstove u:
-- Hero
-- ConcreteActions
-- TargetIndustries
-- DemoForm
-- Stats
-- Services
-- SolutionCards
-- HowItWorks
-- BeforeAfter
-- Testimonials
-- MissedLeadCost
-- FAQ
-- Footer
-- ThankYou stranica
+3. **Dodati install stranicu `/install`**
+   - Nova stranica s kratkim uputama:
+     - iPhone: Share → Add to Home Screen
+     - Android/Chrome: Menu → Install app / Add to Home screen
+   - Stranica će biti u istom Automind dizajnu i dvojezična HR/EN.
 
-### 4. Forma i poruke
-- Prevesti labele, placeholder tekstove, select opcije, GDPR tekst, newsletter tekst i validacijske/toast poruke.
-- Nakon slanja forme, `/hvala` stranica prikazat će tekst na jeziku koji je korisnik odabrao.
-- Podaci koji idu prema postojećem webhooku ostaju kompatibilni.
+4. **Dodati link prema install stranici**
+   - Dodati diskretan link u footer ili navigaciju, npr. “Instaliraj aplikaciju”.
+   - Link će se prevoditi na engleski: “Install app”.
 
-### 5. SEO i legal stranice
-- Za glavnu stranicu prevesti `title`, `description`, `keywords`, Open Graph tekstove i FAQ schema tekstove.
-- Legal stranice mogu dobiti language-aware tekst ako želiš da i one budu potpuno engleske; u ovoj implementaciji ću ih uključiti u translation sustav ako su dio “cijele stranice”.
-- Rute ostaju postojeće, bez lomljenja linkova.
-
-### 6. Chat widget
-- Prevesti tekstove sučelja chata: početna poruka, greške, statusi, aria labeli i fallback poruke.
-- Ako je korisnik na engleskom, Ana će započeti na engleskom i slati kontekst jezika backend funkciji.
+5. **Ikone za aplikaciju**
+   - Iskoristiti postojeći favicon/brand kao bazu i dodati potrebne icon reference u manifest.
+   - Ako postojeći favicon nije dovoljan za kvalitetne app ikone, pripremit ću fallback konfiguraciju da instalacija i dalje radi, a kasnije možemo zamijeniti ikone boljim PNG assetima.
 
 ## Tehnički detalji
-- Dodati `LanguageProvider` / hook, npr. `useLanguage()`.
-- Dodati centralni dictionary file, npr. `src/lib/i18n.ts`, s hrvatskim i engleskim tekstovima.
-- Komponente će koristiti prijevode iz dictionaryja umjesto hardkodiranih tekstova.
-- Ne dirati automatski generirane backend client/type datoteke.
-- Ne mijenjati postojeći vizualni stil, animacije, layout ni webhook URL.
+
+- Neću dodavati `vite-plugin-pwa` ni service worker, jer za osnovnu instalaciju nije potreban i može uzrokovati cache probleme u Lovable previewu.
+- Postojeći `public/site.webmanifest` već ima osnovni `display: standalone`; proširit ću ga da bude spreman za mobilne browsere.
+- Dodat ću novu rutu u `src/App.tsx`: `/install`.
+- Dodati prijevode u `src/lib/i18n.tsx` za HR/EN tekstove install stranice i linka.
 
 ## Rezultat
-Stranica će imati kompletan HR/EN prikaz s jednim dizajnom, jednim setom komponenti i jasnim language switcherom u navigaciji.
+
+Korisnici će moći otvoriti stranicu na mobitelu i dodati Automind na početni ekran kao aplikaciju. Otvarat će se u standalone prikazu, bez standardnog browser chromea gdje uređaj to podržava.
