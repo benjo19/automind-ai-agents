@@ -5,12 +5,14 @@ import { toast } from "sonner";
 import logo from "@/assets/logo.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n";
 
 const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
 const CTA_PHONE = "0995085933";
 const WEBHOOK_URL = "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1";
 
 const Footer = () => {
+  const { language, t } = useLanguage();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -25,15 +27,16 @@ const Footer = () => {
         body: JSON.stringify({
           email,
           source: "newsletter",
+          language,
           submitted_at: new Date().toISOString(),
           page_url: window.location.href,
         }),
       });
       if (!res.ok) throw new Error("Network error");
-      toast.success("Hvala! Prijavljeni ste ✅");
+      toast.success(t.footer.success);
       setEmail("");
     } catch {
-      toast.error(`Greška! Pošaljite e-mail na ${CTA_EMAIL}`);
+      toast.error(t.footer.error);
     } finally {
       setLoading(false);
     }
@@ -50,7 +53,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <img src={logo} alt="Automind logo" className="h-10 w-auto invert mb-4" />
             <p className="text-sm text-muted-foreground mb-2">
-              AI agenti za automatizaciju poslovanja.
+              {t.footer.tagline}
             </p>
             <p className="text-xs text-muted-foreground/60">
               FA. BE. MA TRGOVINA DOO<br />OIB: 60898333063
@@ -59,7 +62,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">Kontakt</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footer.contact}</h4>
             <div className="space-y-3">
               <a href={`mailto:${CTA_EMAIL}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors">
                 <Mail className="h-4 w-4" /> {CTA_EMAIL}
@@ -72,31 +75,31 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground">Pravno</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footer.legal}</h4>
             <div className="space-y-3">
-              <Link to="/politika-privatnosti" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">Politika privatnosti</Link>
-              <Link to="/uvjeti-koristenja" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">Uvjeti korištenja</Link>
-              <Link to="/kolacici" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">Kolačići</Link>
+              <Link to="/politika-privatnosti" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">{t.footer.privacy}</Link>
+              <Link to="/uvjeti-koristenja" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">{t.footer.terms}</Link>
+              <Link to="/kolacici" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">{t.footer.cookies}</Link>
             </div>
           </div>
 
           {/* Newsletter */}
           <div className="md:col-span-1">
-            <h4 className="text-sm font-semibold mb-4 text-foreground">Novosti</h4>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">{t.footer.news}</h4>
             <p className="text-xs text-muted-foreground mb-3">
-              Povremeni savjeti o AI automatizaciji.
+              {t.footer.newsText}
             </p>
             <form onSubmit={submitNewsletter} className="flex flex-col gap-2">
               <Input
                 type="email"
                 required
-                placeholder="vas@email.hr"
+                placeholder={t.footer.emailPlaceholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-secondary/50"
               />
               <Button type="submit" variant="hero" size="sm" disabled={loading}>
-                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Prijavi se"}
+                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : t.footer.subscribe}
               </Button>
             </form>
           </div>
@@ -105,7 +108,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-border/50 pt-6 text-center">
           <p className="text-xs text-muted-foreground/60">
-            © 2026 Automind. Sva prava pridržana.
+            {t.footer.rights}
           </p>
         </div>
       </div>
