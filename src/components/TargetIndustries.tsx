@@ -1,5 +1,6 @@
 import { Building2, Car, Hammer, Home, Scissors, Sparkles } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const industries = [
   { icon: Car, label: "Automehaničari i servisi", color: "text-accent-cyan icon-glow-cyan" },
@@ -11,13 +12,14 @@ const industries = [
 ];
 
 const TargetIndustries = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-14 md:py-20 relative">
       <div className="container px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-10 md:mb-12">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Za koga je <span className="gradient-text-rainbow">AutoMind?</span>
+              {t.targetIndustries.titleStart} <span className="gradient-text-rainbow">{t.targetIndustries.titleHighlight}</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -31,7 +33,7 @@ const TargetIndustries = () => {
                   <div className="w-11 h-11 rounded-xl bg-secondary border border-border flex shrink-0 items-center justify-center">
                     <Icon className={`h-5 w-5 ${industry.color}`} />
                   </div>
-                  <h3 className="text-base font-semibold text-foreground">{industry.label}</h3>
+                  <h3 className="text-base font-semibold text-foreground">{t.targetIndustries.labels[index]}</h3>
                 </div>
               </ScrollReveal>
             );
