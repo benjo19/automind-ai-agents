@@ -80,6 +80,7 @@ const Footer = () => {
               <Link to="/politika-privatnosti" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">{t.footer.privacy}</Link>
               <Link to="/uvjeti-koristenja" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">{t.footer.terms}</Link>
               <Link to="/kolacici" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">{t.footer.cookies}</Link>
+              <Link to="/install" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">{t.footer.install}</Link>
             </div>
           </div>
 
