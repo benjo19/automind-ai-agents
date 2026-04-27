@@ -174,7 +174,7 @@ const ChatWidget = () => {
       {/* Floating launcher */}
       <button
         onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Zatvori chat" : "Otvori chat"}
+        aria-label={open ? t.chat.close : t.chat.open}
         className={cn(
           "fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full flex items-center justify-center",
           "bg-foreground text-background shadow-glow hover:scale-105 transition-all duration-300",
@@ -208,12 +208,12 @@ const ChatWidget = () => {
               </div>
               <div>
                 <div className="text-sm font-semibold text-foreground">Ana · Automind</div>
-                <div className="text-xs text-muted-foreground">Obično odgovori odmah</div>
+                <div className="text-xs text-muted-foreground">{t.chat.status}</div>
               </div>
             </div>
             <button
               onClick={() => setOpen(false)}
-              aria-label="Zatvori"
+              aria-label={t.chat.closeShort}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <X className="h-5 w-5" />
@@ -259,7 +259,7 @@ const ChatWidget = () => {
               <div className="flex items-start gap-2 mt-2 p-3 rounded-lg bg-accent/10 border border-accent/30 text-sm text-foreground">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  Vaši podaci su poslani. Tim će vam se javiti uskoro.
+                  {t.chat.leadSent}
                 </span>
               </div>
             )}
@@ -279,9 +279,9 @@ const ChatWidget = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onKeyDown}
-                placeholder="Napišite poruku..."
+                placeholder={t.chat.placeholder}
                 disabled={loading}
-                aria-label="Chat poruka"
+                aria-label={t.chat.messageLabel}
                 className="flex-1 bg-foreground/5 border border-foreground/10 rounded-full px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all disabled:opacity-60"
               />
               <Button
@@ -290,7 +290,7 @@ const ChatWidget = () => {
                 size="icon"
                 variant="hero"
                 className="rounded-full h-10 w-10 shrink-0"
-                aria-label="Pošalji"
+                aria-label={t.chat.send}
               >
                 {loading ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
