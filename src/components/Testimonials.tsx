@@ -1,5 +1,6 @@
 import { Quote, Star } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const testimonials = [
   { quote: "Chat na webu hvata upite i navečer i vikendom — više nam ne bježe potencijalni klijenti dok ne stignemo odgovoriti.", author: "Marko H.", company: "Frizerski salon · Zagreb" },
@@ -8,20 +9,22 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const { t } = useLanguage();
   return (
     <section id="testimonials" className="py-20 md:py-32 relative overflow-hidden glow-bg scroll-mt-20">
       <div className="container px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Što kažu <span className="gradient-text-rainbow">naši klijenti</span>
+              {t.testimonials.titleStart} <span className="gradient-text-rainbow">{t.testimonials.titleHighlight}</span>
             </h2>
           </div>
         </ScrollReveal>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-          {testimonials.map((t, index) => {
+          {testimonials.map((testimonial, index) => {
             const isMiddle = index === 1;
+            const [quote, author, company] = t.testimonials.items[index];
             return (
               <ScrollReveal key={index} delay={index * 100}>
                 <div
@@ -40,18 +43,18 @@ const Testimonials = () => {
                   </div>
 
                   <Quote className="h-8 w-8 text-accent-pink icon-glow-pink mx-auto mb-4 opacity-60" />
-                  <p className="text-base md:text-lg mb-6 leading-relaxed flex-1">"{t.quote}"</p>
+                  <p className="text-base md:text-lg mb-6 leading-relaxed flex-1">"{quote}"</p>
 
                   <div className="flex items-center justify-center gap-3 mt-auto">
                     <img
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(t.author)}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`}
-                      alt={t.author}
+                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(author)}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`}
+                      alt={author}
                       loading="lazy"
                       className="w-12 h-12 rounded-full bg-secondary ring-2 ring-border"
                     />
                     <div className="text-left">
-                      <div className="font-semibold text-sm">{t.author}</div>
-                      <div className="text-xs text-muted-foreground">{t.company}</div>
+                      <div className="font-semibold text-sm">{author}</div>
+                      <div className="text-xs text-muted-foreground">{company}</div>
                     </div>
                   </div>
                 </div>
