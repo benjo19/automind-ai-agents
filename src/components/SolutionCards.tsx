@@ -1,5 +1,6 @@
 import { Phone, MessageSquare, FileText, Mail, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const solutions = [
   { icon: Phone, title: "Voice agent", description: "Preuzima pozive umjesto vas i zakazuje sljedeći korak — prirodno, na hrvatskom.", span: "md:col-span-2", color: "text-accent", glow: "icon-glow", hover: "hover:border-accent/40", bg: "bg-accent/15", waveColor: "bg-accent", showWave: true, extraBorder: "border-accent/20" },
@@ -21,6 +22,7 @@ const Waveform = () => (
 );
 
 const SolutionCards = () => {
+  const { t } = useLanguage();
   const scrollToDemo = (e: React.MouseEvent) => {
     e.preventDefault();
     document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
@@ -32,10 +34,10 @@ const SolutionCards = () => {
         <ScrollReveal>
           <div className="text-center mb-10 md:mb-12">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Što <span className="gradient-text-rainbow">gradimo za vas</span>
+              {t.solutions.titleStart} <span className="gradient-text-rainbow">{t.solutions.titleHighlight}</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Svako rješenje je prilagođeno vašem poslu — bez gotovih paketa.
+              {t.solutions.subtitle}
             </p>
           </div>
         </ScrollReveal>
@@ -43,6 +45,7 @@ const SolutionCards = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
+            const [title, description] = t.solutions.cards[index];
             return (
               <ScrollReveal key={index} delay={index * 80} className={solution.span}>
                 <div className={`relative overflow-hidden glass-card hover-lift p-6 group h-full transition-colors ${solution.hover} ${(solution as { extraBorder?: string }).extraBorder ?? ""}`}>
@@ -51,14 +54,14 @@ const SolutionCards = () => {
                       <Icon className={`h-6 w-6 ${solution.color} ${solution.glow}`} />
                     </div>
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-foreground">{solution.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{solution.description}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">{title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
                   <a
                     href="#demo"
                     onClick={scrollToDemo}
                     className={`mt-4 inline-flex items-center gap-1 text-sm font-medium ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                   >
-                    Saznaj više <ArrowRight className="h-3.5 w-3.5" />
+                    {t.solutions.learnMore} <ArrowRight className="h-3.5 w-3.5" />
                   </a>
                   {solution.showWave && <Waveform />}
                 </div>
