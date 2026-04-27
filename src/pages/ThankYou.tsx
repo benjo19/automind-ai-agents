@@ -2,14 +2,16 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n";
 
 const ThankYou = () => {
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   return (
     <>
       <Helmet>
-        <title>Hvala! Upit je zaprimljen — Automind</title>
+        <title>{t.thankYou.titleMeta}</title>
         <meta name="robots" content="noindex,nofollow" />
       </Helmet>
       <main className="min-h-screen flex items-center justify-center px-4">
@@ -21,13 +23,13 @@ const ThankYou = () => {
             />
           </div>
           <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight gradient-text-rainbow">
-            Hvala! Upit je zaprimljen.
+            {t.thankYou.title}
           </h1>
           <p className="text-lg text-muted-foreground mb-8">
-            Naš tim javit će vam se u roku 24h s personaliziranom ponudom.
+            {t.thankYou.text}
           </p>
           <Button variant="hero" size="lg" onClick={() => navigate("/")}>
-            Povratak na početak
+            {t.thankYou.button}
           </Button>
         </div>
       </main>

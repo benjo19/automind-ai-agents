@@ -15,11 +15,13 @@ import {
 import { toast } from "sonner";
 import { Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1";
 const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
 
 const DemoForm = () => {
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
@@ -50,7 +52,7 @@ const DemoForm = () => {
 
   const goToStep2 = () => {
     if (!formData.name || !formData.email || !formData.company) {
-      toast.error("Molimo ispunite sva obavezna polja");
+      toast.error(t.demoForm.requiredError);
       return;
     }
     setStep(2);
@@ -60,12 +62,12 @@ const DemoForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!formData.consentGdpr) { toast.error("Morate prihvatiti uvjete zaštite podataka"); return; }
+    if (!formData.consentGdpr) { toast.error(t.demoForm.gdprError); return; }
     setIsLoading(true);
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const payload = {
-        source: "lovable", client_id: "AUTOMIND", page_url: window.location.href,
+        source: "lovable", client_id: "AUTOMIND", page_url: window.location.href, language,
         utm: { utm_source: urlParams.get("utm_source") || "", utm_medium: urlParams.get("utm_medium") || "", utm_campaign: urlParams.get("utm_campaign") || "" },
         ...formData,
       };
@@ -75,7 +77,7 @@ const DemoForm = () => {
         setStep(1);
         navigate("/hvala");
       } else { throw new Error("Network response was not ok"); }
-    } catch { toast.error(`Greška! Pošaljite e-mail na ${CTA_EMAIL}`, { description: "Ispričavamo se zbog neugodnosti." }); }
+    } catch { toast.error(t.demoForm.submitError, { description: t.demoForm.submitErrorDescription }); }
     finally { setIsLoading(false); }
   };
 
@@ -85,10 +87,10 @@ const DemoForm = () => {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Zatraži <span className="gradient-text">demo</span>
+              {t.demoForm.titleStart} <span className="gradient-text">{t.demoForm.titleHighlight}</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ispunite formu i naš tim će vas kontaktirati u roku 24h
+              {t.demoForm.subtitle}
             </p>
           </div>
         </ScrollReveal>
@@ -99,8 +101,8 @@ const DemoForm = () => {
               {/* Progress indicator */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span className={step === 1 ? "text-foreground font-semibold" : ""}>1. Vaši podaci</span>
-                  <span className={step === 2 ? "text-foreground font-semibold" : ""}>2. Detalji projekta</span>
+                  <span className={step === 1 ? "text-foreground font-semibold" : ""}>{t.demoForm.step1}</span>
+                  <span className={step === 2 ? "text-foreground font-semibold" : ""}>{t.demoForm.step2}</span>
                 </div>
                 <div className="flex gap-2">
                   <div className="h-1.5 flex-1 rounded-full bg-accent" />
@@ -112,26 +114,26 @@ const DemoForm = () => {
                 <>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Ime i prezime *</Label>
-                      <Input id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Vaše ime" />
+                      <Label htmlFor="name">{t.demoForm.name}</Label>
+                      <Input id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder={t.demoForm.namePlaceholder} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">E-mail *</Label>
-                      <Input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="vas@email.com" />
+                      <Input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder={t.demoForm.emailPlaceholder} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Telefon</Label>
-                      <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+385 91 000 0000" />
+                      <Label htmlFor="phone">{t.demoForm.phone}</Label>
+                      <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder={t.demoForm.phonePlaceholder} />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="company">Tvrtka *</Label>
-                      <Input id="company" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Naziv tvrtke" />
+                      <Label htmlFor="company">{t.demoForm.company}</Label>
+                      <Input id="company" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder={t.demoForm.companyPlaceholder} />
                     </div>
                   </div>
                   <Button type="button" variant="hero" size="lg" className="w-full" onClick={goToStep2}>
-                    Dalje <ArrowRight className="ml-2 h-5 w-5" />
+                    {t.demoForm.next} <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </>
               )}
@@ -140,70 +142,63 @@ const DemoForm = () => {
                 <>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="industry">Djelatnost *</Label>
+                      <Label htmlFor="industry">{t.demoForm.industry}</Label>
                       <Select value={formData.industry} onValueChange={(value) => setFormData({ ...formData, industry: value })}>
-                        <SelectTrigger><SelectValue placeholder="Odaberite djelatnost" /></SelectTrigger>
+                        <SelectTrigger><SelectValue placeholder={t.demoForm.industryPlaceholder} /></SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="retail">Maloprodaja</SelectItem>
-                          <SelectItem value="services">Usluge</SelectItem>
-                          <SelectItem value="hospitality">Ugostiteljstvo</SelectItem>
-                          <SelectItem value="construction">Građevina</SelectItem>
-                          <SelectItem value="it">IT/Tehnologija</SelectItem>
-                          <SelectItem value="manufacturing">Proizvodnja</SelectItem>
-                          <SelectItem value="healthcare">Zdravstvo</SelectItem>
-                          <SelectItem value="education">Obrazovanje</SelectItem>
-                          <SelectItem value="other">Ostalo</SelectItem>
+                          {["retail", "services", "hospitality", "construction", "it", "manufacturing", "healthcare", "education", "other"].map((value, index) => (
+                            <SelectItem key={value} value={value}>{t.demoForm.industries[index]}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="budget">Opseg projekta</Label>
+                      <Label htmlFor="budget">{t.demoForm.budget}</Label>
                       <Select value={formData.budget} onValueChange={(value) => setFormData({ ...formData, budget: value })}>
-                        <SelectTrigger><SelectValue placeholder="Odaberite opseg" /></SelectTrigger>
+                        <SelectTrigger><SelectValue placeholder={t.demoForm.budgetPlaceholder} /></SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="small">Manji projekt</SelectItem>
-                          <SelectItem value="medium">Srednji projekt</SelectItem>
-                          <SelectItem value="large">Veći projekt</SelectItem>
-                          <SelectItem value="custom">Prilagođeno / dogovor</SelectItem>
+                          {["small", "medium", "large", "custom"].map((value, index) => (
+                            <SelectItem key={value} value={value}>{t.demoForm.budgets[index]}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <Label>Što vas zanima? *</Label>
+                    <Label>{t.demoForm.interestsLabel}</Label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {[{ value: "chat", label: "Chat bot" }, { value: "voice", label: "Voice bot" }, { value: "ponude", label: "Auto-ponude" }, { value: "crm", label: "CRM" }, { value: "email", label: "E-mail sekvence" }].map((interest) => (
-                        <div key={interest.value} className="flex items-center space-x-2">
-                          <Checkbox id={interest.value} checked={formData.interests.includes(interest.value)} onCheckedChange={(checked) => handleInterestChange(interest.value, checked as boolean)} />
-                          <label htmlFor={interest.value} className="text-sm cursor-pointer">{interest.label}</label>
+                      {["chat", "voice", "ponude", "crm", "email"].map((value, index) => (
+                        <div key={value} className="flex items-center space-x-2">
+                          <Checkbox id={value} checked={formData.interests.includes(value)} onCheckedChange={(checked) => handleInterestChange(value, checked as boolean)} />
+                          <label htmlFor={value} className="text-sm cursor-pointer">{t.demoForm.interests[index]}</label>
                         </div>
                       ))}
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="deadline">Željeni rok implementacije</Label>
-                    <Input id="deadline" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} placeholder="npr. odmah, za 2 tjedna, sljedeći mjesec..." />
+                    <Label htmlFor="deadline">{t.demoForm.deadline}</Label>
+                    <Input id="deadline" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} placeholder={t.demoForm.deadlinePlaceholder} />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="message">Dodatna poruka</Label>
-                    <Textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Opišite vaše potrebe ili postavite pitanje..." rows={4} />
+                    <Label htmlFor="message">{t.demoForm.message}</Label>
+                    <Textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={t.demoForm.messagePlaceholder} rows={4} />
                   </div>
                   <div className="space-y-3 pt-4 border-t border-border">
                     <div className="flex items-start space-x-2">
                       <Checkbox id="gdpr" checked={formData.consentGdpr} onCheckedChange={(checked) => setFormData({ ...formData, consentGdpr: checked as boolean })} required />
-                      <label htmlFor="gdpr" className="text-sm leading-relaxed cursor-pointer">Prihvaćam uvjete zaštite podataka i suglasan sam da me Automind kontaktira vezano uz moj upit. *</label>
+                      <label htmlFor="gdpr" className="text-sm leading-relaxed cursor-pointer">{t.demoForm.gdpr}</label>
                     </div>
                     <div className="flex items-start space-x-2">
                       <Checkbox id="newsletter" checked={formData.consentNewsletter} onCheckedChange={(checked) => setFormData({ ...formData, consentNewsletter: checked as boolean })} />
-                      <label htmlFor="newsletter" className="text-sm leading-relaxed cursor-pointer">Želim primati newsletter s novostima i ponudama.</label>
+                      <label htmlFor="newsletter" className="text-sm leading-relaxed cursor-pointer">{t.demoForm.newsletter}</label>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button type="button" variant="hero-outline" size="lg" className="sm:w-auto" onClick={() => setStep(1)} disabled={isLoading}>
-                      <ArrowLeft className="mr-2 h-5 w-5" /> Natrag
+                      <ArrowLeft className="mr-2 h-5 w-5" /> {t.demoForm.back}
                     </Button>
                     <Button type="submit" variant="hero" size="lg" className="flex-1" disabled={isLoading}>
-                      {isLoading ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" />Šaljem...</>) : (<><Send className="mr-2 h-5 w-5" />Pošalji upit</>)}
+                      {isLoading ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" />{t.demoForm.sending}</>) : (<><Send className="mr-2 h-5 w-5" />{t.demoForm.submit}</>)}
                     </Button>
                   </div>
                 </>

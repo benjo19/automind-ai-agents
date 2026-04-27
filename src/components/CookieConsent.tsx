@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Cookie, X } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 const STORAGE_KEY = "cookie_consent";
 
 const CookieConsent = () => {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const CookieConsent = () => {
       <div className="glass-card p-5 shadow-glow flex flex-col gap-3 relative">
         <button
           onClick={dismiss}
-          aria-label="Zatvori"
+          aria-label={t.cookie.close}
           className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <X className="h-4 w-4" />
@@ -47,14 +49,14 @@ const CookieConsent = () => {
         <div className="flex items-start gap-3">
           <Cookie className="h-5 w-5 text-accent-amber icon-glow-amber shrink-0 mt-0.5" />
           <p className="text-sm text-foreground/90">
-            Koristimo kolačiće za bolje iskustvo.{" "}
+            {t.cookie.text}{" "}
             <Link to="/kolacici" className="text-accent-cyan hover:underline">
-              Saznaj više
+              {t.cookie.link}
             </Link>
           </p>
         </div>
         <Button variant="hero" size="sm" onClick={accept} className="w-full">
-          Prihvati
+          {t.cookie.accept}
         </Button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { TrendingUp, Users, Clock, Star } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useCountUp } from "@/hooks/use-count-up";
+import { useLanguage } from "@/lib/i18n";
 
 interface StatProps {
   icon: typeof Users;
@@ -39,6 +40,7 @@ const StatCard = ({ icon: Icon, target, suffix, decimals = 0, label, color, glow
 };
 
 const Stats = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-12 md:py-16 px-4 relative glow-bg">
       <div className="container mx-auto relative z-10">
@@ -49,7 +51,7 @@ const Stats = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
             {stats.map((stat, index) => (
               <ScrollReveal key={index} delay={index * 100}>
-                <StatCard {...stat} />
+                <StatCard {...stat} label={t.stats[index][0]} suffix={t.stats[index][1]} />
               </ScrollReveal>
             ))}
           </div>

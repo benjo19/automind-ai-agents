@@ -1,3 +1,5 @@
+import { useLanguage } from "@/lib/i18n";
+
 const baseTools = [
   { name: "OpenAI", slug: "openai" },
   { name: "Stripe", slug: "stripe" },
@@ -12,11 +14,12 @@ const baseTools = [
 const tools = [...baseTools, ...baseTools];
 
 const Marquee = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-10 overflow-hidden border-y border-border/50">
       <div className="container px-4">
         <p className="text-center text-xs uppercase tracking-widest text-muted-foreground/40 mb-6">
-          Integriramo se s alatima koje već koristite
+          {t.marquee}
         </p>
       </div>
       <div

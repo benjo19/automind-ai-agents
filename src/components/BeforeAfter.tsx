@@ -2,11 +2,13 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { X, Check } from "lucide-react";
 import callAgentImg from "@/assets/call-agent.jpg";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const before = ["Ručni odgovori na upite", "Izgubljeni leadovi", "Kašnjenje s ponudama", "Zaboravljeni follow-upovi"];
 const after = ["AI odgovara 24/7", "Svaki lead bilježen", "Auto-ponuda u minuti", "Follow-up bez zaborava"];
 
 const BeforeAfter = () => {
+  const { t } = useLanguage();
   const [pos, setPos] = useState(50);
   const [dragging, setDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,10 +61,10 @@ const BeforeAfter = () => {
         <ScrollReveal>
           <div className="text-center mb-12">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Prije i <span className="gradient-text-rainbow">poslije</span>
+              {t.beforeAfter.titleStart} <span className="gradient-text-rainbow">{t.beforeAfter.titleHighlight}</span>
             </h2>
             <p className="text-muted-foreground text-sm md:text-base">
-              Povucite ručku lijevo i desno za usporedbu
+              {t.beforeAfter.hint}
             </p>
           </div>
         </ScrollReveal>
@@ -89,10 +91,10 @@ const BeforeAfter = () => {
               >
                 <div className="text-white max-w-sm">
                   <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 flex items-center gap-2">
-                    <X className="h-6 w-6 md:h-8 md:w-8" /> Prije
+                    <X className="h-6 w-6 md:h-8 md:w-8" /> {t.beforeAfter.beforeTitle}
                   </h3>
                   <ul className="space-y-2 md:space-y-3">
-                    {before.map((item) => (
+                    {t.beforeAfter.before.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm md:text-base">
                         <X className="h-4 w-4 md:h-5 md:w-5 shrink-0 mt-0.5 opacity-90" />
                         <span>{item}</span>
@@ -109,10 +111,10 @@ const BeforeAfter = () => {
               >
                 <div className="text-white max-w-sm">
                   <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 flex items-center gap-2">
-                    <Check className="h-6 w-6 md:h-8 md:w-8" /> Poslije
+                    <Check className="h-6 w-6 md:h-8 md:w-8" /> {t.beforeAfter.afterTitle}
                   </h3>
                   <ul className="space-y-2 md:space-y-3">
-                    {after.map((item) => (
+                    {t.beforeAfter.after.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm md:text-base">
                         <Check className="h-4 w-4 md:h-5 md:w-5 shrink-0 mt-0.5" />
                         <span>{item}</span>
@@ -130,7 +132,7 @@ const BeforeAfter = () => {
                 <button
                   type="button"
                   role="slider"
-                  aria-label="Pomakni klizač"
+                  aria-label={t.beforeAfter.sliderLabel}
                   aria-valuenow={Math.round(pos)}
                   aria-valuemin={0}
                   aria-valuemax={100}

@@ -3,26 +3,43 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import logo from "@/assets/logo.png";
-
-const navLinks = [
-  { label: "Usluge", id: "services" },
-  { label: "Rješenja", id: "solutions" },
-  { label: "Kako radi", id: "how-it-works" },
-  { label: "Reference", id: "testimonials" },
-  { label: "FAQ", id: "faq" },
-];
+import { useLanguage, type Language } from "@/lib/i18n";
 
 const Navbar = () => {
+  const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
+  const navLinks = t.nav.links;
+
+  const toggleLanguage = (next: Language) => {
+    setLanguage(next);
+    setOpen(false);
+  };
+
+  const LanguageSwitch = ({ mobile = false }: { mobile?: boolean }) => (
+    <div className={`inline-flex rounded-full border border-foreground/10 bg-foreground/5 p-1 ${mobile ? "w-full" : ""}`} aria-label={t.nav.languageLabel}>
+      {(["hr", "en"] as Language[]).map((lng) => (
+        <button
+          key={lng}
+          type="button"
+          onClick={() => toggleLanguage(lng)}
+          className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${mobile ? "flex-1" : ""} ${
+            language === lng ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          {lng.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [navLinks]);
 
   useEffect(() => {
     const sections = navLinks
@@ -67,7 +84,7 @@ const Navbar = () => {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-          aria-label="Automind - povratak na vrh"
+          aria-label={t.nav.logoLabel}
         >
           <img src={logo} alt="Automind logo" className="h-8 w-auto invert" />
         </button>
@@ -96,9 +113,10 @@ const Navbar = () => {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          <LanguageSwitch />
           <Button variant="hero" size="sm" onClick={() => scrollTo("demo")}>
-            Zatraži demo
+            {t.nav.cta}
           </Button>
         </div>
 
@@ -109,7 +127,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               className="md:hidden text-foreground"
-              aria-label="Otvori meni"
+              aria-label={t.nav.openMenu}
             >
               <Menu className="h-6 w-6" />
             </Button>
@@ -131,13 +149,16 @@ const Navbar = () => {
                 ))}
               </nav>
               <div className="mt-6">
+                <div className="mb-4">
+                  <LanguageSwitch mobile />
+                </div>
                 <Button
                   variant="hero"
                   size="lg"
                   className="w-full"
                   onClick={() => scrollTo("demo")}
                 >
-                  Zatraži demo
+                  {t.nav.cta}
                 </Button>
               </div>
             </div>

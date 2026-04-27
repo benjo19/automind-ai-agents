@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const faqs = [
   { question: "Kako izgleda suradnja?", answer: "Nakon kratkog razgovora pripremamo prijedlog rješenja prilagođen vašim potrebama, s jasnim opsegom i rokovima — bez fiksnih paketa." },
@@ -18,16 +19,17 @@ const faqs = [
 ];
 
 const FAQ = () => {
+  const { t } = useLanguage();
   return (
     <section id="faq" className="py-20 md:py-32 relative glow-bg scroll-mt-20">
       <div className="container px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Često postavljana <span className="gradient-text-rainbow">pitanja</span>
+              {t.faq.titleStart} <span className="gradient-text-rainbow">{t.faq.titleHighlight}</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Odgovori na najčešća pitanja o Automind platformi
+              {t.faq.subtitle}
             </p>
           </div>
         </ScrollReveal>
@@ -36,18 +38,18 @@ const FAQ = () => {
           <div className="max-w-3xl mx-auto">
             <div className="glass-card p-8 rounded-xl">
               <Accordion type="single" collapsible className="w-full">
-                {faqs.map((faq, index) => (
+                {t.faq.items.map(([question, answer], index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
                     <AccordionTrigger className="text-left text-lg font-semibold hover:text-accent-pink transition-colors">
                       <span className="flex items-start">
                         <span className="text-accent-pink text-xs font-mono mr-3 shrink-0 mt-1.5">
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <span>{faq.question}</span>
+                        <span>{question}</span>
                       </span>
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground leading-relaxed">
-                      {faq.answer}
+                      {answer}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
