@@ -15,11 +15,13 @@ import {
 import { toast } from "sonner";
 import { Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/lib/i18n";
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1";
 const CTA_EMAIL = "auto.mind.ai2025@gmail.com";
 
 const DemoForm = () => {
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
@@ -50,7 +52,7 @@ const DemoForm = () => {
 
   const goToStep2 = () => {
     if (!formData.name || !formData.email || !formData.company) {
-      toast.error("Molimo ispunite sva obavezna polja");
+      toast.error(t.demoForm.requiredError);
       return;
     }
     setStep(2);
@@ -60,12 +62,12 @@ const DemoForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!formData.consentGdpr) { toast.error("Morate prihvatiti uvjete zaštite podataka"); return; }
+    if (!formData.consentGdpr) { toast.error(t.demoForm.gdprError); return; }
     setIsLoading(true);
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const payload = {
-        source: "lovable", client_id: "AUTOMIND", page_url: window.location.href,
+        source: "lovable", client_id: "AUTOMIND", page_url: window.location.href, language,
         utm: { utm_source: urlParams.get("utm_source") || "", utm_medium: urlParams.get("utm_medium") || "", utm_campaign: urlParams.get("utm_campaign") || "" },
         ...formData,
       };
@@ -75,7 +77,7 @@ const DemoForm = () => {
         setStep(1);
         navigate("/hvala");
       } else { throw new Error("Network response was not ok"); }
-    } catch { toast.error(`Greška! Pošaljite e-mail na ${CTA_EMAIL}`, { description: "Ispričavamo se zbog neugodnosti." }); }
+    } catch { toast.error(t.demoForm.submitError, { description: t.demoForm.submitErrorDescription }); }
     finally { setIsLoading(false); }
   };
 
