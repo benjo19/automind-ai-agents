@@ -437,7 +437,7 @@ export const translations = {
   },
 } as const;
 
-type Translation = typeof translations.hr;
+type Translation = (typeof translations)[Language];
 
 type LanguageContextValue = {
   language: Language;
