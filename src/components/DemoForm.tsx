@@ -87,10 +87,10 @@ const DemoForm = () => {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Zatraži <span className="gradient-text">demo</span>
+              {t.demoForm.titleStart} <span className="gradient-text">{t.demoForm.titleHighlight}</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ispunite formu i naš tim će vas kontaktirati u roku 24h
+              {t.demoForm.subtitle}
             </p>
           </div>
         </ScrollReveal>
@@ -101,8 +101,8 @@ const DemoForm = () => {
               {/* Progress indicator */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span className={step === 1 ? "text-foreground font-semibold" : ""}>1. Vaši podaci</span>
-                  <span className={step === 2 ? "text-foreground font-semibold" : ""}>2. Detalji projekta</span>
+                  <span className={step === 1 ? "text-foreground font-semibold" : ""}>{t.demoForm.step1}</span>
+                  <span className={step === 2 ? "text-foreground font-semibold" : ""}>{t.demoForm.step2}</span>
                 </div>
                 <div className="flex gap-2">
                   <div className="h-1.5 flex-1 rounded-full bg-accent" />
@@ -114,26 +114,26 @@ const DemoForm = () => {
                 <>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Ime i prezime *</Label>
-                      <Input id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Vaše ime" />
+                      <Label htmlFor="name">{t.demoForm.name}</Label>
+                      <Input id="name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder={t.demoForm.namePlaceholder} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">E-mail *</Label>
-                      <Input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="vas@email.com" />
+                      <Input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder={t.demoForm.emailPlaceholder} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Telefon</Label>
-                      <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+385 91 000 0000" />
+                      <Label htmlFor="phone">{t.demoForm.phone}</Label>
+                      <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder={t.demoForm.phonePlaceholder} />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="company">Tvrtka *</Label>
-                      <Input id="company" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Naziv tvrtke" />
+                      <Label htmlFor="company">{t.demoForm.company}</Label>
+                      <Input id="company" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder={t.demoForm.companyPlaceholder} />
                     </div>
                   </div>
                   <Button type="button" variant="hero" size="lg" className="w-full" onClick={goToStep2}>
-                    Dalje <ArrowRight className="ml-2 h-5 w-5" />
+                    {t.demoForm.next} <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </>
               )}
