@@ -9,6 +9,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import CookiePolicy from "./pages/CookiePolicy";
 import ThankYou from "./pages/ThankYou";
+import Install from "./pages/Install";
 import { LanguageProvider } from "./lib/i18n";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/uvjeti-koristenja" element={<TermsOfUse />} />
             <Route path="/kolacici" element={<CookiePolicy />} />
             <Route path="/hvala" element={<ThankYou />} />
+            <Route path="/install" element={<Install />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
