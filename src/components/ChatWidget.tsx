@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { MessageCircle, X, Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -20,15 +21,10 @@ const getClientKey = () => {
   }
 };
 
-const INITIAL_GREETING: Msg = {
-  role: "assistant",
-  content:
-    "Bok! 👋 Ja sam Ana, asistentica iz Autominda. Mogu vam reći više o našim AI agentima (chat + voice) ili automatizaciji ponuda. Recite mi — čime se bavite i što vas zanima?",
-};
-
 const ChatWidget = () => {
+  const { language, t } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([INITIAL_GREETING]);
+  const [messages, setMessages] = useState<Msg[]>([{ role: "assistant", content: t.chat.greeting }]);
   const [clientKey] = useState(getClientKey);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,6 +32,13 @@ const ChatWidget = () => {
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMessages((prev) => {
+      const hasUserMessage = prev.some((message) => message.role === "user");
+      return hasUserMessage ? prev : [{ role: "assistant", content: t.chat.greeting }];
+    });
+  }, [t.chat.greeting]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -81,24 +84,25 @@ const ChatWidget = () => {
         },
         body: JSON.stringify({
           clientKey,
+          language,
           messages: nextMessages.map((m) => ({ role: m.role, content: m.content })),
         }),
       });
 
       if (resp.status === 429) {
-        setError("Previše zahtjeva. Pokušajte ponovno za par sekundi.");
+        setError(t.chat.rateLimit);
         setMessages((prev) => prev.slice(0, -1));
         setLoading(false);
         return;
       }
       if (resp.status === 402) {
-        setError("AI je trenutno nedostupan. Molimo koristite formu na dnu stranice.");
+        setError(t.chat.unavailable);
         setMessages((prev) => prev.slice(0, -1));
         setLoading(false);
         return;
       }
       if (!resp.ok || !resp.body) {
-        throw new Error("Greška pri komunikaciji s AI-jem");
+        throw new Error(t.chat.commError);
       }
 
       const reader = resp.body.getReader();
@@ -131,7 +135,7 @@ const ChatWidget = () => {
               continue;
             }
             if (parsed.event === "lead_error") {
-              setError("Slanje podataka nije uspjelo, pokušajte ponovno.");
+              setError(t.chat.leadError);
               continue;
             }
             const content = parsed.choices?.[0]?.delta?.content as string | undefined;
@@ -146,12 +150,12 @@ const ChatWidget = () => {
       // If model produced no text (only tool call), give a friendly fallback
       if (!assistantContent.trim()) {
         upsert(
-          "Hvala! 🙌 Vaši podaci su zaprimljeni. Naš tim javit će vam se uskoro s personaliziranom ponudom.",
+          t.chat.leadFallback,
         );
       }
     } catch (e) {
       console.error(e);
-      setError("Došlo je do greške. Pokušajte ponovno.");
+      setError(t.chat.genericError);
       setMessages((prev) => prev.slice(0, -1));
     } finally {
       setLoading(false);
