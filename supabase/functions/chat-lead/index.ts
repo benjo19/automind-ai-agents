@@ -421,7 +421,7 @@ Deno.serve(async (req) => {
           if (toolName === "submit_lead" && toolArgsStr && !leadSubmitted) {
             try {
               const args = JSON.parse(toolArgsStr);
-              await forwardLeadToMake(args, messages);
+              await forwardLeadToMake(args, messages, clientKey);
               leadSubmitted = true;
               // Notify client with a custom SSE event
               controller.enqueue(
