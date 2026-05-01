@@ -93,6 +93,9 @@ const Footer = () => {
               {t.footer.newsText}
             </p>
             <form onSubmit={submitNewsletter} className="flex flex-col gap-2">
+              <div className="absolute opacity-0 pointer-events-none" style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true" tabIndex={-1}>
+                <input type="text" name="fax_number" autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} />
+              </div>
               <Input
                 type="email"
                 required
