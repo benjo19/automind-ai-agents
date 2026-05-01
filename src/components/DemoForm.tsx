@@ -107,6 +107,10 @@ const DemoForm = () => {
         <ScrollReveal delay={100}>
           <div className="max-w-3xl mx-auto">
             <form onSubmit={handleSubmit} className="glass-card p-8 md:p-12 rounded-2xl space-y-6">
+              {/* Honeypot - hidden from real users */}
+              <div className="absolute opacity-0 pointer-events-none" style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true" tabIndex={-1}>
+                <input type="text" name="website_url" autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} />
+              </div>
               {/* Progress indicator */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
