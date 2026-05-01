@@ -25,6 +25,8 @@ const DemoForm = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
+  const [honeypot, setHoneypot] = useState("");
+  const [formLoadedAt] = useState(() => Date.now());
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", company: "", industry: "", budget: "",
     interests: [] as string[], deadline: "", message: "",
@@ -63,11 +65,18 @@ const DemoForm = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!formData.consentGdpr) { toast.error(t.demoForm.gdprError); return; }
+    // Anti-bot: honeypot and timing check
+    if (honeypot) return;
+    const elapsed = Date.now() - formLoadedAt;
+    if (elapsed < 3000) return;
     setIsLoading(true);
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const payload = {
-        source: "lovable", client_id: "AUTOMIND", page_url: window.location.href, language,
+        type: "demo_request",
+        source: "demo-form", client_id: "AUTOMIND", page_url: window.location.href, language,
+        submitted_at: new Date().toISOString(),
+        submitted_after_ms: elapsed,
         utm: { utm_source: urlParams.get("utm_source") || "", utm_medium: urlParams.get("utm_medium") || "", utm_campaign: urlParams.get("utm_campaign") || "" },
         ...formData,
       };
@@ -98,6 +107,10 @@ const DemoForm = () => {
         <ScrollReveal delay={100}>
           <div className="max-w-3xl mx-auto">
             <form onSubmit={handleSubmit} className="glass-card p-8 md:p-12 rounded-2xl space-y-6">
+              {/* Honeypot - hidden from real users */}
+              <div className="absolute opacity-0 pointer-events-none" style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true" tabIndex={-1}>
+                <input type="text" name="website_url" autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} />
+              </div>
               {/* Progress indicator */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
