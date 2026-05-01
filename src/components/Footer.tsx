@@ -14,17 +14,19 @@ const WEBHOOK_URL = "https://hook.eu2.make.com/5bkttym22undrj5o8gg5l7vnktk978m1"
 const Footer = () => {
   const { language, t } = useLanguage();
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [loading, setLoading] = useState(false);
 
   const submitNewsletter = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || honeypot) return;
     setLoading(true);
     try {
       const res = await fetch(WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          type: "newsletter_signup",
           email,
           source: "newsletter",
           language,
