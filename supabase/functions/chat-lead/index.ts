@@ -228,14 +228,44 @@ const tools = [
   },
 ];
 
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 255;
+}
+
 async function forwardLeadToMake(
   lead: Record<string, unknown>,
   transcript: Array<{ role: string; content: string }>,
+  clientKey: string,
 ) {
+  // Validate lead has real data before sending
+  const email = String(lead.email || "").trim();
+  const name = String(lead.name || "").trim();
+  const interest = String(lead.interest || "").trim();
+
+  if (!email || !isValidEmail(email)) {
+    console.warn("Lead skipped: invalid or missing email", email);
+    return;
+  }
+  if (!name || name.length < 2) {
+    console.warn("Lead skipped: missing name");
+    return;
+  }
+  if (!interest) {
+    console.warn("Lead skipped: missing interest");
+    return;
+  }
+
   const payload = {
+    type: "chat_lead",
     source: "ai-chat-widget",
     submitted_at: new Date().toISOString(),
-    ...lead,
+    client_key: clientKey,
+    name,
+    email,
+    phone: String(lead.phone || ""),
+    industry: String(lead.industry || ""),
+    interest,
+    notes: String(lead.notes || ""),
     transcript: transcript
       .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
       .join("\n\n"),
