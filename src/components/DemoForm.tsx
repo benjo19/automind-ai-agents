@@ -68,7 +68,7 @@ const DemoForm = () => {
     if (honeypot) return;
     setIsLoading(true);
     try {
-      const elapsed = Date.now() - formLoadedAt;
+      const payload = {
       const urlParams = new URLSearchParams(window.location.search);
       const payload = {
         type: "demo_request",
