@@ -65,12 +65,11 @@ const DemoForm = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!formData.consentGdpr) { toast.error(t.demoForm.gdprError); return; }
-    // Anti-bot: honeypot and timing check
+    // Anti-bot: honeypot (silent reject only for bots)
     if (honeypot) return;
-    const elapsed = Date.now() - formLoadedAt;
-    if (elapsed < 3000) return;
     setIsLoading(true);
     try {
+      const elapsed = Date.now() - formLoadedAt;
       const urlParams = new URLSearchParams(window.location.search);
       const payload = {
         type: "demo_request",
@@ -86,7 +85,10 @@ const DemoForm = () => {
         setStep(1);
         navigate("/hvala");
       } else { throw new Error("Network response was not ok"); }
-    } catch { toast.error(t.demoForm.submitError, { description: t.demoForm.submitErrorDescription }); }
+    } catch (err) {
+      console.error("DemoForm submit error:", err);
+      toast.error(t.demoForm.submitError, { description: t.demoForm.submitErrorDescription });
+    }
     finally { setIsLoading(false); }
   };
 
