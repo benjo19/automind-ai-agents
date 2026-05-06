@@ -26,7 +26,6 @@ const DemoForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [honeypot, setHoneypot] = useState("");
-  const [formLoadedAt] = useState(() => Date.now());
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", company: "", industry: "", budget: "",
     interests: [] as string[], deadline: "", message: "",
@@ -69,13 +68,11 @@ const DemoForm = () => {
     if (honeypot) return;
     setIsLoading(true);
     try {
-      const elapsed = Date.now() - formLoadedAt;
       const urlParams = new URLSearchParams(window.location.search);
       const payload = {
         type: "demo_request",
         source: "demo-form", client_id: "AUTOMIND", page_url: window.location.href, language,
         submitted_at: new Date().toISOString(),
-        submitted_after_ms: elapsed,
         utm: { utm_source: urlParams.get("utm_source") || "", utm_medium: urlParams.get("utm_medium") || "", utm_campaign: urlParams.get("utm_campaign") || "" },
         ...formData,
       };
