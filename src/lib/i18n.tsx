@@ -26,7 +26,7 @@ export const translations = {
       orgDescription: "AI agenti koji odgovaraju, prodaju, zovu i automatski šalju ponude",
     },
     hero: {
-      badges: ["Aktivacija u 24h", "Hrvatski jezik i glas", "GDPR-ready", "Bez tehničkog znanja"],
+      badges: ["Aktivacija u 7 dana", "Hrvatski jezik i glas", "GDPR-ready", "Bez tehničkog znanja"],
       tagline: "Automatiziraj. Optimiziraj. Napreduj.",
       title: "AI koji odgovara, zove i šalje ponude za vas.",
       description: "AutoMind hvata upite s weba, maila, WhatsAppa i poziva, odgovara klijentima, dogovara termine i šalje ponude — 24/7.",
@@ -53,7 +53,7 @@ export const translations = {
     demoForm: {
       titleStart: "Zatraži",
       titleHighlight: "demo",
-      subtitle: "Ispunite formu i naš tim će vas kontaktirati u roku 24h",
+      subtitle: "Ispunite formu i naš tim će vas kontaktirati u roku 7 dana",
       step1: "1. Vaši podaci",
       step2: "2. Detalji projekta",
       name: "Ime i prezime *",
@@ -157,7 +157,7 @@ export const translations = {
       subtitle: "Odgovori na najčešća pitanja o Automind platformi",
       items: [
         ["Kako izgleda suradnja?", "Nakon kratkog razgovora pripremamo prijedlog rješenja prilagođen vašim potrebama, s jasnim opsegom i rokovima — bez fiksnih paketa."],
-        ["Koliko brzo možemo krenuti?", "Najčešće u 24h. Naš tim priprema sve potrebne postavke prema vašim specifikacijama."],
+        ["Koliko brzo možemo krenuti?", "Najčešće u 7 dana. Naš tim priprema sve potrebne postavke prema vašim specifikacijama."],
         ["Je li rješenje prilagođeno baš nama?", "Da. Svaki projekt kreće od razgovora — ne nudimo gotove pakete, već rješenje koje ima smisla za vaše poslovanje."],
         ["Što ako trebam podršku?", "Pružamo kontinuiranu podršku putem emaila, a po potrebi i prioritetnu podršku s bržim vremenom odgovora — sve dogovaramo individualno."],
         ["Koliko košta?", "Cijena ovisi o kompleksnosti rješenja. Razgovaramo, slušamo i dajemo ponudu prilagođenu vašem budgetu. Nema skrivenih troškova ni iznenađenja."],
@@ -185,7 +185,7 @@ export const translations = {
     thankYou: {
       titleMeta: "Hvala! Upit je zaprimljen — Automind",
       title: "Hvala! Upit je zaprimljen.",
-      text: "Naš tim javit će vam se u roku 24h s personaliziranom ponudom.",
+      text: "Naš tim javit će vam se u roku 7 dana s personaliziranom ponudom.",
       button: "Povratak na početak",
     },
     install: {
@@ -253,7 +253,7 @@ export const translations = {
       orgDescription: "AI agents that answer, sell, call and automatically send offers",
     },
     hero: {
-      badges: ["Activation in 24h", "Croatian language and voice", "GDPR-ready", "No technical knowledge needed"],
+      badges: ["Activation in 7 days", "Croatian language and voice", "GDPR-ready", "No technical knowledge needed"],
       tagline: "Automate. Optimize. Grow.",
       title: "AI that answers, calls and sends offers for you.",
       description: "AutoMind captures inquiries from your website, email, WhatsApp and calls, answers clients, schedules appointments and sends offers — 24/7.",
@@ -280,7 +280,7 @@ export const translations = {
     demoForm: {
       titleStart: "Request a",
       titleHighlight: "demo",
-      subtitle: "Fill out the form and our team will contact you within 24 hours",
+      subtitle: "Fill out the form and our team will contact you within 7 days",
       step1: "1. Your details",
       step2: "2. Project details",
       name: "Full name *",
@@ -384,7 +384,7 @@ export const translations = {
       subtitle: "Answers to the most common questions about the Automind platform",
       items: [
         ["What does collaboration look like?", "After a short conversation, we prepare a proposal tailored to your needs, with a clear scope and timeline — no fixed packages."],
-        ["How quickly can we start?", "Most often within 24 hours. Our team prepares all required settings according to your specifications."],
+        ["How quickly can we start?", "Most often within 7 days. Our team prepares all required settings according to your specifications."],
         ["Is the solution tailored specifically to us?", "Yes. Every project starts with a conversation — we do not offer fixed packages, but a solution that makes sense for your business."],
         ["What if I need support?", "We provide ongoing support by email and, if needed, priority support with faster response times — everything is agreed individually."],
         ["How much does it cost?", "The price depends on the complexity of the solution. We talk, listen and provide an offer tailored to your budget. No hidden costs or surprises."],
@@ -412,7 +412,7 @@ export const translations = {
     thankYou: {
       titleMeta: "Thank you! Your inquiry was received — Automind",
       title: "Thank you! Your inquiry was received.",
-      text: "Our team will contact you within 24 hours with a personalized offer.",
+      text: "Our team will contact you within 7 days with a personalized offer.",
       button: "Back to the start",
     },
     install: {
@@ -427,7 +427,7 @@ export const translations = {
       back: "Back to start",
     },
     chat: {
-      greeting: "Hi! 👋 I’m Ana, an assistant from Automind. I can tell you more about our AI agents (chat + voice) or offer automation. Tell me — what does your business do and what are you interested in?",
+      greeting: "Hi! 👋 I'm Ana, an assistant from Automind. I can tell you more about our AI agents (chat + voice) or offer automation. Tell me — what does your business do and what are you interested in?",
       rateLimit: "Too many requests. Please try again in a few seconds.",
       unavailable: "AI is currently unavailable. Please use the form on the page.",
       commError: "Error communicating with AI",
