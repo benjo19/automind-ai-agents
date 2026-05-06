@@ -65,7 +65,7 @@ const DemoForm = () => {
     e.preventDefault();
     if (!formData.consentGdpr) { toast.error(t.demoForm.gdprError); return; }
     // Anti-bot: honeypot (silent reject only for bots)
-    if (honeypot) return;
+    if (honeypot) { console.warn("Honeypot triggered — likely autofill, ignoring silently"); return; }
     setIsLoading(true);
     try {
       const urlParams = new URLSearchParams(window.location.search);
