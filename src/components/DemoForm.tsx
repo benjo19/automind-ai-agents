@@ -26,7 +26,6 @@ const DemoForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [honeypot, setHoneypot] = useState("");
-  const [formLoadedAt] = useState(() => Date.now());
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", company: "", industry: "", budget: "",
     interests: [] as string[], deadline: "", message: "",
