@@ -10,6 +10,8 @@ import TermsOfUse from "./pages/TermsOfUse";
 import CookiePolicy from "./pages/CookiePolicy";
 import ThankYou from "./pages/ThankYou";
 import Install from "./pages/Install";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import { LanguageProvider } from "./lib/i18n";
 
 const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
             <Route path="/uvjeti-koristenja" element={<TermsOfUse />} />
             <Route path="/kolacici" element={<CookiePolicy />} />
