@@ -6,11 +6,19 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
+import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
-import FAQ from "./components/FAQ";
 import CookieConsent from "./components/CookieConsent";
+import Services from "./components/Services";
+import Stats from "./components/Stats";
+import Testimonials from "./components/Testimonials";
+import BeforeAfter from "./components/BeforeAfter";
+import ConcreteActions from "./components/ConcreteActions";
+import MissedLeadCost from "./components/MissedLeadCost";
+import SolutionCards from "./components/SolutionCards";
+import TargetIndustries from "./components/TargetIndustries";
 
 const queryClient = new QueryClient();
 
@@ -39,9 +47,24 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <div className="min-h-screen bg-background">
           <Navbar onBlogClick={goToBlog} onHomeClick={goHome} />
-          {nav.page === 'home' && <><Hero /><HowItWorks /><FAQ /><Footer /></>}
+          {nav.page === 'home' && (
+            <>
+              <Hero />
+              <Stats />
+              <Services />
+              <SolutionCards />
+              <HowItWorks />
+              <ConcreteActions />
+              <BeforeAfter />
+              <MissedLeadCost />
+              <Testimonials />
+              <TargetIndustries />
+              <FAQ />
+              <Footer />
+            </>
+          )}
           {nav.page === 'blog' && <Blog onSelectPost={goToPost} />}
           {nav.page === 'post' && <BlogPost slug={nav.slug || ''} onBack={goToBlog} />}
         </div>
