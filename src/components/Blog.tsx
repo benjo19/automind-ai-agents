@@ -13,7 +13,7 @@ export default function Blog({ onSelectPost }: { onSelectPost: (slug: string) =>
         </motion.div>
         <div className="space-y-6">
           {blogPosts.map((post, idx) => (
-            <motion.article key={post.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} onClick={() => onSelectPost(post.slug)} className="glass border border-slate-700/50 rounded-2xl p-6 cursor-pointer hover:border-indigo-500/50 transition-all duration-300 group">
+            <motion.article key={post.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} onClick={() => onSelectPost(post.slug)} className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 cursor-pointer hover:border-indigo-500/50 transition-all duration-300 group">
               <div className="flex items-center gap-3 mb-3">
                 <span className="flex items-center gap-1 text-xs text-indigo-400 bg-indigo-500/10 px-2 py-1 rounded-full"><Tag size={10} />{post.category}</span>
                 <span className="flex items-center gap-1 text-xs text-slate-500"><Clock size={10} />{post.readTime}</span>
