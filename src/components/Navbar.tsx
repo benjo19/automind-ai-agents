@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import logo from "@/assets/logo.png";
 import { useLanguage, type Language } from "@/lib/i18n";
 
-const Navbar = () => {
+const Navbar = ({ onBlogClick, onHomeClick }: { onBlogClick?: () => void; onHomeClick?: () => void }) => {
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -82,7 +82,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); onHomeClick && onHomeClick(); }}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           aria-label={t.nav.logoLabel}
         >
@@ -110,6 +110,12 @@ const Navbar = () => {
               </button>
             );
           })}
+          <button
+            onClick={() => { onBlogClick && onBlogClick(); }}
+            className="relative px-4 py-2 text-sm transition-colors text-muted-foreground hover:text-foreground"
+          >
+            Blog
+          </button>
         </nav>
 
         {/* Desktop CTA */}
