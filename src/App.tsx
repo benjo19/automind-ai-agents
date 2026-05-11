@@ -2,43 +2,53 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfUse from "./pages/TermsOfUse";
-import CookiePolicy from "./pages/CookiePolicy";
-import ThankYou from "./pages/ThankYou";
-import Install from "./pages/Install";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import { LanguageProvider } from "./lib/i18n";
+import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import HowItWorks from "./components/HowItWorks";
+import Footer from "./components/Footer";
+import Blog from "./components/Blog";
+import BlogPost from "./components/BlogPost";
+import FAQ from "./components/FAQ";
+import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <LanguageProvider>
+function getPage() {
+  const hash = window.location.hash;
+  if (hash.startsWith('#/blog/')) return { page: 'post', slug: hash.slice(7) };
+  if (hash === '#/blog') return { page: 'blog', slug: null };
+  return { page: 'home', slug: null };
+}
+
+const App = () => {
+  const [nav, setNav] = useState(getPage);
+
+  useEffect(() => {
+    const handler = () => setNav(getPage());
+    window.addEventListener('hashchange', handler);
+    return () => window.removeEventListener('hashchange', handler);
+  }, []);
+
+  const goToBlog = () => { window.location.hash = '#/blog'; };
+  const goToPost = (slug: string) => { window.location.hash = `#/blog/${slug}`; };
+  const goHome = () => { window.location.hash = ''; };
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
-            <Route path="/uvjeti-koristenja" element={<TermsOfUse />} />
-            <Route path="/kolacici" element={<CookiePolicy />} />
-            <Route path="/hvala" element={<ThankYou />} />
-            <Route path="/install" element={<Install />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </LanguageProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+          <Navbar onBlogClick={goToBlog} onHomeClick={goHome} />
+          {nav.page === 'home' && <><Hero /><HowItWorks /><FAQ /><Footer /></>}
+          {nav.page === 'blog' && <Blog onSelectPost={goToPost} />}
+          {nav.page === 'post' && <BlogPost slug={nav.slug || ''} onBack={goToBlog} />}
+        </div>
+        <CookieConsent />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
