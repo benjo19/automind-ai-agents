@@ -22,7 +22,9 @@ import TargetIndustries from "./components/TargetIndustries";
 
 const queryClient = new QueryClient();
 
-function getPage() {
+type NavState = { page: string; slug: string | null };
+
+function getPage(): NavState {
   const hash = window.location.hash;
   if (hash.startsWith('#/blog/')) return { page: 'post', slug: hash.slice(7) };
   if (hash === '#/blog') return { page: 'blog', slug: null };
@@ -30,7 +32,7 @@ function getPage() {
 }
 
 const App = () => {
-  const [nav, setNav] = useState(getPage);
+  const [nav, setNav] = useState<NavState>(getPage);
 
   useEffect(() => {
     const handler = () => setNav(getPage());
@@ -66,7 +68,7 @@ const App = () => {
             </>
           )}
           {nav.page === 'blog' && <Blog onSelectPost={goToPost} />}
-          {nav.page === 'post' && <BlogPost slug={nav.slug || ''} onBack={goToBlog} />}
+          {nav.page === 'post' && <BlogPost slug={nav.slug ?? ''} onBack={goToBlog} />}
         </div>
         <CookieConsent />
       </TooltipProvider>
