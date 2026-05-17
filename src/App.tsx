@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
 import CookieConsent from "./components/CookieConsent";
+import ChatWidget from "./components/ChatWidget";
 import Services from "./components/Services";
 import Stats from "./components/Stats";
 import Testimonials from "./components/Testimonials";
@@ -75,6 +76,7 @@ const App = () => {
           {nav.page === 'post' && <BlogPost slug={nav.slug ?? ''} onBack={goToBlog} />}
         </div>
         <CookieConsent />
+        <ChatWidget />
       </TooltipProvider>
       </BrowserRouter>
       </LanguageProvider>
