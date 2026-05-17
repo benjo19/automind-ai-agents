@@ -19,6 +19,7 @@ import ConcreteActions from "./components/ConcreteActions";
 import MissedLeadCost from "./components/MissedLeadCost";
 import SolutionCards from "./components/SolutionCards";
 import TargetIndustries from "./components/TargetIndustries";
+import { LanguageProvider } from "./lib/i18n";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -72,6 +74,7 @@ const App = () => {
         </div>
         <CookieConsent />
       </TooltipProvider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 };
