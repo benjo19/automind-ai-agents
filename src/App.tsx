@@ -20,6 +20,7 @@ import MissedLeadCost from "./components/MissedLeadCost";
 import SolutionCards from "./components/SolutionCards";
 import TargetIndustries from "./components/TargetIndustries";
 import { LanguageProvider } from "./lib/i18n";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
+      <BrowserRouter>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -74,6 +76,7 @@ const App = () => {
         </div>
         <CookieConsent />
       </TooltipProvider>
+      </BrowserRouter>
       </LanguageProvider>
     </QueryClientProvider>
   );
