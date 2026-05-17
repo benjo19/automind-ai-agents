@@ -22,19 +22,24 @@
     <link rel="apple-touch-icon" href="/app-icon-192.png" />
     <link rel="apple-touch-icon" sizes="512x512" href="/app-icon-512.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://myautomind.com/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://myautomind.com" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://myautomind.com/" />
+    <meta property="og:image" content="https://myautomind.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:title" content="Automind | AI Chatboti &amp; Voice Agenti za Firme u Hrvatskoj" />
     <meta
       property="og:description"
       content="Automind gradi AI agente koji automatiziraju prodaju, korisničku podršku i generiranje ponuda."
     />
+    <meta property="og:locale" content="hr_HR" />
+    <meta property="og:site_name" content="Automind" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@automind" />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image" content="https://myautomind.com/og-image.png" />
     <meta name="twitter:title" content="Automind | AI Chatboti &amp; Voice Agenti za Firme u Hrvatskoj" />
     <meta
       name="twitter:description"
@@ -48,10 +53,60 @@
       rel="stylesheet"
     />
     <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"Organization","name":"AutoMind","url":"https://myautomind.com","telephone":"+385-99-508-5933","address":{"@type":"PostalAddress","addressLocality":"Zagreb","addressCountry":"HR"}}
-    </script>
-    <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Koliko dugo traje postavljanje sustava?","acceptedAnswer":{"@type":"Answer","text":"Sustav je aktivan unutar 24 sata od pokretanja."}},{"@type":"Question","name":"Podržava li sustav hrvatski jezik?","acceptedAnswer":{"@type":"Answer","text":"Da, svi AI agenti komuniciraju na prirodnom hrvatskom jeziku."}},{"@type":"Question","name":"S kojim aplikacijama se može integrirati?","acceptedAnswer":{"@type":"Answer","text":"Sustav se integrira s više od 1000 aplikacija putem Make.com platforme."}}]}
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://myautomind.com/#organization",
+            "name": "Automind",
+            "legalName": "FA. BE. MA TRGOVINA DOO",
+            "url": "https://myautomind.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://myautomind.com/og-image.png"
+            },
+            "description": "AI agenti koji automatiziraju prodaju, korisničku podršku i generiranje ponuda. Chat + voice agenti s CRM integracijom za firme u Hrvatskoj.",
+            "telephone": "+385995085933",
+            "email": "auto.mind.ai2025@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Zagreb",
+              "addressCountry": "HR"
+            },
+            "areaServed": { "@type": "Country", "name": "Croatia" },
+            "knowsLanguage": ["hr", "en"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://myautomind.com/#website",
+            "url": "https://myautomind.com",
+            "name": "Automind",
+            "publisher": { "@id": "https://myautomind.com/#organization" },
+            "inLanguage": "hr"
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Koliko dugo traje postavljanje sustava?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Sustav je aktivan unutar 24 sata od pokretanja." }
+              },
+              {
+                "@type": "Question",
+                "name": "Podržava li sustav hrvatski jezik?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Da, svi AI agenti komuniciraju na prirodnom hrvatskom jeziku." }
+              },
+              {
+                "@type": "Question",
+                "name": "S kojim aplikacijama se može integrirati?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Sustav se integrira s više od 1000 aplikacija putem Make.com platforme." }
+              }
+            ]
+          }
+        ]
+      }
     </script>
   </head>
   <body>
