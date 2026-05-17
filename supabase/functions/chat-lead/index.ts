@@ -282,6 +282,29 @@ async function forwardLeadToMake(
     console.error("Make webhook failed:", res.status, txt);
     throw new Error(`Webhook responded ${res.status}`);
   }
+
+  // Telegram notification
+  const TELEGRAM_BOT_TOKEN = "8625322301:AAGq-NQBzmKVzZLoZ41hEjd9l0F-MahuWfI";
+  const TELEGRAM_CHAT_ID = "1043582386";
+  const tgMsg = [
+    `🔔 *Novi lead s myautomind.com*`,
+    `👤 Ime: ${name}`,
+    `📧 Email: ${email}`,
+    payload.phone ? `📱 Telefon: ${payload.phone}` : null,
+    payload.industry ? `🏭 Industrija: ${payload.industry}` : null,
+    `💬 Interes: ${interest}`,
+    payload.notes ? `📝 Napomene: ${payload.notes}` : null,
+  ].filter(Boolean).join("\n");
+
+  await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text: tgMsg,
+      parse_mode: "Markdown",
+    }),
+  }).catch((err) => console.error("Telegram notification failed:", err));
 }
 
 Deno.serve(async (req) => {
