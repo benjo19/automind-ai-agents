@@ -260,8 +260,8 @@ const ChatWidget = () => {
             ))}
 
             {leadSent && (
-              <div className="flex items-start gap-2 mt-2 p-3 rounded-lg bg-accent/10 border border-accent/30 text-sm text-foreground">
-                <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 mt-2 p-3 rounded-lg bg-accent-emerald/10 border border-accent-emerald/30 text-sm text-foreground">
+                <CheckCircle2 className="h-4 w-4 text-accent-emerald shrink-0 mt-0.5" />
                 <span>
                   {t.chat.leadSent}
                 </span>
@@ -276,7 +276,7 @@ const ChatWidget = () => {
           </div>
 
           {/* Input */}
-          <div className="p-3 border-t border-foreground/10 bg-background/50">
+          <div className="p-3 border-t border-accent/15 bg-background/50">
             <div className="flex gap-2 items-center">
               <input
                 ref={inputRef}
@@ -286,7 +286,7 @@ const ChatWidget = () => {
                 placeholder={t.chat.placeholder}
                 disabled={loading}
                 aria-label={t.chat.messageLabel}
-                className="flex-1 bg-foreground/5 border border-foreground/10 rounded-full px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all disabled:opacity-60"
+                className="flex-1 bg-accent/5 border border-accent/15 rounded-full px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent-pink focus:border-transparent transition-all disabled:opacity-60"
               />
               <Button
                 onClick={send}
