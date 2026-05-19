@@ -177,8 +177,10 @@ const ChatWidget = () => {
         aria-label={open ? t.chat.close : t.chat.open}
         className={cn(
           "fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full flex items-center justify-center",
-          "bg-foreground text-background shadow-glow hover:scale-105 transition-all duration-300",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "bg-gradient-to-br from-accent via-accent-pink to-accent-cyan text-white",
+          "shadow-glow hover:scale-110 hover:shadow-[0_0_50px_hsl(var(--accent-pink)/0.5)] transition-all duration-300",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-pink focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          !open && "animate-pulse-glow",
         )}
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
@@ -196,15 +198,17 @@ const ChatWidget = () => {
         role="dialog"
         aria-label="AI chat"
       >
-        <div className="flex flex-col h-full glass-card rounded-2xl overflow-hidden border border-foreground/10 shadow-glow">
+        <div className="flex flex-col h-full glass-card rounded-2xl overflow-hidden border border-accent/20 shadow-glow relative">
+          {/* Top rainbow accent line */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-pink to-transparent" />
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-foreground/10 bg-background/50">
+          <div className="flex items-center justify-between p-4 border-b border-accent/15 bg-background/50">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-background font-semibold text-sm">
+                <div className="h-9 w-9 rounded-full bg-gradient-to-br from-accent via-accent-pink to-accent-cyan flex items-center justify-center text-white font-semibold text-sm shadow-[0_0_15px_hsl(var(--accent-pink)/0.4)]">
                   A
                 </div>
-                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-accent border-2 border-background" />
+                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-accent-emerald border-2 border-background shadow-[0_0_8px_hsl(var(--accent-emerald)/0.6)]" />
               </div>
               <div>
                 <div className="text-sm font-semibold text-foreground">Ana · Automind</div>
@@ -214,7 +218,7 @@ const ChatWidget = () => {
             <button
               onClick={() => setOpen(false)}
               aria-label={t.chat.closeShort}
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-accent-pink transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
@@ -232,21 +236,21 @@ const ChatWidget = () => {
               >
                 <div
                   className={cn(
-                    "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm whitespace-pre-wrap break-words",
+                    "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm whitespace-pre-wrap break-words shadow-sm",
                     m.role === "user"
-                      ? "bg-foreground text-background rounded-br-sm"
-                      : "bg-foreground/10 text-foreground rounded-bl-sm",
+                      ? "bg-gradient-to-br from-accent to-accent-pink text-white rounded-br-sm shadow-[0_4px_12px_hsl(var(--accent-pink)/0.25)]"
+                      : "bg-accent/5 border border-accent/15 text-foreground rounded-bl-sm",
                   )}
                 >
                   {m.content || (
-                    <span className="inline-flex gap-1 items-center text-muted-foreground">
-                      <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground animate-pulse" />
+                    <span className="inline-flex gap-1 items-center">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent-pink animate-pulse" />
                       <span
-                        className="h-1.5 w-1.5 rounded-full bg-muted-foreground animate-pulse"
+                        className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"
                         style={{ animationDelay: "0.2s" }}
                       />
                       <span
-                        className="h-1.5 w-1.5 rounded-full bg-muted-foreground animate-pulse"
+                        className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-pulse"
                         style={{ animationDelay: "0.4s" }}
                       />
                     </span>
@@ -256,8 +260,8 @@ const ChatWidget = () => {
             ))}
 
             {leadSent && (
-              <div className="flex items-start gap-2 mt-2 p-3 rounded-lg bg-accent/10 border border-accent/30 text-sm text-foreground">
-                <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 mt-2 p-3 rounded-lg bg-accent-emerald/10 border border-accent-emerald/30 text-sm text-foreground">
+                <CheckCircle2 className="h-4 w-4 text-accent-emerald shrink-0 mt-0.5" />
                 <span>
                   {t.chat.leadSent}
                 </span>
@@ -272,7 +276,7 @@ const ChatWidget = () => {
           </div>
 
           {/* Input */}
-          <div className="p-3 border-t border-foreground/10 bg-background/50">
+          <div className="p-3 border-t border-accent/15 bg-background/50">
             <div className="flex gap-2 items-center">
               <input
                 ref={inputRef}
@@ -282,7 +286,7 @@ const ChatWidget = () => {
                 placeholder={t.chat.placeholder}
                 disabled={loading}
                 aria-label={t.chat.messageLabel}
-                className="flex-1 bg-foreground/5 border border-foreground/10 rounded-full px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all disabled:opacity-60"
+                className="flex-1 bg-accent/5 border border-accent/15 rounded-full px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent-pink focus:border-transparent transition-all disabled:opacity-60"
               />
               <Button
                 onClick={send}
