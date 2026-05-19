@@ -198,15 +198,17 @@ const ChatWidget = () => {
         role="dialog"
         aria-label="AI chat"
       >
-        <div className="flex flex-col h-full glass-card rounded-2xl overflow-hidden border border-foreground/10 shadow-glow">
+        <div className="flex flex-col h-full glass-card rounded-2xl overflow-hidden border border-accent/20 shadow-glow relative">
+          {/* Top rainbow accent line */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-pink to-transparent" />
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-foreground/10 bg-background/50">
+          <div className="flex items-center justify-between p-4 border-b border-accent/15 bg-background/50">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-background font-semibold text-sm">
+                <div className="h-9 w-9 rounded-full bg-gradient-to-br from-accent via-accent-pink to-accent-cyan flex items-center justify-center text-white font-semibold text-sm shadow-[0_0_15px_hsl(var(--accent-pink)/0.4)]">
                   A
                 </div>
-                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-accent border-2 border-background" />
+                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-accent-emerald border-2 border-background shadow-[0_0_8px_hsl(var(--accent-emerald)/0.6)]" />
               </div>
               <div>
                 <div className="text-sm font-semibold text-foreground">Ana · Automind</div>
@@ -216,7 +218,7 @@ const ChatWidget = () => {
             <button
               onClick={() => setOpen(false)}
               aria-label={t.chat.closeShort}
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-accent-pink transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
