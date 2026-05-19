@@ -236,21 +236,21 @@ const ChatWidget = () => {
               >
                 <div
                   className={cn(
-                    "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm whitespace-pre-wrap break-words",
+                    "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm whitespace-pre-wrap break-words shadow-sm",
                     m.role === "user"
-                      ? "bg-foreground text-background rounded-br-sm"
-                      : "bg-foreground/10 text-foreground rounded-bl-sm",
+                      ? "bg-gradient-to-br from-accent to-accent-pink text-white rounded-br-sm shadow-[0_4px_12px_hsl(var(--accent-pink)/0.25)]"
+                      : "bg-accent/5 border border-accent/15 text-foreground rounded-bl-sm",
                   )}
                 >
                   {m.content || (
-                    <span className="inline-flex gap-1 items-center text-muted-foreground">
-                      <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground animate-pulse" />
+                    <span className="inline-flex gap-1 items-center">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent-pink animate-pulse" />
                       <span
-                        className="h-1.5 w-1.5 rounded-full bg-muted-foreground animate-pulse"
+                        className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"
                         style={{ animationDelay: "0.2s" }}
                       />
                       <span
-                        className="h-1.5 w-1.5 rounded-full bg-muted-foreground animate-pulse"
+                        className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-pulse"
                         style={{ animationDelay: "0.4s" }}
                       />
                     </span>
