@@ -177,8 +177,10 @@ const ChatWidget = () => {
         aria-label={open ? t.chat.close : t.chat.open}
         className={cn(
           "fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full flex items-center justify-center",
-          "bg-foreground text-background shadow-glow hover:scale-105 transition-all duration-300",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "bg-gradient-to-br from-accent via-accent-pink to-accent-cyan text-white",
+          "shadow-glow hover:scale-110 hover:shadow-[0_0_50px_hsl(var(--accent-pink)/0.5)] transition-all duration-300",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-pink focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          !open && "animate-pulse-glow",
         )}
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
