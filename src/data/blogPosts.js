@@ -185,5 +185,94 @@ Pravo vrijeme za automatizaciju je uvijek sada — ali posebno kada:
 - Vaš tim troši više od 20% vremena na admin
 - Rast je usporen jer nemate kapaciteta
 - Konkurencija odgovara brže od vas`
+  },
+  {
+    slug: 'whatsapp-automatizacija-za-firme',
+    title: 'WhatsApp automatizacija za firme: kako odgovarati brže uz AI',
+    excerpt: 'Više od 3 milijuna Hrvata koristi WhatsApp svakodnevno. Je li vaša firma tu — ili propuštate upite koji dolaze na krivu adresu?',
+    category: 'Automatizacija',
+    readTime: '5 min čitanja',
+    date: '28. travnja 2026.',
+    content: `## WhatsApp je novi telefon
+
+Vaši klijenti ne žele zvati. Ne žele slati email i čekati odgovor do sutra. Oni otvaraju WhatsApp — i očekuju odgovor u minutama.
+
+Za male firme, to je i problem i prilika. Problem jer nitko ne može biti dostupan 24 sata. Prilika jer AI agent može.
+
+## Što AI agent radi na WhatsAppu
+
+AI agent integriran na WhatsApp broj vaše firme:
+
+- **Odmah odgovara** na svaki dolazni upit — neovisno o danu ili satu
+- **Prikuplja podatke** — ime, broj telefona, o čemu se radi
+- **Zakazuje termine** direktno u razgovoru
+- **Šalje ponude** — ili eskalira na pravu osobu kada je potrebno
+
+Klijent ne zna razlikuje li razgovor s AI agentom od razgovora s recepcionistom. Važno je jedino da dobije brz i korektan odgovor.
+
+## Primjer iz uslužnog sektora
+
+Jedan salon ljepote u Zagrebu imao je isti problem: vikend upiti ostajali su nepročitani do ponedjeljka. Do tada bi klijent već naručio termin negdje drugdje.
+
+Nakon postavljanja WhatsApp AI agenta:
+
+- **Prosječno vrijeme odgovora**: s 6 sati na 47 sekundi
+- **Vikend rezervacije**: povećanje od 34%
+- **Ručni rad tima**: smanjio se za 60%
+
+## Kako početi
+
+WhatsApp Business API zahtijeva verifikaciju broja i odobrenje od Meta. Cijeli proces uz AutoMind traje 3-5 radnih dana — bez tehničkog znanja s vaše strane.
+
+Nakon toga, postavljate predloške poruka, spojite kalendar i agent je spreman.
+
+## Jedna stvar koju ne smijete zaboraviti
+
+GDPR. Svaki kontakt putem WhatsAppa mora imati prethodni pristanak za marketinšku komunikaciju. AI agent može automatski zatražiti pristanak i dokumentirati ga — tako ste zaštićeni.`
+  },
+  {
+    slug: 'glasovni-ai-agent-telefon',
+    title: 'Glasovni AI agent: tko odgovara na vaš telefon dok ste zauzeti?',
+    excerpt: 'Svaki propušten poziv je propušten klijent. Glasovni AI agenti sada mogu voditi pravi telefonski razgovor — na hrvatskom.',
+    category: 'Voice AI',
+    readTime: '6 min čitanja',
+    date: '14. svibnja 2026.',
+    content: `## Problem koji svi poznaju
+
+Radiš, ne možeš dignuti telefon. Ili je 19:30 i firma je zatvorena. Klijent zvoni, ne dobiva odgovor — i zove konkurenciju.
+
+Prema istraživanjima, **62% poziva malim firmama** ostaje bez odgovora u prvom pokušaju. Dio tih poziva nikad ne dođe drugi put.
+
+## Što je glasovni AI agent
+
+Glasovni AI agent je sustav koji preuzima dolazne pozive i vodi prirodan, razgovoran dijalog s klijentom — na hrvatskom jeziku.
+
+Nije to snimljeni IVR menu s opcijama "pritisnite 1 za...". Radi se o AI-u koji:
+
+- Razumije slobodan govor i kontekst
+- Odgovara na pitanja o cijenama, terminima, uslugama
+- Zakazuje termin ili prikuplja kontakt podatke
+- Prosljeđuje hitan poziv pravoj osobi
+
+## Industrije gdje odmah vidi razliku
+
+**Automehaničari**: Klijent zove da pita za termin servisa. Agent provjeri slobodne termine i odmah zakaže.
+
+**Saloni i klinike**: Pacijent zove poslije radnog vremena. Agent potvrdi ili predloži slobodan termin sutra ujutro.
+
+**Nekretnine**: Kupac zove zbog oglasa. Agent prikuplja osnovne informacije i zakazuje razgledanje.
+
+**Turizam**: Gost zove s pitanjima o smještaju. Agent odgovara na sve standardne upite i prosljeđuje rezervaciju.
+
+## Nije ovo budućnost — ovo je sad
+
+Glasovni AI agenti su već dostupni za hrvatska mala poduzeća. Postavljanje traje 5-7 radnih dana. Uključuje:
+
+- Prilagođen glas i ton komunikacije vašem brendu
+- Integraciju s kalendarom i CRM sustavom
+- Neograničen broj istovremenih poziva
+- Tjedni izvještaj o svim razgovorima
+
+**Jedan agent = jedan novi zaposleni koji ne uzima godišnji odmor.**`
   }
 ];
