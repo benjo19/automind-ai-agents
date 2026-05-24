@@ -294,15 +294,14 @@ async function forwardLeadToMake(
   // Telegram notification
   const TELEGRAM_BOT_TOKEN = "8625322301:AAGq-NQBzmKVzZLoZ41hEjd9l0F-MahuWfI";
   const TELEGRAM_CHAT_ID = "1043582386";
-  const esc = (s: string) => s.replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, "\\$&");
   const tgMsg = [
-    `🔔 *Novi lead s myautomind\\.com*`,
-    `👤 Ime: ${esc(name)}`,
-    `📧 Email: ${esc(email)}`,
-    payload.phone ? `📱 Telefon: ${esc(String(payload.phone))}` : null,
-    payload.industry ? `🏭 Industrija: ${esc(String(payload.industry))}` : null,
-    `💬 Interes: ${esc(interest)}`,
-    payload.notes ? `📝 Napomene: ${esc(String(payload.notes))}` : null,
+    `🔔 Novi lead s myautomind.com`,
+    `👤 Ime: ${name}`,
+    `📧 Email: ${email}`,
+    payload.phone ? `📱 Telefon: ${payload.phone}` : null,
+    payload.industry ? `🏭 Industrija: ${payload.industry}` : null,
+    `💬 Interes: ${interest}`,
+    payload.notes ? `📝 Napomene: ${payload.notes}` : null,
   ].filter(Boolean).join("\n");
 
   await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -311,7 +310,6 @@ async function forwardLeadToMake(
     body: JSON.stringify({
       chat_id: TELEGRAM_CHAT_ID,
       text: tgMsg,
-      parse_mode: "MarkdownV2",
     }),
   }).catch((err) => console.error("Telegram notification failed:", err));
 }
