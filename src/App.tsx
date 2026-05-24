@@ -2,86 +2,43 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import HowItWorks from "./components/HowItWorks";
-import FAQ from "./components/FAQ";
-import Footer from "./components/Footer";
-import Blog from "./components/Blog";
-import BlogPost from "./components/BlogPost";
-import CookieConsent from "./components/CookieConsent";
-import ChatWidget from "./components/ChatWidget";
-import Services from "./components/Services";
-import Stats from "./components/Stats";
-import Testimonials from "./components/Testimonials";
-import BeforeAfter from "./components/BeforeAfter";
-import ConcreteActions from "./components/ConcreteActions";
-import MissedLeadCost from "./components/MissedLeadCost";
-import SolutionCards from "./components/SolutionCards";
-import TargetIndustries from "./components/TargetIndustries";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./lib/i18n";
-import { BrowserRouter } from "react-router-dom";
+
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
+import CookiePolicy from "./pages/CookiePolicy";
+import ThankYou from "./pages/ThankYou";
+import Install from "./pages/Install";
+import BlogPage from "./pages/Blog";
+import BlogPostPage from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
-type NavState = { page: string; slug: string | null };
-
-function getPage(): NavState {
-  const hash = window.location.hash;
-  if (hash.startsWith('#/blog/')) return { page: 'post', slug: hash.slice(7) };
-  if (hash === '#/blog') return { page: 'blog', slug: null };
-  return { page: 'home', slug: null };
-}
-
-const App = () => {
-  const [nav, setNav] = useState<NavState>(getPage);
-
-  useEffect(() => {
-    const handler = () => setNav(getPage());
-    window.addEventListener('hashchange', handler);
-    return () => window.removeEventListener('hashchange', handler);
-  }, []);
-
-  const goToBlog = () => { window.location.hash = '#/blog'; };
-  const goToPost = (slug: string) => { window.location.hash = `#/blog/${slug}`; };
-  const goHome = () => { window.location.hash = ''; };
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <LanguageProvider>
       <BrowserRouter>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <div className="min-h-screen bg-background">
-          <Navbar onBlogClick={goToBlog} onHomeClick={goHome} />
-          {nav.page === 'home' && (
-            <>
-              <Hero />
-              <Stats />
-              <Services />
-              <SolutionCards />
-              <HowItWorks />
-              <ConcreteActions />
-              <BeforeAfter />
-              <MissedLeadCost />
-              <Testimonials />
-              <TargetIndustries />
-              <FAQ />
-              <Footer />
-            </>
-          )}
-          {nav.page === 'blog' && <Blog onSelectPost={goToPost} />}
-          {nav.page === 'post' && <BlogPost slug={nav.slug ?? ''} onBack={goToBlog} />}
-        </div>
-        <CookieConsent />
-        <ChatWidget />
-      </TooltipProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
+            <Route path="/uvjeti-koristenja" element={<TermsOfUse />} />
+            <Route path="/kolacici" element={<CookiePolicy />} />
+            <Route path="/hvala" element={<ThankYou />} />
+            <Route path="/install" element={<Install />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </TooltipProvider>
       </BrowserRouter>
-      </LanguageProvider>
-    </QueryClientProvider>
-  );
-};
+    </LanguageProvider>
+  </QueryClientProvider>
+);
 
 export default App;
