@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, X, Send, CheckCircle2, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, CheckCircle2, Loader2, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/lib/i18n";
@@ -21,11 +21,19 @@ const getClientKey = () => {
   }
 };
 
+const newClientKey = () => {
+  const next = crypto.randomUUID();
+  try {
+    localStorage.setItem(CHAT_CLIENT_KEY, next);
+  } catch {}
+  return next;
+};
+
 const ChatWidget = () => {
   const { language, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([{ role: "assistant", content: t.chat.greeting }]);
-  const [clientKey] = useState(getClientKey);
+  const [clientKey, setClientKey] = useState(getClientKey);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [leadSent, setLeadSent] = useState(false);
@@ -162,6 +170,14 @@ const ChatWidget = () => {
     }
   };
 
+  const resetConversation = () => {
+    setClientKey(newClientKey());
+    setMessages([{ role: "assistant", content: t.chat.greeting }]);
+    setInput("");
+    setLeadSent(false);
+    setError(null);
+  };
+
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -215,13 +231,23 @@ const ChatWidget = () => {
                 <div className="text-xs text-muted-foreground">{t.chat.status}</div>
               </div>
             </div>
-            <button
-              onClick={() => setOpen(false)}
-              aria-label={t.chat.closeShort}
-              className="text-muted-foreground hover:text-accent-pink transition-colors"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={resetConversation}
+                aria-label="Novi razgovor"
+                title="Novi razgovor"
+                className="text-muted-foreground hover:text-accent-pink transition-colors"
+              >
+                <RotateCcw className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setOpen(false)}
+                aria-label={t.chat.closeShort}
+                className="text-muted-foreground hover:text-accent-pink transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
