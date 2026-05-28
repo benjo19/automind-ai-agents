@@ -240,6 +240,117 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 255;
 }
 
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function buildFollowUpEmail(lead: {
+  name: string; email: string; industry: string; interest: string;
+}) {
+  const firstName = lead.name.split(/\s+/)[0] || lead.name;
+  const subject = `Bok ${firstName}, hvala na upitu — Automind`;
+  const industryLine = lead.industry
+    ? `Vidio sam da si iz područja: <strong>${escapeHtml(lead.industry)}</strong>. Već imamo iskustva sa sličnim biznisima.`
+    : `Pripremit ćemo ti prijedlog prilagođen tvojoj djelatnosti.`;
+
+  const html = `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f5f7fb;font-family:-apple-system,'Segoe UI',Roboto,Inter,sans-serif;color:#0f172a;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f7fb;padding:32px 16px;"><tr><td align="center">
+<table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e2e8f0;"><tr><td>
+<div style="font-size:13px;letter-spacing:0.12em;color:#3b5bdb;font-weight:600;text-transform:uppercase;margin-bottom:8px;">AUTOMIND</div>
+<h1 style="margin:0 0 16px 0;font-size:24px;font-weight:700;letter-spacing:-0.02em;color:#0f172a;">Bok ${escapeHtml(firstName)}, hvala na upitu! 👋</h1>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#334155;">Primili smo tvoj upit za <strong>${escapeHtml(lead.interest)}</strong> i kratko ti se javljam da potvrdim — u tijeku je priprema personaliziranog prijedloga.</p>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#334155;">${industryLine}</p>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#334155;"><strong>Što slijedi:</strong></p>
+<ul style="margin:0 0 24px 0;padding-left:20px;font-size:16px;line-height:1.7;color:#334155;">
+<li>Javit ću ti se osobno unutar <strong>24 sata</strong></li>
+<li>Predložit ćemo konkretno rješenje za tvoju situaciju</li>
+<li>Bez obveze — prvo pogledaj pa odluči</li></ul>
+<p style="margin:0 0 24px 0;font-size:16px;line-height:1.6;color:#334155;">U međuvremenu, ako ti nešto padne na pamet, samo odgovori na ovaj email.</p>
+<div style="margin:32px 0 0 0;padding-top:24px;border-top:1px solid #e2e8f0;">
+<p style="margin:0;font-size:15px;color:#0f172a;font-weight:600;">Benjamin</p>
+<p style="margin:4px 0 0 0;font-size:14px;color:#64748b;">Automind — AI recepcionar za lokalne biznise</p>
+<p style="margin:8px 0 0 0;font-size:13px;color:#94a3b8;"><a href="https://myautomind.com" style="color:#3b5bdb;text-decoration:none;">myautomind.com</a></p>
+</div></td></tr></table></td></tr></table></body></html>`;
+
+  const text = `Bok ${firstName},
+
+Hvala na upitu! Primili smo tvoj interes za: ${lead.interest}
+
+Što slijedi:
+- Javit ću ti se osobno unutar 24 sata
+- Predložit ćemo konkretno rješenje za tvoju situaciju
+- Bez obveze — prvo pogledaj pa odluči
+
+Ako ti nešto padne na pamet u međuvremenu, samo odgovori na ovaj email.
+
+Benjamin
+Automind — AI recepcionar za lokalne biznise
+https://myautomind.com`;
+
+  return { subject, html, text };
+}
+
+function buildRawMime(to: string, subject: string, html: string, text: string): string {
+  const boundary = `bnd_${crypto.randomUUID()}`;
+  const encodedSubject = `=?UTF-8?B?${btoa(unescape(encodeURIComponent(subject)))}?=`;
+  const message = [
+    `To: ${to}`,
+    `From: Benjamin - Automind <${Deno.env.get("GMAIL_FROM_ADDRESS") ?? "me"}>`,
+    `Subject: ${encodedSubject}`,
+    `MIME-Version: 1.0`,
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    ``,
+    `--${boundary}`,
+    `Content-Type: text/plain; charset="UTF-8"`,
+    `Content-Transfer-Encoding: base64`,
+    ``,
+    btoa(unescape(encodeURIComponent(text))),
+    `--${boundary}`,
+    `Content-Type: text/html; charset="UTF-8"`,
+    `Content-Transfer-Encoding: base64`,
+    ``,
+    btoa(unescape(encodeURIComponent(html))),
+    `--${boundary}--`,
+    ``,
+  ].join("\r\n");
+  return btoa(unescape(encodeURIComponent(message)))
+    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+async function sendFollowUpEmail(lead: {
+  name: string; email: string; industry: string; interest: string;
+}) {
+  const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+  const GOOGLE_MAIL_API_KEY = Deno.env.get("GOOGLE_MAIL_API_KEY");
+  if (!LOVABLE_API_KEY || !GOOGLE_MAIL_API_KEY) {
+    console.warn("Gmail follow-up skipped: missing API key(s)");
+    return;
+  }
+  try {
+    const { subject, html, text } = buildFollowUpEmail(lead);
+    const raw = buildRawMime(lead.email, subject, html, text);
+    const res = await fetch(
+      "https://connector-gateway.lovable.dev/google_mail/gmail/v1/users/me/messages/send",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          "X-Connection-Api-Key": GOOGLE_MAIL_API_KEY,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ raw }),
+      },
+    );
+    if (!res.ok) {
+      console.error("Gmail send failed:", res.status, await res.text());
+    } else {
+      console.log("Gmail follow-up sent to", lead.email);
+    }
+  } catch (e) {
+    console.error("Gmail follow-up error:", e);
+  }
+}
+
 async function forwardLeadToMake(
   lead: Record<string, unknown>,
   transcript: Array<{ role: string; content: string }>,
@@ -302,6 +413,13 @@ async function forwardLeadToMake(
   } catch (err) {
     console.error("Telegram error:", err);
   }
+
+  // Personalizirani follow-up email leadu (fire-and-forget)
+  sendFollowUpEmail({
+    name, email, industry: payload.industry, interest,
+  }).catch((e) => console.error("Follow-up email error:", e));
+
+
 
   // Make webhook
   const res = await fetch(MAKE_WEBHOOK_URL, {
