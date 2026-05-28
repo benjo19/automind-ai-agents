@@ -295,7 +295,7 @@ function buildRawMime(to: string, subject: string, html: string, text: string): 
   const encodedSubject = `=?UTF-8?B?${btoa(unescape(encodeURIComponent(subject)))}?=`;
   const message = [
     `To: ${to}`,
-    `From: Benjamin - Automind <${Deno.env.get("GMAIL_FROM_ADDRESS") ?? "me"}>`,
+    `From: Benjamin - Automind <${Deno.env.get("GMAIL_FROM_ADDRESS") ?? "auto.mind.ai2025@gmail.com"}>`,
     `Subject: ${encodedSubject}`,
     `MIME-Version: 1.0`,
     `Content-Type: multipart/alternative; boundary="${boundary}"`,
