@@ -83,10 +83,10 @@ const Navbar = ({ onBlogClick, onHomeClick }: { onBlogClick?: () => void; onHome
         {/* Logo */}
         <button
           onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); onHomeClick && onHomeClick(); }}
-          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/60 border border-foreground/5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] backdrop-blur-sm hover:bg-white/90 hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:border-foreground/10 transition-all duration-300"
           aria-label={t.nav.logoLabel}
         >
-          <img src={logo} alt="Automind logo" className="h-8 w-auto invert" />
+          <img src={logo} alt="Automind logo" className="h-7 w-auto invert" />
         </button>
 
         {/* Desktop nav */}
