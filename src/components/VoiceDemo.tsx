@@ -4,8 +4,10 @@ import { Phone, PhoneOff, Mic, Loader2, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const AGENT_ID_STORAGE_KEY = "automind_elevenlabs_agent_id";
+
 
 const VoiceDemo = () => {
   const [agentId, setAgentId] = useState<string>("");
@@ -37,17 +39,25 @@ const VoiceDemo = () => {
     setIsConnecting(true);
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
+      const { data, error } = await supabase.functions.invoke("elevenlabs-token", {
+        body: { agentId },
+      });
+      if (error || !data?.token) {
+        throw new Error(error?.message || data?.error || "Nije moguće dohvatiti token");
+      }
       await conversation.startSession({
-        agentId,
+        conversationToken: data.token,
         connectionType: "webrtc",
       });
     } catch (err) {
       console.error(err);
-      toast.error("Ne mogu pristupiti mikrofonu");
+      const msg = err instanceof Error ? err.message : "Greška pri pokretanju razgovora";
+      toast.error(msg);
     } finally {
       setIsConnecting(false);
     }
   }, [agentId, conversation]);
+
 
   const endCall = useCallback(async () => {
     await conversation.endSession();
