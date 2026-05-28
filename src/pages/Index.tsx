@@ -12,6 +12,7 @@ import Testimonials from "@/components/Testimonials";
 import MissedLeadCost from "@/components/MissedLeadCost";
 import FAQ from "@/components/FAQ";
 import DemoForm from "@/components/DemoForm";
+import BookCall from "@/components/BookCall";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import CookieConsent from "@/components/CookieConsent";
@@ -90,6 +91,7 @@ const Index = () => {
         <BeforeAfter />
         <Testimonials />
         <MissedLeadCost />
+        <BookCall />
         <FAQ />
         <Footer />
       </main>
