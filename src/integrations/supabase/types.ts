@@ -92,6 +92,72 @@ export type Database = {
         }
         Relationships: []
       }
+      voice_demo_sessions: {
+        Row: {
+          agent_id: string | null
+          created_at: string
+          duration_seconds: number | null
+          ended_at: string | null
+          id: string
+          lead_id: string | null
+          metadata: Json
+          page_url: string | null
+          referrer: string | null
+          session_id: string
+          started_at: string
+          stop_cause: string | null
+          updated_at: string
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          agent_id?: string | null
+          created_at?: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          lead_id?: string | null
+          metadata?: Json
+          page_url?: string | null
+          referrer?: string | null
+          session_id: string
+          started_at?: string
+          stop_cause?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          agent_id?: string | null
+          created_at?: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          lead_id?: string | null
+          metadata?: Json
+          page_url?: string | null
+          referrer?: string | null
+          session_id?: string
+          started_at?: string
+          stop_cause?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
