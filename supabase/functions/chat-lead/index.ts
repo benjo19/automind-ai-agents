@@ -414,6 +414,13 @@ async function forwardLeadToMake(
     console.error("Telegram error:", err);
   }
 
+  // Personalizirani follow-up email leadu (fire-and-forget)
+  sendFollowUpEmail({
+    name, email, industry: payload.industry, interest,
+  }).catch((e) => console.error("Follow-up email error:", e));
+
+
+
   // Make webhook
   const res = await fetch(MAKE_WEBHOOK_URL, {
     method: "POST",
