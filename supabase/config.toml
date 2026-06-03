@@ -1,1 +1,7 @@
 project_id = "vkpaugrneyxbqqgkafgl"
+
+[functions.voice-analytics]
+verify_jwt = false
+
+[functions.gsc-submit-sitemap]
+verify_jwt = false
