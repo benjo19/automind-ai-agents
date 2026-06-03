@@ -1,0 +1,21 @@
+# Automind
+
+> AI recepcionar i automatizacija prodaje za lokalne uslužne biznise u Hrvatskoj — saloni, praonice, servisi, ordinacije, majstori i restorani.
+
+Automind gradi AI agente koji preuzimaju upite s weba, telefona i poruka, kvalificiraju leadove i zakazuju termine 24/7. Sve na prirodnom hrvatskom jeziku, s integracijom u kalendar i CRM.
+
+## Pages
+
+- [Početna](/): Pregled usluga, glasovni demo i poziv na konzultacije.
+- [Blog](/blog): Vodiči i primjeri kako AI mijenja rad lokalnih biznisa.
+- [Politika privatnosti](/politika-privatnosti): Kako koristimo i štitimo podatke.
+- [Uvjeti korištenja](/uvjeti-koristenja): Pravni uvjeti korištenja usluga.
+- [Kolačići](/kolacici): Informacije o kolačićima na stranici.
+
+## Blog
+
+- [Kako AI agent može odgovarati na upite 24/7](/blog/kako-ai-agent-moze-odgovarati-na-upite): Brzina odgovora i utjecaj na konverziju.
+- [Automatizacija zakazivanja termina](/blog/automatizacija-zakazivanja-termina): Kraj telefonskog pingponga.
+- [AI agent za slanje ponuda](/blog/ai-agent-za-slanje-ponuda): Automatizacija prodajnog procesa.
+- [GDPR i AI agenti](/blog/gdpr-i-ai-agenti): Usklađenost i zaštita podataka.
+- [Koliko košta ne automatizirati](/blog/koliko-kosta-ne-automatizirati): Skriveni trošak ručnog rada.
