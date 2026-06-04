@@ -89,6 +89,44 @@ const DemoForm = () => {
     finally { setIsLoading(false); }
   };
 
+  const handleTestSend = async () => {
+    setTestLoading(true);
+    try {
+      const payload = {
+        type: "demo_request",
+        source: "demo-form-test",
+        client_id: "AUTOMIND",
+        page_url: window.location.href,
+        language,
+        submitted_at: new Date().toISOString(),
+        submitted_after_ms: 0,
+        utm: { utm_source: "test", utm_medium: "button", utm_campaign: "" },
+        name: "Test Korisnik",
+        email: "test@myautomind.com",
+        phone: "+385991234567",
+        company: "Test Tvrtka",
+        industry: "it",
+        budget: "medium",
+        interests: ["chat", "voice"],
+        deadline: "ASAP",
+        message: "Ovo je testna poruka poslana gumbom za test slanje.",
+        consentGdpr: true,
+        consentNewsletter: false,
+      };
+      const response = await fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      if (response.ok) {
+        toast.success("Test payload uspješno poslan na webhook!");
+      } else {
+        throw new Error(`Webhook responded ${response.status}`);
+      }
+    } catch (err) {
+      console.error("Test send error:", err);
+      toast.error("Greška pri slanju test payload-a", { description: err instanceof Error ? err.message : "Nepoznata greška" });
+    } finally {
+      setTestLoading(false);
+    }
+  };
+
   return (
     <section id="demo" className="py-20 md:py-32 relative glow-bg scroll-mt-20">
       <div className="container px-4 relative z-10">
