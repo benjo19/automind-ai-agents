@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
+import { Loader2, Send, ArrowRight, ArrowLeft, FlaskConical } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/lib/i18n";
 
@@ -24,6 +24,7 @@ const DemoForm = () => {
   const { language, t } = useLanguage();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [testLoading, setTestLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [formLoadedAt] = useState(() => Date.now());
   const [formData, setFormData] = useState({
@@ -86,6 +87,44 @@ const DemoForm = () => {
       toast.error(t.demoForm.submitError, { description: t.demoForm.submitErrorDescription });
     }
     finally { setIsLoading(false); }
+  };
+
+  const handleTestSend = async () => {
+    setTestLoading(true);
+    try {
+      const payload = {
+        type: "demo_request",
+        source: "demo-form-test",
+        client_id: "AUTOMIND",
+        page_url: window.location.href,
+        language,
+        submitted_at: new Date().toISOString(),
+        submitted_after_ms: 0,
+        utm: { utm_source: "test", utm_medium: "button", utm_campaign: "" },
+        name: "Test Korisnik",
+        email: "test@myautomind.com",
+        phone: "+385991234567",
+        company: "Test Tvrtka",
+        industry: "it",
+        budget: "medium",
+        interests: ["chat", "voice"],
+        deadline: "ASAP",
+        message: "Ovo je testna poruka poslana gumbom za test slanje.",
+        consentGdpr: true,
+        consentNewsletter: false,
+      };
+      const response = await fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      if (response.ok) {
+        toast.success("Test payload uspješno poslan na webhook!");
+      } else {
+        throw new Error(`Webhook responded ${response.status}`);
+      }
+    } catch (err) {
+      console.error("Test send error:", err);
+      toast.error("Greška pri slanju test payload-a", { description: err instanceof Error ? err.message : "Nepoznata greška" });
+    } finally {
+      setTestLoading(false);
+    }
   };
 
   return (
@@ -211,6 +250,23 @@ const DemoForm = () => {
                 </>
               )}
             </form>
+            <div className="mt-6 flex justify-center">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleTestSend}
+                disabled={testLoading}
+                className="gap-2"
+              >
+                {testLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <FlaskConical className="h-4 w-4" />
+                )}
+                {testLoading ? "Šaljem test..." : "Pošalji test payload"}
+              </Button>
+            </div>
           </div>
         </ScrollReveal>
       </div>
