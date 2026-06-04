@@ -375,20 +375,33 @@ async function forwardLeadToMake(
   }
 
   const payload = {
-    type: "chat_lead",
+    type: "demo_request",
     source: "ai-chat-widget",
+    client_id: "AUTOMIND",
+    page_url: "https://myautomind.com",
+    language: "hr",
     submitted_at: new Date().toISOString(),
+    submitted_after_ms: 0,
+    utm: { utm_source: "", utm_medium: "", utm_campaign: "" },
     client_key: clientKey,
     name,
     email,
     phone: String(lead.phone || ""),
+    company: String(lead.industry || ""),
     industry: String(lead.industry || ""),
-    interest,
+    budget: "",
+    interests: [interest],
+    deadline: "",
+    message: String(lead.notes || ""),
+    consentGdpr: true,
+    consentNewsletter: false,
     notes: String(lead.notes || ""),
+    interest,
     transcript: transcript
       .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
       .join("\n\n"),
   };
+
 
   // Telegram notification — šalje se uvijek, neovisno o Make webhook-u
   const TELEGRAM_BOT_TOKEN = "8625322301:AAGq-NQBzmKVzZLoZ41hEjd9l0F-MahuWfI";
