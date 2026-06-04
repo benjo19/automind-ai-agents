@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
+import { Loader2, Send, ArrowRight, ArrowLeft, FlaskConical } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/lib/i18n";
 
