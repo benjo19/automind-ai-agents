@@ -356,22 +356,23 @@ async function forwardLeadToMake(
   transcript: Array<{ role: string; content: string }>,
   clientKey: string,
 ) {
-  // Validate lead has real data before sending
+  // Soft validation — pošalji lead čak i ako je email sumnjiv, samo označi flagom
   const email = String(lead.email || "").trim();
   const name = String(lead.name || "").trim();
   const interest = String(lead.interest || "").trim();
 
-  if (!email || !isValidEmail(email)) {
-    console.warn("Lead skipped: invalid or missing email", email);
-    return;
-  }
   if (!name || name.length < 2) {
     console.warn("Lead skipped: missing name");
     return;
   }
-  if (!interest) {
-    console.warn("Lead skipped: missing interest");
+  if (!email) {
+    console.warn("Lead skipped: missing email entirely");
     return;
+  }
+
+  const emailValid = isValidEmail(email);
+  if (!emailValid) {
+    console.warn("Lead forwarded with SUSPICIOUS email:", email);
   }
 
   const payload = {
@@ -386,17 +387,19 @@ async function forwardLeadToMake(
     client_key: clientKey,
     name,
     email,
+    email_valid: emailValid,
+    email_suspicious: !emailValid,
     phone: String(lead.phone || ""),
     company: String(lead.industry || ""),
     industry: String(lead.industry || ""),
     budget: "",
-    interests: [interest],
+    interests: [interest || "nepoznato"],
     deadline: "",
     message: String(lead.notes || ""),
     consentGdpr: true,
     consentNewsletter: false,
     notes: String(lead.notes || ""),
-    interest,
+    interest: interest || "nepoznato",
     transcript: transcript
       .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
       .join("\n\n"),
@@ -427,10 +430,14 @@ async function forwardLeadToMake(
     console.error("Telegram error:", err);
   }
 
-  // Personalizirani follow-up email leadu (fire-and-forget)
-  sendFollowUpEmail({
-    name, email, industry: payload.industry, interest,
-  }).catch((e) => console.error("Follow-up email error:", e));
+  // Personalizirani follow-up email leadu (fire-and-forget) — samo ako je email valjan
+  if (emailValid) {
+    sendFollowUpEmail({
+      name, email, industry: payload.industry, interest: payload.interest,
+    }).catch((e) => console.error("Follow-up email error:", e));
+  } else {
+    console.warn("Skipping Gmail follow-up — suspicious email:", email);
+  }
 
 
 
