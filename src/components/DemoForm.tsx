@@ -24,6 +24,7 @@ const DemoForm = () => {
   const { language, t } = useLanguage();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [testLoading, setTestLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [formLoadedAt] = useState(() => Date.now());
   const [formData, setFormData] = useState({
