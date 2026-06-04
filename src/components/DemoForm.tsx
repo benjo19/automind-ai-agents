@@ -250,6 +250,23 @@ const DemoForm = () => {
                 </>
               )}
             </form>
+            <div className="mt-6 flex justify-center">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleTestSend}
+                disabled={testLoading}
+                className="gap-2"
+              >
+                {testLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <FlaskConical className="h-4 w-4" />
+                )}
+                {testLoading ? "Šaljem test..." : "Pošalji test payload"}
+              </Button>
+            </div>
           </div>
         </ScrollReveal>
       </div>
