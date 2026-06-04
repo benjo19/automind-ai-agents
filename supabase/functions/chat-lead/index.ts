@@ -430,10 +430,14 @@ async function forwardLeadToMake(
     console.error("Telegram error:", err);
   }
 
-  // Personalizirani follow-up email leadu (fire-and-forget)
-  sendFollowUpEmail({
-    name, email, industry: payload.industry, interest,
-  }).catch((e) => console.error("Follow-up email error:", e));
+  // Personalizirani follow-up email leadu (fire-and-forget) — samo ako je email valjan
+  if (emailValid) {
+    sendFollowUpEmail({
+      name, email, industry: payload.industry, interest: payload.interest,
+    }).catch((e) => console.error("Follow-up email error:", e));
+  } else {
+    console.warn("Skipping Gmail follow-up — suspicious email:", email);
+  }
 
 
 
