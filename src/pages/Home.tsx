@@ -40,6 +40,9 @@ const Home = () => (
     <MissedLeadCost />
     <Testimonials />
     <TargetIndustries />
+    <VoiceDemo />
+    <DemoForm />
+    <BookCall />
     <FAQ />
     <Footer />
   </>
