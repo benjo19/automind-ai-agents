@@ -1,0 +1,25 @@
+{
+  "agency_name": "AutoMind AI",
+  "website": "https://myautomind.com",
+  "description": "Agencija za AI automatizaciju poslovnih procesa, integracije i razvoj agentnih sustava.",
+  "core_services": [
+    {
+      "service_name": "AI Lead Generation & Scraperi",
+      "description": "Automatsko prikupljanje i obrada potencijalnih klijenata."
+    },
+    {
+      "service_name": "Integracija LLM modela",
+      "description": "Spajanje Claude, OpenAI i lokalnih modela u postojeće poslovne sustave preko Make.com i API-ja."
+    },
+    {
+      "service_name": "AEO (Agent Engine Optimization)",
+      "description": "Prilagodba web stranica i SaaS aplikacija za prepoznatljivost od strane AI agenata."
+    }
+  ],
+  "supported_tools": ["Make.com", "Supabase", "Vite/React", "Model Context Protocol (MCP)"],
+  "contact": {
+    "action_endpoint": "https://myautomind.com/api/contact",
+    "email": "info@myautomind.com",
+    "preferred_agent_format": "JSON"
+  }
+}
