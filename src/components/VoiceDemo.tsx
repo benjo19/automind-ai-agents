@@ -51,7 +51,7 @@ const sendAnalytics = (payload: Record<string, unknown>) => {
     .catch((e) => console.error("voice-analytics error", e));
 };
 
-const VoiceDemo = () => {
+const VoiceDemoInner = () => {
   const [agentId, setAgentId] = useState<string>("");
   const [tempAgentId, setTempAgentId] = useState<string>("");
   const [showSettings, setShowSettings] = useState(false);
