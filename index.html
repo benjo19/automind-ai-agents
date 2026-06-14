@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Automind | AI Chatboti &amp; Voice Agenti za Firme u Hrvatskoj</title>
+    <title>Automind | AI recepcionar za lokalne firme u Hrvatskoj</title>
     <meta
       name="description"
-      content="Automind gradi AI agente koji automatiziraju prodaju, podršku i ponude. Chat + voice agenti s CRM integracijom za firme u Hrvatskoj."
+      content="Automind je AI recepcionar za male i srednje tvrtke u Hrvatskoj. Odgovara na upite, pozive i poruke, kvalificira leadove, zakazuje termine i priprema ponude 24/7."
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Automind" />
@@ -23,29 +23,29 @@
     <link rel="apple-touch-icon" href="/app-icon-192.png" />
     <link rel="apple-touch-icon" sizes="512x512" href="/app-icon-512.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <!-- Per-route canonical is set via react-helmet-async; sitewide og:* below remain as static fallback -->
-    <link rel="alternate" type="application/json" href="/ai-agents.json" title="AutoMind AI Agent Manifest" />
+    <link rel="canonical" href="https://myautomind.com/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Automind LLM context" />
+    <link rel="alternate" type="application/json" href="/ai-agents.json" title="Automind AI agent manifest" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://myautomind.com/" />
     <meta property="og:image" content="https://myautomind.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:title" content="Automind | AI Chatboti &amp; Voice Agenti za Firme u Hrvatskoj" />
+    <meta property="og:title" content="Automind | AI recepcionar za lokalne firme u Hrvatskoj" />
     <meta
       property="og:description"
-      content="Automind gradi AI agente koji automatiziraju prodaju, korisničku podršku i generiranje ponuda."
+      content="AI recepcionar koji odgovara na web upite, poruke i pozive, kvalificira leadove, zakazuje termine i priprema ponude 24/7."
     />
     <meta property="og:locale" content="hr_HR" />
     <meta property="og:site_name" content="Automind" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@automind" />
     <meta name="twitter:image" content="https://myautomind.com/og-image.png" />
-    <meta name="twitter:title" content="Automind | AI Chatboti &amp; Voice Agenti za Firme u Hrvatskoj" />
+    <meta name="twitter:title" content="Automind | AI recepcionar za lokalne firme u Hrvatskoj" />
     <meta
       name="twitter:description"
-      content="Automind gradi AI agente koji automatiziraju prodaju, korisničku podršku i generiranje ponuda."
+      content="Automind pomaže lokalnim firmama da ne gube upite, pozive i termine dok rade s klijentima."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,7 +68,7 @@
               "@type": "ImageObject",
               "url": "https://myautomind.com/og-image.png"
             },
-            "description": "AI agenti koji automatiziraju prodaju, korisničku podršku i generiranje ponuda. Chat + voice agenti s CRM integracijom za firme u Hrvatskoj.",
+            "description": "Automind razvija AI recepcionare, AI prodajne agente i automatizacije za lokalne uslužne tvrtke u Hrvatskoj.",
             "telephone": "+385995085933",
             "email": "auto.mind.ai2025@gmail.com",
             "address": {
@@ -88,47 +88,68 @@
             "inLanguage": "hr"
           },
           {
+            "@type": "ProfessionalService",
+            "@id": "https://myautomind.com/#service",
+            "name": "Automind",
+            "url": "https://myautomind.com",
+            "image": "https://myautomind.com/og-image.png",
+            "description": "AI recepcionar i automatizacija prodaje za salone, ordinacije, servise, praonice, restorane, apartmane i lokalne B2B tvrtke.",
+            "provider": { "@id": "https://myautomind.com/#organization" },
+            "areaServed": { "@type": "Country", "name": "Croatia" },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Zagreb",
+              "addressCountry": "HR"
+            },
+            "serviceType": [
+              "AI recepcionar",
+              "AI chatbot za web",
+              "Voice AI agent",
+              "Automatizacija ponuda",
+              "CRM automatizacija",
+              "AEO optimizacija"
+            ],
+            "knowsAbout": [
+              "AI recepcionar",
+              "AI agenti",
+              "AI automatizacija prodaje",
+              "Voice AI",
+              "Chatbot za web",
+              "Make.com integracije",
+              "Google Calendar automatizacija",
+              "AEO optimizacija"
+            ]
+          },
+          {
             "@type": "FAQPage",
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "Koliko dugo traje postavljanje sustava?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Sustav je aktivan unutar 24 sata od pokretanja." }
+                "name": "Što je AI recepcionar?",
+                "acceptedAnswer": { "@type": "Answer", "text": "AI recepcionar je sustav koji odgovara na upite, poruke i pozive, prikuplja podatke, kvalificira klijente i može zakazivati termine ili pripremati ponude." }
               },
               {
                 "@type": "Question",
-                "name": "Podržava li sustav hrvatski jezik?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Da, svi AI agenti komuniciraju na prirodnom hrvatskom jeziku." }
+                "name": "Radi li Automind na hrvatskom jeziku?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Da. Automind je namijenjen hrvatskom tržištu i lokalnim uslužnim tvrtkama, s komunikacijom na prirodnom hrvatskom jeziku." }
               },
               {
                 "@type": "Question",
-                "name": "S kojim aplikacijama se može integrirati?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Sustav se integrira s više od 1000 aplikacija putem Make.com platforme." }
+                "name": "Za koje djelatnosti je Automind?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Automind je za salone, ordinacije, auto servise, praonice rublja, restorane, apartmane, hotele, majstore i druge lokalne tvrtke koje dobivaju upite preko weba, poruka, e-maila ili telefona." }
+              },
+              {
+                "@type": "Question",
+                "name": "Može li Automind zakazivati termine?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Da. Automind se može povezati s kalendarom, ponuditi slobodne termine i spremiti dogovoreni termin prema pravilima tvrtke." }
+              },
+              {
+                "@type": "Question",
+                "name": "Može li Automind pripremati ponude?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Da. Automind može prikupiti podatke iz upita, pripremiti nacrt ponude i poslati ga vama na pregled ili klijentu, ovisno o dogovorenom procesu." }
               }
             ]
           }
-        ]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "AutoMind AI",
-        "url": "https://myautomind.com",
-        "image": "https://myautomind.com/logo.png",
-        "description": "Agencija za AI automatizaciju i integraciju naprednih AI sustava u poslovanje.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Zagreb",
-          "addressRegion": "Hrvatska"
-        },
-        "knowsAbout": [
-          "AI Automation",
-          "Artificial Intelligence",
-          "Model Context Protocol",
-          "Software Development",
-          "API Integrations"
         ]
       }
     </script>
