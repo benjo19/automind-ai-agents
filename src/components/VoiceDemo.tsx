@@ -304,4 +304,10 @@ const VoiceDemoInner = () => {
   );
 };
 
+const VoiceDemo = () => (
+  <ConversationProvider>
+    <VoiceDemoInner />
+  </ConversationProvider>
+);
+
 export default VoiceDemo;
