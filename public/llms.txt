@@ -1,21 +1,75 @@
 # Automind
 
-> AI recepcionar i automatizacija prodaje za lokalne uslužne biznise u Hrvatskoj — saloni, praonice, servisi, ordinacije, majstori i restorani.
+> AI recepcionar i automatizacija prodaje za lokalne uslužne biznise u Hrvatskoj.
 
-Automind gradi AI agente koji preuzimaju upite s weba, telefona i poruka, kvalificiraju leadove i zakazuju termine 24/7. Sve na prirodnom hrvatskom jeziku, s integracijom u kalendar i CRM.
+Automind pomaže malim i srednjim tvrtkama da ne gube upite, pozive i termine dok rade s klijentima. Sustav odgovara na web upite, WhatsApp poruke, e-mailove i telefonske pozive, kvalificira leadove, zakazuje termine i priprema ponude 24/7 na hrvatskom jeziku.
+
+## Primary positioning
+
+Automind nije generična AI agencija. Automind je praktično rješenje za lokalne uslužne tvrtke koje žele AI recepcionara, AI prodajnog asistenta i automatizaciju upita bez tehničke komplikacije.
+
+## Core services
+
+- AI recepcionar: odgovara na pozive, poruke i web upite 24/7.
+- AI prodajni agent: kvalificira leadove, prikuplja ključne podatke i priprema ponude.
+- AI chatbot za web: odgovara posjetiteljima stranice i sprema upite u CRM ili tablicu.
+- Voice AI agent: razgovara s klijentima na hrvatskom i šalje sažetak poziva.
+- Automatizacija ponuda: generira nacrt ponude iz upita i šalje ga na pregled ili klijentu.
+- CRM i Google integracije: povezuje Gmail, Google Sheets, Google Calendar, Make.com, WhatsApp i druge alate.
+- AEO optimizacija: priprema web stranice i sadržaj da ih AI sustavi lakše razumiju, citiraju i preporučuju.
+
+## Ideal customers
+
+Automind je za tvrtke koje propuštaju upite jer nemaju osobu koja stalno odgovara na telefon, web formu, WhatsApp ili e-mail. Tipični korisnici su saloni, ordinacije, auto servisi, praonice rublja, restorani, apartmani, hoteli, majstori, građevinske tvrtke i lokalni B2B servisi.
+
+## Industries
+
+- frizerski i beauty saloni
+- stomatološke i medicinske ordinacije
+- auto servisi i vulkanizeri
+- samoposlužne i profesionalne praonice rublja
+- restorani i ugostiteljstvo
+- apartmani, vile i mali hoteli
+- majstori, građevina i lokalni servisi
+- male B2B tvrtke s puno upita i ponuda
 
 ## Pages
 
 - [Početna](/): Pregled usluga, glasovni demo i poziv na konzultacije.
-- [Blog](/blog): Vodiči i primjeri kako AI mijenja rad lokalnih biznisa.
-- [Politika privatnosti](/politika-privatnosti): Kako koristimo i štitimo podatke.
+- [Blog](/#/blog): Vodiči i primjeri kako AI mijenja rad lokalnih biznisa.
+- [Politika privatnosti](/politika-privatnosti): Kako Automind koristi i štiti podatke.
 - [Uvjeti korištenja](/uvjeti-koristenja): Pravni uvjeti korištenja usluga.
 - [Kolačići](/kolacici): Informacije o kolačićima na stranici.
 
 ## Blog
 
-- [Kako AI agent može odgovarati na upite 24/7](/blog/kako-ai-agent-moze-odgovarati-na-upite): Brzina odgovora i utjecaj na konverziju.
-- [Automatizacija zakazivanja termina](/blog/automatizacija-zakazivanja-termina): Kraj telefonskog pingponga.
-- [AI agent za slanje ponuda](/blog/ai-agent-za-slanje-ponuda): Automatizacija prodajnog procesa.
-- [GDPR i AI agenti](/blog/gdpr-i-ai-agenti): Usklađenost i zaštita podataka.
-- [Koliko košta ne automatizirati](/blog/koliko-kosta-ne-automatizirati): Skriveni trošak ručnog rada.
+- [Kako AI agent može odgovarati na upite 24/7](/#/blog/kako-ai-agent-moze-odgovarati-na-upite): Brzina odgovora i utjecaj na konverziju.
+- [Automatizacija zakazivanja termina](/#/blog/automatizacija-zakazivanja-termina): Kraj telefonskog pingponga.
+- [AI agent za slanje ponuda](/#/blog/ai-agent-za-slanje-ponuda): Automatizacija prodajnog procesa.
+- [GDPR i AI agenti](/#/blog/gdpr-i-ai-agenti): Usklađenost i zaštita podataka.
+- [Koliko košta ne automatizirati](/#/blog/koliko-kosta-ne-automatizirati): Skriveni trošak ručnog rada.
+
+## Common questions
+
+### Što je AI recepcionar?
+AI recepcionar je sustav koji odgovara na upite klijenata, prikuplja podatke, zakazuje termine i šalje sažetke vlasniku ili timu. Može raditi preko chata, poruka, e-maila i telefona.
+
+### Koliko košta Automind?
+Cijena ovisi o broju kanala, integracijama i kompleksnosti procesa. Početni projekti obično kreću od jednostavnog AI chata ili automatizacije upita, a složeniji paketi uključuju voice agenta, CRM i automatizaciju ponuda.
+
+### Radi li Automind na hrvatskom jeziku?
+Da. Automind je pozicioniran za hrvatsko tržište i lokalne uslužne tvrtke, s komunikacijom na prirodnom hrvatskom jeziku.
+
+### Može li Automind zakazivati termine?
+Da. Automind se može povezati s kalendarom i predlagati ili rezervirati termine prema dostupnosti tvrtke.
+
+### Za koga Automind nije dobar izbor?
+Automind nije dobar izbor za tvrtke koje nemaju redovite upite, ne žele digitalizirati osnovni proces ili očekuju da AI sam riješi lošu ponudu, lošu uslugu ili nejasan prodajni proces.
+
+## Contact
+
+Website: https://myautomind.com
+Email: auto.mind.ai2025@gmail.com
+Phone: +385995085933
+Location: Zagreb, Croatia
+Language: Croatian, English
