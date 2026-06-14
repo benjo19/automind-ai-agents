@@ -12,6 +12,9 @@ import ConcreteActions from "@/components/ConcreteActions";
 import MissedLeadCost from "@/components/MissedLeadCost";
 import SolutionCards from "@/components/SolutionCards";
 import TargetIndustries from "@/components/TargetIndustries";
+import DemoForm from "@/components/DemoForm";
+import BookCall from "@/components/BookCall";
+import VoiceDemo from "@/components/VoiceDemo";
 
 const Home = () => (
   <>
