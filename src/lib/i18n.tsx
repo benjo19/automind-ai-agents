@@ -27,12 +27,12 @@ export const translations = {
     },
     hero: {
       badges: ["Aktivacija u 7 dana", "Hrvatski jezik i glas", "GDPR-ready", "Bez tehničkog znanja"],
-      tagline: "Automatiziraj. Optimiziraj. Napreduj.",
-      title: "AI koji odgovara, zove i šalje ponude za vas.",
-      description: "AutoMind hvata upite s weba, maila, WhatsAppa i poziva, odgovara klijentima, dogovara termine i šalje ponude — 24/7.",
-      primaryCta: "Zatraži besplatnu AI analizu",
+      tagline: "AI recepcionar za lokalne tvrtke",
+      title: "Ne gubite klijente dok radite.",
+      description: "Automind odgovara na pozive, poruke i web upite te zakazuje termine i šalje ponude automatski — 24/7.",
+      primaryCta: "Zatraži demo",
       secondaryCta: "Pogledaj kako radi",
-      proof: "Napravljeno za obrte, servise, salone, turizam i lokalne tvrtke u Hrvatskoj.",
+      proof: "Za salone, ordinacije, auto servise, praonice i druge lokalne tvrtke u Hrvatskoj.",
     },
     concreteActions: {
       titleStart: "Što AutoMind",
