@@ -22,7 +22,7 @@ const TermsOfUse = () => {
         <main className="container px-4 pb-20 max-w-3xl">
           <h1 className="font-playfair text-3xl md:text-4xl font-bold mb-8">Uvjeti korištenja</h1>
 
-          <div className="prose prose-invert max-w-none space-y-6 text-muted-foreground leading-relaxed">
+          <div className="prose max-w-none space-y-6 text-muted-foreground leading-relaxed">
             <p><strong className="text-foreground">Pružatelj usluga:</strong> FA. BE. MA TRGOVINA DOO, OIB: 60898333063</p>
             <p><strong className="text-foreground">Kontakt:</strong> auto.mind.ai2025@gmail.com | 0995085933</p>
 

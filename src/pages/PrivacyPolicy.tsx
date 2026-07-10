@@ -22,7 +22,7 @@ const PrivacyPolicy = () => {
         <main className="container px-4 pb-20 max-w-3xl">
           <h1 className="font-playfair text-3xl md:text-4xl font-bold mb-8">Politika privatnosti</h1>
 
-          <div className="prose prose-invert max-w-none space-y-6 text-muted-foreground leading-relaxed">
+          <div className="prose max-w-none space-y-6 text-muted-foreground leading-relaxed">
             <p><strong className="text-foreground">Voditelj obrade:</strong> FA. BE. MA TRGOVINA DOO, OIB: 60898333063</p>
             <p><strong className="text-foreground">Kontakt e-mail:</strong> auto.mind.ai2025@gmail.com</p>
             <p><strong className="text-foreground">Datum stupanja na snagu:</strong> 1. siječnja 2025.</p>
