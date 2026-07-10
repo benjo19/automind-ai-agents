@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -37,11 +38,6 @@ const BlogPost = () => {
 
       if (data) {
         setPost(data);
-        document.title = data.meta_title || `${data.title} | Automind`;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) {
-          metaDesc.setAttribute("content", data.meta_description || data.excerpt);
-        }
       } else {
         setNotFound(true);
       }
@@ -49,11 +45,8 @@ const BlogPost = () => {
     };
 
     fetchPost();
-
-    return () => {
-      document.title = "Automind | AI Chatboti & Voice Agenti za Firme u Hrvatskoj";
-    };
   }, [slug]);
+
 
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "";
