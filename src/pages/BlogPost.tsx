@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -37,11 +38,6 @@ const BlogPost = () => {
 
       if (data) {
         setPost(data);
-        document.title = data.meta_title || `${data.title} | Automind`;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) {
-          metaDesc.setAttribute("content", data.meta_description || data.excerpt);
-        }
       } else {
         setNotFound(true);
       }
@@ -49,11 +45,8 @@ const BlogPost = () => {
     };
 
     fetchPost();
-
-    return () => {
-      document.title = "Automind | AI Chatboti & Voice Agenti za Firme u Hrvatskoj";
-    };
   }, [slug]);
+
 
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "";
@@ -64,9 +57,45 @@ const BlogPost = () => {
     });
   };
 
+  const canonical = post ? `https://myautomind.com/blog/${post.slug}` : `https://myautomind.com/blog/${slug ?? ""}`;
+  const pageTitle = post ? (post.meta_title || `${post.title} | Automind`) : "Automind Blog";
+  const pageDesc = post ? (post.meta_description || post.excerpt) : "";
+  const articleSchema = post
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.published_at ?? undefined,
+        dateModified: post.published_at ?? undefined,
+        articleSection: post.category,
+        inLanguage: "hr",
+        mainEntityOfPage: canonical,
+        url: canonical,
+        author: { "@type": "Organization", name: "Automind", url: "https://myautomind.com" },
+        publisher: { "@id": "https://myautomind.com/#organization" },
+        image: "https://myautomind.com/og-image.png",
+      }
+    : null;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>{pageTitle}</title>
+        {pageDesc && <meta name="description" content={pageDesc} />}
+        <link rel="canonical" href={canonical} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:title" content={pageTitle} />
+        {pageDesc && <meta property="og:description" content={pageDesc} />}
+        <meta name="twitter:title" content={pageTitle} />
+        {pageDesc && <meta name="twitter:description" content={pageDesc} />}
+        {articleSchema && (
+          <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+        )}
+      </Helmet>
       <Navbar />
+
       <main className="container mx-auto px-4 pt-28 pb-20">
         <div className="max-w-2xl mx-auto">
           <Link

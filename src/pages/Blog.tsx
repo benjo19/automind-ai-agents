@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,15 +21,6 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "Blog | Automind — AI automatizacija za firme";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        "content",
-        "Savjeti, studije slučaja i novosti iz svijeta AI automatizacije. Saznaj kako AI agenti i chatboti mijenjaju poslovanje firmi u Hrvatskoj."
-      );
-    }
-
     const fetchPosts = async () => {
       const { data } = await supabase
         .from("blog_posts")
@@ -41,11 +33,25 @@ const Blog = () => {
     };
 
     fetchPosts();
-
-    return () => {
-      document.title = "Automind | AI Chatboti & Voice Agenti za Firme u Hrvatskoj";
-    };
   }, []);
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Automind Blog",
+    url: "https://myautomind.com/blog",
+    description:
+      "Savjeti, studije slučaja i novosti iz svijeta AI automatizacije za lokalne tvrtke u Hrvatskoj.",
+    inLanguage: "hr",
+    isPartOf: { "@id": "https://myautomind.com/#website" },
+    hasPart: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      url: `https://myautomind.com/blog/${p.slug}`,
+      datePublished: p.published_at ?? undefined,
+    })),
+  };
+
 
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "";
@@ -58,7 +64,29 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Blog | Automind — AI automatizacija za firme</title>
+        <meta
+          name="description"
+          content="Savjeti, studije slučaja i novosti iz svijeta AI automatizacije. Saznaj kako AI agenti i chatboti mijenjaju poslovanje firmi u Hrvatskoj."
+        />
+        <link rel="canonical" href="https://myautomind.com/blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://myautomind.com/blog" />
+        <meta property="og:title" content="Blog | Automind — AI automatizacija za firme" />
+        <meta
+          property="og:description"
+          content="Savjeti i studije slučaja o AI automatizaciji za lokalne firme u Hrvatskoj."
+        />
+        <meta name="twitter:title" content="Blog | Automind" />
+        <meta
+          name="twitter:description"
+          content="Savjeti i studije slučaja o AI automatizaciji za lokalne firme u Hrvatskoj."
+        />
+        <script type="application/ld+json">{JSON.stringify(collectionSchema)}</script>
+      </Helmet>
       <Navbar />
+
       <main className="container mx-auto px-4 pt-28 pb-20">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold mb-3">Blog</h1>
