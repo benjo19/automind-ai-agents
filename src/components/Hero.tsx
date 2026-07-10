@@ -23,60 +23,14 @@ const Hero = () => {
     <section className="relative flex items-center justify-center overflow-hidden">
       {/* Multi-color radial glow background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[radial-gradient(ellipse,hsl(245_70%_65%/0.18)_0%,transparent_70%)] animate-float" style={{ animationDelay: '0s' }} />
-        <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[500px] h-[450px] bg-[radial-gradient(ellipse,hsl(320_85%_65%/0.14)_0%,transparent_70%)] animate-float" style={{ animationDelay: '1.5s' }} />
-        <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[400px] bg-[radial-gradient(ellipse,hsl(180_75%_55%/0.12)_0%,transparent_70%)] animate-float" style={{ animationDelay: '3s' }} />
-        <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 w-[480px] h-[420px] bg-[radial-gradient(ellipse,hsl(35_95%_60%/0.08)_0%,transparent_70%)] animate-float" style={{ animationDelay: '4.5s' }} />
+        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[radial-gradient(ellipse,hsl(160_60%_30%/0.10)_0%,transparent_70%)] animate-float" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[500px] h-[450px] bg-[radial-gradient(ellipse,hsl(44_55%_48%/0.09)_0%,transparent_70%)] animate-float" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[400px] bg-[radial-gradient(ellipse,hsl(160_70%_22%/0.08)_0%,transparent_70%)] animate-float" style={{ animationDelay: '3s' }} />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-      {/* Decorative robot SVG (desktop only) */}
-      <div
-        className="hidden lg:block absolute right-4 lg:right-12 top-1/2 -translate-y-1/2 w-64 h-80 opacity-25 pointer-events-none animate-robot-float"
-        style={{ zIndex: 1 }}
-        aria-hidden="true"
-      >
-        <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          {/* Antennas */}
-          <line x1="70" y1="40" x2="70" y2="15" stroke="hsl(180 75% 55%)" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="130" y1="40" x2="130" y2="15" stroke="hsl(180 75% 55%)" strokeWidth="1.5" strokeLinecap="round" />
-          <circle cx="70" cy="12" r="3" stroke="hsl(180 75% 55%)" strokeWidth="1.5" fill="hsl(180 75% 55%)" fillOpacity="0.1" />
-          <circle cx="130" cy="12" r="3" stroke="hsl(180 75% 55%)" strokeWidth="1.5" fill="hsl(180 75% 55%)" fillOpacity="0.1" />
 
-          {/* Head */}
-          <rect x="50" y="40" width="100" height="80" rx="20" stroke="hsl(245 70% 65%)" strokeWidth="1.5" fill="hsl(245 70% 65%)" fillOpacity="0.08" />
 
-          {/* Eyes (pulsing) */}
-          <circle cx="80" cy="78" r="7" fill="hsl(320 85% 65%)" fillOpacity="0.1" stroke="hsl(320 85% 65%)" strokeWidth="1.5" className="animate-pulse" />
-          <circle cx="120" cy="78" r="7" fill="hsl(320 85% 65%)" fillOpacity="0.1" stroke="hsl(320 85% 65%)" strokeWidth="1.5" className="animate-pulse" />
-
-          {/* Visor / mouth */}
-          <line x1="78" y1="100" x2="122" y2="100" stroke="hsl(180 75% 55%)" strokeWidth="1.5" strokeLinecap="round" />
-
-          {/* Neck */}
-          <rect x="85" y="120" width="30" height="14" rx="3" stroke="hsl(245 70% 65%)" strokeWidth="1.5" fill="hsl(245 70% 65%)" fillOpacity="0.08" />
-
-          {/* Body */}
-          <rect x="40" y="134" width="120" height="100" rx="14" stroke="hsl(245 70% 65%)" strokeWidth="1.5" fill="hsl(245 70% 65%)" fillOpacity="0.08" />
-
-          {/* Body grid - vertical */}
-          <line x1="70" y1="140" x2="70" y2="228" stroke="hsl(180 75% 55%)" strokeWidth="1" strokeOpacity="0.4" />
-          <line x1="100" y1="140" x2="100" y2="228" stroke="hsl(180 75% 55%)" strokeWidth="1" strokeOpacity="0.4" />
-          <line x1="130" y1="140" x2="130" y2="228" stroke="hsl(180 75% 55%)" strokeWidth="1" strokeOpacity="0.4" />
-
-          {/* Body grid - horizontal */}
-          <line x1="46" y1="160" x2="154" y2="160" stroke="hsl(180 75% 55%)" strokeWidth="1" strokeOpacity="0.4" />
-          <line x1="46" y1="184" x2="154" y2="184" stroke="hsl(180 75% 55%)" strokeWidth="1" strokeOpacity="0.4" />
-          <line x1="46" y1="208" x2="154" y2="208" stroke="hsl(180 75% 55%)" strokeWidth="1" strokeOpacity="0.4" />
-
-          {/* Core */}
-          <circle cx="100" cy="184" r="9" stroke="hsl(320 85% 65%)" strokeWidth="1.5" fill="hsl(320 85% 65%)" fillOpacity="0.1" />
-
-          {/* Arms */}
-          <rect x="20" y="144" width="14" height="70" rx="6" stroke="hsl(245 70% 65%)" strokeWidth="1.5" fill="hsl(245 70% 65%)" fillOpacity="0.08" />
-          <rect x="166" y="144" width="14" height="70" rx="6" stroke="hsl(245 70% 65%)" strokeWidth="1.5" fill="hsl(245 70% 65%)" fillOpacity="0.08" />
-        </svg>
-      </div>
 
       {/* Content */}
       <div className="container relative z-10 px-4 pt-24 pb-12 md:pt-28 md:pb-20">

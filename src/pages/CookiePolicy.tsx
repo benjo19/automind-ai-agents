@@ -22,7 +22,7 @@ const CookiePolicy = () => {
         <main className="container px-4 pb-20 max-w-3xl">
           <h1 className="font-playfair text-3xl md:text-4xl font-bold mb-8">Pravila o kolačićima</h1>
 
-          <div className="prose prose-invert max-w-none space-y-6 text-muted-foreground leading-relaxed">
+          <div className="prose max-w-none space-y-6 text-muted-foreground leading-relaxed">
             <p><strong className="text-foreground">Voditelj obrade:</strong> FA. BE. MA TRGOVINA DOO, OIB: 60898333063</p>
 
             <h2 className="text-xl font-semibold text-foreground mt-8">1. Što su kolačići?</h2>

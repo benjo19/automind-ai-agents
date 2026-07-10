@@ -147,7 +147,7 @@ const BlogPost = () => {
               </p>
 
               <article
-                className="prose prose-invert prose-lg max-w-none
+                className="prose prose-lg max-w-none
                   prose-headings:font-bold prose-headings:text-foreground
                   prose-p:text-muted-foreground prose-p:leading-relaxed
                   prose-a:text-accent prose-a:no-underline hover:prose-a:underline
