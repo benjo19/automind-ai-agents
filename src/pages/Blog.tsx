@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,15 +21,6 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "Blog | Automind — AI automatizacija za firme";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        "content",
-        "Savjeti, studije slučaja i novosti iz svijeta AI automatizacije. Saznaj kako AI agenti i chatboti mijenjaju poslovanje firmi u Hrvatskoj."
-      );
-    }
-
     const fetchPosts = async () => {
       const { data } = await supabase
         .from("blog_posts")
@@ -41,11 +33,25 @@ const Blog = () => {
     };
 
     fetchPosts();
-
-    return () => {
-      document.title = "Automind | AI Chatboti & Voice Agenti za Firme u Hrvatskoj";
-    };
   }, []);
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Automind Blog",
+    url: "https://myautomind.com/blog",
+    description:
+      "Savjeti, studije slučaja i novosti iz svijeta AI automatizacije za lokalne tvrtke u Hrvatskoj.",
+    inLanguage: "hr",
+    isPartOf: { "@id": "https://myautomind.com/#website" },
+    hasPart: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      url: `https://myautomind.com/blog/${p.slug}`,
+      datePublished: p.published_at ?? undefined,
+    })),
+  };
+
 
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "";
