@@ -64,7 +64,29 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Blog | Automind — AI automatizacija za firme</title>
+        <meta
+          name="description"
+          content="Savjeti, studije slučaja i novosti iz svijeta AI automatizacije. Saznaj kako AI agenti i chatboti mijenjaju poslovanje firmi u Hrvatskoj."
+        />
+        <link rel="canonical" href="https://myautomind.com/blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://myautomind.com/blog" />
+        <meta property="og:title" content="Blog | Automind — AI automatizacija za firme" />
+        <meta
+          property="og:description"
+          content="Savjeti i studije slučaja o AI automatizaciji za lokalne firme u Hrvatskoj."
+        />
+        <meta name="twitter:title" content="Blog | Automind" />
+        <meta
+          name="twitter:description"
+          content="Savjeti i studije slučaja o AI automatizaciji za lokalne firme u Hrvatskoj."
+        />
+        <script type="application/ld+json">{JSON.stringify(collectionSchema)}</script>
+      </Helmet>
       <Navbar />
+
       <main className="container mx-auto px-4 pt-28 pb-20">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold mb-3">Blog</h1>
