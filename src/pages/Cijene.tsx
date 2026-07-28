@@ -22,7 +22,6 @@ const plans = [
     description: "AI recepcionar na više kanala s integracijom u vaše alate i CRM.",
     features: [
       "Sve iz Starter paketa",
-      "Voice agent (pozivi)",
       "Instagram i Messenger",
       "Slanje ponuda na e-mail",
       "Integracija s CRM-om",
@@ -36,6 +35,7 @@ const plans = [
     description: "Potpuno prilagođeno rješenje s naprednim integracijama i SLA podrškom.",
     features: [
       "Sve iz Growth paketa",
+      "Voice agent (pozivi)",
       "Više lokacija ili timova",
       "Napredne integracije po želji",
       "Vlastiti scenariji razgovora",
