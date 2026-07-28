@@ -23,6 +23,7 @@ const plans = [
     features: [
       "Sve iz Starter paketa",
       "Instagram i Messenger",
+      "Automatska obrada ponude",
       "Slanje ponuda na e-mail",
       "Integracija s CRM-om",
       "Prioritetna podrška",
