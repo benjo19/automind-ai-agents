@@ -10,6 +10,9 @@ import "@fontsource/manrope/600.css";
 import "@fontsource/manrope/700.css";
 import App from "./App.tsx";
 import "./index.css";
+import { initMetaPixel } from "./lib/meta";
+
+initMetaPixel();
 
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>

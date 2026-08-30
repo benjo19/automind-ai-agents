@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Cookie, X } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-
-const STORAGE_KEY = "cookie_consent";
+import { COOKIE_CONSENT_KEY, initMetaPixel } from "@/lib/meta";
 
 const CookieConsent = () => {
   const { t } = useLanguage();
@@ -12,7 +11,7 @@ const CookieConsent = () => {
 
   useEffect(() => {
     try {
-      const consent = localStorage.getItem(STORAGE_KEY);
+      const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
       if (!consent) {
         // small delay so it doesn't pop instantly
         const t = setTimeout(() => setVisible(true), 800);
@@ -25,10 +24,11 @@ const CookieConsent = () => {
 
   const accept = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, "accepted");
+      localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
     } catch {
       // ignore
     }
+    initMetaPixel();
     setVisible(false);
   };
 
