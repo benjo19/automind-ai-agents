@@ -14,7 +14,7 @@ interface MetaPixelFunction {
   push: MetaPixelFunction;
 }
 
-export const META_PIXEL_ID = "105565300310111";
+export const META_PIXEL_ID = "1813054276548528";
 export const COOKIE_CONSENT_KEY = "cookie_consent";
 
 export const initMetaPixel = () => {
