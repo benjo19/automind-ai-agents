@@ -1,4 +1,4 @@
-import { Bot, Zap, Code } from "lucide-react";
+import { Bot, Zap, CalendarClock } from "lucide-react";
 import laptopImg from "@/assets/professional-laptop.jpg";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/lib/i18n";
@@ -23,10 +23,10 @@ const services = [
     check: "text-accent-pink",
   },
   {
-    icon: Code,
-    title: "Web stranice",
-    description: "Moderni, brzi i responzivni web — od landing stranica do kompleksnijih projekata.",
-    features: ["Landing stranice", "Web shopovi", "SEO i održavanje"],
+    icon: CalendarClock,
+    title: "Zakazivanje i evidencija",
+    description: "Termini, sažeci razgovora i leadovi povezani s vašim alatima.",
+    features: ["Automatsko zakazivanje", "Sažeci poziva i upita", "CRM i kalendar integracije"],
     color: "text-accent-cyan",
     glow: "icon-glow-cyan",
     check: "text-accent-cyan",

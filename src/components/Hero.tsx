@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 
 const BADGES = [
-  { label: "Aktivacija u 24h", color: "text-accent-amber icon-glow-amber" },
+  { label: "Aktivacija u 7 dana", color: "text-accent-amber icon-glow-amber" },
   { label: "Hrvatski jezik i glas", color: "text-accent-cyan icon-glow-cyan" },
   { label: "GDPR-ready", color: "text-accent-emerald icon-glow-emerald" },
   { label: "Bez tehničkog znanja", color: "text-accent-pink icon-glow-pink" },

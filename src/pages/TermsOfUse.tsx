@@ -27,7 +27,7 @@ const TermsOfUse = () => {
             <p><strong className="text-foreground">Kontakt:</strong> auto.mind.ai2025@gmail.com | 0995085933</p>
 
             <h2 className="text-xl font-semibold text-foreground mt-8">1. Opće odredbe</h2>
-            <p>Ovi Uvjeti korištenja reguliraju korištenje web stranice automind.hr te svih usluga koje pruža FA. BE. MA TRGOVINA DOO pod brendom Automind. Korištenjem ove web stranice prihvaćate ove uvjete u cijelosti.</p>
+            <p>Ovi Uvjeti korištenja reguliraju korištenje web stranice myautomind.com te svih usluga koje pruža FA. BE. MA TRGOVINA DOO pod brendom Automind. Korištenjem ove web stranice prihvaćate ove uvjete u cijelosti.</p>
 
             <h2 className="text-xl font-semibold text-foreground mt-8">2. Opis usluga</h2>
             <p>Automind pruža usluge implementacije AI agenata (chat i voice botova), automatizacije poslovnih procesa, CRM integracija, automatskog generiranja ponuda te e-mail sekvenci. Detaljni opseg usluga definira se individualnim ugovorom s klijentom.</p>

@@ -3,12 +3,10 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import ConcreteActions from "@/components/ConcreteActions";
 import TargetIndustries from "@/components/TargetIndustries";
-import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import SolutionCards from "@/components/SolutionCards";
 import HowItWorks from "@/components/HowItWorks";
 import BeforeAfter from "@/components/BeforeAfter";
-import Testimonials from "@/components/Testimonials";
 import MissedLeadCost from "@/components/MissedLeadCost";
 import FAQ from "@/components/FAQ";
 import DemoForm from "@/components/DemoForm";
@@ -45,7 +43,7 @@ const Index = () => {
           content={t.seo.description} 
         />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://automind.hr" />
+        <link rel="canonical" href="https://myautomind.com/" />
         
         {/* JSON-LD Schema */}
         <script type="application/ld+json">
@@ -54,20 +52,16 @@ const Index = () => {
             "@type": "Organization",
             "name": "Automind",
             "description": t.seo.orgDescription,
-            "url": "https://automind.hr",
-            "logo": "https://automind.hr/logo.png",
+            "url": "https://myautomind.com/",
+            "logo": "https://myautomind.com/logo.png",
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+385 91 000 0000",
+              "telephone": "+385 99 508 5933",
               "contactType": "Sales",
-              "email": "info@automind.hr",
+              "email": "auto.mind.ai2025@gmail.com",
               "areaServed": "HR",
               "availableLanguage": "Croatian"
-            },
-            "sameAs": [
-              "https://www.linkedin.com/company/automind",
-              "https://twitter.com/automind"
-            ]
+            }
           })}
         </script>
         <script type="application/ld+json">
@@ -85,12 +79,10 @@ const Index = () => {
         <ConcreteActions />
         <TargetIndustries />
         <DemoForm />
-        <Stats />
         <Services />
         <SolutionCards />
         <HowItWorks />
         <BeforeAfter />
-        <Testimonials />
         <MissedLeadCost />
         <VoiceDemo />
         <BookCall />

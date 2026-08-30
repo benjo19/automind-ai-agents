@@ -5,8 +5,6 @@ import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
-import Stats from "@/components/Stats";
-import Testimonials from "@/components/Testimonials";
 import BeforeAfter from "@/components/BeforeAfter";
 import ConcreteActions from "@/components/ConcreteActions";
 import MissedLeadCost from "@/components/MissedLeadCost";
@@ -31,14 +29,12 @@ const Home = () => (
     </Helmet>
     <Navbar />
     <Hero />
-    <Stats />
     <Services />
     <SolutionCards />
     <HowItWorks />
     <ConcreteActions />
     <BeforeAfter />
     <MissedLeadCost />
-    <Testimonials />
     <TargetIndustries />
     <VoiceDemo />
     <DemoForm />

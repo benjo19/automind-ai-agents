@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { CalendarClock, Loader2, Video, CheckCircle2 } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { supabase } from "@/integrations/supabase/client";
+import { trackMetaLead } from "@/lib/meta";
 
 // 30-min slots between 09:00 and 17:00, weekdays only, next 14 days
 function buildSlots() {
@@ -80,6 +81,7 @@ const BookCall = () => {
       });
       if (error) throw error;
       if (!data?.success) throw new Error(data?.error || "Greška");
+      trackMetaLead("book_call");
       setConfirmed({ meetLink: data.meetLink, start: data.start });
       toast.success("Termin rezerviran!", {
         description: "Provjerite e-mail za poveznicu na Google Meet.",

@@ -53,7 +53,7 @@ export const translations = {
     demoForm: {
       titleStart: "Zatraži",
       titleHighlight: "demo",
-      subtitle: "Ispunite formu i naš tim će vas kontaktirati u roku 7 dana",
+      subtitle: "Ispunite formu i naš tim će vas kontaktirati u roku 24 sata",
       step1: "1. Vaši podaci",
       step2: "2. Detalji projekta",
       name: "Ime i prezime *",
@@ -101,7 +101,7 @@ export const translations = {
       cards: [
         { title: "AI Agenti", description: "Chat i voice agenti koji razgovaraju s klijentima na hrvatskom — kad ih trebate.", features: ["Chat na webu i porukama", "Voice agent za pozive", "Prebacivanje na čovjeka"] },
         { title: "Automatizacija prodaje", description: "Ponude, follow-up i evidencija klijenata — automatski, bez gubljenja u administraciji.", features: ["Auto-ponude u vašem stilu", "Pravovremeni follow-up", "Pregled klijenata na jednom mjestu"] },
-        { title: "Web stranice", description: "Moderni, brzi i responzivni web — od landing stranica do kompleksnijih projekata.", features: ["Landing stranice", "Web shopovi", "SEO i održavanje"] },
+        { title: "Zakazivanje i evidencija", description: "Termini, sažeci razgovora i leadovi na jednom mjestu — povezano s alatima koje već koristite.", features: ["Automatsko zakazivanje", "Sažeci poziva i upita", "CRM i kalendar integracije"] },
       ],
     },
     solutions: {
@@ -197,7 +197,7 @@ export const translations = {
     thankYou: {
       titleMeta: "Hvala! Upit je zaprimljen — Automind",
       title: "Hvala! Upit je zaprimljen.",
-      text: "Naš tim javit će vam se u roku 7 dana s personaliziranom ponudom.",
+      text: "Naš tim javit će vam se u roku 24 sata s personaliziranim prijedlogom.",
       button: "Povratak na početak",
     },
     install: {
@@ -292,7 +292,7 @@ export const translations = {
     demoForm: {
       titleStart: "Request a",
       titleHighlight: "demo",
-      subtitle: "Fill out the form and our team will contact you within 7 days",
+      subtitle: "Fill out the form and our team will contact you within 24 hours",
       step1: "1. Your details",
       step2: "2. Project details",
       name: "Full name *",
@@ -340,7 +340,7 @@ export const translations = {
       cards: [
         { title: "AI Agents", description: "Chat and voice agents that talk to your clients in Croatian — whenever you need them.", features: ["Chat on your website and messages", "Voice agent for calls", "Human handoff"] },
         { title: "Sales automation", description: "Offers, follow-ups and client records — automated, without getting lost in admin work.", features: ["Offers in your style", "Timely follow-up", "Client overview in one place"] },
-        { title: "Websites", description: "Modern, fast and responsive websites — from landing pages to more complex projects.", features: ["Landing pages", "Web shops", "SEO and maintenance"] },
+        { title: "Scheduling and records", description: "Appointments, conversation summaries, and leads in one place — connected to the tools you already use.", features: ["Automated scheduling", "Call and inquiry summaries", "CRM and calendar integrations"] },
       ],
     },
     solutions: {
@@ -424,7 +424,7 @@ export const translations = {
     thankYou: {
       titleMeta: "Thank you! Your inquiry was received — Automind",
       title: "Thank you! Your inquiry was received.",
-      text: "Our team will contact you within 7 days with a personalized offer.",
+      text: "Our team will contact you within 24 hours with a personalized proposal.",
       button: "Back to the start",
     },
     install: {
