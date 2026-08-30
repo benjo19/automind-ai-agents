@@ -51,6 +51,7 @@ const App = () => (
             <Route path="/kolacici" element={<CookiePolicy />} />
             <Route path="/install" element={<Install />} />
             <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/hvala" element={<ThankYou />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
