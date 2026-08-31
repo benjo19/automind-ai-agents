@@ -5,3 +5,7 @@ verify_jwt = false
 
 [functions.gsc-submit-sitemap]
 verify_jwt = false
+
+[functions.meta-account-status]
+verify_jwt = true
+
