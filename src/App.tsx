@@ -23,7 +23,10 @@ import TermsOfUse from "./pages/TermsOfUse";
 import CookiePolicy from "./pages/CookiePolicy";
 import Install from "./pages/Install";
 import ThankYou from "./pages/ThankYou";
+import Login from "./pages/Login";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
+
 
 const queryClient = new QueryClient();
 
