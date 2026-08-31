@@ -23,7 +23,10 @@ import TermsOfUse from "./pages/TermsOfUse";
 import CookiePolicy from "./pages/CookiePolicy";
 import Install from "./pages/Install";
 import ThankYou from "./pages/ThankYou";
+import Login from "./pages/Login";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
+
 
 const queryClient = new QueryClient();
 
@@ -52,6 +55,9 @@ const App = () => (
             <Route path="/install" element={<Install />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/hvala" element={<ThankYou />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/oauth/consent" element={<OAuthConsent />} />
+            <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
