@@ -105,8 +105,63 @@ async function graphGet(path, params) {
 }
 function upstreamError(status) {
   return errorResult(
-    status === 500 ? "Meta credentials are not configured on the server." : `Meta API request failed (status ${status}).`
+    status === 500 ? "Meta credentials are not configured on the server." : status === 403 ? "Meta API refused the request (permission denied). The server token may lack ads_management." : status === 400 ? "Meta API rejected the request (invalid parameters or not allowed for this object)." : `Meta API request failed (status ${status}).`
   );
+}
+async function graphPost(path, params) {
+  const token = runtimeEnv("META_SYSTEM_USER_TOKEN");
+  if (!token) return { data: null, status: 500 };
+  const body = new URLSearchParams();
+  for (const [k, v] of Object.entries(params)) body.set(k, v);
+  const resp = await fetch(`https://graph.facebook.com/${GRAPH_VERSION}/${path}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: body.toString()
+  });
+  if (!resp.ok) {
+    console.error("meta graph write failed", resp.status);
+    return { data: null, status: resp.status };
+  }
+  return { data: await resp.json().catch(() => ({})), status: 200 };
+}
+function centsToEur(value) {
+  if (value === null || value === void 0 || value === "") return null;
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+  return Math.round(n) / 100;
+}
+function eurToCents(value) {
+  if (typeof value !== "number" || !Number.isFinite(value)) return null;
+  const cents = Math.round(value * 100);
+  if (!Number.isInteger(cents) || cents <= 0) return null;
+  return cents;
+}
+function maxDailyBudgetEur() {
+  const raw = runtimeEnv("META_MAX_DAILY_BUDGET_EUR");
+  const n = raw ? Number(raw) : NaN;
+  if (!Number.isFinite(n) || n <= 0) return 100;
+  return Math.min(n, 1e5);
+}
+async function fetchOwnedObject(objectId, fields, label) {
+  const res = await graphGet(objectId, { fields });
+  if (!res.data) {
+    return {
+      ok: false,
+      result: res.status === 400 || res.status === 404 ? errorResult(`${label} not found.`) : upstreamError(res.status)
+    };
+  }
+  const raw = res.data?.account_id;
+  const accountId = raw ? String(raw).startsWith("act_") ? String(raw) : `act_${raw}` : null;
+  if (accountId !== AD_ACCOUNT_ID) {
+    return {
+      ok: false,
+      result: errorResult(`${label} does not belong to the allowed ad account.`)
+    };
+  }
+  return { ok: true, data: res.data };
 }
 
 // src/lib/mcp/tools/get-ad-account.ts
@@ -248,18 +303,382 @@ var get_campaign_insights_default = defineTool3({
   }
 });
 
+// src/lib/mcp/tools/get-campaign-details.ts
+import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { z as z3 } from "npm:zod@^4.5.4";
+var FIELDS = "id,name,status,effective_status,objective,bid_strategy,daily_budget,lifetime_budget,budget_remaining,spend_cap,account_id";
+var get_campaign_details_default = defineTool4({
+  name: "get_campaign_details",
+  title: "Get Meta campaign details",
+  description: "Use this to read the full configuration of one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric, must belong to the account). Returns id, name, status, effective_status, objective, bid_strategy, daily_budget, lifetime_budget, budget_remaining, spend_cap and account_id, plus *_eur values for monetary fields. Read-only.",
+  inputSchema: {
+    campaign_id: z3.string().trim().regex(/^\d{5,25}$/, "campaign_id must be a numeric Meta campaign ID").describe("Numeric Meta campaign ID from list_campaigns.")
+  },
+  annotations: {
+    readOnlyHint: true,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: true
+  },
+  handler: async ({ campaign_id }, ctx) => {
+    const denied = await requireAdmin(ctx);
+    if (denied) return errorResult(denied);
+    const owned = await fetchOwnedObject(campaign_id, FIELDS, "Campaign");
+    if (!owned.ok) return owned.result ?? errorResult("Ownership check failed.");
+    const c = owned.data ?? {};
+    return jsonResult({
+      id: c.id ?? null,
+      name: c.name ?? null,
+      status: c.status ?? null,
+      effective_status: c.effective_status ?? null,
+      objective: c.objective ?? null,
+      bid_strategy: c.bid_strategy ?? null,
+      account_id: c.account_id ? `act_${c.account_id}` : null,
+      daily_budget: c.daily_budget ?? null,
+      daily_budget_eur: centsToEur(c.daily_budget),
+      lifetime_budget: c.lifetime_budget ?? null,
+      lifetime_budget_eur: centsToEur(c.lifetime_budget),
+      budget_remaining: c.budget_remaining ?? null,
+      budget_remaining_eur: centsToEur(c.budget_remaining),
+      spend_cap: c.spend_cap ?? null,
+      spend_cap_eur: centsToEur(c.spend_cap)
+    });
+  }
+});
+
+// src/lib/mcp/tools/list-ad-sets.ts
+import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { z as z4 } from "npm:zod@^4.5.4";
+var AD_SET_FIELDS = "id,name,status,effective_status,daily_budget,lifetime_budget,budget_remaining,optimization_goal,billing_event,start_time,end_time,campaign_id";
+var list_ad_sets_default = defineTool5({
+  name: "list_ad_sets",
+  title: "List Meta ad sets",
+  description: "Use this to list ad sets of one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric) and accepts optional 'limit' (1-50, default 20). Returns id, name, status, effective_status, daily_budget, lifetime_budget, budget_remaining, optimization_goal, billing_event, start_time, end_time and campaign_id, plus *_eur values for monetary fields. Read-only.",
+  inputSchema: {
+    campaign_id: z4.string().trim().regex(/^\d{5,25}$/, "campaign_id must be a numeric Meta campaign ID").describe("Numeric Meta campaign ID from list_campaigns."),
+    limit: z4.number().int().min(1).max(50).optional().describe("Maximum ad sets to return (1-50, default 20).")
+  },
+  annotations: {
+    readOnlyHint: true,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: true
+  },
+  handler: async ({ campaign_id, limit }, ctx) => {
+    const denied = await requireAdmin(ctx);
+    if (denied) return errorResult(denied);
+    const owned = await fetchOwnedObject(campaign_id, "id,name,account_id", "Campaign");
+    if (!owned.ok) return owned.result ?? errorResult("Ownership check failed.");
+    const bounded = Math.min(Math.max(limit ?? 20, 1), 50);
+    const res = await graphGet(`${campaign_id}/adsets`, {
+      fields: AD_SET_FIELDS,
+      limit: String(bounded)
+    });
+    if (!res.data) return upstreamError(res.status);
+    const rows = Array.isArray(res.data?.data) ? res.data.data : [];
+    const ad_sets = rows.slice(0, bounded).map((a) => ({
+      id: a?.id ?? null,
+      name: a?.name ?? null,
+      status: a?.status ?? null,
+      effective_status: a?.effective_status ?? null,
+      daily_budget: a?.daily_budget ?? null,
+      daily_budget_eur: centsToEur(a?.daily_budget),
+      lifetime_budget: a?.lifetime_budget ?? null,
+      lifetime_budget_eur: centsToEur(a?.lifetime_budget),
+      budget_remaining: a?.budget_remaining ?? null,
+      budget_remaining_eur: centsToEur(a?.budget_remaining),
+      optimization_goal: a?.optimization_goal ?? null,
+      billing_event: a?.billing_event ?? null,
+      start_time: a?.start_time ?? null,
+      end_time: a?.end_time ?? null,
+      campaign_id: a?.campaign_id ?? campaign_id
+    }));
+    return jsonResult({
+      campaign_id,
+      campaign_name: owned.data?.name ?? null,
+      count: ad_sets.length,
+      limit: bounded,
+      ad_sets
+    });
+  }
+});
+
+// src/lib/mcp/tools/set-campaign-status.ts
+import { defineTool as defineTool6 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { z as z5 } from "npm:zod@^4.5.4";
+var FIELDS2 = "id,name,account_id,status,effective_status";
+var set_campaign_status_default = defineTool6({
+  name: "set_campaign_status",
+  title: "Set Meta campaign status",
+  description: "Use this to activate or pause one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric), 'status' (ACTIVE or PAUSED) and 'confirmed' set to true. CONSEQUENTIAL: this changes live ad delivery and spend \u2014 call it only after the user has explicitly confirmed this exact campaign and status in the conversation. If the campaign is already in the requested configured status it returns no_change=true without writing. Otherwise it writes and re-reads the campaign, returning before/after status and verified=true.",
+  inputSchema: {
+    campaign_id: z5.string().trim().regex(/^\d{5,25}$/, "campaign_id must be a numeric Meta campaign ID").describe("Numeric Meta campaign ID from list_campaigns."),
+    status: z5.enum(["ACTIVE", "PAUSED"]).describe("Target configured status: ACTIVE or PAUSED."),
+    confirmed: z5.literal(true).describe("Must be true and only after the user explicitly confirmed this change.")
+  },
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true
+  },
+  handler: async ({ campaign_id, status, confirmed }, ctx) => {
+    const denied = await requireAdmin(ctx);
+    if (denied) return errorResult(denied);
+    if (confirmed !== true) return errorResult("Explicit user confirmation is required.");
+    const owned = await fetchOwnedObject(campaign_id, FIELDS2, "Campaign");
+    if (!owned.ok) return owned.result ?? errorResult("Ownership check failed.");
+    const before = owned.data?.status ?? null;
+    if (before === status) {
+      return jsonResult({
+        campaign_id,
+        campaign_name: owned.data?.name ?? null,
+        no_change: true,
+        before_status: before,
+        after_status: before,
+        verified: true
+      });
+    }
+    const post = await graphPost(campaign_id, { status });
+    if (!post.data) return upstreamError(post.status);
+    const check = await graphGet(campaign_id, { fields: FIELDS2 });
+    if (!check.data) return upstreamError(check.status);
+    const after = check.data?.status ?? null;
+    return jsonResult({
+      campaign_id,
+      campaign_name: check.data?.name ?? owned.data?.name ?? null,
+      no_change: false,
+      before_status: before,
+      after_status: after,
+      effective_status: check.data?.effective_status ?? null,
+      verified: after === status
+    });
+  }
+});
+
+// src/lib/mcp/tools/set-campaign-daily-budget.ts
+import { defineTool as defineTool7 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { z as z6 } from "npm:zod@^4.5.4";
+var FIELDS3 = "id,name,account_id,status,daily_budget,lifetime_budget";
+var set_campaign_daily_budget_default = defineTool7({
+  name: "set_campaign_daily_budget",
+  title: "Set Meta campaign daily budget",
+  description: "Use this to change the daily budget of one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric), 'daily_budget_eur' (minimum 1 EUR, capped by a server-side hard cap) and 'confirmed' set to true. CONSEQUENTIAL: this changes live spend \u2014 call it only after the user has explicitly confirmed the exact campaign and amount. Returns no_change=true when the budget already matches; otherwise writes the amount in integer cents, re-reads the campaign and returns before/after in cents and EUR.",
+  inputSchema: {
+    campaign_id: z6.string().trim().regex(/^\d{5,25}$/, "campaign_id must be a numeric Meta campaign ID").describe("Numeric Meta campaign ID from list_campaigns."),
+    daily_budget_eur: z6.number().min(1).describe("New daily budget in EUR (minimum 1, limited by the server hard cap)."),
+    confirmed: z6.literal(true).describe("Must be true and only after the user explicitly confirmed this change.")
+  },
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true
+  },
+  handler: async ({ campaign_id, daily_budget_eur, confirmed }, ctx) => {
+    const denied = await requireAdmin(ctx);
+    if (denied) return errorResult(denied);
+    if (confirmed !== true) return errorResult("Explicit user confirmation is required.");
+    const cap = maxDailyBudgetEur();
+    const cents = eurToCents(daily_budget_eur);
+    if (cents === null) return errorResult("daily_budget_eur must be a valid positive number.");
+    if (daily_budget_eur < 1) return errorResult("daily_budget_eur must be at least 1 EUR.");
+    if (daily_budget_eur > cap) {
+      return errorResult(`daily_budget_eur exceeds the server hard cap of ${cap} EUR.`);
+    }
+    const owned = await fetchOwnedObject(campaign_id, FIELDS3, "Campaign");
+    if (!owned.ok) return owned.result ?? errorResult("Ownership check failed.");
+    const beforeCents = owned.data?.daily_budget ?? null;
+    if (beforeCents !== null && Number(beforeCents) === cents) {
+      return jsonResult({
+        campaign_id,
+        campaign_name: owned.data?.name ?? null,
+        no_change: true,
+        before_daily_budget_cents: Number(beforeCents),
+        before_daily_budget_eur: centsToEur(beforeCents),
+        after_daily_budget_cents: Number(beforeCents),
+        after_daily_budget_eur: centsToEur(beforeCents),
+        hard_cap_eur: cap,
+        verified: true
+      });
+    }
+    const post = await graphPost(campaign_id, { daily_budget: String(cents) });
+    if (!post.data) {
+      if (post.status === 400) {
+        return errorResult(
+          "Meta rejected the budget change. This campaign likely uses ad-set level budgets \u2014 set the daily budget on the ad set instead."
+        );
+      }
+      return upstreamError(post.status);
+    }
+    const check = await graphGet(campaign_id, { fields: FIELDS3 });
+    if (!check.data) return upstreamError(check.status);
+    const afterCents = check.data?.daily_budget ?? null;
+    return jsonResult({
+      campaign_id,
+      campaign_name: check.data?.name ?? owned.data?.name ?? null,
+      no_change: false,
+      before_daily_budget_cents: beforeCents === null ? null : Number(beforeCents),
+      before_daily_budget_eur: centsToEur(beforeCents),
+      after_daily_budget_cents: afterCents === null ? null : Number(afterCents),
+      after_daily_budget_eur: centsToEur(afterCents),
+      hard_cap_eur: cap,
+      verified: afterCents !== null && Number(afterCents) === cents
+    });
+  }
+});
+
+// src/lib/mcp/tools/set-ad-set-status.ts
+import { defineTool as defineTool8 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { z as z7 } from "npm:zod@^4.5.4";
+var FIELDS4 = "id,name,account_id,campaign_id,status,effective_status";
+var set_ad_set_status_default = defineTool8({
+  name: "set_ad_set_status",
+  title: "Set Meta ad set status",
+  description: "Use this to activate or pause one ad set in the private Automind Meta ad account. Requires 'ad_set_id' (numeric), 'status' (ACTIVE or PAUSED) and 'confirmed' set to true. CONSEQUENTIAL: this changes live ad delivery and spend \u2014 call it only after the user has explicitly confirmed this exact ad set and status. Returns no_change=true when the configured status already matches; otherwise writes, re-reads and returns before/after status with verified=true.",
+  inputSchema: {
+    ad_set_id: z7.string().trim().regex(/^\d{5,25}$/, "ad_set_id must be a numeric Meta ad set ID").describe("Numeric Meta ad set ID from list_ad_sets."),
+    status: z7.enum(["ACTIVE", "PAUSED"]).describe("Target configured status: ACTIVE or PAUSED."),
+    confirmed: z7.literal(true).describe("Must be true and only after the user explicitly confirmed this change.")
+  },
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true
+  },
+  handler: async ({ ad_set_id, status, confirmed }, ctx) => {
+    const denied = await requireAdmin(ctx);
+    if (denied) return errorResult(denied);
+    if (confirmed !== true) return errorResult("Explicit user confirmation is required.");
+    const owned = await fetchOwnedObject(ad_set_id, FIELDS4, "Ad set");
+    if (!owned.ok) return owned.result ?? errorResult("Ownership check failed.");
+    const before = owned.data?.status ?? null;
+    if (before === status) {
+      return jsonResult({
+        ad_set_id,
+        ad_set_name: owned.data?.name ?? null,
+        campaign_id: owned.data?.campaign_id ?? null,
+        no_change: true,
+        before_status: before,
+        after_status: before,
+        verified: true
+      });
+    }
+    const post = await graphPost(ad_set_id, { status });
+    if (!post.data) return upstreamError(post.status);
+    const check = await graphGet(ad_set_id, { fields: FIELDS4 });
+    if (!check.data) return upstreamError(check.status);
+    const after = check.data?.status ?? null;
+    return jsonResult({
+      ad_set_id,
+      ad_set_name: check.data?.name ?? owned.data?.name ?? null,
+      campaign_id: check.data?.campaign_id ?? owned.data?.campaign_id ?? null,
+      no_change: false,
+      before_status: before,
+      after_status: after,
+      effective_status: check.data?.effective_status ?? null,
+      verified: after === status
+    });
+  }
+});
+
+// src/lib/mcp/tools/set-ad-set-daily-budget.ts
+import { defineTool as defineTool9 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { z as z8 } from "npm:zod@^4.5.4";
+var FIELDS5 = "id,name,account_id,campaign_id,status,daily_budget,lifetime_budget";
+var set_ad_set_daily_budget_default = defineTool9({
+  name: "set_ad_set_daily_budget",
+  title: "Set Meta ad set daily budget",
+  description: "Use this to change the daily budget of one ad set in the private Automind Meta ad account. Requires 'ad_set_id' (numeric), 'daily_budget_eur' (minimum 1 EUR, capped by a server-side hard cap) and 'confirmed' set to true. CONSEQUENTIAL: this changes live spend \u2014 call it only after the user has explicitly confirmed the exact ad set and amount. Returns no_change=true when the budget already matches; otherwise writes integer cents, re-reads the ad set and returns before/after in cents and EUR.",
+  inputSchema: {
+    ad_set_id: z8.string().trim().regex(/^\d{5,25}$/, "ad_set_id must be a numeric Meta ad set ID").describe("Numeric Meta ad set ID from list_ad_sets."),
+    daily_budget_eur: z8.number().min(1).describe("New daily budget in EUR (minimum 1, limited by the server hard cap)."),
+    confirmed: z8.literal(true).describe("Must be true and only after the user explicitly confirmed this change.")
+  },
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: true
+  },
+  handler: async ({ ad_set_id, daily_budget_eur, confirmed }, ctx) => {
+    const denied = await requireAdmin(ctx);
+    if (denied) return errorResult(denied);
+    if (confirmed !== true) return errorResult("Explicit user confirmation is required.");
+    const cap = maxDailyBudgetEur();
+    const cents = eurToCents(daily_budget_eur);
+    if (cents === null) return errorResult("daily_budget_eur must be a valid positive number.");
+    if (daily_budget_eur < 1) return errorResult("daily_budget_eur must be at least 1 EUR.");
+    if (daily_budget_eur > cap) {
+      return errorResult(`daily_budget_eur exceeds the server hard cap of ${cap} EUR.`);
+    }
+    const owned = await fetchOwnedObject(ad_set_id, FIELDS5, "Ad set");
+    if (!owned.ok) return owned.result ?? errorResult("Ownership check failed.");
+    const beforeCents = owned.data?.daily_budget ?? null;
+    if (beforeCents !== null && Number(beforeCents) === cents) {
+      return jsonResult({
+        ad_set_id,
+        ad_set_name: owned.data?.name ?? null,
+        campaign_id: owned.data?.campaign_id ?? null,
+        no_change: true,
+        before_daily_budget_cents: Number(beforeCents),
+        before_daily_budget_eur: centsToEur(beforeCents),
+        after_daily_budget_cents: Number(beforeCents),
+        after_daily_budget_eur: centsToEur(beforeCents),
+        hard_cap_eur: cap,
+        verified: true
+      });
+    }
+    const post = await graphPost(ad_set_id, { daily_budget: String(cents) });
+    if (!post.data) {
+      if (post.status === 400) {
+        return errorResult(
+          "Meta rejected the budget change. This ad set likely uses a campaign-level (CBO) or lifetime budget \u2014 change the budget at that level instead."
+        );
+      }
+      return upstreamError(post.status);
+    }
+    const check = await graphGet(ad_set_id, { fields: FIELDS5 });
+    if (!check.data) return upstreamError(check.status);
+    const afterCents = check.data?.daily_budget ?? null;
+    return jsonResult({
+      ad_set_id,
+      ad_set_name: check.data?.name ?? owned.data?.name ?? null,
+      campaign_id: check.data?.campaign_id ?? owned.data?.campaign_id ?? null,
+      no_change: false,
+      before_daily_budget_cents: beforeCents === null ? null : Number(beforeCents),
+      before_daily_budget_eur: centsToEur(beforeCents),
+      after_daily_budget_cents: afterCents === null ? null : Number(afterCents),
+      after_daily_budget_eur: centsToEur(afterCents),
+      hard_cap_eur: cap,
+      verified: afterCents !== null && Number(afterCents) === cents
+    });
+  }
+});
+
 // src/lib/mcp/index.ts
 var projectRef = "vkpaugrneyxbqqgkafgl";
 var mcp_default = defineMcp({
   name: "automind-ai-agents",
   title: "automind-ai-agents",
-  version: "0.1.0",
-  instructions: "Private, read-only Automind tools for the Meta ad account act_336967666. Access is limited to Automind admins. Use get_ad_account for account status, list_campaigns to find campaigns, and get_campaign_insights for performance metrics of a single campaign. No write, budget or spend operations are available.",
+  version: "0.2.0",
+  instructions: "Private Automind tools for the Meta ad account act_336967666. The account is private and access is limited to Automind admins. Read tools: get_ad_account, list_campaigns, get_campaign_details, list_ad_sets, get_campaign_insights. Write tools: set_campaign_status, set_campaign_daily_budget, set_ad_set_status, set_ad_set_daily_budget. Never call a write tool without an explicit, specific confirmation from the user naming the object and the new value; always show the current value first and pass confirmed=true only after that confirmation. Daily budgets are capped by a server-side hard cap. Creating new campaigns, ad sets or ads is not supported in this version.",
   auth: auth.oauth.issuer({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated"
   }),
-  tools: [get_ad_account_default, list_campaigns_default, get_campaign_insights_default]
+  tools: [
+    get_ad_account_default,
+    list_campaigns_default,
+    get_campaign_details_default,
+    list_ad_sets_default,
+    get_campaign_insights_default,
+    set_campaign_status_default,
+    set_campaign_daily_budget_default,
+    set_ad_set_status_default,
+    set_ad_set_daily_budget_default
+  ]
 });
 
 // lovable-mcp-supabase-entry.ts

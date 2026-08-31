@@ -12,7 +12,7 @@
   "mcp": {
     "server": {
       "name": "automind-ai-agents",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "title": "automind-ai-agents"
     },
     "tools": [
@@ -58,6 +58,64 @@
         "outputSchema": null
       },
       {
+        "name": "get_campaign_details",
+        "title": "Get Meta campaign details",
+        "description": "Use this to read the full configuration of one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric, must belong to the account). Returns id, name, status, effective_status, objective, bid_strategy, daily_budget, lifetime_budget, budget_remaining, spend_cap and account_id, plus *_eur values for monetary fields. Read-only.",
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "campaign_id": {
+              "type": "string",
+              "pattern": "^\\d{5,25}$",
+              "description": "Numeric Meta campaign ID from list_campaigns."
+            }
+          },
+          "required": [
+            "campaign_id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_ad_sets",
+        "title": "List Meta ad sets",
+        "description": "Use this to list ad sets of one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric) and accepts optional 'limit' (1-50, default 20). Returns id, name, status, effective_status, daily_budget, lifetime_budget, budget_remaining, optimization_goal, billing_event, start_time, end_time and campaign_id, plus *_eur values for monetary fields. Read-only.",
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "campaign_id": {
+              "type": "string",
+              "pattern": "^\\d{5,25}$",
+              "description": "Numeric Meta campaign ID from list_campaigns."
+            },
+            "limit": {
+              "description": "Maximum ad sets to return (1-50, default 20).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          },
+          "required": [
+            "campaign_id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
         "name": "get_campaign_insights",
         "title": "Get Meta campaign insights",
         "description": "Use this to read performance metrics for one campaign in the Automind Meta ad account. Requires 'campaign_id' (must belong to the account) and 'date_preset' (today, yesterday, last_7d, last_14d, last_30d). Returns spend, impressions, reach, clicks, inline_link_clicks, ctr, cpc, cpm and actions when Meta reports them. Read-only; missing metrics are returned as null and never estimated.",
@@ -91,6 +149,164 @@
           "required": [
             "campaign_id",
             "date_preset"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "set_campaign_status",
+        "title": "Set Meta campaign status",
+        "description": "Use this to activate or pause one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric), 'status' (ACTIVE or PAUSED) and 'confirmed' set to true. CONSEQUENTIAL: this changes live ad delivery and spend — call it only after the user has explicitly confirmed this exact campaign and status in the conversation. If the campaign is already in the requested configured status it returns no_change=true without writing. Otherwise it writes and re-reads the campaign, returning before/after status and verified=true.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "campaign_id": {
+              "type": "string",
+              "pattern": "^\\d{5,25}$",
+              "description": "Numeric Meta campaign ID from list_campaigns."
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "ACTIVE",
+                "PAUSED"
+              ],
+              "description": "Target configured status: ACTIVE or PAUSED."
+            },
+            "confirmed": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true and only after the user explicitly confirmed this change."
+            }
+          },
+          "required": [
+            "campaign_id",
+            "status",
+            "confirmed"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "set_campaign_daily_budget",
+        "title": "Set Meta campaign daily budget",
+        "description": "Use this to change the daily budget of one campaign in the private Automind Meta ad account. Requires 'campaign_id' (numeric), 'daily_budget_eur' (minimum 1 EUR, capped by a server-side hard cap) and 'confirmed' set to true. CONSEQUENTIAL: this changes live spend — call it only after the user has explicitly confirmed the exact campaign and amount. Returns no_change=true when the budget already matches; otherwise writes the amount in integer cents, re-reads the campaign and returns before/after in cents and EUR.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "campaign_id": {
+              "type": "string",
+              "pattern": "^\\d{5,25}$",
+              "description": "Numeric Meta campaign ID from list_campaigns."
+            },
+            "daily_budget_eur": {
+              "type": "number",
+              "minimum": 1,
+              "description": "New daily budget in EUR (minimum 1, limited by the server hard cap)."
+            },
+            "confirmed": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true and only after the user explicitly confirmed this change."
+            }
+          },
+          "required": [
+            "campaign_id",
+            "daily_budget_eur",
+            "confirmed"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "set_ad_set_status",
+        "title": "Set Meta ad set status",
+        "description": "Use this to activate or pause one ad set in the private Automind Meta ad account. Requires 'ad_set_id' (numeric), 'status' (ACTIVE or PAUSED) and 'confirmed' set to true. CONSEQUENTIAL: this changes live ad delivery and spend — call it only after the user has explicitly confirmed this exact ad set and status. Returns no_change=true when the configured status already matches; otherwise writes, re-reads and returns before/after status with verified=true.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "ad_set_id": {
+              "type": "string",
+              "pattern": "^\\d{5,25}$",
+              "description": "Numeric Meta ad set ID from list_ad_sets."
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "ACTIVE",
+                "PAUSED"
+              ],
+              "description": "Target configured status: ACTIVE or PAUSED."
+            },
+            "confirmed": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true and only after the user explicitly confirmed this change."
+            }
+          },
+          "required": [
+            "ad_set_id",
+            "status",
+            "confirmed"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "set_ad_set_daily_budget",
+        "title": "Set Meta ad set daily budget",
+        "description": "Use this to change the daily budget of one ad set in the private Automind Meta ad account. Requires 'ad_set_id' (numeric), 'daily_budget_eur' (minimum 1 EUR, capped by a server-side hard cap) and 'confirmed' set to true. CONSEQUENTIAL: this changes live spend — call it only after the user has explicitly confirmed the exact ad set and amount. Returns no_change=true when the budget already matches; otherwise writes integer cents, re-reads the ad set and returns before/after in cents and EUR.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "ad_set_id": {
+              "type": "string",
+              "pattern": "^\\d{5,25}$",
+              "description": "Numeric Meta ad set ID from list_ad_sets."
+            },
+            "daily_budget_eur": {
+              "type": "number",
+              "minimum": 1,
+              "description": "New daily budget in EUR (minimum 1, limited by the server hard cap)."
+            },
+            "confirmed": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true and only after the user explicitly confirmed this change."
+            }
+          },
+          "required": [
+            "ad_set_id",
+            "daily_budget_eur",
+            "confirmed"
           ]
         },
         "outputSchema": null
