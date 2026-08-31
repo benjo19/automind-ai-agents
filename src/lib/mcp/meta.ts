@@ -132,7 +132,12 @@ export function maxDailyBudgetEur(): number {
   return Math.min(n, 100000);
 }
 
-type Owned = { ok: true; data: any } | { ok: false; result: ReturnType<typeof errorResult> };
+export type Owned = {
+  ok: boolean;
+  data?: any;
+  result?: ReturnType<typeof errorResult>;
+};
+
 
 /** Fetch an object and verify it belongs to the allowed ad account. */
 export async function fetchOwnedObject(
