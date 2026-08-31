@@ -55,6 +55,9 @@ const App = () => (
             <Route path="/install" element={<Install />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/hvala" element={<ThankYou />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/oauth/consent" element={<OAuthConsent />} />
+            <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
