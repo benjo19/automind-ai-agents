@@ -34,7 +34,7 @@ export default defineTool({
     if (denied) return errorResult(denied);
 
     const owned = await fetchOwnedObject(campaign_id, FIELDS, "Campaign");
-    if (!owned.ok) return owned.result;
+    if (!owned.ok) return owned.result ?? errorResult("Ownership check failed.");
     const c = owned.data ?? {};
 
     return jsonResult({
