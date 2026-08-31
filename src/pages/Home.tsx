@@ -17,15 +17,15 @@ import VoiceDemo from "@/components/VoiceDemo";
 const Home = () => (
   <>
     <Helmet>
-      <title>Automind — AI recepcionar za lokalne tvrtke u Hrvatskoj</title>
+      <title>AutoMind AI — automatizacije i aplikacije po mjeri</title>
       <meta
         name="description"
-        content="Automind je AI recepcionar koji odgovara na pozive, poruke i web upite te zakazuje termine i šalje ponude 24/7. Za salone, ordinacije, servise i praonice."
+        content="AutoMind AI automatizira upite, rezervacije, prodaju, narudžbe i administraciju te izrađuje aplikacije po mjeri vašeg poslovnog procesa."
       />
       <link rel="canonical" href="https://myautomind.com/" />
       <meta property="og:url" content="https://myautomind.com/" />
-      <meta property="og:title" content="Automind — AI recepcionar za lokalne tvrtke" />
-      <meta property="og:description" content="AI recepcionar koji odgovara na upite, zakazuje termine i šalje ponude 24/7." />
+      <meta property="og:title" content="AutoMind AI — automatizacije i aplikacije po mjeri" />
+      <meta property="og:description" content="Sustavi koji automatiziraju upite, rezervacije, prodaju, narudžbe i administraciju — prema stvarnom procesu vašeg poslovanja." />
     </Helmet>
     <Navbar />
     <Hero />
