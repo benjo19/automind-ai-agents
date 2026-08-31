@@ -105,7 +105,7 @@ async function graphGet(path, params) {
 }
 function upstreamError(status) {
   return errorResult(
-    status === 500 ? "Meta credentials are not configured on the server." : `Meta API request failed (status ${status}).`
+    status === 500 ? "Meta credentials are not configured on the server." : status === 403 ? "Meta API refused the request (permission denied). The server token may lack ads_management." : status === 400 ? "Meta API rejected the request (invalid parameters or not allowed for this object)." : `Meta API request failed (status ${status}).`
   );
 }
 
