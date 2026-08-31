@@ -94,6 +94,25 @@
     background-clip: text;
   }
 
+  /* Homepage title: calm emerald-to-gold treatment aligned with the brand palette. */
+  .hero-title {
+    font-family: 'Sora', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    color: hsl(160 84% 12%);
+    text-wrap: balance;
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .hero-title {
+      background: linear-gradient(115deg, hsl(160 84% 12%) 0%, hsl(160 65% 25%) 62%, hsl(44 60% 43%) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
   /* Section soft glow — barely visible gold wash */
   .glow-bg {
     position: relative;

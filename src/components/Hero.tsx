@@ -51,7 +51,7 @@ const Hero = () => {
           </div>
 
           {/* Heading with rotating word */}
-          <h1 className="mb-6 font-playfair text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up text-foreground" style={{ animationDelay: '0.3s' }}>
+          <h1 className="hero-title mb-6 text-3xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             {t.hero.title}
           </h1>
 
