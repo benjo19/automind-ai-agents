@@ -21,13 +21,13 @@ export default defineTool({
     openWorldHint: true,
   },
   handler: async (_input, ctx) => {
-    const guard = await requireAdmin(ctx);
-    if (!guard.ok) return errorResult(guard.reason);
+    const denied = await requireAdmin(ctx);
+    if (denied) return errorResult(denied);
 
     const res = await graphGet(AD_ACCOUNT_ID, {
       fields: "id,name,account_status,currency,timezone_name",
     });
-    if (!res.ok) return upstreamError(res.status);
+    if (!res.data) return upstreamError(res.status);
 
     const d = res.data ?? {};
     return jsonResult({

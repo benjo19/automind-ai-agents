@@ -6,15 +6,15 @@ export const GRAPH_VERSION = "v21.0";
 /** The only ad account this MCP server may ever read. */
 export const AD_ACCOUNT_ID = "act_336967666";
 
-export type Guard = { ok: true } | { ok: false; reason: string };
+/** Returns null when authorized, otherwise a caller-safe reason string. */
 
 /**
  * Verified-token identity + server-side admin allowlist check.
  * Never trusts tool input for identity.
  */
-export async function requireAdmin(ctx: ToolContext): Promise<Guard> {
+export async function requireAdmin(ctx: ToolContext): Promise<string | null> {
   if (!ctx.isAuthenticated?.() || !ctx.getUserId?.()) {
-    return { ok: false, reason: "Not authenticated." };
+    return "Not authenticated.";
   }
   try {
     const supabase = supabaseForUser(ctx);
@@ -22,11 +22,11 @@ export async function requireAdmin(ctx: ToolContext): Promise<Guard> {
       _user_id: ctx.getUserId(),
     });
     if (error || data !== true) {
-      return { ok: false, reason: "Forbidden: account is not an Automind MCP admin." };
+      return "Forbidden: account is not an Automind MCP admin.";
     }
-    return { ok: true };
+    return null;
   } catch {
-    return { ok: false, reason: "Authorization check failed." };
+    return "Authorization check failed.";
   }
 }
 
@@ -48,9 +48,9 @@ export function jsonResult<T extends Record<string, unknown>>(payload: T) {
 export async function graphGet(
   path: string,
   params: Record<string, string>,
-): Promise<{ ok: true; data: any } | { ok: false; status: number }> {
+): Promise<{ data: any | null; status: number }> {
   const token = runtimeEnv("META_SYSTEM_USER_TOKEN");
-  if (!token) return { ok: false, status: 500 };
+  if (!token) return { data: null, status: 500 };
 
   const url = new URL(`https://graph.facebook.com/${GRAPH_VERSION}/${path}`);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
@@ -62,9 +62,9 @@ export async function graphGet(
 
   if (!resp.ok) {
     console.error("meta graph request failed", resp.status);
-    return { ok: false, status: resp.status };
+    return { data: null, status: resp.status };
   }
-  return { ok: true, data: await resp.json() };
+  return { data: await resp.json(), status: 200 };
 }
 
 export function upstreamError(status: number) {
