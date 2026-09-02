@@ -3,13 +3,13 @@
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
 // src/lib/mcp/index.ts
-import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@1.0.0";
 
 // src/lib/mcp/tools/get-ad-account.ts
-import { defineTool } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool } from "npm:@lovable.dev/mcp-js@1.0.0";
 
 // src/lib/mcp/supabase.ts
-import { createClient } from "npm:@supabase/supabase-js@^2.97.0";
+import { createClient } from "npm:@supabase/supabase-js@^2.114.0";
 function runtimeEnv(name) {
   const runtime = globalThis;
   return runtime.Deno?.env?.get?.(name) ?? runtime.process?.env?.[name];
@@ -195,7 +195,7 @@ var get_ad_account_default = defineTool({
 });
 
 // src/lib/mcp/tools/list-campaigns.ts
-import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z } from "npm:zod@^4.5.4";
 var list_campaigns_default = defineTool2({
   name: "list_campaigns",
@@ -234,7 +234,7 @@ var list_campaigns_default = defineTool2({
 });
 
 // src/lib/mcp/tools/get-campaign-insights.ts
-import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z as z2 } from "npm:zod@^4.5.4";
 var DATE_PRESETS = ["today", "yesterday", "last_7d", "last_14d", "last_30d"];
 var METRICS = [
@@ -304,7 +304,7 @@ var get_campaign_insights_default = defineTool3({
 });
 
 // src/lib/mcp/tools/get-campaign-details.ts
-import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z as z3 } from "npm:zod@^4.5.4";
 var FIELDS = "id,name,status,effective_status,objective,bid_strategy,daily_budget,lifetime_budget,budget_remaining,spend_cap,account_id";
 var get_campaign_details_default = defineTool4({
@@ -347,7 +347,7 @@ var get_campaign_details_default = defineTool4({
 });
 
 // src/lib/mcp/tools/list-ad-sets.ts
-import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z as z4 } from "npm:zod@^4.5.4";
 var AD_SET_FIELDS = "id,name,status,effective_status,daily_budget,lifetime_budget,budget_remaining,optimization_goal,billing_event,start_time,end_time,campaign_id";
 var list_ad_sets_default = defineTool5({
@@ -404,7 +404,7 @@ var list_ad_sets_default = defineTool5({
 });
 
 // src/lib/mcp/tools/set-campaign-status.ts
-import { defineTool as defineTool6 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool6 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z as z5 } from "npm:zod@^4.5.4";
 var FIELDS2 = "id,name,account_id,status,effective_status";
 var set_campaign_status_default = defineTool6({
@@ -457,7 +457,7 @@ var set_campaign_status_default = defineTool6({
 });
 
 // src/lib/mcp/tools/set-campaign-daily-budget.ts
-import { defineTool as defineTool7 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool7 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z as z6 } from "npm:zod@^4.5.4";
 var FIELDS3 = "id,name,account_id,status,daily_budget,lifetime_budget";
 var set_campaign_daily_budget_default = defineTool7({
@@ -529,7 +529,7 @@ var set_campaign_daily_budget_default = defineTool7({
 });
 
 // src/lib/mcp/tools/set-ad-set-status.ts
-import { defineTool as defineTool8 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool8 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z as z7 } from "npm:zod@^4.5.4";
 var FIELDS4 = "id,name,account_id,campaign_id,status,effective_status";
 var set_ad_set_status_default = defineTool8({
@@ -584,7 +584,7 @@ var set_ad_set_status_default = defineTool8({
 });
 
 // src/lib/mcp/tools/set-ad-set-daily-budget.ts
-import { defineTool as defineTool9 } from "npm:@lovable.dev/mcp-js@0.28.0";
+import { defineTool as defineTool9 } from "npm:@lovable.dev/mcp-js@1.0.0";
 import { z as z8 } from "npm:zod@^4.5.4";
 var FIELDS5 = "id,name,account_id,campaign_id,status,daily_budget,lifetime_budget";
 var set_ad_set_daily_budget_default = defineTool9({
@@ -682,5 +682,5 @@ var mcp_default = defineMcp({
 });
 
 // lovable-mcp-supabase-entry.ts
-import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@0.28.0/stacks/supabase";
+import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@1.0.0/stacks/supabase";
 Deno.serve(createSupabaseHandler(mcp_default, { functionName: "mcp" }));
