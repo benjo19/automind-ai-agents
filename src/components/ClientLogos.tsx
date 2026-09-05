@@ -1,25 +1,53 @@
-import { useLanguage } from "@/lib/i18n";
+import varaderoLogo from "@/assets/varadero-bar-logo.jpg";
 
 /**
- * "Naši korisnici" — premium horizontalni beskonačni ticker.
- * Sadrži SAMO stvarne, verifikabilne korisnike (ponavljane u loopu).
- * Poštuje prefers-reduced-motion.
+ * "Naši korisnici" — premium horizontalni beskonačni ticker s brand markovima.
+ * Samo stvarni, potvrđeni korisnici. Gdje nemamo čistu logo datoteku,
+ * koristi se elegantan wordmark s točnim nazivom (privremeno).
+ * Poštuje prefers-reduced-motion, bez horizontalnog overflowa.
  */
 
-// Stvarni korisnici koje možemo potvrditi — ne izmišljati ostale.
-const CLIENTS = [
-  { name: "Verona Due Pizzeria", tag: "Pizzeria" },
-  { name: "Caffe Lusso", tag: "Caffe" },
+type Client = {
+  name: string;
+  /** Wordmark u dva reda (prvi = naglašen), ili logo slika */
+  top?: string;
+  bottom?: string;
+  image?: string;
+};
+
+const CLIENTS: Client[] = [
+  { name: "Verona Due Pizzeria", top: "VERONA", bottom: "DUE" },
+  { name: "Veranda Grill", top: "VERANDA", bottom: "GRILL" },
+  { name: "Varadero Bar", image: varaderoLogo },
+  { name: "Pierino Restaurant Rovinj", top: "PIERINO", bottom: "ROVINJ" },
 ];
 
-// Ponavljamo isti skup da ticker vizualno izgleda popunjeno,
-// ostaje jasno da su to dva korisnika.
+// Dupliciramo skup radi beskonačnog loopa (animacija pomiče -50%).
 const LOOP = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS];
 
-const ClientLogos = () => {
-  const { t } = useLanguage();
-  void t; // naslov/podnaslov su statični (hrvatski), t se čuva radi konzistencije
+const LogoTile = ({ client }: { client: Client }) => (
+  <span className="glass-card hover-lift flex h-20 w-52 shrink-0 items-center justify-center overflow-hidden px-5 md:h-24 md:w-60 md:px-6">
+    {client.image ? (
+      <img
+        src={client.image}
+        alt={`${client.name} logo`}
+        decoding="async"
+        className="h-14 w-14 md:h-16 md:w-16 shrink-0 rounded-full object-cover"
+      />
+    ) : (
+      <span className="flex flex-col items-center leading-none">
+        <span className="text-base md:text-lg font-semibold uppercase tracking-[0.22em] text-foreground">
+          {client.top}
+        </span>
+        <span className="mt-1.5 text-[10px] md:text-xs uppercase tracking-[0.38em] text-accent">
+          {client.bottom}
+        </span>
+      </span>
+    )}
+  </span>
+);
 
+const ClientLogos = () => {
   return (
     <section
       aria-label="Naši korisnici"
@@ -35,7 +63,7 @@ const ClientLogos = () => {
       </div>
 
       <div
-        className="relative"
+        className="relative w-full overflow-hidden"
         style={{
           maskImage:
             "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
@@ -43,29 +71,10 @@ const ClientLogos = () => {
             "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
         }}
       >
-        <div className="flex w-max animate-marquee-slow whitespace-nowrap">
+        <div className="flex w-max animate-marquee-slow items-center gap-4 md:gap-6">
           {LOOP.map((client, index) => (
-            <span
-              key={index}
-              className="mx-4 md:mx-6 inline-flex select-none"
-              aria-hidden={index >= CLIENTS.length}
-            >
-              <span className="glass-card hover-lift inline-flex items-center gap-3 px-5 py-3 md:px-7 md:py-4">
-                <span
-                  className="flex h-8 w-8 md:h-9 md:w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/10 to-accent/15 text-xs font-semibold text-primary"
-                  aria-hidden="true"
-                >
-                  {client.name.charAt(0)}
-                </span>
-                <span className="flex flex-col leading-tight">
-                  <span className="text-sm md:text-base font-semibold tracking-tight text-foreground">
-                    {client.name}
-                  </span>
-                  <span className="text-[11px] md:text-xs uppercase tracking-widest text-muted-foreground/70">
-                    {client.tag}
-                  </span>
-                </span>
-              </span>
+            <span key={index} aria-hidden={index >= CLIENTS.length} className="flex">
+              <LogoTile client={client} />
             </span>
           ))}
         </div>
