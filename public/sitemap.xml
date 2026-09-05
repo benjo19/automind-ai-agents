@@ -31,9 +31,29 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://myautomind.com/cijene</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://myautomind.com/primjeri</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://myautomind.com/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://myautomind.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://myautomind.com/blog/kako-ai-agent-moze-zamijeniti-call-centar</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://myautomind.com/blog/kako-ai-agent-moze-odgovarati-na-upite</loc>
