@@ -29,6 +29,7 @@ const Home = () => (
     </Helmet>
     <Navbar />
     <Hero />
+    <ClientLogos />
     <Services />
     <SolutionCards />
     <HowItWorks />
