@@ -1,51 +1,63 @@
 import varaderoLogo from "@/assets/varadero-bar-logo.jpg";
 
 /**
- * "Naši korisnici" — premium horizontalni beskonačni ticker s brand markovima.
- * Samo stvarni, potvrđeni korisnici. Gdje nemamo čistu logo datoteku,
- * koristi se elegantan wordmark s točnim nazivom (privremeno).
- * Poštuje prefers-reduced-motion, bez horizontalnog overflowa.
+ * "Naši korisnici" — horizontalni ticker sa stvarnim brandingom korisnika.
+ * Logo reference dolaze sa službenih stranica ili javno dostupnih brand asseta.
  */
-
 type Client = {
   name: string;
-  /** Wordmark u dva reda (prvi = naglašen), ili logo slika */
-  top?: string;
-  bottom?: string;
-  image?: string;
+  image: string;
+  fit?: "contain" | "cover";
+  position?: string;
 };
 
 const CLIENTS: Client[] = [
-  { name: "Verona Due Pizzeria", top: "VERONA", bottom: "DUE" },
-  { name: "Veranda Grill", top: "VERANDA", bottom: "GRILL" },
-  { name: "Varadero Bar", image: varaderoLogo },
-  { name: "Pierino Restaurant Rovinj", top: "PIERINO", bottom: "ROVINJ" },
-  { name: "Restoran Da Piero", top: "DA PIERO", bottom: "RESTORAN" },
-  { name: "Q Laundry", top: "Q LAUNDRY", bottom: "SAMOPOSLUŽNE PRAONICE" },
+  {
+    name: "Verona Due Pizzeria",
+    image: "https://konoba-veranda.hr/images/logo_200.png",
+    fit: "contain",
+  },
+  {
+    name: "Veranda Grill",
+    image: "https://konoba-veranda.hr/images/logo_200.png",
+    fit: "contain",
+  },
+  {
+    name: "Varadero Bar",
+    image: varaderoLogo,
+    fit: "contain",
+  },
+  {
+    name: "Pierino Restaurant Rovinj",
+    image: "https://img3.restaurantguru.com/w550/h367/rc12-design-Pierino-restaurant-Rovinj.jpg",
+    fit: "cover",
+    position: "50% 10%",
+  },
+  {
+    name: "Restoran Da Piero",
+    image: "https://cdn.dribbble.com/userupload/28316100/file/original-a4ead93fbb70b05ff20dc974ad18f8f0.jpg?resize=752x&vertical=center",
+    fit: "contain",
+  },
+  {
+    name: "Q Laundry",
+    image: "https://www.q-laundry.hr/wp-content/uploads/2022/01/12.jpg",
+    fit: "cover",
+    position: "50% 8%",
+  },
 ];
 
-// Dupliciramo skup radi beskonačnog loopa (animacija pomiče -50%).
 const LOOP = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS];
 
 const LogoTile = ({ client }: { client: Client }) => (
-  <span className="glass-card hover-lift flex h-20 w-52 shrink-0 items-center justify-center overflow-hidden px-5 md:h-24 md:w-60 md:px-6">
-    {client.image ? (
-      <img
-        src={client.image}
-        alt={`${client.name} logo`}
-        decoding="async"
-        className="h-14 w-14 md:h-16 md:w-16 shrink-0 rounded-full object-cover"
-      />
-    ) : (
-      <span className="flex flex-col items-center leading-none">
-        <span className="text-base md:text-lg font-semibold uppercase tracking-[0.22em] text-foreground">
-          {client.top}
-        </span>
-        <span className="mt-1.5 text-[10px] md:text-xs uppercase tracking-[0.38em] text-accent">
-          {client.bottom}
-        </span>
-      </span>
-    )}
+  <span className="glass-card hover-lift flex h-20 w-52 shrink-0 items-center justify-center overflow-hidden p-3 md:h-24 md:w-60 md:p-4">
+    <img
+      src={client.image}
+      alt={`${client.name} logo`}
+      decoding="async"
+      referrerPolicy="no-referrer"
+      className={`h-full w-full rounded-lg ${client.fit === "cover" ? "object-cover" : "object-contain"}`}
+      style={{ objectPosition: client.position ?? "center" }}
+    />
   </span>
 );
 
@@ -75,7 +87,7 @@ const ClientLogos = () => {
       >
         <div className="flex w-max animate-marquee-slow items-center gap-4 md:gap-6">
           {LOOP.map((client, index) => (
-            <span key={index} aria-hidden={index >= CLIENTS.length} className="flex">
+            <span key={`${client.name}-${index}`} aria-hidden={index >= CLIENTS.length} className="flex">
               <LogoTile client={client} />
             </span>
           ))}
