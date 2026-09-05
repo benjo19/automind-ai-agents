@@ -46,24 +46,24 @@ const CLIENTS: Client[] = [
 const LOOP = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS];
 
 const LogoTile = ({ client }: { client: Client }) => (
-  <span className="group flex h-24 w-44 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#111722]/85 px-4 py-3 shadow-[0_12px_35px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/35 hover:bg-[#151c29] hover:shadow-[0_16px_45px_rgba(0,0,0,0.3)] md:h-28 md:w-52 md:px-5 md:py-4">
+  <span className="group flex h-20 w-40 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#111722]/85 px-2 py-2 shadow-[0_10px_28px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/35 hover:bg-[#151c29] hover:shadow-[0_14px_38px_rgba(0,0,0,0.3)] md:h-24 md:w-46 md:px-3 md:py-2.5">
     {client.image ? (
       <img
         src={client.image}
         alt={`${client.name} logo`}
         decoding="async"
         referrerPolicy="no-referrer"
-        className={`h-full w-full max-h-[82px] max-w-[168px] transition-transform duration-300 group-hover:scale-[1.04] md:max-h-[94px] md:max-w-[190px] ${
+        className={`h-full w-full max-h-[72px] max-w-[150px] transition-transform duration-300 group-hover:scale-[1.04] md:max-h-[88px] md:max-w-[174px] ${
           client.fit === "cover" ? "object-cover" : "object-contain"
         }`}
         style={{ objectPosition: client.position ?? "center" }}
       />
     ) : (
       <span className="flex flex-col items-center text-center leading-none">
-        <span className="text-lg font-extrabold tracking-[0.08em] text-white md:text-xl">
+        <span className="text-base font-extrabold tracking-[0.08em] text-white md:text-lg">
           {client.fallbackTop}
         </span>
-        <span className="mt-2 text-[9px] font-semibold tracking-[0.14em] text-white/55 md:text-[10px]">
+        <span className="mt-1.5 text-[8px] font-semibold tracking-[0.12em] text-white/55 md:text-[9px]">
           {client.fallbackBottom}
         </span>
       </span>
