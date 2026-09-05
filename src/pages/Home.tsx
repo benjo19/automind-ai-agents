@@ -12,6 +12,7 @@ import SolutionCards from "@/components/SolutionCards";
 import TargetIndustries from "@/components/TargetIndustries";
 import DemoForm from "@/components/DemoForm";
 import BookCall from "@/components/BookCall";
+import ClientLogos from "@/components/ClientLogos";
 
 const Home = () => (
   <>
@@ -28,6 +29,7 @@ const Home = () => (
     </Helmet>
     <Navbar />
     <Hero />
+    <ClientLogos />
     <Services />
     <SolutionCards />
     <HowItWorks />

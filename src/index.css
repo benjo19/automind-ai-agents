@@ -235,4 +235,9 @@
   .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
   .animate-float { animation: float 7s ease-in-out infinite; }
   .animate-marquee { animation: marquee-scroll 30s linear infinite; }
+  .animate-marquee-slow { animation: marquee-scroll 60s linear infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee-slow { animation: none !important; }
+  }
 }
