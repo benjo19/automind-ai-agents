@@ -31,9 +31,8 @@ const LogoTile = ({ client }: { client: Client }) => (
       <img
         src={client.image}
         alt={`${client.name} logo`}
-        loading="lazy"
         decoding="async"
-        className="h-12 w-12 md:h-14 md:w-14 shrink-0 rounded-full object-cover"
+        className="h-14 w-14 md:h-16 md:w-16 shrink-0 rounded-full object-cover"
       />
     ) : (
       <span className="flex flex-col items-center leading-none">
