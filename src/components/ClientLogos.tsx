@@ -20,6 +20,8 @@ const CLIENTS: Client[] = [
   { name: "Veranda Grill", top: "VERANDA", bottom: "GRILL" },
   { name: "Varadero Bar", image: varaderoLogo },
   { name: "Pierino Restaurant Rovinj", top: "PIERINO", bottom: "ROVINJ" },
+  { name: "Restoran Da Piero", top: "DA PIERO", bottom: "RESTORAN" },
+  { name: "Q Laundry", top: "Q LAUNDRY", bottom: "SAMOPOSLUŽNE PRAONICE" },
 ];
 
 // Dupliciramo skup radi beskonačnog loopa (animacija pomiče -50%).
