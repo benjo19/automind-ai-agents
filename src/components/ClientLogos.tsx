@@ -1,4 +1,4 @@
-import varaderoLogo from "@/assets/varadero-bar-logo.jpg.asset.json";
+import varaderoLogo from "@/assets/varadero-bar-logo.jpg";
 
 /**
  * "Naši korisnici" — premium horizontalni beskonačni ticker s brand markovima.
@@ -18,7 +18,7 @@ type Client = {
 const CLIENTS: Client[] = [
   { name: "Verona Due Pizzeria", top: "VERONA", bottom: "DUE" },
   { name: "Veranda Grill", top: "VERANDA", bottom: "GRILL" },
-  { name: "Varadero Bar", image: varaderoLogo.url },
+  { name: "Varadero Bar", image: varaderoLogo },
   { name: "Pierino Restaurant Rovinj", top: "PIERINO", bottom: "ROVINJ" },
 ];
 
