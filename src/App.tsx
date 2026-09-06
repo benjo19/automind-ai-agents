@@ -9,6 +9,8 @@ import { LanguageProvider } from "./lib/i18n";
 
 import Home from "./pages/Home";
 import AIRecepcionar from "./pages/AIRecepcionar";
+import AIAutomatizacijaPoslovanja from "./pages/AIAutomatizacijaPoslovanja";
+import AIAgentiHrvatska from "./pages/AIAgentiHrvatska";
 import AIZaSalone from "./pages/AIZaSalone";
 import AIZaOrdinacije from "./pages/AIZaOrdinacije";
 import AIZaAutoServise from "./pages/AIZaAutoServise";
@@ -40,6 +42,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/ai-recepcionar" element={<AIRecepcionar />} />
+            <Route path="/ai-automatizacija-poslovanja" element={<AIAutomatizacijaPoslovanja />} />
+            <Route path="/ai-agenti-hrvatska" element={<AIAgentiHrvatska />} />
             <Route path="/ai-za-salone" element={<AIZaSalone />} />
             <Route path="/ai-za-ordinacije" element={<AIZaOrdinacije />} />
             <Route path="/ai-za-auto-servise" element={<AIZaAutoServise />} />

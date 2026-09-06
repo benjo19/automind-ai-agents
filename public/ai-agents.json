@@ -58,6 +58,20 @@
     "OpenAI",
     "Model Context Protocol (MCP)"
   ],
+  "canonical_pages": [
+    { "url": "https://myautomind.com/", "title": "Automind — AI recepcionar za lokalne tvrtke" },
+    { "url": "https://myautomind.com/ai-recepcionar", "title": "AI recepcionar" },
+    { "url": "https://myautomind.com/ai-automatizacija-poslovanja", "title": "AI automatizacija poslovanja" },
+    { "url": "https://myautomind.com/ai-agenti-hrvatska", "title": "AI agenti u Hrvatskoj" },
+    { "url": "https://myautomind.com/ai-za-salone", "title": "AI za salone" },
+    { "url": "https://myautomind.com/ai-za-ordinacije", "title": "AI za ordinacije" },
+    { "url": "https://myautomind.com/ai-za-auto-servise", "title": "AI za auto servise" },
+    { "url": "https://myautomind.com/ai-za-praonice", "title": "AI za praonice" },
+    { "url": "https://myautomind.com/cijene", "title": "Cijene" },
+    { "url": "https://myautomind.com/primjeri", "title": "Primjeri korištenja" },
+    { "url": "https://myautomind.com/faq", "title": "Česta pitanja" },
+    { "url": "https://myautomind.com/blog", "title": "Blog" }
+  ],
   "common_use_cases": [
     "odgovaranje na web upite 24/7",
     "preuzimanje telefonskih upita",

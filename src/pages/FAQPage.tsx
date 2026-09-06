@@ -1,4 +1,4 @@
-import PageShell, { PageHero, CtaBlock } from "@/components/PageShell";
+import PageShell, { PageHero, CtaBlock, RelatedLinks } from "@/components/PageShell";
 import {
   Accordion,
   AccordionContent,
@@ -51,6 +51,35 @@ const FAQPage = () => {
           </Accordion>
         </div>
       </section>
+
+      <section className="container px-4 max-w-3xl mx-auto py-10">
+        <div className="p-8 rounded-2xl border border-foreground/10 bg-white/60">
+          <h2 className="text-2xl font-bold tracking-tight mb-3">O Automindu</h2>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            Automind postavlja AI recepcionara i automatizaciju upita za lokalne uslužne tvrtke u Hrvatskoj. Radimo na
+            hrvatskom jeziku, s alatima koje tvrtke već koriste — kalendar, e-mail, tablice i CRM — i s procesima koji
+            se prije uvođenja zapišu, testiraju i tek onda puste uživo.
+          </p>
+          <ul className="text-sm text-muted-foreground leading-relaxed space-y-2 list-disc pl-5">
+            <li>Sjedište i rad: Zagreb, Hrvatska.</li>
+            <li>Jezici komunikacije: hrvatski i engleski.</li>
+            <li>Kontakt: auto.mind.ai2025@gmail.com, +385 99 508 5933.</li>
+            <li>Obrada podataka opisana je u politici privatnosti i uvjetima korištenja.</li>
+          </ul>
+        </div>
+      </section>
+
+      <RelatedLinks
+        title="Povezane stranice"
+        links={[
+          { to: "/ai-recepcionar", label: "AI recepcionar", text: "Kratki odgovori o radu sustava." },
+          { to: "/ai-automatizacija-poslovanja", label: "AI automatizacija poslovanja", text: "Širi zahvat od jednog kanala." },
+          { to: "/ai-agenti-hrvatska", label: "AI agenti u Hrvatskoj", text: "Vrste agenata i njihove granice." },
+          { to: "/primjeri", label: "Primjeri", text: "Scenariji i projektni primjer." },
+          { to: "/cijene", label: "Cijene", text: "Paketi i opseg." },
+          { to: "/blog", label: "Blog", text: "Vodiči i objašnjenja." },
+        ]}
+      />
 
       <CtaBlock />
     </PageShell>
