@@ -9,6 +9,8 @@ import { LanguageProvider } from "./lib/i18n";
 
 import Home from "./pages/Home";
 import AIRecepcionar from "./pages/AIRecepcionar";
+import AIAutomatizacijaPoslovanja from "./pages/AIAutomatizacijaPoslovanja";
+import AIAgentiHrvatska from "./pages/AIAgentiHrvatska";
 import AIZaSalone from "./pages/AIZaSalone";
 import AIZaOrdinacije from "./pages/AIZaOrdinacije";
 import AIZaAutoServise from "./pages/AIZaAutoServise";
