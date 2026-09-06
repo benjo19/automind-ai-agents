@@ -87,6 +87,70 @@ export const FeatureGrid = ({ items }: FeatureGridProps) => (
   </section>
 );
 
+export interface QaItem {
+  q: string;
+  a: string;
+}
+
+interface QaSectionProps {
+  title?: string;
+  intro?: string;
+  items: QaItem[];
+  headingLevel?: "h2" | "h3";
+}
+
+/** Concise, quotable question/answer blocks (AEO). */
+export const QaSection = ({ title, intro, items, headingLevel = "h2" }: QaSectionProps) => {
+  const Heading = headingLevel;
+  return (
+    <section className="container px-4 max-w-3xl mx-auto py-12">
+      {title && <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">{title}</h2>}
+      {intro && <p className="text-muted-foreground mb-8 leading-relaxed">{intro}</p>}
+      <div className="space-y-8">
+        {items.map((item, i) => (
+          <div key={i}>
+            <Heading className="text-lg md:text-xl font-semibold tracking-tight mb-2">{item.q}</Heading>
+            <p className="text-muted-foreground leading-relaxed">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export const faqSchema = (items: QaItem[]) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+});
+
+interface RelatedLinksProps {
+  title?: string;
+  links: { to: string; label: string; text?: string }[];
+}
+
+export const RelatedLinks = ({ title = "Povezano", links }: RelatedLinksProps) => (
+  <section className="container px-4 max-w-5xl mx-auto py-10">
+    <h2 className="text-xl font-bold tracking-tight mb-5">{title}</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {links.map((l) => (
+        <Link
+          key={l.to}
+          to={l.to}
+          className="block p-5 rounded-2xl border border-foreground/10 bg-white/60 hover:border-accent/40 transition-colors"
+        >
+          <span className="font-semibold tracking-tight block mb-1">{l.label}</span>
+          {l.text && <span className="text-sm text-muted-foreground leading-relaxed">{l.text}</span>}
+        </Link>
+      ))}
+    </div>
+  </section>
+);
+
 export const CtaBlock = ({
   title = "Spremni za AI recepcionara?",
   subtitle = "Pošaljite upit i pripremamo demo prilagođen vašoj djelatnosti — javljamo se u 24 sata.",
