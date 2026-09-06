@@ -35,19 +35,29 @@ Automind je za tvrtke koje propuštaju upite jer nemaju osobu koja stalno odgova
 
 ## Pages
 
-- [Početna](/): Pregled usluga, glasovni demo i poziv na konzultacije.
-- [Blog](/#/blog): Vodiči i primjeri kako AI mijenja rad lokalnih biznisa.
-- [Politika privatnosti](/politika-privatnosti): Kako Automind koristi i štiti podatke.
-- [Uvjeti korištenja](/uvjeti-koristenja): Pravni uvjeti korištenja usluga.
-- [Kolačići](/kolacici): Informacije o kolačićima na stranici.
+- [Početna](https://myautomind.com/): Pregled usluga, glasovni demo i poziv na konzultacije.
+- [AI recepcionar](https://myautomind.com/ai-recepcionar): Što radi AI recepcionar, kako radi, jezik, kanali, termini, ponude, GDPR i cijena.
+- [AI automatizacija poslovanja](https://myautomind.com/ai-automatizacija-poslovanja): Automatizacija upita, zakazivanja, ponuda, nabave i evidencije.
+- [AI agenti u Hrvatskoj](https://myautomind.com/ai-agenti-hrvatska): Vrste AI agenata, primjena kod lokalnih tvrtki i granice sustava.
+- [AI za salone](https://myautomind.com/ai-za-salone): Termini i poruke u beauty djelatnosti.
+- [AI za ordinacije](https://myautomind.com/ai-za-ordinacije): Naručivanje pacijenata i podsjetnici.
+- [AI za auto servise](https://myautomind.com/ai-za-auto-servise): Pozivi, trijaža kvarova i termini.
+- [AI za praonice](https://myautomind.com/ai-za-praonice): Narudžbe, preuzimanje i dostava.
+- [Cijene](https://myautomind.com/cijene): Paketi i opseg svakog paketa.
+- [Primjeri](https://myautomind.com/primjeri): Scenariji po djelatnostima i projektni primjer Orderly.
+- [FAQ](https://myautomind.com/faq): Odgovori na najčešća pitanja i osnovni podaci o tvrtki.
+- [Blog](https://myautomind.com/blog): Vodiči i primjeri kako AI mijenja rad lokalnih biznisa.
+- [Politika privatnosti](https://myautomind.com/politika-privatnosti): Kako Automind koristi i štiti podatke.
+- [Uvjeti korištenja](https://myautomind.com/uvjeti-koristenja): Pravni uvjeti korištenja usluga.
+- [Kolačići](https://myautomind.com/kolacici): Informacije o kolačićima na stranici.
 
 ## Blog
 
-- [Kako AI agent može odgovarati na upite 24/7](/#/blog/kako-ai-agent-moze-odgovarati-na-upite): Brzina odgovora i utjecaj na konverziju.
-- [Automatizacija zakazivanja termina](/#/blog/automatizacija-zakazivanja-termina): Kraj telefonskog pingponga.
-- [AI agent za slanje ponuda](/#/blog/ai-agent-za-slanje-ponuda): Automatizacija prodajnog procesa.
-- [GDPR i AI agenti](/#/blog/gdpr-i-ai-agenti): Usklađenost i zaštita podataka.
-- [Koliko košta ne automatizirati](/#/blog/koliko-kosta-ne-automatizirati): Skriveni trošak ručnog rada.
+- [Kako AI agent može odgovarati na upite 24/7](https://myautomind.com/blog/kako-ai-agent-moze-odgovarati-na-upite): Brzina odgovora i utjecaj na konverziju.
+- [Automatizacija zakazivanja termina](https://myautomind.com/blog/automatizacija-zakazivanja-termina): Kraj telefonskog pingponga.
+- [AI agent za slanje ponuda](https://myautomind.com/blog/ai-agent-za-slanje-ponuda): Automatizacija prodajnog procesa.
+- [GDPR i AI agenti](https://myautomind.com/blog/gdpr-i-ai-agenti): Usklađenost i zaštita podataka.
+- [Koliko košta ne automatizirati](https://myautomind.com/blog/koliko-kosta-ne-automatizirati): Skriveni trošak ručnog rada.
 
 ## Common questions
 
