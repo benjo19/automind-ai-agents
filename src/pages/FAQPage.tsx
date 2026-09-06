@@ -1,4 +1,4 @@
-import PageShell, { PageHero, CtaBlock } from "@/components/PageShell";
+import PageShell, { PageHero, CtaBlock, RelatedLinks } from "@/components/PageShell";
 import {
   Accordion,
   AccordionContent,
