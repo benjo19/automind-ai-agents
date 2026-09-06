@@ -14,6 +14,8 @@ import { useLanguage, type Language } from "@/lib/i18n";
 
 const industries = [
   { to: "/ai-recepcionar", label: "AI recepcionar" },
+  { to: "/ai-automatizacija-poslovanja", label: "AI automatizacija poslovanja" },
+  { to: "/ai-agenti-hrvatska", label: "AI agenti u Hrvatskoj" },
   { to: "/ai-za-salone", label: "AI za salone" },
   { to: "/ai-za-ordinacije", label: "AI za ordinacije" },
   { to: "/ai-za-auto-servise", label: "AI za auto servise" },
