@@ -39,7 +39,6 @@ const Home = () => (
     <TargetIndustries />
     <OrderlySection />
     <DemoForm />
-    <BookCall />
     <FAQ />
     <Footer />
   </>
