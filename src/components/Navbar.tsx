@@ -90,11 +90,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Handle /#demo hash scroll when arriving on home
+  // Handle /#demo and /#orderly hash scroll when arriving on home
   useEffect(() => {
-    if (location.pathname === "/" && location.hash === "#demo") {
+    if (location.pathname === "/" && (location.hash === "#demo" || location.hash === "#orderly")) {
       setTimeout(() => {
-        document.getElementById("demo")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 200);
     }
   }, [location]);
@@ -130,6 +130,14 @@ const Navbar = () => {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
+
+          <button
+            type="button"
+            onClick={goToOrderly}
+            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Orderly
+          </button>
 
           {mainLinks.map((l) => (
             <Link
