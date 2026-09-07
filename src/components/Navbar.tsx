@@ -54,6 +54,18 @@ const Navbar = () => {
     }
   };
 
+  const goToOrderly = () => {
+    setOpen(false);
+    if (location.pathname === "/") {
+      document.getElementById("orderly")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      navigate("/#orderly");
+      setTimeout(() => {
+        document.getElementById("orderly")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+    }
+  };
+
   const LanguageSwitch = ({ mobile = false }: { mobile?: boolean }) => (
     <div className={`inline-flex rounded-full border border-foreground/10 bg-foreground/5 p-1 ${mobile ? "w-full" : ""}`} aria-label={t.nav.languageLabel}>
       {(["hr", "en"] as Language[]).map((lng) => (
