@@ -12,7 +12,6 @@ import SolutionCards from "@/components/SolutionCards";
 import TargetIndustries from "@/components/TargetIndustries";
 import OrderlySection from "@/components/OrderlySection";
 import DemoForm from "@/components/DemoForm";
-import BookCall from "@/components/BookCall";
 import ClientLogos from "@/components/ClientLogos";
 
 const Home = () => (
