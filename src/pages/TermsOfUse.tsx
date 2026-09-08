@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import logo from "@/assets/logo.png";
+import fullLogo from "@/assets/automindai-full-logo.jpg.asset.json";
 
 const TermsOfUse = () => {
   return (
@@ -15,7 +15,7 @@ const TermsOfUse = () => {
         <header className="container px-4 py-6 flex items-center gap-4">
           <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-5 w-5" />
-            <img src={logo} alt="Automind logo" className="h-8 w-auto invert" />
+            <img src={fullLogo.url} alt="AutomindAI — Automation for a brighter tomorrow" className="h-10 w-auto max-w-[210px] object-contain" />
           </Link>
         </header>
 

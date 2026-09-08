@@ -2,7 +2,7 @@ import { useState, FormEvent } from "react";
 import { Mail, Phone, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import logo from "@/assets/logo.png";
+import fullLogo from "@/assets/automindai-full-logo.jpg.asset.json";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n";
@@ -53,7 +53,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <img src={logo} alt="Automind logo" className="h-10 w-auto invert mb-4" />
+            <img src={fullLogo.url} alt="AutomindAI — Automation for a brighter tomorrow" className="h-auto w-full max-w-[240px] object-contain mb-4" />
             <p className="text-sm text-muted-foreground mb-2">
               {t.footer.tagline}
             </p>
