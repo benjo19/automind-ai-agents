@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logo from "@/assets/logo.png";
+import fullLogo from "@/assets/automindai-full-logo.jpg.asset.json";
 import { useLanguage, type Language } from "@/lib/i18n";
 
 const industries = [
@@ -111,10 +111,10 @@ const Navbar = () => {
         <Link
           to="/"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/60 border border-foreground/5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] backdrop-blur-sm hover:bg-white/90 transition-all"
+          className="flex items-center px-2 py-1 rounded-xl bg-white/90 border border-foreground/5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] backdrop-blur-sm hover:bg-white transition-all"
           aria-label={t.nav.logoLabel}
         >
-          <img src={logo} alt="Automind logo" className="h-7 w-auto invert" />
+          <img src={fullLogo.url} alt="AutomindAI — Automation for a brighter tomorrow" className="h-9 md:h-10 w-auto max-w-[170px] md:max-w-[210px] object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
