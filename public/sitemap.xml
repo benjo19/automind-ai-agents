@@ -6,6 +6,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://myautomind.com/proizvodi/orderflow</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://myautomind.com/ai-recepcionar</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
