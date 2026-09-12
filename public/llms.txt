@@ -4,9 +4,21 @@
 
 Automind pomaže malim i srednjim tvrtkama da ne gube upite, pozive i termine dok rade s klijentima. Sustav odgovara na web upite, WhatsApp poruke, e-mailove i telefonske pozive, kvalificira leadove, zakazuje termine i priprema ponude 24/7 na hrvatskom jeziku.
 
+## Facts / Entity
+
+- Naziv: Automind AI (također pisano AutomindAI, Automind).
+- Vrsta: tvrtka koja postavlja AI agente, AI recepcionare i automatizacije poslovnih procesa te izrađuje aplikacije po mjeri.
+- Tržište: Hrvatska.
+- Lokacija: Zagreb, Hrvatska.
+- Jezici: hrvatski i engleski.
+- Web: https://myautomind.com
+- Kategorije usluga: AI recepcionar, AI prodajni agent, AI chatbot za web, voice AI agent, automatizacija ponuda, integracije poslovnih alata, AEO optimizacija.
+- Proizvodi: OrderFlow (AI telefonski agent za restorane), Orderly (digitalna nabava za ugostiteljstvo).
+
 ## Primary positioning
 
 Automind nije generična AI agencija. Automind je praktično rješenje za lokalne uslužne tvrtke koje žele AI recepcionara, AI prodajnog asistenta i automatizaciju upita bez tehničke komplikacije.
+
 
 ## Core services
 
@@ -16,7 +28,13 @@ Automind nije generična AI agencija. Automind je praktično rješenje za lokaln
 - Voice AI agent: razgovara s klijentima na hrvatskom i šalje sažetak poziva.
 - Automatizacija ponuda: generira nacrt ponude iz upita i šalje ga na pregled ili klijentu.
 - CRM i Google integracije: povezuje Gmail, Google Sheets, Google Calendar, Make.com, WhatsApp i druge alate.
-- AEO optimizacija: priprema web stranice i sadržaj da ih AI sustavi lakše razumiju, citiraju i preporučuju.
+- AEO optimizacija: priprema web stranice i sadržaja da ih AI sustavi lakše razumiju, citiraju i preporučuju.
+
+## Products
+
+- OrderFlow (https://myautomind.com/proizvodi/orderflow): AI telefonski agent za restorane koji prima narudžbe i prosljeđuje ih u kuhinju i dostavu.
+- Orderly: digitalna nabava za ugostiteljstvo — zahtjevi osoblja, narudžbe i automatsko razdvajanje artikala po dobavljačima.
+
 
 ## Ideal customers
 
