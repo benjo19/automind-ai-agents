@@ -44,8 +44,7 @@ const Navbar = () => {
   const goToDemo = () => {
     setOpen(false);
     if (location.pathname === "/") {
-      const el = document.getElementById("demo");
-      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("demo")?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
       navigate("/#demo");
       setTimeout(() => {
@@ -90,9 +89,8 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Handle /#demo and /#orderly hash scroll when arriving on home
   useEffect(() => {
-    if (location.pathname === "/" && (location.hash === "#demo" || location.hash === "#orderly")) {
+    if (location.pathname === "/" && (location.hash === "#demo" || location.hash === "#orderly" || location.hash === "#proizvodi")) {
       setTimeout(() => {
         document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 200);
@@ -100,6 +98,7 @@ const Navbar = () => {
   }, [location]);
 
   const isActive = (to: string) => location.pathname === to;
+  const productsActive = location.pathname.startsWith("/proizvodi");
 
   return (
     <header
@@ -131,13 +130,29 @@ const Navbar = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <button
-            type="button"
-            onClick={goToOrderly}
-            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Orderly
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className={`flex items-center gap-1 px-4 py-2 text-sm transition-colors ${
+                productsActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Proizvodi <ChevronDown className="h-3.5 w-3.5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64">
+              <DropdownMenuItem onSelect={goToOrderly} className="cursor-pointer">
+                <div>
+                  <div className="font-medium">Orderly</div>
+                  <div className="text-xs text-muted-foreground">Nabava i naručivanje robe</div>
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/proizvodi/orderflow" className="flex flex-col items-start">
+                  <span className="font-medium">OrderFlow</span>
+                  <span className="text-xs text-muted-foreground">AI telefonski agent za restorane</span>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {mainLinks.map((l) => (
             <Link
@@ -176,7 +191,26 @@ const Navbar = () => {
                 <Link to="/" onClick={() => setOpen(false)} className="px-4 py-3 text-base text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-lg">
                   Početna
                 </Link>
-                <div className="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-muted-foreground/60 font-semibold">Industrije</div>
+
+                <div className="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-muted-foreground/60 font-semibold">Proizvodi</div>
+                <button
+                  type="button"
+                  onClick={goToOrderly}
+                  className="text-left px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-lg"
+                >
+                  <span className="block font-medium">Orderly</span>
+                  <span className="block text-xs text-muted-foreground/70 mt-0.5">Nabava i naručivanje robe</span>
+                </button>
+                <Link
+                  to="/proizvodi/orderflow"
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-lg"
+                >
+                  <span className="block font-medium">OrderFlow</span>
+                  <span className="block text-xs text-muted-foreground/70 mt-0.5">AI telefonski agent za restorane</span>
+                </Link>
+
+                <div className="px-4 pt-4 pb-1 text-xs uppercase tracking-wider text-muted-foreground/60 font-semibold">Industrije</div>
                 {industries.map((i) => (
                   <Link
                     key={i.to}
