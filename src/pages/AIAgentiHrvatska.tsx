@@ -23,6 +23,11 @@ const faq: QaItem[] = [
     a: "Najčešće kod lokalnih uslužnih tvrtki koje dobivaju puno kratkih upita: saloni, ordinacije, auto servisi, praonice, ugostiteljstvo, smještaj i manje B2B tvrtke. Zajedničko im je da upiti stižu izvan radnog vremena i preko više kanala.",
   },
   {
+    q: "Koja je razlika između chatbota i AI voice agenta?",
+    a: "Chatbot radi u pisanom kanalu — na web stranici, u poruci ili e-mailu — i dobar je za brze odgovore i prikupljanje upita. Voice agent razgovara telefonom, pa preuzima pozive koje inače nitko ne stigne javiti i sažetak razgovora šalje timu. Oba mogu raditi na istim pravilima i pisati u isti kalendar ili tablicu, pa se često kombiniraju.",
+  },
+
+  {
     q: "Što ako agent ne zna odgovor?",
     a: "Agent se postavlja s jasnom granicom: kada pitanje izlazi izvan zadanog opsega, razgovor se prebacuje na osobu iz tima uz sažetak dotadašnjeg razgovora. Cilj je da nijedan upit ne ostane bez odgovora, a ne da agent nagađa.",
   },
