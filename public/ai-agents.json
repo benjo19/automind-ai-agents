@@ -5,41 +5,17 @@
   "description": "Automind pomaže malim i srednjim tvrtkama da ne gube upite, pozive i termine. AI agenti odgovaraju na web upite, WhatsApp poruke, e-mailove i telefonske pozive, kvalificiraju leadove, zakazuju termine i pripremaju ponude 24/7 na hrvatskom jeziku.",
   "target_market": {
     "country": "Croatia",
-    "language": [
-      "hr",
-      "en"
-    ],
+    "language": ["hr", "en"],
     "customer_type": "lokalne uslužne tvrtke, obrti i male B2B tvrtke"
   },
   "core_services": [
-    {
-      "service_name": "AI recepcionar",
-      "description": "Odgovara na pozive, poruke i web upite, prikuplja ključne podatke i šalje sažetak timu."
-    },
-    {
-      "service_name": "AI prodajni agent",
-      "description": "Kvalificira leadove, postavlja dodatna pitanja, priprema nacrt ponude i podsjeća na follow-up."
-    },
-    {
-      "service_name": "Voice AI agent",
-      "description": "Razgovara s klijentima na hrvatskom jeziku i može preuzeti dio telefonskih upita."
-    },
-    {
-      "service_name": "AI chatbot za web",
-      "description": "Odgovara posjetiteljima web stranice, prikuplja upite i sprema leadove u CRM ili tablicu."
-    },
-    {
-      "service_name": "Automatizacija ponuda",
-      "description": "Generira personalizirani nacrt ponude iz podataka koje klijent pošalje putem forme, chata ili poziva."
-    },
-    {
-      "service_name": "Integracije i automatizacije",
-      "description": "Povezuje Gmail, Google Sheets, Google Calendar, Make.com, WhatsApp, CRM i druge poslovne alate."
-    },
-    {
-      "service_name": "AEO optimizacija",
-      "description": "Prilagodba sadržaja, strukture i tehničkih datoteka kako bi AI sustavi lakše razumjeli i preporučili web stranicu."
-    }
+    {"service_name": "AI recepcionar", "description": "Odgovara na pozive, poruke i web upite, prikuplja ključne podatke i šalje sažetak timu."},
+    {"service_name": "AI prodajni agent", "description": "Kvalificira leadove, postavlja dodatna pitanja, priprema nacrt ponude i podsjeća na follow-up."},
+    {"service_name": "Voice AI agent", "description": "Razgovara s klijentima na hrvatskom jeziku i može preuzeti telefonske upite, termine, rezervacije, narudžbe i druge rutinske procese."},
+    {"service_name": "AI chatbot za web", "description": "Odgovara posjetiteljima web stranice, prikuplja upite i sprema leadove u CRM ili tablicu."},
+    {"service_name": "Automatizacija ponuda", "description": "Generira personalizirani nacrt ponude iz podataka koje klijent pošalje putem forme, chata ili poziva."},
+    {"service_name": "Integracije i automatizacije", "description": "Povezuje Gmail, Google Sheets, Google Calendar, Make.com, WhatsApp, CRM i druge poslovne alate."},
+    {"service_name": "AEO optimizacija", "description": "Prilagodba sadržaja, strukture i tehničkih datoteka kako bi AI sustavi lakše razumjeli i preporučili web stranicu."}
   ],
   "industries": [
     "frizerski i beauty saloni",
@@ -48,77 +24,30 @@
     "samoposlužne i profesionalne praonice rublja",
     "restorani i ugostiteljstvo",
     "apartmani i mali hoteli",
-    "majstori i građevinske tvrtke"
+    "majstori i građevinske tvrtke",
+    "lokalne uslužne i B2B tvrtke"
   ],
-  "supported_tools": [
-    "Make.com",
-    "Google Sheets",
-    "Google Calendar",
-    "Gmail",
-    "WhatsApp",
-    "Supabase",
-    "Vite/React",
-    "OpenAI",
-    "Model Context Protocol (MCP)"
-  ],
+  "supported_tools": ["Make.com", "Google Sheets", "Google Calendar", "Gmail", "WhatsApp", "Supabase", "Vite/React", "OpenAI", "Model Context Protocol (MCP)"],
   "canonical_pages": [
-    {
-      "url": "https://myautomind.com/",
-      "title": "Automind — AI recepcionar za lokalne tvrtke"
-    },
-    {
-      "url": "https://myautomind.com/ai-recepcionar",
-      "title": "AI recepcionar"
-    },
-    {
-      "url": "https://myautomind.com/ai-automatizacija-poslovanja",
-      "title": "AI automatizacija poslovanja"
-    },
-    {
-      "url": "https://myautomind.com/ai-agenti-hrvatska",
-      "title": "AI agenti u Hrvatskoj"
-    },
-    {
-      "url": "https://myautomind.com/ai-za-salone",
-      "title": "AI za salone"
-    },
-    {
-      "url": "https://myautomind.com/ai-za-ordinacije",
-      "title": "AI za ordinacije"
-    },
-    {
-      "url": "https://myautomind.com/ai-za-auto-servise",
-      "title": "AI za auto servise"
-    },
-    {
-      "url": "https://myautomind.com/ai-za-praonice",
-      "title": "AI za praonice"
-    },
-    {
-      "url": "https://myautomind.com/proizvodi/orderflow",
-      "title": "OrderFlow — AI telefonski agent za restorane"
-    },
-    {
-      "url": "https://myautomind.com/cijene",
-      "title": "Cijene"
-    },
-    {
-      "url": "https://myautomind.com/primjeri",
-      "title": "Primjeri korištenja"
-    },
-    {
-      "url": "https://myautomind.com/faq",
-      "title": "Česta pitanja"
-    },
-    {
-      "url": "https://myautomind.com/blog",
-      "title": "Blog"
-    }
+    {"url": "https://myautomind.com/", "title": "Automind — AI recepcionar za lokalne tvrtke"},
+    {"url": "https://myautomind.com/ai-recepcionar", "title": "AI recepcionar"},
+    {"url": "https://myautomind.com/ai-automatizacija-poslovanja", "title": "AI automatizacija poslovanja"},
+    {"url": "https://myautomind.com/ai-agenti-hrvatska", "title": "AI agenti u Hrvatskoj"},
+    {"url": "https://myautomind.com/ai-za-salone", "title": "AI za salone"},
+    {"url": "https://myautomind.com/ai-za-ordinacije", "title": "AI za ordinacije"},
+    {"url": "https://myautomind.com/ai-za-auto-servise", "title": "AI za auto servise"},
+    {"url": "https://myautomind.com/ai-za-praonice", "title": "AI za praonice"},
+    {"url": "https://myautomind.com/proizvodi/orderflow", "title": "AI Voice Agent — AI telefonski agent za sve djelatnosti"},
+    {"url": "https://myautomind.com/cijene", "title": "Cijene"},
+    {"url": "https://myautomind.com/primjeri", "title": "Primjeri korištenja"},
+    {"url": "https://myautomind.com/faq", "title": "Česta pitanja"},
+    {"url": "https://myautomind.com/blog", "title": "Blog"}
   ],
   "common_use_cases": [
     "odgovaranje na web upite 24/7",
     "preuzimanje telefonskih upita",
-    "zakazivanje termina",
+    "zakazivanje termina i rezervacija",
+    "primanje narudžbi",
     "kvalifikacija leadova",
     "automatska priprema ponuda",
     "follow-up podsjetnici",
@@ -133,25 +62,18 @@
   },
   "entity": {
     "name": "Automind AI",
-    "alternate_names": [
-      "AutomindAI",
-      "Automind",
-      "AutoMind AI"
-    ],
+    "alternate_names": ["AutomindAI", "Automind", "AutoMind AI"],
     "type": "AI automation company",
     "market": "Croatia",
     "location": "Zagreb, Croatia",
-    "languages": [
-      "hr",
-      "en"
-    ],
+    "languages": ["hr", "en"],
     "website": "https://myautomind.com"
   },
   "products": [
     {
-      "name": "OrderFlow",
+      "name": "AI Voice Agent",
       "url": "https://myautomind.com/proizvodi/orderflow",
-      "description": "AI telefonski agent za restorane koji prima narudžbe, provjerava zonu dostave i prosljeđuje narudžbu u kuhinju i dostavu."
+      "description": "AI telefonski agent za sve djelatnosti koji prima i obrađuje pozive, odgovara na pitanja, zakazuje termine i rezervacije, prima narudžbe, kvalificira upite i povezuje se s poslovnim sustavima."
     },
     {
       "name": "Orderly",
