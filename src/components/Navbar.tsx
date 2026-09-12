@@ -147,8 +147,8 @@ const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/proizvodi/orderflow" className="flex flex-col items-start">
-                  <span className="font-medium">OrderFlow</span>
-                  <span className="text-xs text-muted-foreground">AI telefonski agent za restorane</span>
+                  <span className="font-medium">AI Voice Agent</span>
+                  <span className="text-xs text-muted-foreground">AI telefonski agent za sve djelatnosti</span>
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -206,8 +206,8 @@ const Navbar = () => {
                   onClick={() => setOpen(false)}
                   className="px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-lg"
                 >
-                  <span className="block font-medium">OrderFlow</span>
-                  <span className="block text-xs text-muted-foreground/70 mt-0.5">AI telefonski agent za restorane</span>
+                  <span className="block font-medium">AI Voice Agent</span>
+                  <span className="block text-xs text-muted-foreground/70 mt-0.5">AI telefonski agent za sve djelatnosti</span>
                 </Link>
 
                 <div className="px-4 pt-4 pb-1 text-xs uppercase tracking-wider text-muted-foreground/60 font-semibold">Industrije</div>
