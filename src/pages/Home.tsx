@@ -14,6 +14,8 @@ import ProductsSection from "@/components/ProductsSection";
 import OrderlySection from "@/components/OrderlySection";
 import DemoForm from "@/components/DemoForm";
 import ClientLogos from "@/components/ClientLogos";
+import { useLanguage } from "@/lib/i18n";
+
 
 const Home = () => {
   const { t } = useLanguage();
@@ -60,6 +62,8 @@ const Home = () => {
     <FAQ />
     <Footer />
   </>
-);
+  );
+};
+
 
 export default Home;
