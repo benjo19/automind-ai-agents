@@ -48,6 +48,7 @@ const App = () => (
             <Route path="/ai-za-ordinacije" element={<AIZaOrdinacije />} />
             <Route path="/ai-za-auto-servise" element={<AIZaAutoServise />} />
             <Route path="/ai-za-praonice" element={<AIZaPraonice />} />
+            <Route path="/proizvodi/ai-voice-agent" element={<OrderFlow />} />
             <Route path="/proizvodi/orderflow" element={<OrderFlow />} />
             <Route path="/cijene" element={<Cijene />} />
             <Route path="/primjeri" element={<PrimjeriKoristenja />} />
