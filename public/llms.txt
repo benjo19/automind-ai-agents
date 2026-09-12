@@ -61,6 +61,7 @@ Automind je za tvrtke koje propuštaju upite jer nemaju osobu koja stalno odgova
 - [AI za ordinacije](https://myautomind.com/ai-za-ordinacije): Naručivanje pacijenata i podsjetnici.
 - [AI za auto servise](https://myautomind.com/ai-za-auto-servise): Pozivi, trijaža kvarova i termini.
 - [AI za praonice](https://myautomind.com/ai-za-praonice): Narudžbe, preuzimanje i dostava.
+- [OrderFlow](https://myautomind.com/proizvodi/orderflow): AI telefonski agent za restorane — narudžbe, zona dostave i prosljeđivanje u kuhinju.
 - [Cijene](https://myautomind.com/cijene): Paketi i opseg svakog paketa.
 - [Primjeri](https://myautomind.com/primjeri): Scenariji po djelatnostima i projektni primjer Orderly.
 - [FAQ](https://myautomind.com/faq): Odgovori na najčešća pitanja i osnovni podaci o tvrtki.
