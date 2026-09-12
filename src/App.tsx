@@ -15,6 +15,7 @@ import AIZaSalone from "./pages/AIZaSalone";
 import AIZaOrdinacije from "./pages/AIZaOrdinacije";
 import AIZaAutoServise from "./pages/AIZaAutoServise";
 import AIZaPraonice from "./pages/AIZaPraonice";
+import OrderFlow from "./pages/OrderFlow";
 import Cijene from "./pages/Cijene";
 import PrimjeriKoristenja from "./pages/PrimjeriKoristenja";
 import FAQPage from "./pages/FAQPage";
@@ -28,7 +29,6 @@ import ThankYou from "./pages/ThankYou";
 import Login from "./pages/Login";
 import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
-
 
 const queryClient = new QueryClient();
 
@@ -48,6 +48,7 @@ const App = () => (
             <Route path="/ai-za-ordinacije" element={<AIZaOrdinacije />} />
             <Route path="/ai-za-auto-servise" element={<AIZaAutoServise />} />
             <Route path="/ai-za-praonice" element={<AIZaPraonice />} />
+            <Route path="/proizvodi/orderflow" element={<OrderFlow />} />
             <Route path="/cijene" element={<Cijene />} />
             <Route path="/primjeri" element={<PrimjeriKoristenja />} />
             <Route path="/faq" element={<FAQPage />} />
