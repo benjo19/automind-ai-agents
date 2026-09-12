@@ -27,7 +27,7 @@ const faq: QaItem[] = [
     a: "Ako imate mali broj upita mjesečno, proces koji se svaki put odvija drukčije ili nedefiniran cjenik, automatizacija najčešće samo ubrzava nered. U tom slučaju prvo treba posložiti proces, pa tek onda razmišljati o alatima.",
   },
   {
-    q: "Koliko košta?",
+    q: "Koliko košta AI automatizacija poslovanja?",
     a: "Cijena ovisi o broju kanala, integracijama i složenosti procesa, pa se određuje nakon kratkog razgovora i pregleda postojećeg tijeka rada. Na stranici Cijene opisani su paketi i što svaki obuhvaća.",
   },
 ];
