@@ -10,6 +10,7 @@ import ConcreteActions from "@/components/ConcreteActions";
 import MissedLeadCost from "@/components/MissedLeadCost";
 import SolutionCards from "@/components/SolutionCards";
 import TargetIndustries from "@/components/TargetIndustries";
+import ProductsSection from "@/components/ProductsSection";
 import OrderlySection from "@/components/OrderlySection";
 import DemoForm from "@/components/DemoForm";
 import ClientLogos from "@/components/ClientLogos";
@@ -32,6 +33,7 @@ const Home = () => (
     <ClientLogos />
     <Services />
     <SolutionCards />
+    <ProductsSection />
     <HowItWorks />
     <ConcreteActions />
     <BeforeAfter />
