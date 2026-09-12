@@ -1,4 +1,4 @@
-import { ArrowRight, Bot, ClipboardList, MapPin, PhoneCall, ShoppingCart, Truck } from "lucide-react";
+import { ArrowRight, Bot, CalendarCheck, ClipboardList, PhoneCall, ShoppingCart, Truck, Workflow } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -19,7 +19,7 @@ const ProductsSection = () => {
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-3">Automind proizvodi</p>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-4">Gotovi sustavi za procese koji troše najviše vremena.</h2>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            Uz automatizacije po mjeri razvijamo vlastite proizvode za ugostiteljstvo — od nabave do telefonskih narudžbi, kuhinje i dostave.
+            Uz automatizacije po mjeri razvijamo vlastite proizvode za tvrtke različitih djelatnosti — od nabave do AI telefonskih agenata koji preuzimaju pozive i rutinske zadatke.
           </p>
         </div>
 
@@ -53,18 +53,18 @@ const ProductsSection = () => {
                 </div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-accent border border-accent/20 bg-accent/5 rounded-full px-3 py-1.5">AI Voice</span>
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">OrderFlow</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">AI Voice Agent</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                AI telefonski agent za restorane koji prima pozive i narudžbe, provjerava zonu dostave te šalje narudžbu direktno u operativni sustav kuhinje i dostave.
+                AI telefonski agent za sve djelatnosti. Prima i obrađuje pozive, odgovara na pitanja, zakazuje termine, kvalificira upite, prima narudžbe i povezuje se s vašim poslovnim sustavima.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2"><PhoneCall className="w-4 h-4 text-accent" /> AI pozivi</div>
-                <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" /> Geofencing</div>
-                <div className="flex items-center gap-2"><Truck className="w-4 h-4 text-accent" /> Kuhinja i dostava</div>
+                <div className="flex items-center gap-2"><PhoneCall className="w-4 h-4 text-accent" /> AI pozivi 24/7</div>
+                <div className="flex items-center gap-2"><CalendarCheck className="w-4 h-4 text-accent" /> Termini i upiti</div>
+                <div className="flex items-center gap-2"><Workflow className="w-4 h-4 text-accent" /> CRM i integracije</div>
               </div>
               <Button variant="hero" asChild className="group/btn">
                 <Link to="/proizvodi/orderflow">
-                  Pogledaj OrderFlow <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                  Pogledaj AI Voice Agent <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                 </Link>
               </Button>
             </div>
