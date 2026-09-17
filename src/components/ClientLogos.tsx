@@ -5,36 +5,37 @@ type Client = {
   image?: string;
   fit?: "contain" | "cover";
   position?: string;
-  fallbackTop?: string;
+  fallbackTop: string;
   fallbackBottom?: string;
 };
 
 const CLIENTS: Client[] = [
   {
     name: "Verona Due Pizzeria",
-    image: "https://konoba-veranda.hr/images/logo_200.png",
-    fit: "contain",
+    fallbackTop: "VERONA DUE",
+    fallbackBottom: "PIZZERIA",
   },
   {
     name: "Veranda Grill",
-    image: "https://konoba-veranda.hr/images/logo_200.png",
-    fit: "contain",
+    fallbackTop: "VERANDA",
+    fallbackBottom: "GRILL",
   },
   {
     name: "Varadero Bar",
     image: varaderoLogo,
     fit: "contain",
+    fallbackTop: "VARADERO",
+    fallbackBottom: "BAR",
   },
   {
     name: "Pierino Restaurant Rovinj",
-    image: "https://img3.restaurantguru.com/w550/h367/rc12-design-Pierino-restaurant-Rovinj.jpg",
-    fit: "cover",
-    position: "50% 10%",
+    fallbackTop: "PIERINO",
+    fallbackBottom: "ROVINJ",
   },
   {
     name: "Restoran Da Piero",
-    image: "https://cdn.dribbble.com/userupload/28316100/file/original-a4ead93fbb70b05ff20dc974ad18f8f0.jpg?resize=752x&vertical=center",
-    fit: "contain",
+    fallbackTop: "DA PIERO",
+    fallbackBottom: "RESTORAN",
   },
   {
     name: "Q Laundry",
