@@ -135,14 +135,22 @@ const OrderlySection = () => {
                 );
               })}
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center gap-4">
                 <a
                   href="https://bar-runner.lovable.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 h-12 rounded-lg px-8 text-base font-semibold bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all"
+                  className="inline-flex items-center justify-center gap-2 h-12 rounded-lg px-8 text-base font-semibold bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all"
                 >
                   Otkrij Orderly <ExternalLink className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://automindorderly.com/auth"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 h-12 rounded-lg px-8 text-base font-semibold border border-accent/40 text-accent hover:bg-accent/10 hover:scale-105 transition-all"
+                >
+                  Prijavi se ili registriraj <ExternalLink className="h-4 w-4" />
                 </a>
               </div>
             </div>
