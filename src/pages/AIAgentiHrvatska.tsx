@@ -79,7 +79,37 @@ const AIAgentiHrvatska = () => {
         </p>
       </section>
 
+      <section className="container px-4 max-w-3xl mx-auto py-8">
+        <div className="p-6 rounded-2xl border border-foreground/10 bg-white/60">
+          <h2 className="text-lg font-semibold tracking-tight mb-3">Što agent radi na hrvatskom</h2>
+          <ul className="text-sm text-muted-foreground leading-relaxed space-y-2 list-disc pl-5">
+            <li>Razgovara s klijentima na hrvatskom, pisano i glasovno, a po potrebi prelazi na engleski.</li>
+            <li>Razumije uobičajene formulacije upita i traži podatke koji nedostaju, poput imena, kontakta ili željenog termina.</li>
+            <li>Odgovara tonom i izrazima koje vaša tvrtka inače koristi, prema uputama koje zajedno zapišemo.</li>
+            <li>Timu šalje sažetak razgovora na hrvatskom, kako bi osoba koja preuzima znala o čemu je riječ.</li>
+            <li>Kad pitanje izlazi iz dogovorenog opsega, razgovor prepušta osobi iz tima.</li>
+          </ul>
+        </div>
+      </section>
+
       <FeatureGrid items={agents} />
+
+      <section className="container px-4 max-w-3xl mx-auto py-8">
+        <h2 className="text-2xl font-semibold tracking-tight mb-4">Konkretne primjene</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            { t: "Saloni", d: "Klijent u poruci traži termin za uslugu; agent provjeri slobodne termine, predloži jedan i zabilježi rezervaciju." },
+            { t: "Ordinacije", d: "Pacijent zove izvan radnog vremena; agent prikupi ime, kontakt i razlog dolaska te ih proslijedi osoblju." },
+            { t: "Auto servisi", d: "Vozač opiše kvar; agent postavi nekoliko pitanja o vozilu i problemu i dogovori termin za pregled." },
+            { t: "Ugostiteljstvo i praonice", d: "Agent odgovara na pitanja o radnom vremenu i uslugama te prima rezervacije ili narudžbe prema vašim pravilima." },
+          ].map((u) => (
+            <div key={u.t} className="p-6 rounded-2xl border border-foreground/10 bg-white/60">
+              <h3 className="text-lg font-semibold tracking-tight mb-2">{u.t}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{u.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="container px-4 max-w-3xl mx-auto py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -101,6 +131,18 @@ const AIAgentiHrvatska = () => {
               <li>Broj upita je premali da bi se uštedjelo vrijeme.</li>
             </ul>
           </div>
+        </div>
+      </section>
+
+      <section className="container px-4 max-w-3xl mx-auto py-8">
+        <div className="p-6 rounded-2xl border border-foreground/10 bg-white/60">
+          <h2 className="text-lg font-semibold tracking-tight mb-3">Kako izgleda procjena vašeg procesa</h2>
+          <ol className="text-sm text-muted-foreground leading-relaxed space-y-2 list-decimal pl-5">
+            <li>Pošaljete upit s kratkim opisom djelatnosti i kanala preko kojih stižu upiti.</li>
+            <li>Zajedno prođemo kako danas izgleda put od upita do termina ili ponude.</li>
+            <li>Predložimo koji dio ima smisla prepustiti agentu, a koji ostaje vašem timu.</li>
+            <li>Pripremimo demo na vašem primjeru, pa odlučite želite li nastaviti.</li>
+          </ol>
         </div>
       </section>
 
