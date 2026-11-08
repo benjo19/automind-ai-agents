@@ -22,14 +22,14 @@ const benefits = [
 ];
 
 // Dashboard mockup izgrađen isključivo od postojećih UI elemenata — bez novih ovisnosti.
-const OrderMockup = () => (
+export const OrderMockup = () => (
   <div className="orderly-preview rounded-lg border border-border bg-card shadow-elegant overflow-hidden">
     {/* Window chrome */}
     <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-secondary/60">
       <span className="w-2.5 h-2.5 rounded-full bg-accent/40" />
       <span className="w-2.5 h-2.5 rounded-full bg-accent/30" />
       <span className="w-2.5 h-2.5 rounded-full bg-accent/20" />
-      <span className="ml-3 text-xs font-semibold text-muted-foreground tracking-wide">Orderly · Nadzorna ploća</span>
+      <span className="ml-3 text-xs font-semibold text-muted-foreground tracking-wide">Orderly · Nadzorna ploča</span>
     </div>
 
     <div className="p-4 md:p-5">
