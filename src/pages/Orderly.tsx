@@ -5,6 +5,7 @@ import PageShell, { faqSchema } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import DemoForm from "@/components/DemoForm";
+import { OrderMockup } from "@/components/OrderlySection";
 
 const steps = [
   { icon: ClipboardList, title: "Osoblje kreira zahtjev", text: "Potrebe kuhinje i šanka prikupljaju se na jednom mjestu." },
@@ -14,8 +15,8 @@ const steps = [
   { icon: PackageCheck, title: "Zaprimanje robe", text: "Dostavljena roba povezuje se s narudžbom." },
 ];
 const core = [
-  { icon: BookOpen, title: "Katalog", text: "Polazište za organizaciju artikala koji se naručuju. Artikli su organizirani u katalogu kako bi osoblje lakše pronašlo ono što treba." },
-  { icon: Store, title: "Lokacije i uloge", text: "Organizirajte naručivanje za jedan ili više restorana i odredite tko podnosi, a tko odobrava zahtjeve. Osoblje, voditelji i administratori imaju različite odgovornosti i pristup." },
+  { icon: BookOpen, title: "Katalog", text: "Artikli su organizirani u katalogu kako bi osoblje lakše pronašlo ono što treba." },
+  { icon: Store, title: "Lokacije i uloge", text: "Više restorana u jednom sustavu, s odvojenim pristupom za osoblje, voditelje i administratore." },
   { icon: ClipboardList, title: "Nabava", text: "Zahtjevi osoblja, odobravanje i narudžbenice u povezanom procesu." },
   { icon: Truck, title: "Dobavljači", text: "Grupiranje stavki prema dobavljaču umjesto ručnog sastavljanja više popisa." },
   { icon: PackageCheck, title: "Zaprimanje", text: "Kad roba stigne, osoblje može evidentirati što je zaprimljeno." },
@@ -52,6 +53,18 @@ const Orderly = () => {
           <Button asChild variant="link" className="mt-3 px-0 h-auto whitespace-normal"><a href="https://automindorderly.com/auth" target="_blank" rel="noopener noreferrer">Prijavi se ili registriraj <ExternalLink /></a></Button>
           <div className="mt-9 border-y border-border py-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {["Zahtjevi na jednom mjestu", "Pregled prije naručivanja", "Narudžbe po dobavljačima"].map(text => <div key={text} className="flex gap-2 items-center text-sm font-semibold"><CheckCircle2 className="h-5 w-5 shrink-0 text-primary" />{text}</div>)}
+          </div>
+        </section>
+
+        <section className="container px-4 max-w-6xl mx-auto pb-10 md:pb-14" aria-labelledby="orderly-preview-title">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div>
+              <p className="text-sm font-semibold text-primary mb-2">Kako to izgleda</p>
+              <h2 id="orderly-preview-title" className="text-2xl md:text-3xl font-bold mb-4">Sve narudžbe pregledno, po dobavljačima</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">Kada osoblje prijavi što nedostaje, ne morate ručno spajati poruke iz kuhinje i šanka. Stavke se mogu pregledati prema dobavljaču i pripremiti za naručivanje.</p>
+              <p className="text-sm text-muted-foreground">Prikaz je ilustracija procesa, a ne snimka stvarne aplikacije. Stvarno sučelje pokazujemo na demonstraciji.</p>
+            </div>
+            <OrderMockup />
           </div>
         </section>
 
