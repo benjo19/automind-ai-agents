@@ -44,10 +44,10 @@ const CLIENTS: Client[] = [
   },
 ];
 
-const LOOP = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS];
+const LOOP = [...CLIENTS, ...CLIENTS];
 
 const LogoTile = ({ client }: { client: Client }) => (
-  <span className="group relative flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#7d86b3]/25 bg-[radial-gradient(circle_at_35%_30%,rgba(255,255,255,0.055),rgba(17,23,34,0.94)_58%)] p-2.5 shadow-[0_10px_28px_rgba(0,0,0,0.24)] ring-1 ring-white/[0.025] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#7c6cff]/45 hover:shadow-[0_14px_34px_rgba(77,67,180,0.22)] md:h-32 md:w-32 md:p-3">
+  <span className="group relative flex h-20 w-36 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-card p-3 transition-colors hover:border-accent md:h-24 md:w-40">
     {client.image ? (
       <img
         src={client.image}
@@ -61,10 +61,10 @@ const LogoTile = ({ client }: { client: Client }) => (
       />
     ) : (
       <span className="flex w-[82%] flex-col items-center text-center leading-none">
-        <span className="text-sm font-extrabold tracking-[0.06em] text-white md:text-base">
+        <span className="text-sm font-extrabold text-foreground md:text-base">
           {client.fallbackTop}
         </span>
-        <span className="mt-1.5 text-[7px] font-semibold tracking-[0.09em] text-white/55 md:text-[8px]">
+        <span className="mt-1.5 text-[7px] font-semibold text-muted-foreground md:text-[8px]">
           {client.fallbackBottom}
         </span>
       </span>
