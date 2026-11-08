@@ -242,6 +242,14 @@
   }
 
   /* Homepage-only rhythm: shared landing pages and form behavior stay untouched. */
+  .orderly-page h1, .orderly-page h2, .orderly-page h3 { letter-spacing: 0; }
+  .orderly-page #demo { padding-top: 2rem; padding-bottom: 3rem; }
+  .orderly-page #demo .text-center.mb-16 { margin-bottom: 2rem; }
+  .orderly-page #demo h2 { font-size: 1.875rem; }
+  .orderly-page #demo form { padding: 1.25rem; }
+  @media (min-width: 768px) {
+    .orderly-page #demo form { padding: 2rem; }
+  }
   .home-refresh > section {
     padding-top: 3rem;
     padding-bottom: 3rem;
