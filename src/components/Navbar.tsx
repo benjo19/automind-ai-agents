@@ -55,14 +55,7 @@ const Navbar = () => {
 
   const goToOrderly = () => {
     setOpen(false);
-    if (location.pathname === "/") {
-      document.getElementById("orderly")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      navigate("/#orderly");
-      setTimeout(() => {
-        document.getElementById("orderly")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 150);
-    }
+    navigate("/orderly");
   };
 
   const LanguageSwitch = ({ mobile = false }: { mobile?: boolean }) => (
@@ -98,7 +91,7 @@ const Navbar = () => {
   }, [location]);
 
   const isActive = (to: string) => location.pathname === to;
-  const productsActive = location.pathname.startsWith("/proizvodi");
+  const productsActive = location.pathname.startsWith("/proizvodi") || location.pathname === "/orderly";
 
   return (
     <header

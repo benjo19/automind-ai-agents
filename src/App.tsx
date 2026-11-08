@@ -8,6 +8,7 @@ import ChatWidget from "./components/ChatWidget";
 import { LanguageProvider } from "./lib/i18n";
 
 import Home from "./pages/Home";
+import Orderly from "./pages/Orderly";
 import AIRecepcionar from "./pages/AIRecepcionar";
 import AIAutomatizacijaPoslovanja from "./pages/AIAutomatizacijaPoslovanja";
 import AIAgentiHrvatska from "./pages/AIAgentiHrvatska";
@@ -41,6 +42,7 @@ const App = () => (
         <div className="min-h-screen bg-background">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/orderly" element={<Orderly />} />
             <Route path="/ai-recepcionar" element={<AIRecepcionar />} />
             <Route path="/ai-automatizacija-poslovanja" element={<AIAutomatizacijaPoslovanja />} />
             <Route path="/ai-agenti-hrvatska" element={<AIAgentiHrvatska />} />

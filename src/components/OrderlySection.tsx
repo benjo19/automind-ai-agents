@@ -1,6 +1,7 @@
 import { ExternalLink, ShoppingBag, Layers, ClipboardList } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const benefits = [
   {
@@ -136,13 +137,9 @@ const OrderlySection = () => {
 
               <div className="pt-3 flex flex-col sm:flex-row sm:flex-wrap gap-3">
                 <Button variant="hero" asChild className="h-12 px-5">
-                <a
-                  href="https://bar-runner.lovable.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link to="/orderly">
                   Otkrij Orderly <ExternalLink className="h-4 w-4" />
-                </a>
+                </Link>
                 </Button>
                 <Button variant="hero-outline" asChild className="h-12 px-5">
                 <a
