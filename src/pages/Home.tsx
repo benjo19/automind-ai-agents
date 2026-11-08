@@ -5,12 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
-import BeforeAfter from "@/components/BeforeAfter";
-import ConcreteActions from "@/components/ConcreteActions";
-import MissedLeadCost from "@/components/MissedLeadCost";
-import SolutionCards from "@/components/SolutionCards";
 import TargetIndustries from "@/components/TargetIndustries";
-import ProductsSection from "@/components/ProductsSection";
 import OrderlySection from "@/components/OrderlySection";
 import DemoForm from "@/components/DemoForm";
 import ClientLogos from "@/components/ClientLogos";
@@ -47,19 +42,18 @@ const Home = () => {
     </Helmet>
 
     <Navbar />
+    <main className="home-refresh">
     <Hero />
     <ClientLogos />
     <Services />
-    <SolutionCards />
-    <ProductsSection />
+    <div id="proizvodi" className="scroll-mt-20">
+      <OrderlySection />
+    </div>
     <HowItWorks />
-    <ConcreteActions />
-    <BeforeAfter />
-    <MissedLeadCost />
     <TargetIndustries />
-    <OrderlySection />
     <DemoForm />
     <FAQ />
+    </main>
     <Footer />
   </>
   );

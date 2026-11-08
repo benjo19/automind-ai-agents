@@ -1,5 +1,6 @@
-import { ExternalLink, Check, ShoppingBag, Layers, ClipboardList } from "lucide-react";
+import { ExternalLink, ShoppingBag, Layers, ClipboardList } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Button } from "@/components/ui/button";
 
 const benefits = [
   {
@@ -21,7 +22,7 @@ const benefits = [
 
 // Dashboard mockup izgrađen isključivo od postojećih UI elemenata — bez novih ovisnosti.
 const OrderMockup = () => (
-  <div className="rounded-2xl border border-border bg-card shadow-elegant overflow-hidden">
+  <div className="orderly-preview rounded-lg border border-border bg-card shadow-elegant overflow-hidden">
     {/* Window chrome */}
     <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-secondary/60">
       <span className="w-2.5 h-2.5 rounded-full bg-accent/40" />
@@ -97,17 +98,15 @@ const OrderMockup = () => (
 
 const OrderlySection = () => {
   return (
-    <section id="orderly" className="py-14 md:py-20 px-4 relative glow-bg scroll-mt-20">
+    <section id="orderly" className="py-12 md:py-16 px-4 relative border-y border-border bg-secondary/50 scroll-mt-20">
       <div className="container mx-auto relative z-10 max-w-6xl">
         <ScrollReveal>
-          <div className="text-center mb-10 md:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
-              AutomindAI proizvod
-            </div>
-            <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              Orderly — <span className="gradient-text-rainbow">digitalna nabava za ugostiteljstvo</span>
+          <div className="max-w-3xl mb-8">
+            <p className="text-sm font-semibold text-primary mb-2">Naša aplikacija za digitalnu nabavu</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-3">
+              Orderly <span className="text-muted-foreground">— za ugostiteljstvo</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               Zahtjevi osoblja, naručivanje robe, automatsko razdvajanje artikala po dobavljačima i praćenje narudžbi —
               sve na jednom mjestu.
             </p>
@@ -115,17 +114,17 @@ const OrderlySection = () => {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          <ScrollReveal className="order-2 lg:order-1">
+          <ScrollReveal>
             <div className="space-y-4">
               {benefits.map((b) => {
                 const Icon = b.icon;
                 return (
                   <div
                     key={b.title}
-                    className="glass-card hover-lift p-5 flex items-start gap-4"
+                    className="flex items-start gap-3 py-2"
                   >
-                    <div className="w-11 h-11 shrink-0 rounded-xl bg-accent/15 border border-accent/20 flex items-center justify-center">
-                      <Icon className="h-5 w-5 text-accent" />
+                    <div className="w-9 h-9 shrink-0 rounded-lg bg-card border border-border flex items-center justify-center">
+                      <Icon className="h-4 w-4 text-primary" />
                     </div>
                     <div>
                       <h3 className="text-base font-semibold text-foreground mb-1">{b.title}</h3>
@@ -135,28 +134,30 @@ const OrderlySection = () => {
                 );
               })}
 
-              <div className="pt-2 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="pt-3 flex flex-col sm:flex-row sm:flex-wrap gap-3">
+                <Button variant="hero" asChild className="h-12 px-5">
                 <a
                   href="https://bar-runner.lovable.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-12 rounded-lg px-8 text-base font-semibold bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all"
                 >
                   Otkrij Orderly <ExternalLink className="h-4 w-4" />
                 </a>
+                </Button>
+                <Button variant="hero-outline" asChild className="h-12 px-5">
                 <a
                   href="https://automindorderly.com/auth"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 h-12 rounded-lg px-8 text-base font-semibold border border-accent/40 text-accent hover:bg-accent/10 hover:scale-105 transition-all"
                 >
                   Prijavi se ili registriraj <ExternalLink className="h-4 w-4" />
                 </a>
+                </Button>
               </div>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={120} className="order-1 lg:order-2">
+          <ScrollReveal delay={120} className="min-w-0">
             <OrderMockup />
           </ScrollReveal>
         </div>

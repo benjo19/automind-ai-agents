@@ -1,7 +1,8 @@
 import { Bot, Zap, CalendarClock } from "lucide-react";
-import laptopImg from "@/assets/professional-laptop.jpg";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useLanguage } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -39,17 +40,14 @@ const Services = () => {
     <section id="services" className="py-14 md:py-20 px-4 relative glow-bg scroll-mt-20">
       <div className="container mx-auto relative z-10">
         <ScrollReveal>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12 md:mb-16">
+          <div className="max-w-3xl mb-8">
             <div>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4 tracking-tight gradient-text-rainbow">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-3 text-foreground">
                 {t.services.title}
               </h2>
-              <p className="text-xl text-muted-foreground max-w-xl">
+              <p className="text-base md:text-lg text-muted-foreground">
                 {t.services.subtitle}
               </p>
-            </div>
-            <div className="rounded-2xl overflow-hidden border border-border shadow-card mb-8 md:mb-0">
-              <img src={laptopImg} alt={t.services.imageAlt} className="w-full h-64 lg:h-80 object-cover" loading="lazy" />
             </div>
           </div>
         </ScrollReveal>
@@ -59,12 +57,12 @@ const Services = () => {
             const content = t.services.cards[index];
             return (
             <ScrollReveal key={index} delay={index * 100}>
-              <div className="glass-card hover-lift p-6 group h-full">
-                <div className="w-14 h-14 rounded-xl bg-secondary border border-border flex items-center justify-center mb-6">
-                  <service.icon className={`w-7 h-7 ${service.color} ${service.glow}`} />
+              <div className="rounded-lg border border-border bg-card p-5 md:p-6 h-full flex flex-col">
+                <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center mb-4">
+                  <service.icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-foreground">{content.title}</h3>
-                <p className="text-muted-foreground mb-6 text-sm">{content.description}</p>
+                <p className="text-muted-foreground mb-4 text-sm">{content.description}</p>
                 <ul className="space-y-2">
                   {content.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-muted-foreground text-sm">
@@ -73,6 +71,11 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
+                <Button variant="link" asChild className="mt-auto pt-5 px-0 justify-start h-auto whitespace-normal">
+                  <Link to={["/ai-recepcionar", "/ai-automatizacija-poslovanja", "/ai-agenti-hrvatska"][index]}>
+                    {t.solutions.learnMore} <span aria-hidden="true">→</span>
+                  </Link>
+                </Button>
               </div>
             </ScrollReveal>
             );
