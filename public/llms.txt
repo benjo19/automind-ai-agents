@@ -13,7 +13,7 @@ Automind pomaže malim i srednjim tvrtkama da ne gube upite, pozive i termine do
 - Jezici: hrvatski i engleski.
 - Web: https://myautomind.com
 - Kategorije usluga: AI recepcionar, AI prodajni agent, AI chatbot za web, voice AI agent, automatizacija ponuda, integracije poslovnih alata, AEO optimizacija.
-- Proizvodi: AI Voice Agent (AI telefonski agent za sve djelatnosti), Orderly (digitalna nabava za ugostiteljstvo).
+- Proizvodi: AI Voice Agent (AI telefonski agent za sve djelatnosti), Orderly (digitalna nabava, zaprimanje robe i operativni zadaci za ugostiteljstvo).
 
 ## Primary positioning
 
@@ -32,7 +32,7 @@ Automind nije generična AI agencija. Automind je praktično rješenje za lokaln
 ## Products
 
 - AI Voice Agent (https://myautomind.com/proizvodi/orderflow): AI telefonski agent za sve djelatnosti. Prima i obrađuje pozive, odgovara na upite, zakazuje termine i rezervacije, prima narudžbe, kvalificira leadove i povezuje se s CRM-om, kalendarom i drugim poslovnim sustavima.
-- Orderly: digitalna nabava za ugostiteljstvo — zahtjevi osoblja, narudžbe i automatsko razdvajanje artikala po dobavljačima.
+- Orderly (https://automindorderly.com/): SaaS za ugostiteljstvo koji povezuje zahtjeve osoblja, narudžbenice dobavljačima, zaprimanje robe, operativne zadatke i upravljanje više lokacija. Prikaz i ovlasti ovise o ulozi korisnika (vlasnik/administrator, voditelj, osoblje). QC kontrolne liste i HACCP evidencije dostupne su prema aktiviranim modulima.
 
 ## Ideal customers
 
