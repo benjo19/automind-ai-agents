@@ -7,7 +7,6 @@ const plans = [
   {
     name: "Starter",
     tagline: "Za manje timove i lokale",
-    price: "690 €",
     minutes: "1.500 min",
     description: "AI agent za manji volumen poziva i jednostavniji proces obrade upita i narudžbi.",
     features: [
@@ -22,7 +21,6 @@ const plans = [
   {
     name: "Growth",
     tagline: "Najpopularniji izbor",
-    price: "1.590 €",
     minutes: "4.000 min",
     description: "Za tvrtke i lokale s većim brojem poziva, više automatizacije i povezivanjem s postojećim alatima.",
     features: [
@@ -38,7 +36,6 @@ const plans = [
   {
     name: "Pro",
     tagline: "Za veliki volumen poziva",
-    price: "2.990 €",
     minutes: "9.000 min",
     description: "Za veći promet, više lokacija i zahtjevnije procese gdje AI agent preuzima velik dio dolaznih poziva.",
     features: [
@@ -60,19 +57,18 @@ const Cijene = () => {
     name: "Automind",
     url: "https://myautomind.com",
     description: "Mjesečni paketi AI agenata s uključenim minutama razgovora.",
-    priceRange: "€€€",
   };
   return (
     <PageShell
       path="/cijene"
       title="Cijene — Automind | AI agent paketi i minute"
-      description="Starter, Growth i Pro paketi AI agenata s jasno uključenim minutama razgovora i mjesečnom cijenom."
+      description="Starter, Growth i Pro paketi AI agenata s jasno uključenim minutama razgovora. Cijena se formira prema vašem volumenu poziva i integracijama — zatražite ponudu."
       schema={schema}
     >
       <PageHero
         eyebrow="Cijene"
         title="Jasni paketi prema mjesečnoj potrošnji AI minuta."
-        subtitle="Odaberite paket prema volumenu poziva. Sve cijene su bez PDV-a, a dodatne minute iznad paketa naplaćuju se 0,26 € + PDV po minuti."
+        subtitle="Odaberite paket prema volumenu poziva. Cijena se formira prema vašem volumenu poziva, integracijama i složenosti procesa — zatražite ponudu i predložit ćemo najbolji paket."
       />
 
       <section className="container px-4 max-w-6xl mx-auto py-8">
@@ -95,11 +91,7 @@ const Cijene = () => {
               <p className="text-xs uppercase tracking-wider text-accent font-semibold mb-4">{p.tagline}</p>
 
               <div className="mb-5">
-                <div className="flex items-end gap-2">
-                  <span className="text-4xl font-bold tracking-tight">{p.price}</span>
-                  <span className="text-sm text-muted-foreground mb-1">+ PDV / mj</span>
-                </div>
-                <div className="mt-2 inline-flex items-center rounded-full border border-accent/20 bg-accent/[0.06] px-3 py-1 text-sm font-semibold text-accent">
+                <div className="inline-flex items-center rounded-full border border-accent/20 bg-accent/[0.06] px-3 py-1 text-sm font-semibold text-accent">
                   Uključeno {p.minutes}
                 </div>
               </div>
@@ -120,7 +112,7 @@ const Cijene = () => {
           ))}
         </div>
         <p className="text-center text-sm text-muted-foreground mt-8">
-          Sve cijene su bez PDV-a. Dodatne minute iznad uključenog paketa naplaćuju se <strong>0,26 € + PDV po minuti</strong>.
+          Točnu cijenu određujemo prema vašem volumenu poziva, potrebnim integracijama i složenosti procesa. Pošaljite upit i pripremit ćemo ponudu za vašu tvrtku.
         </p>
       </section>
 

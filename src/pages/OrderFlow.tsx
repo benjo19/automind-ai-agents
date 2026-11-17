@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 
 const plans = [
-  { name: "Starter", price: "690 €", minutes: "1.500 min", overage: "0,26 €/min", note: "Za manje tvrtke i niži volumen poziva." },
-  { name: "Growth", price: "1.590 €", minutes: "4.000 min", overage: "0,26 €/min", note: "Za tvrtke s redovitim telefonskim upitima i većim volumenom poziva.", featured: true },
-  { name: "Pro", price: "2.990 €", minutes: "9.000 min", overage: "0,26 €/min", note: "Za veće tvrtke, više lokacija i visok volumen poziva." },
+  { name: "Starter", minutes: "1.500 min", note: "Za manje tvrtke i niži volumen poziva." },
+  { name: "Growth", minutes: "4.000 min", note: "Za tvrtke s redovitim telefonskim upitima i većim volumenom poziva.", featured: true },
+  { name: "Pro", minutes: "9.000 min", note: "Za veće tvrtke, više lokacija i visok volumen poziva." },
 ];
 
 const features = [
@@ -81,19 +81,17 @@ const OrderFlow = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="max-w-2xl mb-10">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-3">Paketi</p>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-4">Cijena prati stvarni volumen poziva.</h2>
-              <p className="text-muted-foreground">Sve cijene su bez PDV-a. Jednokratni setup ovisi o integracijama, telefonskom broju, pravilima razgovora i poslovnim sustavima koje treba povezati.</p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-4">Paket prati stvarni volumen poziva.</h2>
+              <p className="text-muted-foreground">Cijena se formira prema vašem volumenu poziva, integracijama, telefonskom broju, pravilima razgovora i poslovnim sustavima koje treba povezati — zatražite ponudu.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-5">
               {plans.map((plan) => (
                 <article key={plan.name} className={`rounded-3xl border p-6 md:p-7 ${plan.featured ? "border-accent/40 bg-accent/[0.07] shadow-[0_0_40px_rgba(124,58,237,0.08)]" : "border-foreground/10 bg-foreground/[0.02]"}`}>
                   {plan.featured && <span className="inline-block text-xs font-semibold uppercase tracking-wider text-accent mb-4">Najpopularniji</span>}
                   <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
-                  <div className="mt-4 mb-1"><span className="text-4xl font-bold text-foreground">{plan.price}</span><span className="text-muted-foreground"> / mj</span></div>
-                  <p className="text-sm text-muted-foreground mb-6">{plan.note}</p>
+                  <p className="text-sm text-muted-foreground mt-2 mb-6">{plan.note}</p>
                   <div className="space-y-3 text-sm mb-7">
-                    <div className="flex items-center gap-2"><Check className="w-4 h-4 text-accent" /><span>{plan.minutes} uključeno</span></div>
-                    <div className="flex items-center gap-2"><Check className="w-4 h-4 text-accent" /><span>{plan.overage} iznad paketa</span></div>
+                    <div className="flex items-center gap-2"><Check className="w-4 h-4 text-accent" /><span>{plan.minutes} uključeno mjesečno</span></div>
                     <div className="flex items-center gap-2"><Check className="w-4 h-4 text-accent" /><span>AI Voice Agent platforma i podrška</span></div>
                   </div>
                   <Button variant={plan.featured ? "hero" : "outline"} className="w-full" onClick={goToDemo}>Zatraži ponudu</Button>
@@ -101,7 +99,7 @@ const OrderFlow = () => {
               ))}
             </div>
             <div className="mt-6 rounded-2xl border border-foreground/10 p-5 md:p-6 text-sm text-muted-foreground">
-              <strong className="text-foreground">Setup:</strong> cijena ovisi o složenosti implementacije, integracijama i broju poslovnih procesa. Za više lokacija i napredne integracije radi se prilagođena ponuda.
+              <strong className="text-foreground">Setup:</strong> ovisi o složenosti implementacije, integracijama i broju poslovnih procesa. Za više lokacija i napredne integracije radi se prilagođena ponuda.
             </div>
           </div>
         </section>
